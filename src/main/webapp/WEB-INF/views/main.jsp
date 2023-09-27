@@ -22,7 +22,7 @@
             <!-- contant 시작 -->
             <div class="row">
             	<div class="card">
-            		<div class="card-body p-5 bg-danger">컨텐츠 영역</div>
+            		<div class="card-body p-5 bg-secondary">컨텐츠 영역</div>
             	</div>
             </div>
             <!-- contant 종료 -->
