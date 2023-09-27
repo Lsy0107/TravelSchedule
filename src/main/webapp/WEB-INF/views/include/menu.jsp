@@ -10,13 +10,6 @@
                             <li class="nav-item"><a class="nav-link" href="/">회원가입</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">여행계획</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">여행지검색</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">검색란</a>
-                                <form action="/" method="get">
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><input  class="form-control" name="searchValue" placeholder="검색어를 입력하세요."type="text"><input type="submit" value="검색"></li>
-                                </ul>
-                                </form>
                             </li>
                             <!-- 
                             토글방식 메뉴바
@@ -33,3 +26,9 @@
                     </div>
                 </div>
             </nav>
+       <div class="row " >
+       <div class="col p-3" style="display: flex;align-items: center;">
+       <input placeholder="검색어를 입력해주세요." type="text" class="form-control" style="display:inline-block; width:80%;box-sizing: border-box; margin:5px;">
+       <button class="btn btn-info" style="width:19%;box-sizing: border-box;">검색</button>
+       </div> 
+       </div>
