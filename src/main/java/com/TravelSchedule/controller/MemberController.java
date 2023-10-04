@@ -35,8 +35,9 @@ public class MemberController {
 	@RequestMapping(value="/idCheck")
 	public @ResponseBody String idCheck(String mid) {
 		System.out.println("아이디 중복체크 요청");
+		System.out.println(mid);
 		String rs = msvc.checkinfo(mid);
-		return null;
+		return rs;
 	}
 	
 	@RequestMapping(value="/memberLogin")

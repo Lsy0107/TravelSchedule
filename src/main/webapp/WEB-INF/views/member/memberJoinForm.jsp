@@ -144,16 +144,6 @@
     display: block;
 }
 
-#idC {
-	width: 25%;
-	height: 48px;
-	padding: 0 20px;
-	margin-bottom: 5px;
-	background-color: rgb(151, 136, 177);
-	border: 1px solid rgb(151, 136, 177);
-	border-radius: 12px;
-}
-
 #memail{
 	width: 75%;
 	height: 48px;
@@ -230,6 +220,24 @@ div#passArea i{
     top: 17px;
     color: black;
 }
+div#idArea{
+    position: relative;
+}
+div#idArea i{
+    position: absolute;
+    left: 80%;
+    top: 17px;
+    color: black;
+}
+div#nicknameArea{
+    position: relative;
+}
+div#nicknameArea i{
+    position: absolute;
+    left: 80%;
+    top: 17px;
+    color: black;
+}
 
 #body{
     background-color: #eec0c6;
@@ -254,18 +262,19 @@ div#passArea i{
            		<h2 class="Title">회원가입</h2>
 				<div class="formTag">
 					<form action="memberJoin" method ="post" enctype="multipart/form-data">
-
-						<input type="text" id="id" onblur="checkMid()" name="mid" placeholder="아이디"
-    						onkeyup="idCheck()" class="formInputCheck">
-    						
+						<div id="idArea">
+						<input type="text" id="id" onblur="checkMid()" name="mid" placeholder="아이디" class="formInputCheck">
 						<p id="MsgId"></p>
+						</div>
                         <div id="passArea">
                             <input type="password" id="password" name="mpw" placeholder="비밀번호">
                             <i class="fa-solid fa-eye-slash"></i>
                             <p id="MsgPw"></p>
                         </div>
-
+						<div id="nicknameArea">
 						<input type="text" id="name" onblur="checkMnickname()" name="mnickname" placeholder="닉네임">
+						<i class="fa-solid fa-check"></i>
+						</div>
 						
 						<input type="file" id="profile" name="mprofiledata" value="파일선택">
 
@@ -373,7 +382,19 @@ div#passArea i{
                         "mid": idEl.value
                     },
                     success: function (rs) {
-						
+                    	let idAreaEl = document.querySelector("#idArea");
+                    	let iTagEl = idAreaEl.querySelector("i");
+                    	console.log(iTagEl);
+                    	if(iTagEl != null){
+                    		idAreaEl.removeChild(iTagEl);
+                    	}
+						if(rs == "N"){
+							console.log("사용가능")
+							idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-check"></i>';
+						}else{
+							console.log("사용불가")
+							idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-x"></i>';
+						}
                     }
                 });
             }

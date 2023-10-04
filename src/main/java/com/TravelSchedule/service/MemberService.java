@@ -55,7 +55,8 @@ public class MemberService {
 
 	public String checkinfo(String mid) {
 		System.out.println("MemberService - checkinfo");
-		return mdao.selectInfo(mid);
+		System.out.println(mid);
+		return mdao.selectInfo(mid, "");
 	}
 
 }
