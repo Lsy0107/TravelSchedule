@@ -17,14 +17,97 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
+
+<!-- Data AOS-->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+<style type="text/css">
+.signIn {
+	border: 1px solid black;
+	border-radius: 25px;
+	display: block;
+	margin-top: 20px;
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.signUp {
+	border: 1px solid black;
+	border-radius: 25px;
+	display: block;
+	margin-top: 20px;
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.search {
+	position: relative;
+	top: 120px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#TripRecommend {
+	background-color: #ffd045;
+background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
+	width: 70%;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#WeatherInfo{
+	background-color: #ffffff;
+background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
+	width: 70%;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#FestivalRecommend{
+	background-color: #ffffff;
+background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
+	width: 70%;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#TitleBar {
+	position: relative;
+	top: 64px;
+}
+#MainContents{
+	position: relative;
+    top: 700px;
+}
+footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+main{
+	position: relative;
+	min-height: 100%;
+	padding-bottom: 2000px;
+}
+
+</style>
+
+
 </head>
 <body class="d-flex flex-column h-100">
 	<main class="flex-shrink-0">
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
-		<!-- contant 시작 -->
-		<div class="row">
-			<div class="col col-8">
+		<!-- content 시작 -->
+
+
+		<div class="" id="TitleBar">
+			<div class="IMGBAR">
 				<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-indicators">
 						<button type="button" data-bs-target="#myCarousel"
@@ -37,54 +120,32 @@
 					</div>
 					<div class="carousel-inner">
 						<div class="carousel-item">
-							<svg class="bd-placeholder-img" width="100%" height="100%"
+							<svg class="bd-placeholder-img" width="100%" height="800px"
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="100%" fill="#777"></rect></svg>
-
-							<div class="container">
+								<rect width="100%" height="800px" fill="#777"></rect></svg>
 								<div class="carousel-caption text-start">
-									<h1>Example headline.</h1>
-									<p>Some representative placeholder content for the first
-										slide of the carousel.</p>
-									<p>
-										<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
-									</p>
+									<img style="max-width: 100%; height: auto;" src="${pageContext.request.contextPath }/resources/남산타워.jpg" alt="">
 								</div>
-							</div>
 						</div>
 						<div class="carousel-item active">
-							<svg class="bd-placeholder-img" width="100%" height="100%"
+							<svg class="bd-placeholder-img" width="100%" height="800px"
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="100%" fill="#777"></rect></svg>
+								<rect width="100%" height="800px" fill="#777"></rect></svg>
 
-							<div class="container">
-								<div class="carousel-caption">
-									<h1>Another example headline.</h1>
-									<p>Some representative placeholder content for the second
-										slide of the carousel.</p>
-									<p>
-										<a class="btn btn-lg btn-primary" href="#">Learn more</a>
-									</p>
-								</div>
+							<div class="carousel-caption text-start">
+								<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/경복궁.jpg" alt="">
 							</div>
 						</div>
 						<div class="carousel-item">
-							<svg class="bd-placeholder-img" width="100%" height="100%"
+							<svg class="bd-placeholder-img" width="100%" height="800px"
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="100%" fill="#777"></rect></svg>
+								<rect width="100%" height="800px" fill="#777"></rect></svg>
 
-							<div class="container">
-								<div class="carousel-caption text-end">
-									<h1>One more for good measure.</h1>
-									<p>Some representative placeholder content for the third
-										slide of this carousel.</p>
-									<p>
-										<a class="btn btn-lg btn-primary" href="#">Browse gallery</a>
-									</p>
-								</div>
+							<div class="carousel-caption text-start">
+								<img src="${pageContext.request.contextPath }/resources/제주 성산일출봉.jpg" alt="">
 							</div>
 						</div>
 					</div>
@@ -100,55 +161,78 @@
 					</button>
 				</div>
 			</div>
-			<div class="col col-4 text-center" style="background: aliceblue;">2 of 2</div>
+			
 		</div>
-		<div class="row">
-			<div class="col p-5">
-				<div class="card" style="width: 18rem;">
-					<a><img src="..." class="card-img-top" alt="..."></a>
-					<div class="card-body">
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
+
+
+		<div id="MainContents">
+			<div class="row" data-aos="zoom-in-down" data-aos-duration="600" data-aos-anchor-placement="top-center">
+				<div class="col p-5">
+					<div class="card" id="WeatherInfo">
+						<a><img src="..." class="card-img-top" alt="..."></a>
+						<div class="card-body">
+							<p class="card-text">날씨 정보</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
+			data-aos-anchor-placement="top-center">
+				<div class="col p-5">
+					<div class="card" id="TripRecommend">
+						<a><img src="..." class="card-img-top" alt="..."></a>
+						<div class="card-body">
+							<p class="card-text">여행지 추천</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
+			data-aos-anchor-placement="top-center">
+				<div class="col p-5">
+					<div class="card" id="FestivalRecommend">
+						<a><img src="..." class="card-img-top" alt="..."></a>
+						<div class="card-body">
+							<p class="card-text">축제 추천</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col p-5">
-				<div class="card" style="width: 18rem;">
-					<a><img src="..." class="card-img-top" alt="..."></a>
-					<div class="card-body">
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
+		<!-- content 종료 -->
+		<!-- Footer-->
+		<footer class="bg-dark py-4 mt-auto">
+			<div class="container px-5">
+				<div
+					class="row align-items-center justify-content-between flex-column flex-sm-row">
+					<div class="col-auto">
+						<div class="small m-0 text-white">Copyright &copy; Your
+							Website 2023</div>
+					</div>
+					<div class="col-auto">
+						<a class="link-light small" href="#!">Privacy</a> <span
+							class="text-white mx-1">&middot;</span> <a
+							class="link-light small" href="#!">Terms</a> <span
+							class="text-white mx-1">&middot;</span> <a
+							class="link-light small" href="#!">Contact</a>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- contant 종료 -->
+		</footer>
 	</main>
-	<!-- Footer-->
-	<footer class="bg-dark py-4 mt-auto">
-		<div class="container px-5">
-			<div
-				class="row align-items-center justify-content-between flex-column flex-sm-row">
-				<div class="col-auto">
-					<div class="small m-0 text-white">Copyright &copy; Your
-						Website 2023</div>
-				</div>
-				<div class="col-auto">
-					<a class="link-light small" href="#!">Privacy</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Terms</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Contact</a>
-				</div>
-			</div>
-		</div>
-	</footer>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="resources/js/scripts.js"></script>
+
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init();
+	</script>
 </body>
 </html>
