@@ -248,15 +248,16 @@ div#passArea i{
 		<div class="joinContents">
             <div class="leftArea">
             
-                <img src="${pageContext.request.contextPath}/resources/3509.jpg" alt="">
+                <img src="${pageContext.request.contextPath}/resources/tdest/3509.jpg" alt="">
             </div>
 			<div class="joinArea">                
            		<h2 class="Title">회원가입</h2>
 				<div class="formTag">
-					<form action="" method="post" enctype="multipart/form-data">
+					<form action="memberJoin" method ="post" enctype="multipart/form-data">
 
-						<input type="text" id="id" name="mid" placeholder="아이디"
+						<input type="text" id="id" onblur="checkMid()" name="mid" placeholder="아이디"
     						onkeyup="idCheck()" class="formInputCheck">
+    						
 						<p id="MsgId"></p>
                         <div id="passArea">
                             <input type="password" id="password" name="mpw" placeholder="비밀번호">
@@ -264,12 +265,9 @@ div#passArea i{
                             <p id="MsgPw"></p>
                         </div>
 
-						<input type="text" id="name" name="mname" placeholder="이름입력">
-
-						<div>
-							<input type="text" id="memail" name="memail" placeholder="eamil@example.com">
-						</div>
-						<input type="file" id="profile" name="mfile" value="파일선택">
+						<input type="text" id="name" onblur="checkMnickname()" name="mnickname" placeholder="닉네임">
+						
+						<input type="file" id="profile" name="mprofiledata" value="파일선택">
 
 						<div class="button_container">
                             <button class="btn1" type="submit"><span>회원가입</span></button>
@@ -364,7 +362,7 @@ div#passArea i{
 
 	<script type="text/javascript">
             let idch = false;
-            function idCheck() {
+            function checkMid() {
                 let idEl = document.querySelector('#id');
                 console.log("확인할 아이디 " + idEl.value);
 
@@ -372,26 +370,10 @@ div#passArea i{
                     type: "get",
                     url: "idCheck",
                     data: {
-                        "id": idEl.value
+                        "mid": idEl.value
                     },
-                    success: function (repl) {
-                        console.log(repl);
-                        if (repl == 'Y') {
-                            $('#MsgId').css("color", "green").text("사용가능한 아이디입니다.");
-                            let btnTag = document.getElementById("btn")
-                            //btnTag.disabled = false;
-                            idch = true;
-                        } else if (repl == 'N') {
-                            $('#MsgId').css("color", "red").text("중복된 아이디입니다.");
-                            let btnTag = document.getElementById("btn")
-                            btnTag.disabled = true;
-                            let idch = false;
-                        } else if (repl == 'F') {
-                            $('#MsgId').css("color", "#4D2B8A").text("아이디를 입력하세요.");
-                            let btnTag = document.getElementById("btn")
-                            btnTag.disabled = true;
-                            let idch = false;
-                        }
+                    success: function (rs) {
+						
                     }
                 });
             }

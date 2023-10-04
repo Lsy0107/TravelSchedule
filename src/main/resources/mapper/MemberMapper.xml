@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.TravelSchedule.dao.MemberDao">
+	<insert id="insertMember" >
+	insert into members values(#{mid}, #{mpw}, #{mnickname}, #{mprofile}, 'NY')
+	</insert>
+	<select id="selectInfo" resultType="string">
+	select mid
+	from members
+	<where>
+	 <if test="mid != null">mid = #{mid}</if>
+	 <if test="mnickname != null">mnickname = #{mnickname}</if>
+	</where>
+	</select>
+</mapper>
