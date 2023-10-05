@@ -17,6 +17,21 @@ public class MemberController {
 	@Autowired
 	MemberService msvc;
 	
+	@RequestMapping(value="/memberLogin")
+	public ModelAndView memberLogin(Member mem, HttpSession session) {
+		System.out.println("로그인 요청");
+		ModelAndView mav = new ModelAndView();
+		Member rs = msvc.memberLogin(mem);
+		if(rs == null) {
+			mav.setViewName("redirect:memberLoginForm");
+		}else {
+			session.setAttribute("loginId", rs.getMid());
+			session.setAttribute("loginProfile", rs.getMprofile());
+			mav.setViewName("redirect:/");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value="/memberJoin")
 	public ModelAndView memberJoin(Member meminfo, HttpSession session) {
 		System.out.println("회원가입 요청");
@@ -39,12 +54,4 @@ public class MemberController {
 		System.out.println("rs"+rs);
 		return rs;
 	}
-	
-	@RequestMapping(value="/memberLogin")
-	public ModelAndView memberLogin() {
-		System.out.println("로그인 요청");
-		ModelAndView mav = new ModelAndView();
-		return null;
-	}
-	
 }

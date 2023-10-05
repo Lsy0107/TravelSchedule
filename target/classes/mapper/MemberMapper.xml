@@ -13,4 +13,9 @@
 	 <if test="location == 'id'">mid = #{info}</if>
 	 <if test="location == 'nickname'">mnickname = #{info}</if>
 	</select>
+	<select id="selectMember" resultType="mem">
+	select *
+	from members
+	where mid = #{mid} and mpw = #{mpw}
+	</select>
 </mapper>

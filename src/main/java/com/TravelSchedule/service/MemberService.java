@@ -59,4 +59,9 @@ public class MemberService {
 		return mdao.selectInfo(info, location);
 	}
 
+	public Member memberLogin(Member mem) {
+		System.out.println("MemberService - memberLogin");
+		return mdao.selectMember(mem);
+	}
+
 }

@@ -18,7 +18,7 @@
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <%@ include file="include/menu.jsp" %>
+            <%@ include file="/WEB-INF/views/include/menu.jsp" %>
             <!-- contant 시작 -->
             <div class="row">
             	<div class="card">
@@ -28,7 +28,7 @@
             <!-- contant 종료 -->
         </main>
         <!-- Footer-->
-       <%@ include file="include/footer.jsp"%>
+       <%@ include file="/WEB-INF/views/include/footer.jsp"%>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

@@ -10,4 +10,6 @@ public interface MemberDao {
 
 	String selectInfo(@Param("info")String info, @Param("location")String location);
 
+	Member selectMember(Member mem);
+
 }
