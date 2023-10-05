@@ -10,7 +10,7 @@
 	select  nvl(MAX(mid), 'N')
 	from members
 	where
-	 <if test="location != 'id'">mid = #{info}</if>
-	 <if test="location != 'nickname'">mnickname = #{info}</if>
+	 <if test="location == 'id'">mid = #{info}</if>
+	 <if test="location == 'nickname'">mnickname = #{info}</if>
 	</select>
 </mapper>

@@ -261,7 +261,7 @@ div#nicknameArea i{
 			<div class="joinArea">                
            		<h2 class="Title">회원가입</h2>
 				<div class="formTag">
-					<form action="memberJoin" method ="post" enctype="multipart/form-data">
+					<form action="memberJoin" method ="post" enctype="multipart/form-data" onsubmit="return check(this)">
 						<div id="idArea">
 						<input type="text" id="id" onblur="checkinfo('id')" name="mid" placeholder="아이디" class="formInputCheck">
 						<p id="MsgId"></p>
@@ -369,16 +369,20 @@ div#nicknameArea i{
         </script>
 
 	<script type="text/javascript">
+	let checkMid = false;
+	let checkMnickname = false;
             function checkinfo(location) {
             	let info = "";
+            	
             	switch (location) {
 				case "id":
-					info = document.querySelector("#id")
+					info = document.querySelector("#id").value
 					break;
 				case "nickname":
-					info = document.querySelector("#nickname") 
+					info = document.querySelector("#nickname").value 
 					break;
 				}
+            	console.log(info);
                 $.ajax({
                     type: "post",
                     url: "checkInfo",
@@ -386,17 +390,18 @@ div#nicknameArea i{
                         "info": info, 
                         "location" : location
                     },
-                    success: function (rs) {
+                    async:false,
+                    success: function (rs) {  						
+     					if(info != ""){
                     	switch (location) {
         				case "id":
-        					console.log(rs);
-        					idcheck(rs);
+        					idcheck(rs); 
         					break;
-        				case "location":
+        				case "nickname":
         					nicknamecheck(rs);
         					break;
         				}
-                    	
+    					}
                     }
                 });
             }
@@ -404,17 +409,20 @@ div#nicknameArea i{
 
             	let idAreaEl = document.querySelector("#idArea");
             	let iTagEl = idAreaEl.querySelector("i");
-            	console.log(iTagEl);
             	if(iTagEl != null){
             		idAreaEl.removeChild(iTagEl);
             	}
+            	iTagEl = document.createElement("i");
 				if(rs == "N"){
 					console.log("사용가능")
-					idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-check"></i>';
+					iTagEl.setAttribute('class','fa-solid fa-check')
+					checkMid = true;
 				}else{
 					console.log("사용불가")
-					idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-x"></i>';
+					iTagEl.setAttribute('class','fa-solid fa-x')
+					checkMid = false;
 				}
+					idAreaEl.appendChild(iTagEl);
             }
             function nicknamecheck(rs){
             	let nicknameAreaEl = document.querySelector("#nicknameArea");
@@ -422,14 +430,36 @@ div#nicknameArea i{
             	if(iTagEl != null){
             		nicknameAreaEl.removeChild(iTagEl);
             	}
+            	iTagEl = document.createElement("i");
 				if(rs == "N"){
 					console.log("사용가능")
-					nicknameAreaEl.innerHTML = nicknameAreaEl.innerHTML + '<i class="fa-solid fa-check"></i>';
+					iTagEl.setAttribute('class','fa-solid fa-check')
+					checkMnickname = true;
 				}else{
 					console.log("사용불가")
-					nicknameAreaEl.innerHTML = nicknameAreaEl.innerHTML + '<i class="fa-solid fa-x"></i>';
+					iTagEl.setAttribute('class','fa-solid fa-x')
+					checkMnickname = false;
 				}
+				nicknameAreaEl.appendChild(iTagEl);
             }
+        </script>
+        <script type="text/javascript">
+        	function check(){
+        		if(!checkMid){
+        			alert("아이디를 확인해주세요");
+        			return false;
+        		}
+        		let password = document.querySelector("#password");
+        		if(password.value == ""){
+        			alert("비밀번호를 확인해주세요")
+        			return false;
+        		}
+        		if(!checkMnickname){
+        			alert("닉네임을 확인해주세요");
+        			return false;
+        		}
+        		return true;
+        	}
         </script>
 </body>
 

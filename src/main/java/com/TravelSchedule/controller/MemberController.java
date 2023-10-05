@@ -35,8 +35,8 @@ public class MemberController {
 	@RequestMapping(value="/checkInfo")
 	public @ResponseBody String idCheck(String info, String location) {
 		System.out.println("아이디/닉네임 중복체크 요청");
-		System.out.println(info);
 		String rs = msvc.checkinfo(info, location);
+		System.out.println("rs"+rs);
 		return rs;
 	}
 	
