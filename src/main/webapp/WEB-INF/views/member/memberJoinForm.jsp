@@ -144,17 +144,7 @@
     display: block;
 }
 
-#idC {
-	width: 25%;
-	height: 48px;
-	padding: 0 20px;
-	margin-bottom: 5px;
-	background-color: rgb(151, 136, 177);
-	border: 1px solid rgb(151, 136, 177);
-	border-radius: 12px;
-}
-
-#memail{
+#nickname{
 	width: 75%;
 	height: 48px;
 	padding: 0 20px;
@@ -230,6 +220,24 @@ div#passArea i{
     top: 17px;
     color: black;
 }
+div#idArea{
+    position: relative;
+}
+div#idArea i{
+    position: absolute;
+    left: 80%;
+    top: 17px;
+    color: black;
+}
+div#nicknameArea{
+    position: relative;
+}
+div#nicknameArea i{
+    position: absolute;
+    left: 80%;
+    top: 17px;
+    color: black;
+}
 
 #body{
     background-color: #eec0c6;
@@ -248,28 +256,26 @@ div#passArea i{
 		<div class="joinContents">
             <div class="leftArea">
             
-                <img src="${pageContext.request.contextPath}/resources/3509.jpg" alt="">
+                <img src="${pageContext.request.contextPath}/resources/tdest/3509.jpg" alt="">
             </div>
 			<div class="joinArea">                
            		<h2 class="Title">회원가입</h2>
 				<div class="formTag">
-					<form action="" method="post" enctype="multipart/form-data">
-
-						<input type="text" id="id" name="mid" placeholder="아이디"
-    						onkeyup="idCheck()" class="formInputCheck">
+					<form action="memberJoin" method ="post" enctype="multipart/form-data" onsubmit="return check(this)">
+						<div id="idArea">
+						<input type="text" id="id" onblur="checkinfo('id')" name="mid" placeholder="아이디" class="formInputCheck">
 						<p id="MsgId"></p>
+						</div>
                         <div id="passArea">
                             <input type="password" id="password" name="mpw" placeholder="비밀번호">
                             <i class="fa-solid fa-eye-slash"></i>
                             <p id="MsgPw"></p>
                         </div>
-
-						<input type="text" id="name" name="mname" placeholder="이름입력">
-
-						<div>
-							<input type="text" id="memail" name="memail" placeholder="eamil@example.com">
+						<div id="nicknameArea">
+						<input type="text" id="nickname" onblur="checkinfo('nickname')" name="mnickname" placeholder="닉네임" >
 						</div>
-						<input type="file" id="profile" name="mfile" value="파일선택">
+						
+						<input type="file" id="profile" name="mprofiledata" value="파일선택">
 
 						<div class="button_container">
                             <button class="btn1" type="submit"><span>회원가입</span></button>
@@ -285,24 +291,7 @@ div#passArea i{
 		<!-- content 종료 -->
 	</main>
 	<!-- Footer-->
-	<footer class="bg-dark py-4 mt-auto">
-		<div class="container px-5">
-			<div
-				class="row align-items-center justify-content-between flex-column flex-sm-row">
-				<div class="col-auto">
-					<div class="small m-0 text-white">Copyright &copy; Your
-						Website 2023</div>
-				</div>
-				<div class="col-auto">
-					<a class="link-light small" href="#!">Privacy</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Terms</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Contact</a>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -363,38 +352,97 @@ div#passArea i{
         </script>
 
 	<script type="text/javascript">
-            let idch = false;
-            function idCheck() {
-                let idEl = document.querySelector('#id');
-                console.log("확인할 아이디 " + idEl.value);
-
+	let checkMid = false;
+	let checkMnickname = false;
+            function checkinfo(location) {
+            	let info = "";
+            	
+            	switch (location) {
+				case "id":
+					info = document.querySelector("#id").value
+					break;
+				case "nickname":
+					info = document.querySelector("#nickname").value 
+					break;
+				}
+            	console.log(info);
                 $.ajax({
-                    type: "get",
-                    url: "idCheck",
+                    type: "post",
+                    url: "checkInfo",
                     data: {
-                        "id": idEl.value
+                        "info": info, 
+                        "location" : location
                     },
-                    success: function (repl) {
-                        console.log(repl);
-                        if (repl == 'Y') {
-                            $('#MsgId').css("color", "green").text("사용가능한 아이디입니다.");
-                            let btnTag = document.getElementById("btn")
-                            //btnTag.disabled = false;
-                            idch = true;
-                        } else if (repl == 'N') {
-                            $('#MsgId').css("color", "red").text("중복된 아이디입니다.");
-                            let btnTag = document.getElementById("btn")
-                            btnTag.disabled = true;
-                            let idch = false;
-                        } else if (repl == 'F') {
-                            $('#MsgId').css("color", "#4D2B8A").text("아이디를 입력하세요.");
-                            let btnTag = document.getElementById("btn")
-                            btnTag.disabled = true;
-                            let idch = false;
-                        }
+                    async:false,
+                    success: function (rs) {  						
+     					if(info != ""){
+                    	switch (location) {
+        				case "id":
+        					idcheck(rs); 
+        					break;
+        				case "nickname":
+        					nicknamecheck(rs);
+        					break;
+        				}
+    					}
                     }
                 });
             }
+            function idcheck(rs){
+
+            	let idAreaEl = document.querySelector("#idArea");
+            	let iTagEl = idAreaEl.querySelector("i");
+            	if(iTagEl != null){
+            		idAreaEl.removeChild(iTagEl);
+            	}
+            	iTagEl = document.createElement("i");
+				if(rs == "N"){
+					console.log("사용가능")
+					iTagEl.setAttribute('class','fa-solid fa-check')
+					checkMid = true;
+				}else{
+					console.log("사용불가")
+					iTagEl.setAttribute('class','fa-solid fa-x')
+					checkMid = false;
+				}
+					idAreaEl.appendChild(iTagEl);
+            }
+            function nicknamecheck(rs){
+            	let nicknameAreaEl = document.querySelector("#nicknameArea");
+            	let iTagEl = nicknameAreaEl.querySelector("i");
+            	if(iTagEl != null){
+            		nicknameAreaEl.removeChild(iTagEl);
+            	}
+            	iTagEl = document.createElement("i");
+				if(rs == "N"){
+					console.log("사용가능")
+					iTagEl.setAttribute('class','fa-solid fa-check')
+					checkMnickname = true;
+				}else{
+					console.log("사용불가")
+					iTagEl.setAttribute('class','fa-solid fa-x')
+					checkMnickname = false;
+				}
+				nicknameAreaEl.appendChild(iTagEl);
+            }
+        </script>
+        <script type="text/javascript">
+        	function check(){
+        		if(!checkMid){
+        			alert("아이디를 확인해주세요");
+        			return false;
+        		}
+        		let password = document.querySelector("#password");
+        		if(password.value == ""){
+        			alert("비밀번호를 확인해주세요")
+        			return false;
+        		}
+        		if(!checkMnickname){
+        			alert("닉네임을 확인해주세요");
+        			return false;
+        		}
+        		return true;
+        	}
         </script>
 </body>
 

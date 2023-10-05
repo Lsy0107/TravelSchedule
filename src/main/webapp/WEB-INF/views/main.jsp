@@ -125,7 +125,7 @@ main{
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 								<div class="carousel-caption text-start">
-									<img style="max-width: 100%; height: auto;" src="${pageContext.request.contextPath }/resources/남산타워.jpg" alt="">
+									<img style="max-width: 100%; height: auto;" src="${pageContext.request.contextPath }/resources/tdest/남산타워.jpg" alt="">
 								</div>
 						</div>
 						<div class="carousel-item active">
@@ -135,7 +135,7 @@ main{
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 
 							<div class="carousel-caption text-start">
-								<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/경복궁.jpg" alt="">
+								<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/tdest/경복궁.jpg" alt="">
 							</div>
 						</div>
 						<div class="carousel-item">
@@ -145,7 +145,7 @@ main{
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 
 							<div class="carousel-caption text-start">
-								<img src="${pageContext.request.contextPath }/resources/제주 성산일출봉.jpg" alt="">
+								<img src="${pageContext.request.contextPath }/resources/tdest/제주 성산일출봉.jpg" alt="">
 							</div>
 						</div>
 					</div>
@@ -205,24 +205,7 @@ main{
 		</div>
 		<!-- content 종료 -->
 		<!-- Footer-->
-		<footer class="bg-dark py-4 mt-auto">
-			<div class="container px-5">
-				<div
-					class="row align-items-center justify-content-between flex-column flex-sm-row">
-					<div class="col-auto">
-						<div class="small m-0 text-white">Copyright &copy; Your
-							Website 2023</div>
-					</div>
-					<div class="col-auto">
-						<a class="link-light small" href="#!">Privacy</a> <span
-							class="text-white mx-1">&middot;</span> <a
-							class="link-light small" href="#!">Terms</a> <span
-							class="text-white mx-1">&middot;</span> <a
-							class="link-light small" href="#!">Contact</a>
-					</div>
-				</div>
-			</div>
-		</footer>
+		<%@ include file="include/footer.jsp"%>
 	</main>
 	<!-- Bootstrap core JS-->
 	<script

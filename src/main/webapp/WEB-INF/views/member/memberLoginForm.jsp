@@ -146,19 +146,17 @@ div#passArea i{
             <div class="loginArea">
                 <h2 class="Title">로그인</h2>
                 <div>
-                    <form action="">
+                    <form action="/memberLogin">
                         <input type="text" id="id" name="mid" placeholder="아이디">
                         <div id="passArea">
                             <input type="password" id="password" name="mpw" placeholder="비밀번호">
                             <i class="fa-solid fa-eye-slash"></i>
                         </div>
-
-
-                        <div class="btn btnArea btn-outline-secondary">로그인</div>
+                        <input type="submit" class="btn btnArea btn-outline-secondary" value="로그인">
                     </form>
                 </div>
                 <p style="position: relative; left: 24%; bottom: -80px;">
-                    <a href="">회원가입</a>
+                    <a href="/memberJoin">회원가입</a>
                     <a href="">아이디 찾기</a>
                     <a href="">비밀번호 찾기</a>
                 </p>
@@ -167,24 +165,7 @@ div#passArea i{
 		<!-- content 종료 -->
 	</main>
 	<!-- Footer-->
-	<footer class="bg-dark py-4 mt-auto">
-		<div class="container px-5">
-			<div
-				class="row align-items-center justify-content-between flex-column flex-sm-row">
-				<div class="col-auto">
-					<div class="small m-0 text-white">Copyright &copy; Your
-						Website 2023</div>
-				</div>
-				<div class="col-auto">
-					<a class="link-light small" href="#!">Privacy</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Terms</a> <span
-						class="text-white mx-1">&middot;</span> <a
-						class="link-light small" href="#!">Contact</a>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
