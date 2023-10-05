@@ -389,6 +389,7 @@ div#nicknameArea i{
                     success: function (rs) {
                     	switch (location) {
         				case "id":
+        					console.log(rs);
         					idcheck(rs);
         					break;
         				case "location":

@@ -7,9 +7,7 @@
 	insert into members values(#{mid}, #{mpw}, #{mnickname}, #{mprofile}, 'NY')
 	</insert>
 	<select id="selectInfo" resultType="string">
-	select  
-	<if test="location != 'id'">nvl(MAX(mid), 'N')</if>
-	 <if test="location != 'nickname'">nvl(max(nickname), 'N')</if>
+	select  nvl(MAX(mid), 'N')
 	from members
 	where
 	 <if test="location != 'id'">mid = #{info}</if>
