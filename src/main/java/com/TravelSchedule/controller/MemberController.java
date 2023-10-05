@@ -32,11 +32,11 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/idCheck")
-	public @ResponseBody String idCheck(String mid) {
-		System.out.println("아이디 중복체크 요청");
-		System.out.println(mid);
-		String rs = msvc.checkinfo(mid);
+	@RequestMapping(value="/checkInfo")
+	public @ResponseBody String idCheck(String info, String location) {
+		System.out.println("아이디/닉네임 중복체크 요청");
+		System.out.println(info);
+		String rs = msvc.checkinfo(info, location);
 		return rs;
 	}
 	

@@ -144,7 +144,7 @@
     display: block;
 }
 
-#memail{
+#nickname{
 	width: 75%;
 	height: 48px;
 	padding: 0 20px;
@@ -263,7 +263,7 @@ div#nicknameArea i{
 				<div class="formTag">
 					<form action="memberJoin" method ="post" enctype="multipart/form-data">
 						<div id="idArea">
-						<input type="text" id="id" onblur="checkMid()" name="mid" placeholder="아이디" class="formInputCheck">
+						<input type="text" id="id" onblur="checkinfo('id')" name="mid" placeholder="아이디" class="formInputCheck">
 						<p id="MsgId"></p>
 						</div>
                         <div id="passArea">
@@ -272,8 +272,7 @@ div#nicknameArea i{
                             <p id="MsgPw"></p>
                         </div>
 						<div id="nicknameArea">
-						<input type="text" id="name" onblur="checkMnickname()" name="mnickname" placeholder="닉네임">
-						<i class="fa-solid fa-check"></i>
+						<input type="text" id="nickname" onblur="checkinfo('nickname')" name="mnickname" placeholder="닉네임" >
 						</div>
 						
 						<input type="file" id="profile" name="mprofiledata" value="파일선택">
@@ -370,33 +369,65 @@ div#nicknameArea i{
         </script>
 
 	<script type="text/javascript">
-            let idch = false;
-            function checkMid() {
-                let idEl = document.querySelector('#id');
-                console.log("확인할 아이디 " + idEl.value);
-
+            function checkinfo(location) {
+            	let info = "";
+            	switch (location) {
+				case "id":
+					info = document.querySelector("#id")
+					break;
+				case "nickname":
+					info = document.querySelector("#nickname") 
+					break;
+				}
                 $.ajax({
-                    type: "get",
-                    url: "idCheck",
+                    type: "post",
+                    url: "checkInfo",
                     data: {
-                        "mid": idEl.value
+                        "info": info, 
+                        "location" : location
                     },
                     success: function (rs) {
-                    	let idAreaEl = document.querySelector("#idArea");
-                    	let iTagEl = idAreaEl.querySelector("i");
-                    	console.log(iTagEl);
-                    	if(iTagEl != null){
-                    		idAreaEl.removeChild(iTagEl);
-                    	}
-						if(rs == "N"){
-							console.log("사용가능")
-							idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-check"></i>';
-						}else{
-							console.log("사용불가")
-							idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-x"></i>';
-						}
+                    	switch (location) {
+        				case "id":
+        					idcheck(rs);
+        					break;
+        				case "location":
+        					nicknamecheck(rs);
+        					break;
+        				}
+                    	
                     }
                 });
+            }
+            function idcheck(rs){
+
+            	let idAreaEl = document.querySelector("#idArea");
+            	let iTagEl = idAreaEl.querySelector("i");
+            	console.log(iTagEl);
+            	if(iTagEl != null){
+            		idAreaEl.removeChild(iTagEl);
+            	}
+				if(rs == "N"){
+					console.log("사용가능")
+					idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-check"></i>';
+				}else{
+					console.log("사용불가")
+					idAreaEl.innerHTML = idAreaEl.innerHTML + '<i class="fa-solid fa-x"></i>';
+				}
+            }
+            function nicknamecheck(rs){
+            	let nicknameAreaEl = document.querySelector("#nicknameArea");
+            	let iTagEl = nicknameAreaEl.querySelector("i");
+            	if(iTagEl != null){
+            		nicknameAreaEl.removeChild(iTagEl);
+            	}
+				if(rs == "N"){
+					console.log("사용가능")
+					nicknameAreaEl.innerHTML = nicknameAreaEl.innerHTML + '<i class="fa-solid fa-check"></i>';
+				}else{
+					console.log("사용불가")
+					nicknameAreaEl.innerHTML = nicknameAreaEl.innerHTML + '<i class="fa-solid fa-x"></i>';
+				}
             }
         </script>
 </body>

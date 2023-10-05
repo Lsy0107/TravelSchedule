@@ -8,6 +8,6 @@ public interface MemberDao {
 
 	int insertMember(Member mem);
 
-	String selectInfo(@Param("mid")String mid, @Param("mnickname")String mnickname);
+	String selectInfo(@Param("info")String info, @Param("location")String location);
 
 }

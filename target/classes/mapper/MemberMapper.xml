@@ -7,10 +7,12 @@
 	insert into members values(#{mid}, #{mpw}, #{mnickname}, #{mprofile}, 'NY')
 	</insert>
 	<select id="selectInfo" resultType="string">
-	select  nvl(MAX(mid), 'N')
+	select  
+	<if test="location != 'id'">nvl(MAX(mid), 'N')</if>
+	 <if test="location != 'nickname'">nvl(max(nickname), 'N')</if>
 	from members
 	where
-	 <if test="mid != ''">mid = #{mid}</if>
-	 <if test="mnickname != ''">mnickname = #{mnickname}</if>
+	 <if test="location != 'id'">mid = #{info}</if>
+	 <if test="location != 'nickname'">mnickname = #{info}</if>
 	</select>
 </mapper>

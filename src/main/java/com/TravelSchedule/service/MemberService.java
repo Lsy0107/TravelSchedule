@@ -53,10 +53,10 @@ public class MemberService {
 		return meminfo;
 	}
 
-	public String checkinfo(String mid) {
+	public String checkinfo(String mid, String location) {
 		System.out.println("MemberService - checkinfo");
 		System.out.println(mid);
-		return mdao.selectInfo(mid, "");
+		return mdao.selectInfo(mid, location);
 	}
 
 }
