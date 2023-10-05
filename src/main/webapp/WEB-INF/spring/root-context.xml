@@ -27,4 +27,6 @@
 	</bean>
 	<mybatis-spring:scan
 		base-package="com.TravelSchedule.dao"></mybatis-spring:scan>
+		<mybatis-spring:scan
+		base-package="com.TravelSchedule.crawling"></mybatis-spring:scan>
 </beans>
