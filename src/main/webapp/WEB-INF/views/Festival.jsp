@@ -129,14 +129,17 @@ main{
 							<c:forEach items="${festival }" var="fe">
 								<a href="">
 									<div class="card mb-4 feList" >
-										<c:when test="${fe.feposter == null }">
-                            				<img class="card-img-top feImg" src="${pageContext.request.contextPath }/resources/tdest/3509.jpg">
-                            			</c:when>
-                            			<c:otherwise>
-		                            		<img class="card-img-top feImg" src="${fe.feposter }" alt="..." />
-                            			</c:otherwise>				
+										<c:choose>
+											<c:when test="${fe.feposter == null}">
+	                            				<img class="card-img-top feImg" src="${pageContext.request.contextPath}/resources/tdest/3509.jpg">
+	                            			</c:when>
+	                            			<c:otherwise>
+			                            		<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            		
+	                            			</c:otherwise>
+                            			</c:choose>				
 										<h5 class="feName">${fe.fename }</h5>
 										<h6>${fe.opendate} ~ ${fe.enddate }</h6>
+										<h6> ${fe.feaddress }</h6>
 									</div>
 								</a>
 							</c:forEach>
