@@ -20,7 +20,7 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
 .signIn {
@@ -106,7 +106,7 @@ main{
 		<!-- content 시작 -->
 
 
-		<div class="" id="TitleBar">
+		<div id="TitleBar">
 			<div class="IMGBAR">
 				<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-indicators">
@@ -125,7 +125,8 @@ main{
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 								<div class="carousel-caption text-start">
-									<img style="max-width: 100%; height: auto;" src="${pageContext.request.contextPath }/resources/tdest/남산타워.jpg" alt="">
+									<a href="${newList[0].url}"><img style="max-width: 100%; height: auto;" src="${newList[0].photo }" alt=""></a>
+									<div><p>${newList[0].newtitle }</p><p>${newList[0].newsdate }</p></div>
 								</div>
 						</div>
 						<div class="carousel-item active">
@@ -133,9 +134,9 @@ main{
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
-
 							<div class="carousel-caption text-start">
-								<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/tdest/경복궁.jpg" alt="">
+								<a href="${newList[1].url}"><img style="width: 100%; height: 100%;" src="${newList[1].photo }" alt=""></a>
+								<div><p>${newList[1].newtitle }</p><p>${newList[1].newsdate }</p></div>
 							</div>
 						</div>
 						<div class="carousel-item">
@@ -145,7 +146,8 @@ main{
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 
 							<div class="carousel-caption text-start">
-								<img src="${pageContext.request.contextPath }/resources/tdest/제주 성산일출봉.jpg" alt="">
+								<a href="${newList[2].url}"><img src="${newList[2].photo }" alt=""></a>
+								<div><p>${newList[2].newtitle }</p><p>${newList[2].newsdate }</p></div>
 							</div>
 						</div>
 					</div>
@@ -163,7 +165,6 @@ main{
 			</div>
 			
 		</div>
-
 
 		<div id="MainContents">
 			<div class="row" data-aos="zoom-in-down" data-aos-duration="600" data-aos-anchor-placement="top-center">
@@ -216,6 +217,10 @@ main{
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script>
 		AOS.init();
+	</script>
+	<script type="text/javascript">
+	console.log("${newList}");
+	console.log("${newList[0]}");
 	</script>
 </body>
 </html>

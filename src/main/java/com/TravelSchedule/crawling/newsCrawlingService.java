@@ -1,4 +1,5 @@
 package com.TravelSchedule.crawling;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,11 +11,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.TravelSchedule.dto.News;
+
 @Service
 public class newsCrawlingService {
 
 	@Autowired
-	newsCrawlingDao newcdao;
+	newsCrawlingDao ndao;
 	
 	public void getNews() {
 		System.out.println("joongang news 크롤링 service");
@@ -43,12 +46,17 @@ public class newsCrawlingService {
         	String time = item.findElement(By.cssSelector("div.meta > p")).getText();
         	System.out.println(" && time : " + time);
         	if(!img.equals("")) {
-        		int rs = newcdao.insertNews(img,title,time, url);          		
+        		int rs = ndao.insertNews(img,title,time, url);          		
         	}
         	
         }
         driver.quit();
 		
+	}
+
+	public ArrayList<News> getNewsList() {
+		System.out.println("newsService - getNewsList()");
+		return ndao.selectNewsList();
 	}
 
 }

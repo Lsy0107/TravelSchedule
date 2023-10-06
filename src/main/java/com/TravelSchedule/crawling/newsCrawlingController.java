@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class newsCrawlingController {
 
 	@Autowired
-	newsCrawlingService newcsvc;
+	newsCrawlingService nsvc;
 	
 	@RequestMapping(value="/joongang")
 	public void joogang() {
 		System.out.println("joongang 페이지 크롤링 요청");
-		newcsvc.getNews();
+		nsvc.getNews();
 	}
 }
