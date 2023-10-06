@@ -22,13 +22,11 @@ public class ApiController {
 		System.out.println("축제 리스트 불러오기 - festival()");
 		ModelAndView mav = new ModelAndView();
 		
-		//1. 버스 도착 정보 조회
 		
 		ArrayList<Festival> result  = asvc.getFestival();
 		System.out.println(result);
 		mav.addObject("festival",result);
 		
-		//2. 버스도착정보 페이지
 		mav.setViewName("Festival");
 		
 		
