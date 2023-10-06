@@ -10,7 +10,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="/">여행페이지</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath }/festival">여행페이지</a>
                     <div class="col" style="display: flex; align-items: center;">
                         <input placeholder="검색어를 입력해주세요." type="text" class="form-control"
                             style="display: inline-block; width: 80%; box-sizing: border-box; margin: 5px;">
@@ -23,7 +23,7 @@
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberLoginForm">로그인</a></li>
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberJoinForm">회원가입</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">여행계획</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/">여행지검색</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/TdestSearch">여행지검색</a></li>
                             
                             <!-- 
                             토글방식 메뉴바
