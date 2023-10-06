@@ -106,7 +106,7 @@ main{
 		<!-- content 시작 -->
 
 
-		<div class="" id="TitleBar">
+		<div id="TitleBar">
 			<div class="IMGBAR">
 				<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-indicators">
@@ -163,7 +163,6 @@ main{
 			</div>
 			
 		</div>
-
 
 		<div id="MainContents">
 			<div class="row" data-aos="zoom-in-down" data-aos-duration="600" data-aos-anchor-placement="top-center">

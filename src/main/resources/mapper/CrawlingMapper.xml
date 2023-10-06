@@ -6,4 +6,7 @@
 <insert id="insertNews">
 insert into news(url, photo, newtitle, newsdate) values(#{url}, #{img}, #{title}, to_date(#{time}, 'YYYY.MM.DD HH24:MI'))
 </insert>
+<select id="selectNewsList" resultType="com.TravelSchedule.dto.News">
+select * from news
+</select>
 </mapper>
