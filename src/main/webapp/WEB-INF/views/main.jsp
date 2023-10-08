@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,8 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
 .signIn {
@@ -53,23 +55,25 @@
 
 #TripRecommend {
 	background-color: #ffd045;
-background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
+	background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
 	width: 70%;
 	height: 500px;
 	margin-left: auto;
 	margin-right: auto;
 }
-#WeatherInfo{
+
+#WeatherInfo {
 	background-color: #ffffff;
-background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
+	background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
 	width: 70%;
 	height: 500px;
 	margin-left: auto;
 	margin-right: auto;
 }
-#FestivalRecommend{
+
+#FestivalRecommend {
 	background-color: #ffffff;
-background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
+	background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
 	width: 70%;
 	height: 500px;
 	margin-left: auto;
@@ -80,27 +84,29 @@ background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
 	position: relative;
 	top: 64px;
 }
-#MainContents{
+
+#MainContents {
 	position: relative;
-    top: 700px;
+	top: 700px;
 }
-footer{
+
+footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 }
-main{
+
+main {
 	position: relative;
 	min-height: 100%;
 	padding-bottom: 2000px;
 }
-
 </style>
 
 
 </head>
 <body class="d-flex flex-column h-100">
-	<main class="flex-shrink-0">
+	<main class="">
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
@@ -124,10 +130,15 @@ main{
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
-								<div class="carousel-caption text-start">
-									<a href="${newList[0].url}"><img style="max-width: 100%; height: auto;" src="${newList[0].photo }" alt=""></a>
-									<div><p>${newList[0].newtitle }</p><p>${newList[0].newsdate }</p></div>
+							<div class="carousel-caption text-start">
+								<a href="${newList[0].url}"><img
+									style="max-width: 100%; height: auto;"
+									src="${newList[0].photo }" alt=""></a>
+								<div>
+									<p>${newList[0].newtitle }</p>
+									<p>${newList[0].newsdate }</p>
 								</div>
+							</div>
 						</div>
 						<div class="carousel-item active">
 							<svg class="bd-placeholder-img" width="100%" height="800px"
@@ -135,8 +146,13 @@ main{
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 							<div class="carousel-caption text-start">
-								<a href="${newList[1].url}"><img style="width: 100%; height: 100%;" src="${newList[1].photo }" alt=""></a>
-								<div><p>${newList[1].newtitle }</p><p>${newList[1].newsdate }</p></div>
+								<a href="${newList[1].url}"><img
+									style="width: 100%; height: 100%;" src="${newList[1].photo }"
+									alt=""></a>
+								<div>
+									<p>${newList[1].newtitle }</p>
+									<p>${newList[1].newsdate }</p>
+								</div>
 							</div>
 						</div>
 						<div class="carousel-item">
@@ -146,8 +162,12 @@ main{
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 
 							<div class="carousel-caption text-start">
-								<a href="${newList[2].url}"><img src="${newList[2].photo }" alt=""></a>
-								<div><p>${newList[2].newtitle }</p><p>${newList[2].newsdate }</p></div>
+								<a href="${newList[2].url}"><img src="${newList[2].photo }"
+									alt=""></a>
+								<div>
+									<p>${newList[2].newtitle }</p>
+									<p>${newList[2].newsdate }</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -163,47 +183,39 @@ main{
 					</button>
 				</div>
 			</div>
-			
+		</div>
+		<div class="row"
+			style="margin-top: 80px; overflow-x: scroll; height: 410px;">
+			<nav style="display: -webkit-inline-box;">
+				<c:forEach items="${ tdList}" var="td">
+					<div class="card" style="width: 18rem; margin: 4px;">
+						<img src="${td.tdphoto }" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">${td.tdname }</h5>
+							<p class="card-text">${td.tdaddress }</p>
+							<a href="#" class="btn btn-primary">계획에 추가하기</a>
+						</div>
+					</div>
+				</c:forEach>
+			</nav>
+		</div>
+		<h2>축제</h2>
+		<div class="row"
+			style="margin-top: 30px; overflow-x: scroll; height: 410px;">
+			<nav style="display: -webkit-inline-box;">
+				<c:forEach items="${ tdList}" var="td">
+					<div class="card" style="width: 18rem; margin: 4px;">
+						<img src="${td.tdphoto }" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">${td.tdname }</h5>
+							<p class="card-text">${td.tdaddress }</p>
+							<a href="#" class="btn btn-primary">Go somewhere</a>
+						</div>
+					</div>
+				</c:forEach>
+			</nav>
 		</div>
 
-		<div id="MainContents">
-			<div class="row" data-aos="zoom-in-down" data-aos-duration="600" data-aos-anchor-placement="top-center">
-				<div class="col p-5">
-					<div class="card" id="WeatherInfo">
-						<a><img src="..." class="card-img-top" alt="..."></a>
-						<div class="card-body">
-							<p class="card-text">날씨 정보</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
-			data-aos-anchor-placement="top-center">
-				<div class="col p-5">
-					<div class="card" id="TripRecommend">
-						<a><img src="..." class="card-img-top" alt="..."></a>
-						<div class="card-body">
-							<p class="card-text">여행지 추천</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
-			data-aos-anchor-placement="top-center">
-				<div class="col p-5">
-					<div class="card" id="FestivalRecommend">
-						<a><img src="..." class="card-img-top" alt="..."></a>
-						<div class="card-body">
-							<p class="card-text">축제 추천</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
@@ -219,8 +231,7 @@ main{
 		AOS.init();
 	</script>
 	<script type="text/javascript">
-	console.log("${newList}");
-	console.log("${newList[0]}");
+		
 	</script>
 </body>
 </html>

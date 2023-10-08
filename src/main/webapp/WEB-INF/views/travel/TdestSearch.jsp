@@ -22,7 +22,14 @@
                 <!-- Navigation-->
                 <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                     <!-- contant 시작 -->
-                    <div class="row">
+                    <div class="row"style="padding:10px;
+  font-size:2rem;
+  width:1000px;
+  margin:0 auto;
+  background-color:red;
+  white-space:nowrap;
+  /* 가로방향으로 스크롤바를 무조건 생성(넘치치 않으면 스크롤바가 안생김) */
+  overflow-x:auto;">
                         <div class="col-lg-8">
                             <div id="rowid" class="row">
                                 <c:forEach var="TdList" items="${TdestList}">

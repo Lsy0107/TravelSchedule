@@ -4,9 +4,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.TravelSchedule.dto.Member" alias="mem"/>
+		<typeAlias type="com.TravelSchedule.dto.Tdest" alias="tdest"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/CrawlingMapper.xml"/>
+		<mapper resource="mapper/ApiMapper.xml"/>
 	</mappers>
 </configuration>
