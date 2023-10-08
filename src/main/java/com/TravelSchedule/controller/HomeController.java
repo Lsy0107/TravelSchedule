@@ -11,19 +11,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
 import com.TravelSchedule.dto.News;
+import com.TravelSchedule.dto.Tdest;
+import com.TravelSchedule.service.ApiService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
 	newsCrawlingService nsvc;
+	@Autowired
+	ApiService apisvc;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
 		System.out.println("메인페이지 이동 요청");
 		ModelAndView mav = new ModelAndView();
 		ArrayList<News> newsList = nsvc.getNewsList();
+		ArrayList<Tdest> tdList = apisvc.getTdList();
 		mav.addObject("newList", newsList);
+		mav.addObject("tdList", tdList);
 		mav.setViewName("/main");
 		return mav;
 	}

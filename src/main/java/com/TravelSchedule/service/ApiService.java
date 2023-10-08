@@ -7,12 +7,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.TravelSchedule.dao.ApiDao;
 import com.TravelSchedule.dto.Festival;
-
 import com.TravelSchedule.dto.Tdest;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -21,7 +21,8 @@ import com.google.gson.JsonParser;
 public class ApiService {
 
 	private final String Servicekey = "S7zgFEQqSlrWVhHdRtINMDDNv%2BTnaJrW2iEOUsm2Y5UdcfYh6inhqrsA1Qls%2BtLEub4iFJ4UT89YTfsFhZ0sZQ%3D%3D";
-
+	@Autowired
+	ApiDao apiDao;
 	public ArrayList<Festival> getFestival() throws Exception  {
 		
 		
@@ -168,20 +169,53 @@ public class ApiService {
 		for (int i = 0; i < infoList.size(); i++) {
 			Tdest tdest = new Tdest();
 			String tdname = infoList.get(i).getAsJsonObject().get("title").getAsString();
-			tdest.setTdname(tdname);
+			
 
 			String addr1 = infoList.get(i).getAsJsonObject().get("addr1").getAsString();
+			String ctcode = apiDao.selectCtcode(addr1.split(" ")[0]);	
+			if(ctcode.equals("CT00000")) {
+				/*
+				ctcode = apiDao.maxcode("country", addr1);
+				String codeName = ctcode.substring(0,2);
+				int codeNum = Integer.parseInt(ctcode.substring(2))+1;
+				System.out.println("codeName : "+codeName + " codeNum : "+codeNum);
+				String codeNum_String = String.format("%05d", codeNum);
+				ctcode = codeName + codeNum_String;
+				System.out.println(ctcode);
+				 * */
+				continue;
+			}
+			String tdcode = apiDao.maxcode("tdest");
+			String codeName = tdcode.substring(0,2);
+			int codeNum = Integer.parseInt(tdcode.substring(2))+1;
+			String codeNum_String = String.format("%05d", codeNum);
+			tdcode = codeName + codeNum_String;
+			
+			tdest.setTdcode(tdcode);
+			tdest.setTdname(tdname);
+			tdest.setCtcode(ctcode);
 			String addr2 = infoList.get(i).getAsJsonObject().get("addr2").getAsString();
-			String tdaddress = addr1 + " " + addr2;
+			String tdaddress = addr1 + addr2;
 			tdest.setTdaddress(tdaddress);
 
 			String tdphoto = infoList.get(i).getAsJsonObject().get("firstimage").getAsString();
 			tdest.setTdphoto(tdphoto);
-
+			String rs = apiDao.selectTdcode(tdname);
+			if(rs.equals("Y")) {
+				if(!tdphoto.equals("")) {
+					apiDao.insertTdest(tdest);
+				}
+			}
+			System.out.println("tdest : "+tdest);
 			TdestList.add(tdest);
 		}
 	//	System.out.println(TdestList);
 		return TdestList;
+	}
+
+	public ArrayList<Tdest> getTdList() {
+		System.out.println("ApiService - getTdList()");
+		return apiDao.selectTdest();
 	}
 
 }
