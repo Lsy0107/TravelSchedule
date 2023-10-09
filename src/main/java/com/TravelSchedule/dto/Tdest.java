@@ -11,4 +11,6 @@ public class Tdest {
 	private String tdaddress;
 	private String tdphoto;
 	private String tdinfo;
+	private String tdlati;
+	private String tdlongti;
 }
