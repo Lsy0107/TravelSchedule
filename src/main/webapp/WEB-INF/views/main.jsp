@@ -101,6 +101,13 @@ main {
 	min-height: 100%;
 	padding-bottom: 2000px;
 }
+.profile{
+    width: 20%;
+    border-radius: 50px;
+}
+.disnone{
+	display:none;
+}
 </style>
 
 
@@ -112,7 +119,8 @@ main {
 		<!-- content 시작 -->
 
 
-		<div id="TitleBar">
+		<div class="row">
+		<div id="TitleBar" style="width: 70%;">
 			<div class="IMGBAR">
 				<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-indicators">
@@ -126,14 +134,13 @@ main {
 					</div>
 					<div class="carousel-inner">
 						<div class="carousel-item">
-							<svg class="bd-placeholder-img" width="100%" height="800px"
+							<svg class="bd-placeholder-img" width="100%" height="550px"
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 							<div class="carousel-caption text-start">
-								<a href="${newList[0].url}"><img
-									style="max-width: 100%; height: auto;"
-									src="${newList[0].photo }" alt=""></a>
+								<a href="${newList[0].url}"><img src="${newList[0].photo }"
+									height="400px"></a>
 								<div>
 									<p>${newList[0].newtitle }</p>
 									<p>${newList[0].newsdate }</p>
@@ -141,14 +148,13 @@ main {
 							</div>
 						</div>
 						<div class="carousel-item active">
-							<svg class="bd-placeholder-img" width="100%" height="800px"
+							<svg class="bd-placeholder-img" width="100%" height="550px"
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 							<div class="carousel-caption text-start">
-								<a href="${newList[1].url}"><img
-									style="width: 100%; height: 100%;" src="${newList[1].photo }"
-									alt=""></a>
+								<a href="${newList[1].url}"><img src="${newList[1].photo }"
+									height="400px"></a>
 								<div>
 									<p>${newList[1].newtitle }</p>
 									<p>${newList[1].newsdate }</p>
@@ -156,14 +162,14 @@ main {
 							</div>
 						</div>
 						<div class="carousel-item">
-							<svg class="bd-placeholder-img" width="100%" height="800px"
+							<svg class="bd-placeholder-img" width="100%" height="550px"
 								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 								preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#777"></rect></svg>
 
 							<div class="carousel-caption text-start">
 								<a href="${newList[2].url}"><img src="${newList[2].photo }"
-									alt=""></a>
+									height="400px"></a>
 								<div>
 									<p>${newList[2].newtitle }</p>
 									<p>${newList[2].newsdate }</p>
@@ -183,6 +189,33 @@ main {
 					</button>
 				</div>
 			</div>
+		</div>
+		<div class="card text-center" style="width:28%;     margin-top: 70px;">
+			<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item"><a id="meminfoA" class="nav-link active"
+						aria-current="true" href="javascript:chageDisplay('meminfo')">내정보</a></li>
+					<li class="nav-item"><a id="weatherA" class="nav-link" href="javascript:chageDisplay('weather')">날씨</a></li>
+				</ul>
+			</div>
+			<div class="card-body" id="meminfoTag">
+				<c:choose>
+				<c:when test="${sessionScope.loginId ==null }">
+					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/memberLoginForm'">로그인</button>
+				</c:when>
+				<c:otherwise>
+				<h1 class="card-title" style="text-align: justify;"><img src="/resources/memberProfile/${sessionScope.loginProfile}" class="profile">${sessionScope.loginId }</h1>
+				<p class="card-text">오늘의 일정</p>
+				<a href="#" class="btn btn-primary">일정보러가기</a>
+				</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="card-body disnone" id="weatherTag">
+				<h5 class="card-title" style="text-align: justify;">날씨</h5>
+				<p class="card-text">오늘의 날씨</p>
+			</div>
+		</div>
+		
 		</div>
 		<div class="row"
 			style="margin-top: 80px; overflow-x: scroll; height: 410px;">
@@ -231,7 +264,32 @@ main {
 		AOS.init();
 	</script>
 	<script type="text/javascript">
-		
+		function chageDisplay(seloption){
+				let meminfoTag = document.querySelector('#meminfoTag');
+				let weatherinfoTag = document.querySelector('#weatherTag');
+				let meminfoA = document.querySelector('#meminfoA');
+				let weatherA = document.querySelector('#weatherA');
+				console.log(meminfoA)
+				console.log(weatherA)
+			switch(seloption){
+			case 'meminfo':
+				if(meminfoTag.classList.contains('disnone')){
+					weatherinfoTag.classList.add('disnone');
+					meminfoTag.classList.remove('disnone');
+					meminfoA.classList.add('active');
+					weatherA.classList.remove('active');
+				}
+				break;
+			case 'weather':
+				if(weatherTag.classList.contains('disnone')){
+					weatherinfoTag.classList.remove('disnone');
+					meminfoTag.classList.add('disnone');
+					meminfoA.classList.remove('active');
+					weatherA.classList.add('active');
+				}
+				break;
+			}
+		}
 	</script>
 </body>
 </html>

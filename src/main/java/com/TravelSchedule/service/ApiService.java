@@ -121,7 +121,7 @@ public class ApiService {
 		urlBuilder.append(
 				"&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* XML/JSON 여부 */
 		urlBuilder.append(
-				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 지역코드 */
+				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8")); /* 지역코드 */
 		urlBuilder.append("&" + URLEncoder.encode("contentTypeId", "UTF-8") + "=" + URLEncoder.encode("12", "UTF-8"));
 
 		URL url = new URL(urlBuilder.toString());
@@ -150,7 +150,7 @@ public class ApiService {
 
 		JsonArray infoList = DestInfo.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
 				.getAsJsonObject().get("item").getAsJsonArray();
-
+		
 //		System.out.println("[infoList] : " + infoList);
 
 		JsonObject DestInfo_Body = DestInfo.get("response").getAsJsonObject().get("body").getAsJsonObject();
@@ -197,7 +197,10 @@ public class ApiService {
 			String addr2 = infoList.get(i).getAsJsonObject().get("addr2").getAsString();
 			String tdaddress = addr1 + addr2;
 			tdest.setTdaddress(tdaddress);
-
+			String tdlati = infoList.get(i).getAsJsonObject().get("mapx").getAsString();
+			tdest.setTdlati(tdlati);
+			String tdlongti = infoList.get(i).getAsJsonObject().get("mapy").getAsString();
+			tdest.setTdlongti(tdlongti);
 			String tdphoto = infoList.get(i).getAsJsonObject().get("firstimage").getAsString();
 			tdest.setTdphoto(tdphoto);
 			String rs = apiDao.selectTdcode(tdname);
@@ -206,8 +209,8 @@ public class ApiService {
 					apiDao.insertTdest(tdest);
 				}
 			}
-			System.out.println("tdest : "+tdest);
 			TdestList.add(tdest);
+			System.out.println(tdest);
 		}
 	//	System.out.println(TdestList);
 		return TdestList;

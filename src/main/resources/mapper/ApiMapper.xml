@@ -10,7 +10,7 @@
   select <if test="seloption == 'tdest'">nvl(max(tdcode),'TD00000')</if> from <if test="seloption == 'tdest'"> tdest</if>
   </select>
   <insert id="insertTdest">
-  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto})
+  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto,tdlati, tdlongti) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdlati},#{tdlongti})
   </insert>
   <select id="selectTdcode">
   select nvl(max(tdcode), 'Y') from tdest where tdname = #{tdname}
