@@ -89,6 +89,10 @@ background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
 	width: 300px;
 	display:inline-block;
 }
+.ctList{
+	width: 130px;
+	display:inline-block;
+}
 .feImg{
 	width: 300px;
 	height: 200px;
@@ -125,24 +129,24 @@ main{
 					<div class="card" id="FestivalRecommend">
 						<a><img src="..." class="card-img-top" alt="..."></a>
 						<div class="card-body">
-							<p class="card-text">축제 추천</p>
-							<c:forEach items="${festival }" var="fe">
-								<a href="">
-									<div class="card mb-4 feList" >
-										<c:choose>
-											<c:when test="${fe.feposter == null}">
-	                            				<img class="card-img-top feImg" src="${pageContext.request.contextPath}/resources/tdest/3509.jpg">
-	                            			</c:when>
-	                            			<c:otherwise>
-			                            		<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            		
-	                            			</c:otherwise>
-                            			</c:choose>				
-										<h5 class="feName">${fe.fename }</h5>
-										<h6>${fe.opendate} ~ ${fe.enddate }</h6>
-										<h6> ${fe.feaddress }</h6>
-									</div>
-								</a>
+							<c:forEach items="${country }" var="ct">
+								<div class="card mb-4 ctList">
+									<button onclick="festival_country('${ct.ctcode}')">${ct.ctname }</button>
+								</div>
 							</c:forEach>
+							<p class="card-text">축제 추천</p>
+							<div id="feArea">
+								<c:forEach items="${festival }" var="fe">
+									<a href="">							
+										<div class="card mb-4 feList" >
+				                        	<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
+											<h5 class="feName">${fe.fename }</h5>
+											<h6>${fe.opendate} ~ ${fe.enddate }</h6>
+											<h6> ${fe.feaddress }</h6>
+										</div>
+									</a>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -152,6 +156,8 @@ main{
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
 	</main>
+	<!-- JQUERY -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -161,6 +167,46 @@ main{
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script>
 		AOS.init();
+	</script>
+	<script>	
+		function festival_country(ctcode){			
+			console.log(ctcode);
+			$.ajax({
+				type : 'get',
+				url : 'festival_country',
+				data : { 'ctcode' : ctcode },
+				dataType : 'json',
+				async : false,
+				success : function(result){
+					printFestival_country(result);
+				}
+			});
+		}
+		function printFestival_country(feList){
+			let feArea = document.querySelector('#feArea');
+			feArea.innerHTML = "";
+			for(let fe of feList){
+				let feDiv = document.createElement('div');
+				feDiv.classList.add('feList');
+				feDiv.classList.add('card');
+				feDiv.classList.add('mb-4');
+				let feImg = document.createElement('img');
+				feImg.classList.add('card-img-top');
+				feImg.classList.add('feImg');
+				feImg.setAttribute('src', fe.feposter);
+				feImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
+				
+				let feName = document.createElement('div');
+				feName.innerText = fe.fename;
+				let feDate = document.createElement('div');
+				feDate.innerText = fe.opendate +" ~ " + fe.enddate;
+				
+				feDiv.appendChild(feImg);
+				feDiv.appendChild(feName);
+				feDiv.appendChild(feDate);
+				feArea.appendChild(feDiv);
+			}
+		} 
 	</script>
 </body>
 </html>

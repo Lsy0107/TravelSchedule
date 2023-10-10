@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
     .navbar{
         position: fixed;
@@ -20,8 +21,16 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <c:choose>
+                        	<c:when test="${sessionScope.loginId ==null }">
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberLoginForm">로그인</a></li>
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberJoinForm">회원가입</a></li>
+                        	</c:when>
+                        	<c:otherwise>
+                        	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberLogout">로그아웃</a></li>
+                        	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/">내정보</a></li>
+                        	</c:otherwise>
+                        </c:choose>
                             <li class="nav-item"><a class="nav-link" href="/">여행계획</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">여행지검색</a></li>
                             
