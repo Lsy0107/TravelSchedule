@@ -156,11 +156,7 @@ div#passArea i{
                     </form>
                 </div>
                 <p style="position: relative; left: 24%; bottom: -80px;">
-<<<<<<< HEAD
                     <a href="/memberJoinForm">회원가입</a>
-=======
-                    <a href="/memberJoin">회원가입</a>
->>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
                     <a href="">아이디 찾기</a>
                     <a href="">비밀번호 찾기</a>
                 </p>
