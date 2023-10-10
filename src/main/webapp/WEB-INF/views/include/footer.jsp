@@ -9,7 +9,6 @@
 							Website 2023</div>
 					</div>
 					<div class="col-auto">
-<<<<<<< HEAD
 						<a class="link-light small" href="#!">Privacy</a> 
 						<span class="text-white mx-1">&middot;</span> 
 						<a class="link-light small" href="#!">Terms</a> 
@@ -17,13 +16,6 @@
 						<a class="link-light small" href="/TdestSearch">insertTDEST</a>
 						<span class="text-white mx-1">&middot;</span> 
 						<a class="link-light small" href="/joongang">joongang</a>
-=======
-						<a class="link-light small" href="#!">Privacy</a> <span
-							class="text-white mx-1">&middot;</span> <a
-							class="link-light small" href="#!">Terms</a> <span
-							class="text-white mx-1">&middot;</span> <a
-							class="link-light small" href="#!">Contact</a>
->>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 					</div>
 				</div>
 			</div>
