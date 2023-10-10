@@ -17,7 +17,6 @@ public class MemberController {
 	@Autowired
 	MemberService msvc;
 	
-<<<<<<< HEAD
 	@RequestMapping(value="/memberLogout")
 	public ModelAndView memberLogout(HttpSession session) {
 		System.out.println("로그아웃 요청");
@@ -28,8 +27,6 @@ public class MemberController {
 		return mav;
 	}
 	
-=======
->>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 	@RequestMapping(value="/memberLogin")
 	public ModelAndView memberLogin(Member mem, HttpSession session) {
 		System.out.println("로그인 요청");
