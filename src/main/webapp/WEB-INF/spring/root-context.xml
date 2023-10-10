@@ -13,7 +13,11 @@
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
 		<property name="url"
+<<<<<<< HEAD
 			value="jdbc:oracle:thin:@//121.65.47.74:5561/xe" />
+=======
+			value="jdbc:oracle:thin:@//192.168.0.95:1521/xe" />
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 			<!-- 192.168.0.95 : TRAVELSCHEDULE : 1111-->
 		<property name="username" value="TRAVELSCHEDULE" />
 		<property name="password" value="1111" />

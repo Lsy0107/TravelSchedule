@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import com.TravelSchedule.crawling.newsCrawlingService;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Tdest;
@@ -22,14 +24,22 @@ public class HomeController {
 	@Autowired
 	ApiService apisvc;
 	
+=======
+@Controller
+public class HomeController {
+	
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
 		System.out.println("메인페이지 이동 요청");
 		ModelAndView mav = new ModelAndView();
+<<<<<<< HEAD
 		ArrayList<News> newsList = nsvc.getNewsList();
 		ArrayList<Tdest> tdList = apisvc.getTdList();
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);
+=======
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 		mav.setViewName("/main");
 		return mav;
 	}

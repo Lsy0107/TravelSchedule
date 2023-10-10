@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+=======
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +13,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Modern Business - Start Bootstrap Template</title>
+<<<<<<< HEAD
 
 <script src="https://kit.fontawesome.com/c8056a816e.js"
 	crossorigin="anonymous"></script>
@@ -17,6 +21,9 @@
 <!-- Favicon-->
 <link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
 
+=======
+<!-- Favicon-->
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Bootstrap icons-->
 <link
@@ -27,8 +34,12 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<<<<<<< HEAD
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+=======
+
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 
 <style type="text/css">
 .signIn {
@@ -61,25 +72,41 @@
 
 #TripRecommend {
 	background-color: #ffd045;
+<<<<<<< HEAD
 	background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
+=======
+background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 	width: 70%;
 	height: 500px;
 	margin-left: auto;
 	margin-right: auto;
 }
+<<<<<<< HEAD
 
 #WeatherInfo {
 	background-color: #ffffff;
 	background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
+=======
+#WeatherInfo{
+	background-color: #ffffff;
+background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 	width: 70%;
 	height: 500px;
 	margin-left: auto;
 	margin-right: auto;
 }
+<<<<<<< HEAD
 
 #FestivalRecommend {
 	background-color: #ffffff;
 	background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
+=======
+#FestivalRecommend{
+	background-color: #ffffff;
+background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 	width: 70%;
 	height: 500px;
 	margin-left: auto;
@@ -90,6 +117,7 @@
 	position: relative;
 	top: 64px;
 }
+<<<<<<< HEAD
 
 #MainContents {
 	position: relative;
@@ -97,17 +125,29 @@
 }
 
 footer {
+=======
+#MainContents{
+	position: relative;
+    top: 700px;
+}
+footer{
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 }
+<<<<<<< HEAD
 
 main {
+=======
+main{
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 	position: relative;
 	min-height: 100%;
 	padding-bottom: 2000px;
 }
 
+<<<<<<< HEAD
 .profile {
 	width: 20%;
 	border-radius: 50px;
@@ -124,17 +164,24 @@ main {
 	font-size: 12pt;
 	text-align: center;
 }
+=======
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 </style>
 
 
 </head>
 <body class="d-flex flex-column h-100">
+<<<<<<< HEAD
 	<main class="">
+=======
+	<main class="flex-shrink-0">
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
 
 
+<<<<<<< HEAD
 		<div class="row"
 			style="padding: 200px; padding-top: 23px; padding-bottom: 0px;">
 			<div id="TitleBar" style="width: 74%;">
@@ -322,6 +369,105 @@ main {
 			</div>
 		</div>
 
+=======
+		<div class="" id="TitleBar">
+			<div class="IMGBAR">
+				<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#myCarousel"
+							data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#myCarousel"
+							data-bs-slide-to="1" aria-label="Slide 2" class="active"
+							aria-current="true"></button>
+						<button type="button" data-bs-target="#myCarousel"
+							data-bs-slide-to="2" aria-label="Slide 3"></button>
+					</div>
+					<div class="carousel-inner">
+						<div class="carousel-item">
+							<svg class="bd-placeholder-img" width="100%" height="800px"
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+								preserveAspectRatio="xMidYMid slice" focusable="false">
+								<rect width="100%" height="800px" fill="#777"></rect></svg>
+								<div class="carousel-caption text-start">
+									<img style="max-width: 100%; height: auto;" src="${pageContext.request.contextPath }/resources/tdest/남산타워.jpg" alt="">
+								</div>
+						</div>
+						<div class="carousel-item active">
+							<svg class="bd-placeholder-img" width="100%" height="800px"
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+								preserveAspectRatio="xMidYMid slice" focusable="false">
+								<rect width="100%" height="800px" fill="#777"></rect></svg>
+
+							<div class="carousel-caption text-start">
+								<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/tdest/경복궁.jpg" alt="">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<svg class="bd-placeholder-img" width="100%" height="800px"
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+								preserveAspectRatio="xMidYMid slice" focusable="false">
+								<rect width="100%" height="800px" fill="#777"></rect></svg>
+
+							<div class="carousel-caption text-start">
+								<img src="${pageContext.request.contextPath }/resources/tdest/제주 성산일출봉.jpg" alt="">
+							</div>
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button"
+						data-bs-target="#myCarousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button"
+						data-bs-target="#myCarousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+			
+		</div>
+
+
+		<div id="MainContents">
+			<div class="row" data-aos="zoom-in-down" data-aos-duration="600" data-aos-anchor-placement="top-center">
+				<div class="col p-5">
+					<div class="card" id="WeatherInfo">
+						<a><img src="..." class="card-img-top" alt="..."></a>
+						<div class="card-body">
+							<p class="card-text">날씨 정보</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
+			data-aos-anchor-placement="top-center">
+				<div class="col p-5">
+					<div class="card" id="TripRecommend">
+						<a><img src="..." class="card-img-top" alt="..."></a>
+						<div class="card-body">
+							<p class="card-text">여행지 추천</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
+			data-aos-anchor-placement="top-center">
+				<div class="col p-5">
+					<div class="card" id="FestivalRecommend">
+						<a><img src="..." class="card-img-top" alt="..."></a>
+						<div class="card-body">
+							<p class="card-text">축제 추천</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
@@ -336,6 +482,7 @@ main {
 	<script>
 		AOS.init();
 	</script>
+<<<<<<< HEAD
 	<script type="text/javascript">
 		function chageDisplay(seloption) {
 			let meminfoTag = document.querySelector('#meminfoTag');
@@ -498,5 +645,7 @@ main {
 		}
 	</script>
 
+=======
+>>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 </body>
 </html>
