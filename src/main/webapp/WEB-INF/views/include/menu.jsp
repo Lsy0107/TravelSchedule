@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-=======
->>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
 <style>
     .navbar{
         position: fixed;
@@ -14,11 +11,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">
-<<<<<<< HEAD
                     <a class="navbar-brand" href="${pageContext.request.contextPath }/festival">여행페이지</a>
-=======
-                    <a class="navbar-brand" href="/">여행페이지</a>
->>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
                     <div class="col" style="display: flex; align-items: center;">
                         <input placeholder="검색어를 입력해주세요." type="text" class="form-control"
                             style="display: inline-block; width: 80%; box-sizing: border-box; margin: 5px;">
@@ -28,7 +21,6 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-<<<<<<< HEAD
                         <c:choose>
                         	<c:when test="${sessionScope.loginId ==null }">
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberLoginForm">로그인</a></li>
@@ -39,10 +31,6 @@
                         	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/">내정보</a></li>
                         	</c:otherwise>
                         </c:choose>
-=======
-                            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberLoginForm">로그인</a></li>
-                            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberJoinForm">회원가입</a></li>
->>>>>>> 7f1a2fc6b2f20e59b860d55cd6123a14f857915d
                             <li class="nav-item"><a class="nav-link" href="/">여행계획</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">여행지검색</a></li>
                             
