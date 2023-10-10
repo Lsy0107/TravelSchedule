@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,14 +23,19 @@ public class HomeController {
 	@Autowired
 	ApiService apisvc;
 	
+@Controller
+public class HomeController {
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
 		System.out.println("메인페이지 이동 요청");
 		ModelAndView mav = new ModelAndView();
+
 		ArrayList<News> newsList = nsvc.getNewsList();
 		ArrayList<Tdest> tdList = apisvc.getTdList();
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);
+
 		mav.setViewName("/main");
 		return mav;
 	}
