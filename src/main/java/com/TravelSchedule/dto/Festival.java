@@ -15,4 +15,6 @@ public class Festival {
 	private String feup;
 	private String fedown;
 	private String fetel;
+	private String felati;
+	private String felongti;
 }
