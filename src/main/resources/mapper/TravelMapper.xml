@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.TravelSchedule.dao.TravelDao">
+  <select id="selectCalendar" resultType="calendar">
+  select * from calendar where mid=#{mid}
+  </select>
+  <insert id="insertCalendar">
+  insert into calendar(mid, cdcode, cdname) values(#{mid}, #{cdcode}, #{cdname})
+  </insert>
+  <select id="maxcode">
+  select nvl(max(cdcode),'CD00000') from calendar where mid = #{mid}
+  </select>
+  <select id="selectCdcode" resultType="calendar">
+  select distinct cdcode, cdname from calendar where mid = #{mid} order by cdcode
+  </select>
+  <insert id="insertFKcode">
+  insert into schedule(mid, cdcode, tdcode) values(#{mid},#{cdcode},#{tdcode})
+  </insert>
+  <select id="selectSchedule" resultType="sc">
+  select * from schedule where mid = #{mid} and cdcode = #{cdcode}
+  </select>
+  <select id="selectTdest" resultType="tdest">
+  select * from tdest where tdcode = #{tdcode}
+  </select>
+  </mapper>

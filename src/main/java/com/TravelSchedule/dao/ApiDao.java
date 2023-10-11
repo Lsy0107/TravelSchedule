@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Tdest;
 
 public interface ApiDao {
@@ -17,4 +18,6 @@ public interface ApiDao {
 	String selectTdcode(@Param("tdname")String tdname);
 
 	ArrayList<Tdest> selectTdest();
+
+	ArrayList<Festival> selectFestival();
 }

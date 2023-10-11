@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.TravelSchedule.dao.ApiDao">
+  
   <select id="selectCtcode" resultType="string">
   select nvl(max(ctcode),'CT00000') from country where ctname like #{ctname}||'%'
   </select>
@@ -18,6 +19,11 @@
   <select id="selectTdest" resultType="tdest">
   <![CDATA[
   select * from tdest where rownum <= 10
+  ]]>
+  </select>
+  <select id="selectFestival" resultType="festival">
+  <![CDATA[
+  select * from festival where rownum <= 10
   ]]>
   </select>
   </mapper>
