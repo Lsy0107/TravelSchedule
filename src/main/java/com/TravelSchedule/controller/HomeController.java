@@ -23,9 +23,6 @@ public class HomeController {
 	@Autowired
 	ApiService apisvc;
 	
-@Controller
-public class HomeController {
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
 		System.out.println("메인페이지 이동 요청");
