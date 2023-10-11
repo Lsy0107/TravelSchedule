@@ -45,6 +45,7 @@ public class newsCrawlingService {
         	System.out.print(" && url : "+url);
         	String time = item.findElement(By.cssSelector("div.meta > p")).getText();
         	System.out.println(" && time : " + time);
+        	
         	if(!img.equals("")) {
         		int rs = ndao.insertNews(img,title,time, url);          		
         	}
