@@ -20,6 +20,7 @@ public interface ApiDao {
 
 	ArrayList<Tdest> selectTdest();
 
+	ArrayList<Festival> selectFestival();
 	String selectFecode(@Param("fename")String fename);
 
 	void insertFestival(Festival festival);

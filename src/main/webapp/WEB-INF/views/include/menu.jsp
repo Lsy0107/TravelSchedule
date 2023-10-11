@@ -11,7 +11,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/festival">여행페이지</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath }/">여행페이지</a>
                     <div class="col" style="display: flex; align-items: center;">
                         <input placeholder="검색어를 입력해주세요." type="text" class="form-control"
                             style="display: inline-block; width: 80%; box-sizing: border-box; margin: 5px;">
@@ -31,7 +31,7 @@
                         	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/">내정보</a></li>
                         	</c:otherwise>
                         </c:choose>
-                            <li class="nav-item"><a class="nav-link" href="/">여행계획</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/selectCalendar">여행계획</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">여행지검색</a></li>
                             
                             <!-- 

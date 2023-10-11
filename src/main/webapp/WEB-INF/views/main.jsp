@@ -15,7 +15,8 @@
 	crossorigin="anonymous"></script>
 
 <!-- Favicon-->
-<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua:400"
+	rel="stylesheet">
 
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Bootstrap icons-->
@@ -27,6 +28,7 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- ajax -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -236,7 +238,9 @@ main {
 					<div class="row">
 						<div class="row align-items-start">
 							<div class="col">
-								<h3 style="margin-left: 15px; color: #fff; font-family: 'Jua' !important;">오늘의 날씨</h3>
+								<h3
+									style="margin-left: 15px; color: #fff; font-family: 'Jua' !important;">오늘의
+									날씨</h3>
 							</div>
 						</div>
 						<div class="row align-items-center" style="color: #fff;">
@@ -246,8 +250,7 @@ main {
 								</div>
 							</div>
 							<div class="col">
-								<select class="weatherCity"
-									style="width: 75px;"
+								<select class="weatherCity" style="width: 75px;"
 									onchange="selectWeather(this.value)">
 									<option value="Seoul">서울</option>
 									<option value="Incheon">인천</option>
@@ -287,7 +290,7 @@ main {
 
 		</div>
 		<div class="row"
-			style="margin-top: 80px; padding-left: 210px; padding-right: 210px;">
+			style="margin-top: 80px; padding-left: 210px; padding-right: 210px; background-color: ghostwhite;">
 			<div style="overflow-x: scroll;">
 				<nav style="display: -webkit-inline-box;">
 					<c:forEach items="${ tdList}" var="td">
@@ -296,25 +299,46 @@ main {
 							<div class="card-body">
 								<h5 class="card-title">${td.tdname }</h5>
 								<p class="card-text">${td.tdaddress }</p>
-								<a href="#" class="btn btn-primary">계획에 추가하기</a>
+								<button class="btn btn-primary"
+									onclick="selectCdcode('${td.tdcode}')" data-bs-toggle="modal"
+									data-bs-target="#exampleModal">계획에 추가하기</button>
 							</div>
 						</div>
 					</c:forEach>
 				</nav>
 			</div>
 		</div>
-
-		<div class="row" style="margin-top: 20px; padding-left: 210px; padding-right: 210px;">
-		<h2>축제</h2>
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="selectCalendar">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="selectClear">선택</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row"
+			style="margin-top: 20px; padding-left: 210px; padding-right: 210px;">
+			<h2>축제</h2>
 			<div style="overflow-x: scroll;">
 				<nav style="display: -webkit-inline-box;">
-					<c:forEach items="${ tdList}" var="td">
+					<c:forEach items="${ feList}" var="fe">
 						<div class="card" style="width: 18rem; margin: 4px;">
-							<img src="${td.tdphoto }" class="card-img-top" alt="...">
+							<img src="${fe.feposter }" class="card-img-top" alt="...">
 							<div class="card-body">
-								<h5 class="card-title">${td.tdname }</h5>
-								<p class="card-text">${td.tdaddress }</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<h5 class="card-title">${fe.fename }</h5>
+								<p class="card-text">${fe.feaddress }</p>
+								<p class="card-text">${fe.opendate.split(' ')[0] }~
+									${fe.enddate.split(' ')[0] }</p>
+								<button class="btn btn-info">계획에 추가하기</button>
 							</div>
 						</div>
 					</c:forEach>
@@ -337,6 +361,7 @@ main {
 		AOS.init();
 	</script>
 	<script type="text/javascript">
+		console.log("${feList[0]}");
 		function chageDisplay(seloption) {
 			let meminfoTag = document.querySelector('#meminfoTag');
 			let weatherinfoTag = document.querySelector('#weatherTag');
@@ -497,6 +522,55 @@ main {
 					})
 		}
 	</script>
+	<script type="text/javascript">
+		function selectCdcode(tdcode) {
+			if ("${sessionScope.loginId}" == "") {
+				location.href = "${pageContext.request.contextPath}/memberLoginForm"
+			} else {
+				$.ajax({
+					url:"/getCdcode",
+					type:"post",
+					data:{mid:"${sessionScope.loginId}"},
+					async:false,
+					success(rs){
+						console.log(rs.length);
+						let modalBodyTag = document.querySelector("#selectCalendar")
+						modalBodyTag.innerHTML = "";
+						if(rs.length > 0){
 
+							let selTag = document.createElement("select")
+							for(let cd of rs){
+								let optionTag = document.createElement("option")
+								optionTag.innerText = cd.cdname;
+								optionTag.setAttribute("value", cd.cdcode)
+								selTag.appendChild(optionTag);
+							}
+							modalBodyTag.appendChild(selTag);
+							let btnTag = document.querySelector("#selectClear");
+							btnTag.addEventListener("click", function(){
+								selectDest(tdcode, selTag.value)
+							})
+						}
+						else{
+							modalBodyTag.innerText="달력을 추가 해주세요";
+						}
+					}				
+					})
+			}
+		}
+		function selectDest(tdcode, cdcode){
+			console.log(tdcode+ "  "+cdcode);
+			$.ajax({
+				url:"/registSelectDest",
+				type:"post",
+				data:{mid:"${sessionScope.loginId}", tdcode:tdcode, cdcode:cdcode},
+				async:false,
+				success(rs){
+					alert('행선지 선택 완료');
+					location.href="/";
+				}				
+				})
+		}
+	</script>
 </body>
 </html>

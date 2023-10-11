@@ -1,5 +1,6 @@
 package com.TravelSchedule.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,18 @@ import com.TravelSchedule.service.ApiService;
 public class ApiController {
 	@Autowired
 	public ApiService asvc;
+	@RequestMapping(value="/weatherApi")
+	public ModelAndView weatherApi() throws IOException {
+		System.out.println("weatherApi - 날씨정보 조회요청");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String result = asvc.weatherApi();
+		
+		mav.setViewName("weatherApi");
+		
+		return mav;
+	}
 	
 	@RequestMapping(value="/festival")
 	public ModelAndView festival() throws Exception {
