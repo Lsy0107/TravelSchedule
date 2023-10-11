@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.TravelSchedule.dao.ApiDao">
+  <select id="selectCtcode" resultType="string">
+  select nvl(max(ctcode),'CT00000') from country where ctname like #{ctname}||'%'
+  </select>
+  <select id="maxcode" resultType="string">
+  select <if test="seloption == 'tdest'">nvl(max(tdcode),'TD00000')</if> from <if test="seloption == 'tdest'"> tdest</if>
+  </select>
+  <insert id="insertTdest">
+  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto,tdlati, tdlongti) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdlati},#{tdlongti})
+  </insert>
+  <select id="selectTdcode">
+  select nvl(max(tdcode), 'Y') from tdest where tdname = #{tdname}
+  </select>
+  <select id="selectTdest" resultType="tdest">
+  <![CDATA[
+  select * from tdest where rownum <= 10
+  ]]>
+  </select>
+  </mapper>
