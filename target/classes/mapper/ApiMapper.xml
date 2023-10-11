@@ -8,10 +8,16 @@
   select nvl(max(ctcode),'CT00000') from country where ctname like #{ctname}||'%'
   </select>
   <select id="maxcode" resultType="string">
-  select <if test="seloption == 'tdest'">nvl(max(tdcode),'TD00000')</if> from <if test="seloption == 'tdest'"> tdest</if>
+  select 
+  <if test="seloption == 'tdest'">nvl(max(tdcode),'TD00000')</if>
+  <if test="seloption == 'festival'">nvl(max(fecode),'FE00000')</if>
+  from 
+  <if test="seloption == 'tdest'"> tdest</if>
+  <if test="seloption == 'festival'"> festival</if>
   </select>
+  
   <insert id="insertTdest">
-  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto,tdlati, tdlongti) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdlati},#{tdlongti})
+  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto, tdlati, tdlongti) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdlati},#{tdlongti})
   </insert>
   <select id="selectTdcode">
   select nvl(max(tdcode), 'Y') from tdest where tdname = #{tdname}
@@ -25,5 +31,17 @@
   <![CDATA[
   select * from festival where rownum <= 10
   ]]>
+  </select>
+  <select id="selectFecode">
+  select nvl(max(fecode), 'Y') from festival where fename = #{fename}
+  </select>
+  <insert id="insertFestival">
+  insert into festival(fecode, ctcode, fename, feaddress, feposter, opendate, enddate, felati, felongti) values(#{fecode}, #{ctcode}, #{fename}, #{feaddress}, #{feposter}, #{opendate}, #{enddate}, #{felati}, #{felongti} )
+  </insert>
+  <select id="selectCountry">
+  select * from country
+  </select>
+  <select id="selectFestival_country">
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY-MM-DD') as opendate, TO_CHAR(enddate, 'YYYY-MM-DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where ctcode = #{ctcode}
   </select>
   </mapper>

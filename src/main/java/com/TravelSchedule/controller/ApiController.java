@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
@@ -35,6 +37,8 @@ public class ApiController {
 		System.out.println("축제 리스트 불러오기 - festival()");
 		ModelAndView mav = new ModelAndView();
 		
+		ArrayList<Country> country = asvc.getCountry();
+		mav.addObject("country",country);
 		
 		ArrayList<Festival> result  = asvc.getFestival();
 		System.out.println(result);
@@ -59,6 +63,8 @@ public class ApiController {
 		
 		return mav;
 	}
+	
+	
 
 
 }
