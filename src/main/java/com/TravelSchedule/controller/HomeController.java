@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
@@ -18,6 +19,7 @@ import com.TravelSchedule.service.ApiService;
 import com.TravelSchedule.service.TravelService;
 import com.google.gson.Gson;
 
+
 @Controller
 public class HomeController {
 	
@@ -25,6 +27,7 @@ public class HomeController {
 	newsCrawlingService nsvc;
 	@Autowired
 	ApiService apisvc;
+	
 	@Autowired
 	TravelService tsvc;
 	
@@ -65,5 +68,41 @@ public class HomeController {
 		ArrayList<Festival> result = apisvc.festival_country(ctcode);
 		return new Gson().toJson(result);
 		
+	}
+	
+	@RequestMapping(value="/TdestSearchPage")
+	public ModelAndView TdestSearchPage() {
+		System.out.println("여행지 검색 페이지 이동");
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+		
+		mav.addObject("TdestList",TdestList);
+		mav.setViewName("/travel/TdestSearch");
+		return mav;
+	}
+	@RequestMapping(value="TdestCtSearchPage")
+	public @ResponseBody String TdestCtSearchPage(String ctcode){
+		System.out.println("도시코드 받아온 컨트롤러");
+		ModelAndView mav = new ModelAndView();
+		System.out.println("받아온 도시코드 : "+ctcode);
+		
+		ArrayList<Tdest> TdestList = tsvc.CtTdestList(ctcode);
+		
+		mav.addObject("TdestList",TdestList);
+		mav.setViewName("/travel/TdestSearch");
+		return new Gson().toJson(TdestList);
+	}
+	
+	@RequestMapping(value="/SearchService")
+	public @ResponseBody ModelAndView SearchService(String searchVal) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("검색한 변수"+searchVal);
+		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
+		
+		mav.addObject("TdestList",TdestList);
+		mav.setViewName("/travel/TdestSearch");
+		
+		return mav;
 	}
 }

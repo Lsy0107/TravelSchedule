@@ -32,7 +32,7 @@
                         	</c:otherwise>
                         </c:choose>
                             <li class="nav-item"><a class="nav-link" href="/selectCalendar">여행계획</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/">여행지검색</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/TdestSearchPage">여행지검색</a></li>
                             
                             <!-- 
                             토글방식 메뉴바
