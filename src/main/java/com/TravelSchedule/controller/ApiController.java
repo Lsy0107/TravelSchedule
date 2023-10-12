@@ -42,8 +42,7 @@ public class ApiController {
 		ArrayList<Tdest> TdestList = asvc.getTdestList();  
 		
 		mav.addObject("TdestList",TdestList);
-		mav.setViewName("travel/TdestSearch");
-		
+		mav.setViewName("/");
 		return mav;
 	}
 

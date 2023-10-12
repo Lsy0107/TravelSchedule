@@ -121,7 +121,8 @@ public class ApiService {
 		urlBuilder.append(
 				"&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* XML/JSON 여부 */
 		urlBuilder.append(
-				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8")); /* 지역코드 */
+				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("38", "UTF-8")); /* 지역코드 */
+		
 		urlBuilder.append("&" + URLEncoder.encode("contentTypeId", "UTF-8") + "=" + URLEncoder.encode("12", "UTF-8"));
 
 		URL url = new URL(urlBuilder.toString());
