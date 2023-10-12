@@ -24,4 +24,17 @@
   <select id="selectTdest" resultType="tdest">
   select * from tdest where tdcode = #{tdcode}
   </select>
+  <update id="updateSc">
+  update schedule set
+  <if test="seloption == 'tdest'">
+  scdate = to_date(#{sc.scdate}, 'YYYY/MM/DD HH24:MI')
+  </if>
+  where mid = #{sc.mid} and cdcode = #{sc.cdcode} and
+  <if test="seloption == 'tdest'">
+  tdcode = #{sc.tdcode}
+  </if>
+  </update>
+  <select id="select_sc_td_join" resultType="hashmap">
+  select * from schedule sc inner join tdest td on sc.tdcode = td.tdcode where sc.mid= #{mid} and sc.cdcode = #{cdcode}
+  </select>
   </mapper>
