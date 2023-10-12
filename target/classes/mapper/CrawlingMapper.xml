@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.TravelSchedule.crawling.newsCrawlingDao">
+<insert id="insertNews">
+insert into news(url, photo, newtitle, newsdate) values(#{url}, #{img}, #{title}, to_date(#{time}, 'YYYY.MM.DD HH24:MI'))
+</insert>
+<select id="selectNewsList" resultType="com.TravelSchedule.dto.News">
+<![CDATA[
+select url, newtitle, photo, to_char(newsdate, 'YYYY/MM/DD HH24:MI') as newsdate from (select * from news order by newsdate desc) where rownum<=3
+]]>
+</select>
+</mapper>
