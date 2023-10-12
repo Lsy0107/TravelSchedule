@@ -25,10 +25,12 @@ public interface ApiDao {
 	void insertFestival(Festival festival);
 
 	ArrayList<Country> selectCountry();
+	
+	ArrayList<Festival> selectFestival();
 
 	ArrayList<Festival> selectFestival_country(@Param("ctcode")String ctcode);
 
-	ArrayList<Festival> selectFestival();
+	ArrayList<Festival> selectFestival_db();
 
 	Festival selectFestival_detail(@Param("code")String code);
 }

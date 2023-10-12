@@ -325,7 +325,7 @@ public class ApiService {
 
 	public ArrayList<Festival> getFestival_db() {
 		System.out.println("ApiService - getFestival_db()");
-		return apiDao.selectFestival();
+		return apiDao.selectFestival_db();
 	}
 
 	public Festival detailFestival(String code) {
