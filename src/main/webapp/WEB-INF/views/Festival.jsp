@@ -22,6 +22,10 @@
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 <style type="text/css">
 .signIn {
 	border: 1px solid black;
@@ -100,12 +104,15 @@ background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
 	white-space:nowrap;
 	overflow: hidden;
 }
+<<<<<<< HEAD
 .body{
 	margin-top:50px;
 }
 #feArea{
 	
 }
+=======
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 footer{
 	position: absolute;
 	bottom: 0;
@@ -128,14 +135,23 @@ main{
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
 
+<<<<<<< HEAD
 			
 				<div class="col p-5 body">				
+=======
+			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
+			data-aos-anchor-placement="top-center">
+				<div class="col p-5">
+					<div class="card" id="FestivalRecommend">
+						<a><img src="..." class="card-img-top" alt="..."></a>
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 						<div class="card-body">
 							<c:forEach items="${country }" var="ct">
 								<div class="card mb-4 ctList">
 									<button onclick="festival_country('${ct.ctcode}')">${ct.ctname }</button>
 								</div>
 							</c:forEach>
+<<<<<<< HEAD
 							<div id="feArea">
 								<c:forEach items="${festival }" var="fe">
 									<a href="${pageContext.request.contextPath }/detailPage?code=${fe.fecode }">							
@@ -143,17 +159,34 @@ main{
 				                        	<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
 											<div class="feName">${fe.fename }</div>
 											<div>${fe.opendate} ~ ${fe.enddate }</div>
+=======
+							<p class="card-text">축제 추천</p>
+							<div id="feArea">
+								<c:forEach items="${festival }" var="fe">
+									<a href="">							
+										<div class="card mb-4 feList" >
+				                        	<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
+											<h5 class="feName">${fe.fename }</h5>
+											<h6>${fe.opendate} ~ ${fe.enddate }</h6>
+											<h6> ${fe.feaddress }</h6>
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 										</div>
 									</a>
 								</c:forEach>
 							</div>
 						</div>
+<<<<<<< HEAD
 					
 				</div>
 
 			<!-- HTML -->
 
 			
+=======
+					</div>
+				</div>
+			</div>
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 	
 		<!-- content 종료 -->
 		<!-- Footer-->
@@ -200,11 +233,15 @@ main{
 				feImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
 				
 				let feName = document.createElement('div');
+<<<<<<< HEAD
 				feName.classList.add('feName');
+=======
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 				feName.innerText = fe.fename;
 				let feDate = document.createElement('div');
 				feDate.innerText = fe.opendate +" ~ " + fe.enddate;
 				
+<<<<<<< HEAD
 				let aTag = document.createElement('a');
 				aTag.setAttribute('href', "${pageContext.request.contextPath }/detailPage?code="+fe.fecode);
 				
@@ -213,6 +250,12 @@ main{
 				feDiv.appendChild(feDate);
 				aTag.appendChild(feDiv);
 				feArea.appendChild(aTag);
+=======
+				feDiv.appendChild(feImg);
+				feDiv.appendChild(feName);
+				feDiv.appendChild(feDate);
+				feArea.appendChild(feDiv);
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 			}
 		} 
 	</script>

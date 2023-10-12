@@ -5,10 +5,20 @@
 	<typeAliases>
 		<typeAlias type="com.TravelSchedule.dto.Member" alias="mem"/>
 		<typeAlias type="com.TravelSchedule.dto.Tdest" alias="tdest"/>
+<<<<<<< HEAD
+=======
+		<typeAlias type="com.TravelSchedule.dto.Festival" alias="festival"/>
+		<typeAlias type="com.TravelSchedule.dto.Calendar" alias="calendar"/>
+		<typeAlias type="com.TravelSchedule.dto.Schedule" alias="sc"/>
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/CrawlingMapper.xml"/>
 		<mapper resource="mapper/ApiMapper.xml"/>
+<<<<<<< HEAD
+=======
+		<mapper resource="mapper/TravelMapper.xml"/>
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 	</mappers>
 </configuration>

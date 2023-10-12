@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.TravelSchedule.dao.ApiDao">
+<<<<<<< HEAD
+=======
+  
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
   <select id="selectCtcode" resultType="string">
   select nvl(max(ctcode),'CT00000') from country where ctname like #{ctname}||'%'
   </select>
@@ -26,6 +30,14 @@
   select * from tdest where rownum <= 10
   ]]>
   </select>
+<<<<<<< HEAD
+=======
+  <select id="selectFestival" resultType="festival">
+  <![CDATA[
+  select * from festival where rownum <= 10
+  ]]>
+  </select>
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
   <select id="selectFecode">
   select nvl(max(fecode), 'Y') from festival where fename = #{fename}
   </select>
@@ -36,6 +48,7 @@
   select * from country
   </select>
   <select id="selectFestival_country">
+<<<<<<< HEAD
   select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where ctcode = #{ctcode}
   </select>
   <select id="selectFestival">
@@ -43,5 +56,8 @@
   </select>
   <select id="selectFestival_detail">
   select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where fecode = #{code}
+=======
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY-MM-DD') as opendate, TO_CHAR(enddate, 'YYYY-MM-DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where ctcode = #{ctcode}
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
   </select>
   </mapper>
