@@ -72,9 +72,11 @@ public class MemberController {
 		
 		String loginId = (String)session.getAttribute("loginId");
 		System.out.println("조회 할 아이디 : " + loginId);
-		Member member = msvc.getMemberInfo(loginId);
-		mav.addObject("mInfo", member);
 		
+		Member member = msvc.getMemberInfo(loginId);
+		System.out.println(member);
+
+		mav.addObject("mInfo", member);
 		mav.setViewName("member/myInfo");
 		return mav;
 	}

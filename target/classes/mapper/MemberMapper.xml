@@ -19,7 +19,7 @@
 	where mid = #{mid} and mpw = #{mpw}
 	</select>
 	<select id="selectMemberInfo" resultType="mem">
-	select mid, mnickname, mpw, mprofile, mstate
+	select *
 	from members 
 	where mid =  #{loginId}
 	</select>

@@ -38,7 +38,8 @@ public class newsCrawlingService {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-        	System.out.print("img : "+img);
+        	String img_1 = img.split("/_ir_380x213_/l.jpg")[0];
+        	System.out.print("img : "+img_1);
         	String title = item.findElement(By.cssSelector("div > h2 > a")).getText();
         	System.out.print(" && title : "+title);
         	String url = item.findElement(By.cssSelector("div > h2 > a")).getAttribute("href");
@@ -47,7 +48,7 @@ public class newsCrawlingService {
         	System.out.println(" && time : " + time);
         	
         	if(!img.equals("")) {
-        		int rs = ndao.insertNews(img,title,time, url);          		
+        		int rs = ndao.insertNews(img_1,title,time, url);          		
         	}
         	
         }
