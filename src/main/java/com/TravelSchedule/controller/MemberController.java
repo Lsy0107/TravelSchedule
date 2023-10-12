@@ -64,4 +64,19 @@ public class MemberController {
 		System.out.println("rs"+rs);
 		return rs;
 	}
+	
+	@RequestMapping(value = "/myInfo")
+	public ModelAndView myInfo(HttpSession session) {
+		System.out.println("내정보 조회 요청");
+		ModelAndView mav = new ModelAndView();
+		
+		String loginId = (String)session.getAttribute("loginId");
+		System.out.println("조회 할 아이디 : " + loginId);
+		Member member = msvc.getMemberInfo(loginId);
+		mav.addObject("mInfo", member);
+		
+		mav.setViewName("member/myInfo");
+		return mav;
+	}
+	
 }
