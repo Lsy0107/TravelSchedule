@@ -15,12 +15,8 @@
 	crossorigin="anonymous"></script>
 
 <!-- Favicon-->
-<<<<<<< HEAD
-<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
-=======
 <link href="https://fonts.googleapis.com/css?family=Jua:400"
 	rel="stylesheet">
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Bootstrap icons-->
@@ -32,10 +28,7 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<<<<<<< HEAD
-=======
 <!-- ajax -->
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -245,13 +238,9 @@ main {
 					<div class="row">
 						<div class="row align-items-start">
 							<div class="col">
-<<<<<<< HEAD
-								<h3 style="margin-left: 15px; color: #fff; font-family: 'Jua' !important;">오늘의 날씨</h3>
-=======
 								<h3
 									style="margin-left: 15px; color: #fff; font-family: 'Jua' !important;">오늘의
 									날씨</h3>
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 							</div>
 						</div>
 						<div class="row align-items-center" style="color: #fff;">
@@ -261,12 +250,7 @@ main {
 								</div>
 							</div>
 							<div class="col">
-<<<<<<< HEAD
-								<select class="weatherCity"
-									style="width: 75px;"
-=======
 								<select class="weatherCity" style="width: 75px;"
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 									onchange="selectWeather(this.value)">
 									<option value="Seoul">서울</option>
 									<option value="Incheon">인천</option>
@@ -306,11 +290,7 @@ main {
 
 		</div>
 		<div class="row"
-<<<<<<< HEAD
-			style="margin-top: 80px; padding-left: 210px; padding-right: 210px;">
-=======
 			style="margin-top: 80px; padding-left: 210px; padding-right: 210px; background-color: ghostwhite;">
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 			<div style="overflow-x: scroll;">
 				<nav style="display: -webkit-inline-box;">
 					<c:forEach items="${ tdList}" var="td">
@@ -319,33 +299,15 @@ main {
 							<div class="card-body">
 								<h5 class="card-title">${td.tdname }</h5>
 								<p class="card-text">${td.tdaddress }</p>
-<<<<<<< HEAD
-								<a href="#" class="btn btn-primary">계획에 추가하기</a>
-=======
 								<button class="btn btn-primary"
 									onclick="selectCdcode('${td.tdcode}')" data-bs-toggle="modal"
 									data-bs-target="#exampleModal">계획에 추가하기</button>
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 							</div>
 						</div>
 					</c:forEach>
 				</nav>
 			</div>
 		</div>
-<<<<<<< HEAD
-
-		<div class="row" style="margin-top: 20px; padding-left: 210px; padding-right: 210px;">
-		<h2>축제</h2>
-			<div style="overflow-x: scroll;">
-				<nav style="display: -webkit-inline-box;">
-					<c:forEach items="${ tdList}" var="td">
-						<div class="card" style="width: 18rem; margin: 4px;">
-							<img src="${td.tdphoto }" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h5 class="card-title">${td.tdname }</h5>
-								<p class="card-text">${td.tdaddress }</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-=======
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -377,7 +339,6 @@ main {
 								<p class="card-text">${fe.opendate.split(' ')[0] }~
 									${fe.enddate.split(' ')[0] }</p>
 								<button class="btn btn-info">계획에 추가하기</button>
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 							</div>
 						</div>
 					</c:forEach>
@@ -400,10 +361,7 @@ main {
 		AOS.init();
 	</script>
 	<script type="text/javascript">
-<<<<<<< HEAD
-=======
 		console.log("${feList[0]}");
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 		function chageDisplay(seloption) {
 			let meminfoTag = document.querySelector('#meminfoTag');
 			let weatherinfoTag = document.querySelector('#weatherTag');
@@ -564,9 +522,6 @@ main {
 					})
 		}
 	</script>
-<<<<<<< HEAD
-
-=======
 	<script type="text/javascript">
 		function selectCdcode(tdcode) {
 			if ("${sessionScope.loginId}" == "") {
@@ -617,6 +572,5 @@ main {
 				})
 		}
 	</script>
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 </body>
 </html>

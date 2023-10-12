@@ -15,8 +15,6 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
             <!-- Core theme CSS (includes Bootstrap)-->
             <link href="resources/css/styles.css" rel="stylesheet" />
-<<<<<<< HEAD
-=======
 
             <style>
                 .pagination {
@@ -200,7 +198,6 @@
                     height: 75px;
                 }
             </style>
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
         </head>
 
         <body class="d-flex flex-column h-100">
@@ -208,32 +205,6 @@
                 <!-- Navigation-->
                 <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                     <!-- contant 시작 -->
-<<<<<<< HEAD
-                    <div class="row"style="padding:10px;
-  font-size:2rem;
-  width:1000px;
-  margin:0 auto;
-  background-color:red;
-  white-space:nowrap;
-  /* 가로방향으로 스크롤바를 무조건 생성(넘치치 않으면 스크롤바가 안생김) */
-  overflow-x:auto;">
-                        <div class="col-lg-8">
-                            <div id="rowid" class="row">
-                                <c:forEach var="TdList" items="${TdestList}">
-                                    <div id="contain" class="col-lg-4 col-md-6">
-                                        <!-- Blog post-->
-                                        <div class="card mb-4" id="photo">
-                                            <a href=""><img class="card-img-top" src="${TdList.tdphoto}"
-                                                    alt="..." /></a>
-
-                                            <div class="card-body">
-
-                                                <h2 id="title" class="card-title h4" title="${TdList.tdname}"
-                                                    style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-=======
 
                     <div class="map_wrap">
                         <div id="map">
@@ -282,31 +253,11 @@
                                         </div>
                                     </div>
 
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
-                                </c:forEach>
+                                </c:forEach>                                
                             </div>
                         </div>
                     </div>
 
-<<<<<<< HEAD
-                    <div class="pagination-container">
-                        <div class="prev-button">이전</div>
-                        <div class="number-button-wrapper"><span class="number-button">1</span></div>
-                        <div class="next-button">이후</div>
-                    </div>
-
-
-                    <!-- contant 종료 -->
-            </main>
-            <!-- Footer-->
-            <%@ include file="/WEB-INF/views/include/footer.jsp" %>
-                <!-- Bootstrap core JS-->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-                <!-- Core theme JS-->
-                <script src="resources/js/scripts.js"></script>
-
-              
-=======
                     <div class="pagination">
                         <i id="leftCur" class="fa-solid fa-arrow-left"></i>
                         <ol id="numbers">
@@ -659,7 +610,6 @@
                 }
 
             </script>
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 
         </body>
 

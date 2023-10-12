@@ -1,19 +1,12 @@
 package com.TravelSchedule.controller;
 
-<<<<<<< HEAD
-=======
 import java.io.IOException;
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ResponseBody;
-=======
-
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Country;
@@ -26,8 +19,6 @@ import com.TravelSchedule.service.ApiService;
 public class ApiController {
 	@Autowired
 	public ApiService asvc;
-<<<<<<< HEAD
-=======
 	@RequestMapping(value="/weatherApi")
 	public ModelAndView weatherApi() throws IOException {
 		System.out.println("weatherApi - 날씨정보 조회요청");
@@ -40,7 +31,6 @@ public class ApiController {
 		
 		return mav;
 	}
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 	
 	@RequestMapping(value="/festival")
 	public ModelAndView festival() throws Exception {
@@ -50,12 +40,9 @@ public class ApiController {
 		ArrayList<Country> country = asvc.getCountry();
 		mav.addObject("country",country);
 		
-<<<<<<< HEAD
 		// ArrayList<Festival> result  = asvc.getFestival();
 		ArrayList<Festival> result = asvc.getFestival_db(); 
-=======
-		ArrayList<Festival> result  = asvc.getFestival();
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
+
 		System.out.println(result);
 		mav.addObject("festival",result);
 		
@@ -74,12 +61,8 @@ public class ApiController {
 		ArrayList<Tdest> TdestList = asvc.getTdestList();  
 		
 		mav.addObject("TdestList",TdestList);
-<<<<<<< HEAD
 		mav.setViewName("travel/TdestSearch");
 		
-=======
-		mav.setViewName("/");
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 		return mav;
 	}
 	

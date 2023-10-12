@@ -4,18 +4,10 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
-
-=======
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
-=======
-
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
@@ -23,15 +15,10 @@ import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
-<<<<<<< HEAD
-import com.google.gson.Gson;
-
-=======
 import com.TravelSchedule.service.TravelService;
 import com.google.gson.Gson;
 
 
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 @Controller
 public class HomeController {
 	
@@ -40,26 +27,17 @@ public class HomeController {
 	@Autowired
 	ApiService apisvc;
 	
-<<<<<<< HEAD
-=======
 	@Autowired
 	TravelService tsvc;
 	
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
 		System.out.println("메인페이지 이동 요청");
 		ModelAndView mav = new ModelAndView();
-<<<<<<< HEAD
-
-		ArrayList<News> newsList = nsvc.getNewsList();
-		ArrayList<Tdest> tdList = apisvc.getTdList();
-=======
 		ArrayList<Festival> feList = apisvc.getFeList();
 		ArrayList<News> newsList = nsvc.getNewsList();
 		ArrayList<Tdest> tdList = apisvc.getTdList();
 		mav.addObject("feList", feList);
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);
 
@@ -91,7 +69,6 @@ public class HomeController {
 		
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping(value="/detailPage")
 	public ModelAndView detailPage(String code) {
 		System.out.println("상세페이지 이동");
@@ -109,8 +86,7 @@ public class HomeController {
 		}
 		mav.setViewName("travel/detailPage");
 		return mav;
-		
-=======
+	}
 	@RequestMapping(value="/TdestSearchPage")
 	public ModelAndView TdestSearchPage() {
 		System.out.println("여행지 검색 페이지 이동");
@@ -145,6 +121,5 @@ public class HomeController {
 		mav.setViewName("/travel/TdestSearch");
 		
 		return mav;
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 	}
 }

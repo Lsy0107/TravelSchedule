@@ -1,10 +1,7 @@
 package com.TravelSchedule.service;
 
 import java.io.BufferedReader;
-<<<<<<< HEAD
-=======
 import java.io.IOException;
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -33,11 +30,7 @@ public class ApiService {
 		
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551011/KorService1/searchFestival1"); /*URL*/
 		urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + Servicekey); /*Service Key*/
-<<<<<<< HEAD
-		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("423", "UTF-8")); /*한 페이지 결과 수*/
-=======
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8")); /*	OS 구분 : IOS (아이폰), AND (안드로이드), WIN (윈도우폰), ETC(기타)*/
         urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8")); /*서비스명(어플명)*/
@@ -182,12 +175,8 @@ public class ApiService {
 		urlBuilder.append(
 				"&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* XML/JSON 여부 */
 		urlBuilder.append(
-<<<<<<< HEAD
-				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8")); /* 지역코드 */
-=======
 				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("38", "UTF-8")); /* 지역코드 */
 		
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 		urlBuilder.append("&" + URLEncoder.encode("contentTypeId", "UTF-8") + "=" + URLEncoder.encode("12", "UTF-8"));
 
 		URL url = new URL(urlBuilder.toString());
@@ -287,8 +276,6 @@ public class ApiService {
 		return apiDao.selectTdest();
 	}
 
-<<<<<<< HEAD
-=======
 	public ArrayList<Festival> getFeList() {
 		System.out.println("ApiService - getFeList()");
 		return apiDao.selectFestival();
@@ -326,7 +313,6 @@ public class ApiService {
         
 		return null;
 	}
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 	public ArrayList<Country> getCountry() {
 		System.out.println("ApiService - getCountry()");
 		return apiDao.selectCountry();
@@ -337,7 +323,6 @@ public class ApiService {
 		return apiDao.selectFestival_country(ctcode);
 	}
 
-<<<<<<< HEAD
 	public ArrayList<Festival> getFestival_db() {
 		System.out.println("ApiService - getFestival_db()");
 		return apiDao.selectFestival();
@@ -348,6 +333,4 @@ public class ApiService {
 		return apiDao.selectFestival_detail(code);
 	}
 
-=======
->>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
 }
