@@ -69,22 +69,19 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value="/detailPage")
+	@RequestMapping(value="/detailFestival")
 	public ModelAndView detailPage(String code) {
-		System.out.println("상세페이지 이동");
+		System.out.println("상세페이지_축제 이동");
 		ModelAndView mav = new ModelAndView();
-		System.out.println(code);
-		String codeName = code.substring(0,2);
 		//System.out.println(codeName);
-		if(codeName.equals("FE")) {
 			Festival festival = apisvc.detailFestival(code);
-			System.out.println(festival);
+			String ctcode = festival.getCtcode();
+			String fecode = festival.getFecode();
+			ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
+			System.out.println(Nearby);
 			mav.addObject("festival", festival);
-			
-		} else if(codeName.equals("TD")) {
-			// Tdest 셀렉트하셈
-		}
-		mav.setViewName("travel/detailPage");
+			mav.addObject("nearby", Nearby);
+		mav.setViewName("travel/detailFestival");
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
@@ -122,4 +119,5 @@ public class HomeController {
 		
 		return mav;
 	}
+	
 }

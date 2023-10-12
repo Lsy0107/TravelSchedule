@@ -50,4 +50,7 @@
   <select id="selectFestival_detail">
   select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where fecode = #{code}
   </select>
+  <select id="selectFestival_Nearby">
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where ctcode = #{ctcode} and fecode not in(#{fecode})
+  </select>
   </mapper>
