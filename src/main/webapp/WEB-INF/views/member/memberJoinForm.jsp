@@ -303,8 +303,13 @@ div#nicknameArea i{
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 	<script>
+<<<<<<< HEAD
+         $(document).ready(function(){
+           $('#passArea i').on('click',function(){
+=======
         $(document).ready(function(){
             $('#passArea i').on('click',function(){
+>>>>>>> c21d369ee9c6360b13b6d2fb98cac3e97ff52a67
                 $('input').toggleClass('active');
                 if($('input').hasClass('active')){
                     $(this).attr('class',"fa-solid fa-eye")
