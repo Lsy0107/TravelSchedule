@@ -18,6 +18,7 @@ import com.TravelSchedule.service.ApiService;
 import com.TravelSchedule.service.TravelService;
 import com.google.gson.Gson;
 
+
 @Controller
 public class HomeController {
 	
@@ -25,6 +26,7 @@ public class HomeController {
 	newsCrawlingService nsvc;
 	@Autowired
 	ApiService apisvc;
+	
 	@Autowired
 	TravelService tsvc;
 	
@@ -66,4 +68,56 @@ public class HomeController {
 		return new Gson().toJson(result);
 		
 	}
+	
+	@RequestMapping(value="/detailFestival")
+	public ModelAndView detailPage(String code) {
+		System.out.println("상세페이지_축제 이동");
+		ModelAndView mav = new ModelAndView();
+		//System.out.println(codeName);
+			Festival festival = apisvc.detailFestival(code);
+			String ctcode = festival.getCtcode();
+			String fecode = festival.getFecode();
+			ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
+			System.out.println(Nearby);
+			mav.addObject("festival", festival);
+			mav.addObject("nearby", Nearby);
+		mav.setViewName("travel/detailFestival");
+		return mav;
+	}
+	@RequestMapping(value="/TdestSearchPage")
+	public ModelAndView TdestSearchPage() {
+		System.out.println("여행지 검색 페이지 이동");
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+		
+		mav.addObject("TdestList",TdestList);
+		mav.setViewName("/travel/TdestSearch");
+		return mav;
+	}
+	@RequestMapping(value="TdestCtSearchPage")
+	public @ResponseBody String TdestCtSearchPage(String ctcode){
+		System.out.println("도시코드 받아온 컨트롤러");
+		ModelAndView mav = new ModelAndView();
+		System.out.println("받아온 도시코드 : "+ctcode);
+		
+		ArrayList<Tdest> TdestList = tsvc.CtTdestList(ctcode);
+		
+		mav.addObject("TdestList",TdestList);
+		mav.setViewName("/travel/TdestSearch");
+		return new Gson().toJson(TdestList);
+	}
+	
+	@RequestMapping(value="/SearchService")
+	public @ResponseBody ModelAndView SearchService(String searchVal) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("검색한 변수"+searchVal);
+		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
+		
+		mav.addObject("TdestList",TdestList);
+		mav.setViewName("/travel/TdestSearch");
+		
+		return mav;
+	}
+	
 }

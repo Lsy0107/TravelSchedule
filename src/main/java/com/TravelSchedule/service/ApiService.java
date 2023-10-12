@@ -175,7 +175,8 @@ public class ApiService {
 		urlBuilder.append(
 				"&" + URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* XML/JSON 여부 */
 		urlBuilder.append(
-				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8")); /* 지역코드 */
+				"&" + URLEncoder.encode("areaCode", "UTF-8") + "=" + URLEncoder.encode("38", "UTF-8")); /* 지역코드 */
+		
 		urlBuilder.append("&" + URLEncoder.encode("contentTypeId", "UTF-8") + "=" + URLEncoder.encode("12", "UTF-8"));
 
 		URL url = new URL(urlBuilder.toString());
@@ -320,6 +321,21 @@ public class ApiService {
 	public ArrayList<Festival> festival_country(String ctcode) {
 		System.out.println("ApiService - festival_country()");
 		return apiDao.selectFestival_country(ctcode);
+	}
+
+	public ArrayList<Festival> getFestival_db() {
+		System.out.println("ApiService - getFestival_db()");
+		return apiDao.selectFestival_db();
+	}
+
+	public Festival detailFestival(String code) {
+		System.out.println("ApiService - detailFestival()");
+		return apiDao.selectFestival_detail(code);
+	}
+
+	public ArrayList<Festival> festival_Nearby(String ctcode, String fecode) {
+		System.out.println("ApiService - festival_Nearby");
+		return apiDao.selectFestival_Nearby(ctcode, fecode);
 	}
 
 }

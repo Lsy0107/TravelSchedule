@@ -20,12 +20,20 @@ public interface ApiDao {
 
 	ArrayList<Tdest> selectTdest();
 
-	ArrayList<Festival> selectFestival();
 	String selectFecode(@Param("fename")String fename);
 
 	void insertFestival(Festival festival);
 
 	ArrayList<Country> selectCountry();
+	
+	ArrayList<Festival> selectFestival();
 
 	ArrayList<Festival> selectFestival_country(@Param("ctcode")String ctcode);
+
+	ArrayList<Festival> selectFestival_db();
+
+	Festival selectFestival_detail(@Param("code")String code);
+
+	ArrayList<Festival> selectFestival_Nearby(@Param("ctcode")String ctcode, @Param("fecode")String fecode);
+	
 }

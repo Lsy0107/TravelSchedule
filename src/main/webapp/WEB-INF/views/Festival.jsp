@@ -22,7 +22,6 @@
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-
 <style type="text/css">
 .signIn {
 	border: 1px solid black;
@@ -101,6 +100,12 @@ background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
 	white-space:nowrap;
 	overflow: hidden;
 }
+.body{
+	margin-top:50px;
+}
+#feArea{
+	
+}
 footer{
 	position: absolute;
 	bottom: 0;
@@ -123,34 +128,32 @@ main{
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
 
-			<div class="row" data-aos="fade-down-right" data-aos-duration="600"
-			data-aos-anchor-placement="top-center">
-				<div class="col p-5">
-					<div class="card" id="FestivalRecommend">
-						<a><img src="..." class="card-img-top" alt="..."></a>
+			
+				<div class="col p-5 body">				
 						<div class="card-body">
 							<c:forEach items="${country }" var="ct">
 								<div class="card mb-4 ctList">
 									<button onclick="festival_country('${ct.ctcode}')">${ct.ctname }</button>
 								</div>
 							</c:forEach>
-							<p class="card-text">축제 추천</p>
 							<div id="feArea">
 								<c:forEach items="${festival }" var="fe">
-									<a href="">							
+									<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">							
 										<div class="card mb-4 feList" >
 				                        	<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
-											<h5 class="feName">${fe.fename }</h5>
-											<h6>${fe.opendate} ~ ${fe.enddate }</h6>
-											<h6> ${fe.feaddress }</h6>
+											<div class="feName">${fe.fename }</div>
+											<div>${fe.opendate} ~ ${fe.enddate }</div>
 										</div>
 									</a>
 								</c:forEach>
 							</div>
 						</div>
-					</div>
+					
 				</div>
-			</div>
+
+			<!-- HTML -->
+
+			
 	
 		<!-- content 종료 -->
 		<!-- Footer-->
@@ -197,14 +200,19 @@ main{
 				feImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
 				
 				let feName = document.createElement('div');
+				feName.classList.add('feName');
 				feName.innerText = fe.fename;
 				let feDate = document.createElement('div');
 				feDate.innerText = fe.opendate +" ~ " + fe.enddate;
 				
+				let aTag = document.createElement('a');
+				aTag.setAttribute('href', "${pageContext.request.contextPath }/detailFestival?code="+fe.fecode);
+				
 				feDiv.appendChild(feImg);
 				feDiv.appendChild(feName);
 				feDiv.appendChild(feDate);
-				feArea.appendChild(feDiv);
+				aTag.appendChild(feDiv);
+				feArea.appendChild(aTag);
 			}
 		} 
 	</script>
