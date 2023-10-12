@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Country;
@@ -19,18 +19,6 @@ import com.TravelSchedule.service.ApiService;
 public class ApiController {
 	@Autowired
 	public ApiService asvc;
-	@RequestMapping(value="/weatherApi")
-	public ModelAndView weatherApi() throws IOException {
-		System.out.println("weatherApi - 날씨정보 조회요청");
-		
-		ModelAndView mav = new ModelAndView();
-		
-		String result = asvc.weatherApi();
-		
-		mav.setViewName("weatherApi");
-		
-		return mav;
-	}
 	
 	@RequestMapping(value="/festival")
 	public ModelAndView festival() throws Exception {
@@ -40,7 +28,9 @@ public class ApiController {
 		ArrayList<Country> country = asvc.getCountry();
 		mav.addObject("country",country);
 		
-		ArrayList<Festival> result  = asvc.getFestival();
+		// ArrayList<Festival> result  = asvc.getFestival();
+		ArrayList<Festival> result = asvc.getFestival_db(); 
+
 		System.out.println(result);
 		mav.addObject("festival",result);
 		
@@ -59,7 +49,8 @@ public class ApiController {
 		ArrayList<Tdest> TdestList = asvc.getTdestList();  
 		
 		mav.addObject("TdestList",TdestList);
-		mav.setViewName("/");
+		mav.setViewName("travel/TdestSearch");
+		
 		return mav;
 	}
 	
