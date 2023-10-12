@@ -1,6 +1,7 @@
 package com.TravelSchedule.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,14 +51,14 @@ public class TravelService {
 		return tdao.insertFKcode(sc);
 	}
 
-	public ArrayList<Schedule> getScList(String mid, String cdcode) {
-		System.out.println("travelService - getSchedule()");
-		return tdao.selectSchedule(mid, cdcode);
+	public int updateSc(Schedule sc, String seloption) {
+		System.out.println("TravelService - updateSc()");
+		return tdao.updateSc(sc,seloption);
 	}
 
-	public Tdest getTdest(String tdcode) {
-		System.out.println("travelService - getTdest()");
-		return tdao.selectTdest(tdcode);
+	public ArrayList<HashMap<String, String>> select_sc_td_join(String mid, String cdcode) {
+		System.out.println("TravelService - select_sc_td_join()");
+		return tdao.select_sc_td_join(mid, cdcode);
 	}
 
 
