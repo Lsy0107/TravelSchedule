@@ -90,6 +90,7 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-tx/5.2.25.RELEASE/spring-tx-5.2.25.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/mybatis/mybatis/3.5.13/mybatis-3.5.13.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/mybatis/mybatis-spring/2.0.6/mybatis-spring-2.0.6.jar" enabled="true" runInBatchMode="false"/>
+<<<<<<< HEAD
     <factorypathentry kind="EXTJAR" id="D:\Tomcat v9.0\lib\annotations-api.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="D:\Tomcat v9.0\lib\catalina-ant.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="D:\Tomcat v9.0\lib\catalina-ha.jar" enabled="true" runInBatchMode="false"/>
@@ -122,5 +123,7 @@
     <factorypathentry kind="EXTJAR" id="D:\Tomcat v9.0\lib\tomcat-util.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="D:\Tomcat v9.0\lib\tomcat-websocket.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="D:\Tomcat v9.0\lib\websocket-api.jar" enabled="true" runInBatchMode="false"/>
+=======
+>>>>>>> 49c63ef8cea4b24c01a800de54cbe4a8a36b58b5
     <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
 </factorypath>

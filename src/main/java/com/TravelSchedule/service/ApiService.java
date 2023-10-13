@@ -323,4 +323,14 @@ public class ApiService {
 		return apiDao.selectFestival_country(ctcode);
 	}
 
+	public ArrayList<Festival> getFestival_db() {
+		System.out.println("ApiService - getFestival_db()");
+		return apiDao.selectFestival_db();
+	}
+
+	public Festival detailFestival(String code) {
+		System.out.println("ApiService - detailFestival()");
+		return apiDao.selectFestival_detail(code);
+	}
+
 }

@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
@@ -70,6 +69,24 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value="/detailPage")
+	public ModelAndView detailPage(String code) {
+		System.out.println("상세페이지 이동");
+		ModelAndView mav = new ModelAndView();
+		System.out.println(code);
+		String codeName = code.substring(0,2);
+		//System.out.println(codeName);
+		if(codeName.equals("FE")) {
+			Festival festival = apisvc.detailFestival(code);
+			System.out.println(festival);
+			mav.addObject("festival", festival);
+			
+		} else if(codeName.equals("TD")) {
+			// Tdest 셀렉트하셈
+		}
+		mav.setViewName("travel/detailPage");
+		return mav;
+	}
 	@RequestMapping(value="/TdestSearchPage")
 	public ModelAndView TdestSearchPage() {
 		System.out.println("여행지 검색 페이지 이동");
