@@ -28,7 +28,7 @@
                         	</c:when>
                         	<c:otherwise>
                         	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/memberLogout">로그아웃</a></li>
-                        	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/">내정보</a></li>
+                        	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/myInfo">내정보</a></li>
                         	</c:otherwise>
                         </c:choose>
                         <c:choose>
