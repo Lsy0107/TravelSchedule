@@ -33,4 +33,7 @@ public interface ApiDao {
 	ArrayList<Festival> selectFestival_db();
 
 	Festival selectFestival_detail(@Param("code")String code);
+
+	ArrayList<Festival> selectFestival_Nearby(@Param("ctcode")String ctcode, @Param("fecode")String fecode);
+	
 }
