@@ -45,7 +45,7 @@
                     padding: 3px;
                 }
 
-                li>a {
+                ol > li>a {
                     padding: 10px;
                     max-width: 50px;
                 }
@@ -197,6 +197,12 @@
                     width: 75px;
                     height: 75px;
                 }
+                .photo{
+                    cursor: pointer;
+                }
+                div.contain{
+                    padding: 25px;
+                }
             </style>
         </head>
 
@@ -223,7 +229,7 @@
                             <span id="RecommendTitle">제주도에 이런 여행지는 어떠세요?</span>
                             <img src="${pageContext.request.contextPath}/resources/tdest/제주도.png" alt="">
                         </div>
-                        <div class="FestivalRecomm">
+                        <div class="FestivalRecomm" onclick="location.href='festival'">
                             <span id="RecommendTitle">축제를 즐기고 싶으신가요?</span>
                         </div>
                     </div>
@@ -242,14 +248,16 @@
                                 <c:forEach var="TdList" items="${TdestList}">
                                     <div class="col-lg-4 col-md-6 contain">
                                         <!-- Blog post-->
-                                        <div class="card mb-4" id="photo">
+                                        <div class="card mb-4 photo" id="photo" onclick="location.href='detailTdest?tdcode=${TdList.tdcode}'">
                                             <img class="card-img-top" src="${TdList.tdphoto}" alt="..." />
 
                                         </div>
                                         <div class="card-body">
-
-                                            <h2 id="title" class="card-title h4" title="${TdList.tdname}"
-                                                style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h2>
+                                            <h3 id="title" class="card-title h4" title="${TdList.tdname}"
+                                                style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
+                                            <button class="btn btn-primary" onclick="selectCdcode('${td.tdcode}')"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+											추가하기</button>
                                         </div>
                                     </div>
 
@@ -257,6 +265,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body" id="selectCalendar">
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+										id="selectClear">선택</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
                     <div class="pagination">
                         <i id="leftCur" class="fa-solid fa-arrow-left"></i>
@@ -582,8 +608,13 @@
                         DestDiv.classList.add('col-md-6');
                         DestDiv.classList.add('contain');
 
+                        
                         let TdestImgDiv = document.createElement('div');
                         TdestImgDiv.classList.add('card-mb-4');
+                        TdestImgDiv.classList.add('photo');
+                        TdestImgDiv.addEventListener('click',function(e){
+                            DetailPageMove(Td.tdcode);
+                        });
 
                         let TdestImg = document.createElement('img');
                         TdestImg.classList.add('card-img-top');
@@ -600,14 +631,67 @@
                         TdestTitle.classList.add('h4');
                         TdestTitle.innerText = Td.tdname;
 
+                        let TdestBtn = document.createElement('button');
+                        TdestBtn.classList.add('btn');
+                        TdestBtn.classList.add('btn-primary');
+                        TdestBtn.innerText='계획에 추가하기';
+                        TdestBtn.setAttribute('data-bs-toggle','modal');
+                        TdestBtn.setAttribute('data-bs-target','#exampleModal');
+                        TdestBtn.addEventListener('click', function(){
+                            selectCdcode(Td.tdcode);                    
+                        });
                         TdestTitleDiv.appendChild(TdestTitle);
+
+
+                        TdestTitleDiv.appendChild(TdestBtn);
+
                         DestDiv.appendChild(TdestTitleDiv);
 
                         TdestAreaDiv.appendChild(DestDiv);
 
                     }
                     Paging();
-                }
+            }
+            function DetailPageMove(tdcode){
+                console.log(tdcode);
+                location.href='detailTdest?tdcode='+tdcode;
+
+            }
+            function selectCdcode(tdcode) {
+					if ("${sessionScope.loginId}" == "") {
+						location.href = "${pageContext.request.contextPath}/memberLoginForm"
+					} else {
+						$.ajax({
+							url: "/getCdcode",
+							type: "post",
+							data: { mid: "${sessionScope.loginId}" },
+							async: false,
+							success(rs) {
+								console.log(rs.length);
+								let modalBodyTag = document.querySelector("#selectCalendar")
+								modalBodyTag.innerHTML = "";
+								if (rs.length > 0) {
+
+									let selTag = document.createElement("select")
+									for (let cd of rs) {
+										let optionTag = document.createElement("option")
+										optionTag.innerText = cd.cdname;
+										optionTag.setAttribute("value", cd.cdcode)
+										selTag.appendChild(optionTag);
+									}
+									modalBodyTag.appendChild(selTag);
+									let btnTag = document.querySelector("#selectClear");
+									btnTag.addEventListener("click", function () {
+										selectDest(tdcode, selTag.value)
+									})
+								}
+								else {
+									modalBodyTag.innerText = "달력을 추가 해주세요";
+								}
+							}
+						})
+					}
+				}
 
             </script>
 

@@ -1,6 +1,7 @@
 package com.TravelSchedule.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -33,4 +34,9 @@ public interface TravelDao {
 
 	@Select("SELECT * FROM TDEST WHERE TDNAME LIKE '%'||#{searchVal}||'%'")
 	ArrayList<Tdest> SearchTdest(String searchVal);
+
+	@Select("SELECT * FROM TDEST WHERE TDCODE = #{tdcode}")
+	Tdest detailTdestDao(String tdcode);
+
+
 }

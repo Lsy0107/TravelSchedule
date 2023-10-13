@@ -1,6 +1,7 @@
 package com.TravelSchedule.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,7 +85,7 @@ public class HomeController {
 		} else if(codeName.equals("TD")) {
 			// Tdest 셀렉트하셈
 		}
-		mav.setViewName("travel/detailPage");
+		mav.setViewName("travel/detailFestival");
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
@@ -122,4 +123,5 @@ public class HomeController {
 		
 		return mav;
 	}
+	
 }

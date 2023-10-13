@@ -1,6 +1,7 @@
 package com.TravelSchedule.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,15 @@ public class TravelService {
 		ArrayList<Tdest> SearchTdest = tdao.SearchTdest(searchVal);
 		return SearchTdest;
 	}
+
+	public Tdest detailTdest(String tdcode) {
+		System.out.println("상세 여행지 정보");
+		
+		Tdest detailTdestDao = tdao.detailTdestDao(tdcode);
+		return detailTdestDao;
+	}
+
+	
 
 }
 
