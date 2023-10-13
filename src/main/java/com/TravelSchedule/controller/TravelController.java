@@ -3,7 +3,6 @@ package com.TravelSchedule.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +23,32 @@ public class TravelController {
 	 @Autowired
 	 TravelService tsvc;
 	
+	 @RequestMapping(value="/updateSc")
+	 public @ResponseBody String updateSc(Schedule sc, String seloption){
+		 System.out.println("스케쥴 등록하기");
+		 System.out.println(sc);
+		 System.out.println(seloption);
+		 int rs = tsvc.updateSc(sc, seloption);
+		 return null;
+	 }
+	 
 	@RequestMapping(value="/travelSc")
 	public ModelAndView travelMkSc(String cdcode, HttpSession session) {
 		System.out.println("여행 계획 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		String mid = (String) session.getAttribute("loginId");
-		ArrayList<Schedule> scList = tsvc.getScList(mid, cdcode);
-		ArrayList<Tdest> tdList = new ArrayList<Tdest>();
-		for(Schedule sc : scList) {
-			if(!sc.getTdcode().equals(null)) {				
-			Tdest td = tsvc.getTdest(sc.getTdcode());
-			tdList.add(td);
-			}
+		ArrayList<HashMap<String,String>> sctdList = tsvc.select_sc_td_join(mid, cdcode);
+		ArrayList<HashMap<String,String>> lalngList = new ArrayList<HashMap<String,String>>();
+		for(HashMap<String,String> sctd : sctdList) {
+			HashMap<String,String> lalng = new HashMap<String, String>();
+			lalng.put("lati", sctd.get("TDLONGTI"));
+			lalng.put("longti", sctd.get("TDLATI"));
+			lalng.put("name", sctd.get("TDNAME"));
+			lalngList.add(lalng);
 		}
-		mav.addObject("tdList",tdList);
-		mav.addObject("scList",scList);
+		mav.addObject("sctdList",sctdList);
+		//mav.addObject("sctdList",new Gson().toJson(sctdList));
+		mav.addObject("lalngList",new Gson().toJson(lalngList));
 		mav.setViewName("/travel/TravelSchedule");
 		return mav;
 	}

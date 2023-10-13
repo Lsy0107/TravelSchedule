@@ -138,7 +138,7 @@ main{
 							</c:forEach>
 							<div id="feArea">
 								<c:forEach items="${festival }" var="fe">
-									<a href="${pageContext.request.contextPath }/detailPage?code=${fe.fecode }">							
+									<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">							
 										<div class="card mb-4 feList" >
 				                        	<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
 											<div class="feName">${fe.fename }</div>
@@ -206,7 +206,7 @@ main{
 				feDate.innerText = fe.opendate +" ~ " + fe.enddate;
 				
 				let aTag = document.createElement('a');
-				aTag.setAttribute('href', "${pageContext.request.contextPath }/detailPage?code="+fe.fecode);
+				aTag.setAttribute('href', "${pageContext.request.contextPath }/detailFestival?code="+fe.fecode);
 				
 				feDiv.appendChild(feImg);
 				feDiv.appendChild(feName);

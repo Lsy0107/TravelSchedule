@@ -333,4 +333,9 @@ public class ApiService {
 		return apiDao.selectFestival_detail(code);
 	}
 
+	public ArrayList<Festival> festival_Nearby(String ctcode, String fecode) {
+		System.out.println("ApiService - festival_Nearby");
+		return apiDao.selectFestival_Nearby(ctcode, fecode);
+	}
+
 }

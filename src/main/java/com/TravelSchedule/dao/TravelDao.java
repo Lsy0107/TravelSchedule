@@ -22,9 +22,9 @@ public interface TravelDao {
 
 	int insertFKcode(Schedule sc);
 
-	ArrayList<Schedule> selectSchedule(@Param("mid")String mid, @Param("cdcode")String cdcode);
+	int updateSc(@Param("sc")Schedule sc, @Param("seloption")String seloption);
 
-	Tdest selectTdest(String tdcode);
+	ArrayList<HashMap<String, String>> select_sc_td_join(@Param("mid")String mid, @Param("cdcode")String cdcode);
 
 	@Select("SELECT * FROM TDEST WHERE CTCODE = 'CT00001'")
 	ArrayList<Tdest> TdestService();
