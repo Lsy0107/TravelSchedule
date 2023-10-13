@@ -64,4 +64,12 @@ public class MemberService {
 		return mdao.selectMember(mem);
 	}
 
+	public Member getMemberInfo(String loginId) {
+		System.out.println("MemberService - getMemberInfo");
+		
+		Member member = mdao.selectMemberInfo(loginId);
+		
+		return member;
+	}
+
 }
