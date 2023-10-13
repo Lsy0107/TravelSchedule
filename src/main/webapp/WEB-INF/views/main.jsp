@@ -141,7 +141,7 @@
 				<%@ include file="include/menu.jsp" %>
 					<!-- content 시작 -->
 
-
+					
 					<div class="row" style="padding: 200px; padding-top: 23px; padding-bottom: 0px; height: 662px;">
 						<div id="TitleBar" style="width: 74%;">
 							<div class="IMGBAR">
