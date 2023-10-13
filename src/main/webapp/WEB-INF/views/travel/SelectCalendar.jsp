@@ -71,5 +71,12 @@
 			}
 		}
 	</script>
+	<script type="text/javascript">
+	$(document).ready({
+		if("${sessionScope.loginId == ''}"){
+			location.herf="/memberLoginForm";
+		}
+	})
+	</script>
 </body>
 </html>

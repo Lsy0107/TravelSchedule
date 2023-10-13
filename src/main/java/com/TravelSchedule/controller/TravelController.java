@@ -39,14 +39,24 @@ public class TravelController {
 		ArrayList<HashMap<String,String>> sctdList = tsvc.select_sc_td_join(mid, cdcode);
 		ArrayList<HashMap<String,String>> lalngList = new ArrayList<HashMap<String,String>>();
 		for(HashMap<String,String> sctd : sctdList) {
+			if(!sctd.containsKey("SCDATE")) {
+				System.out.println("여기");
+				continue;
+			}
 			HashMap<String,String> lalng = new HashMap<String, String>();
-			lalng.put("lati", sctd.get("TDLONGTI"));
-			lalng.put("longti", sctd.get("TDLATI"));
-			lalng.put("name", sctd.get("TDNAME"));
+			if(sctd.containsKey("TDCODE")) {
+				lalng.put("lati", sctd.get("TDLONGTI"));
+				lalng.put("longti", sctd.get("TDLATI"));				
+				lalng.put("name", sctd.get("TDNAME"));
+			}else {
+				lalng.put("lati", sctd.get("FELONGTI"));
+				lalng.put("longti", sctd.get("FELATI"));
+				lalng.put("name", sctd.get("FENAME"));
+			}
+			lalng.put("scdate", sctd.get("SCDATE"));
 			lalngList.add(lalng);
 		}
-		mav.addObject("sctdList",sctdList);
-		//mav.addObject("sctdList",new Gson().toJson(sctdList));
+		mav.addObject("scdestList",sctdList);
 		mav.addObject("lalngList",new Gson().toJson(lalngList));
 		mav.setViewName("/travel/TravelSchedule");
 		return mav;

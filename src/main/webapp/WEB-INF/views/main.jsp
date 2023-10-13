@@ -89,7 +89,6 @@
 }
 
 #TitleBar {
-	position: relative;
 	top: 64px;
 }
 
@@ -136,12 +135,12 @@ main {
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
 
-
+		<div class="row" style="margin: 45px;"></div>
 		<div class="row"
 			style="padding: 200px; padding-top: 23px; padding-bottom: 0px;">
 			<div id="TitleBar" style="width: 74%;">
 				<div class="IMGBAR">
-					<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+					<div id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="z-index: 0;">
 						<div class="carousel-indicators">
 							<button type="button" data-bs-target="#myCarousel"
 								data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
@@ -289,8 +288,9 @@ main {
 			</div>
 
 		</div>
-		<div class="row"
-			style="margin-top: 80px; padding-left: 210px; padding-right: 210px; background-color: ghostwhite;">
+		<div class="row pt-2 pb-2 mt-2"
+			style="padding-left: 210px; padding-right: 210px; background-color: ghostwhite;">
+			<h2>여행지</h2>
 			<div style="overflow-x: scroll;">
 				<nav style="display: -webkit-inline-box;">
 					<c:forEach items="${ tdList}" var="td">

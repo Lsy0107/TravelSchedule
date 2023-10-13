@@ -31,8 +31,15 @@
                         	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/">내정보</a></li>
                         	</c:otherwise>
                         </c:choose>
-                            <li class="nav-item"><a class="nav-link" href="/selectCalendar">여행계획</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/TdestSearchPage">여행지검색</a></li>
+                        <c:choose>
+                        	<c:when test="${sessionScope.loginId ==null }">
+	                            <li class="nav-item"><a class="nav-link" href="/memberLoginForm">여행계획</a></li>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<li class="nav-item"><a class="nav-link" href="/selectCalendar">여행계획</a></li>
+                        	</c:otherwise>
+                        </c:choose>
+	                            <li class="nav-item"><a class="nav-link" href="/TdestSearchPage">여행지검색</a></li>
                             <li class="nav-item"><a class="nav-link" href="/festival">축제</a></li>
                             <!-- 
                             토글방식 메뉴바

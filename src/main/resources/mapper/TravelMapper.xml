@@ -25,16 +25,16 @@
   select * from tdest where tdcode = #{tdcode}
   </select>
   <update id="updateSc">
-  update schedule set
-  <if test="seloption == 'tdest'">
-  scdate = to_date(#{sc.scdate}, 'YYYY/MM/DD HH24:MI')
-  </if>
+  update schedule set  scdate = to_date(#{sc.scdate}, 'YYYY-MM-DD HH24:MI')
   where mid = #{sc.mid} and cdcode = #{sc.cdcode} and
   <if test="seloption == 'tdest'">
   tdcode = #{sc.tdcode}
   </if>
+  <if test="seloption == 'festival'">
+  fecode = #{sc.fecode}
+  </if>
   </update>
   <select id="select_sc_td_join" resultType="hashmap">
-  select * from schedule sc inner join tdest td on sc.tdcode = td.tdcode where sc.mid= #{mid} and sc.cdcode = #{cdcode}
+  select sc.mid, sc.cdcode, sc.fecode, sc.tdcode, to_char(sc.scdate, 'YYYY/MM/DD HH24:MI') as scdate, td.*, fe.* from schedule sc left join tdest td on sc.tdcode = td.tdcode left join festival fe on sc.fecode = fe.fecode where sc.mid= #{mid} and sc.cdcode = #{cdcode} order by sc.scdate
   </select>
   </mapper>
