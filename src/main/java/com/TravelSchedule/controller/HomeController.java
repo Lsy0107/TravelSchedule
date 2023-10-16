@@ -116,7 +116,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("검색한 변수"+searchVal);
 		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
-		
+		ArrayList<Country> CountryList = tsvc.CountryList();
+		mav.addObject("CountryList",CountryList);
 		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");
 		
