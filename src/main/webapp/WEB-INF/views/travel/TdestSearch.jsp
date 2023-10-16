@@ -18,11 +18,8 @@
 
             <style>
                 .pagination {
-                    position: relative;
-                    left: 50%;
-                    right: 50%;
-                    top: 160px;
-                    margin-left: -195px;
+                    position: relative;                    
+                    margin-left: 80px;
                 }
 
                 ol {
@@ -63,10 +60,10 @@
                 }
 
                 div#map {
-                    width: 50%;
+                    width: 100%;
                     position: relative;
-                    top: 150px;
-                    height: 650px;
+                    top: 77px;
+                    height: 685px;
                     margin-left: auto;
                     margin-right: auto;
                 }
@@ -84,13 +81,14 @@
                 .TdListIn {
                     margin-left: auto;
                     margin-right: auto;
-                    max-height: 1000px;
+                    max-height: 717px;
                     overflow: scroll;
                     width: 100%;
+                    overflow-x: hidden;
                 }
 
                 .SearchArea {
-                    border: 1px solid;
+                    border-bottom: 1px solid;
                 }
 
                 .SArea {
@@ -98,7 +96,7 @@
                     margin-bottom: 20px;
                     margin-left: auto;
                     margin-right: auto;
-                    width: 400px;
+                    width: 308px;
                 }
 
                 .Search {
@@ -123,8 +121,9 @@
 
                 #SelectMapType {
                     position: relative;
-                    bottom: 450px;
-                    left: 175px;
+                    bottom: 557px;
+                    left: 15px;
+                    z-index: 4;
                 }
 
                 .selected,
@@ -161,7 +160,7 @@
                     transition: background-color 0s;
                 }
 
-                
+
 
                 .TdestRecommendArea {
                     position: relative;
@@ -202,7 +201,8 @@
                 }
 
                 div.contain {
-                    padding: 25px;
+                    padding: 9px;
+                    display: flex;
 
                 }
 
@@ -229,6 +229,36 @@
                 footer {
                     position: relative;
                 }
+
+                .content_wrap {
+                    display: flex;
+                }
+
+                .map_wrap {
+                    width: 70%;
+                    border-right: 1px solid;
+                }
+
+                .Tdest_wrap {
+                    width: 30%;
+                    position: relative;
+                    top: 77px;
+                }
+
+                .ctList {
+                    display: inline-block;
+                    margin: 7px;
+                }
+
+                .hashTag {
+                    position: relative;
+                    top: 77px;
+                }
+
+                .photo {
+                    width: 40%;
+                    height: 25%;
+                }
             </style>
         </head>
 
@@ -237,22 +267,73 @@
             <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                 <div class="StickyBar">
                     <button class="Bar">
-                        <img class="BarImage" style="width: 100%;" src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png"
-                            alt="">
+                        <img class="BarImage" style="width: 100%;"
+                            src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png" alt="">
                     </button>
                 </div>
                 <!-- contant 시작 -->
+                <div class="content_wrap">
 
-                <div class="map_wrap">
-                    <div id="map">
-                    </div>
-                    <div id="SelectMapType" class="custom_typecontrol radius_border">
-                        <span id="btnRoadmap" class="selected" onclick="setMapType('roadmap')">지도</span>
-                        <span id="btnSkyview" class="unselected" onclick="setMapType('skyview')">스카이뷰</span>
-                    </div>
-                    <!-- 지도타입 컨트롤 div 입니다 -->
+                    <div class="map_wrap">
+                        <div class="hashTag">
+                            <c:forEach items="${CountryList }" var="ct">
+                                <div class="ctList">
+                                    <button onclick="festival_country('${ct.ctcode}')">#${ct.ctname }</button>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div id="map">
+                        </div>
+                        <div id="SelectMapType" class="custom_typecontrol radius_border">
+                            <span id="btnRoadmap" class="selected" onclick="setMapType('roadmap')">지도</span>
+                            <span id="btnSkyview" class="unselected" onclick="setMapType('skyview')">스카이뷰</span>
+                        </div>
+                        <!-- 지도타입 컨트롤 div 입니다 -->
 
+                    </div>
+                    <div class="Tdest_wrap">
+                        <div>
+                            <div class="SearchArea">
+                                <form action="SearchService" method="get">
+                                    <div class="SArea">
+                                        <input name="searchVal" class="Search" type="text">
+                                        <button class="SearchBtn">검색</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="TdListIn">
+                            <div id="rowid" class="row TdestArea">
+                                <c:forEach var="TdList" items="${TdestList}">
+                                    <div class="contain">
+                                        <!-- Blog post-->
+                                        <div class="card mb-4 photo" id="photo"
+                                            onclick="location.href='detailTdest?tdcode=${TdList.tdcode}'">
+                                            <img class="card-img-top" src="${TdList.tdphoto}" alt="..." />
+
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 id="title" class="card-title h4" title="${TdList.tdname}"
+                                                style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
+                                            <button class="btn btn-primary" onclick="selectCdcode('${TdList.tdcode}')"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+                                                추가하기</button>
+                                        </div>
+                                    </div>
+
+                                </c:forEach>
+                            </div>
+                        </div>
+                        <div class="pagination">
+                            <i id="leftCur" class="fa-solid fa-arrow-left"></i>
+                            <ol id="numbers">
+        
+                            </ol>
+                            <i id="rightCur" class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
                 </div>
+
                 <hr style="position: relative; top: 65px;">
                 </hr>
                 <div class="TdestRecommendArea">
@@ -266,38 +347,7 @@
                     </div>
                 </div>
 
-                <div class="row TdListArea">
-                    <div class="SearchArea">
-                        <form action="SearchService" method="get">
-                            <div class="SArea">
-                                <input name="searchVal" class="Search" type="text">
-                                <button class="SearchBtn">검색</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-8 TdListIn">
-                        <div id="rowid" class="row TdestArea">
-                            <c:forEach var="TdList" items="${TdestList}">
-                                <div class="col-lg-4 col-md-6 contain">
-                                    <!-- Blog post-->
-                                    <div class="card mb-4 photo" id="photo"
-                                        onclick="location.href='detailTdest?tdcode=${TdList.tdcode}'">
-                                        <img class="card-img-top" src="${TdList.tdphoto}" alt="..." />
 
-                                    </div>
-                                    <div class="card-body">
-                                        <h3 id="title" class="card-title h4" title="${TdList.tdname}"
-                                            style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
-                                        <button class="btn btn-primary" onclick="selectCdcode('${TdList.tdcode}')"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
-                                            추가하기</button>
-                                    </div>
-                                </div>
-
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -317,13 +367,7 @@
                     </div>
                 </div>
 
-                <div class="pagination">
-                    <i id="leftCur" class="fa-solid fa-arrow-left"></i>
-                    <ol id="numbers">
 
-                    </ol>
-                    <i id="rightCur" class="fa-solid fa-arrow-right"></i>
-                </div>
 
 
 
@@ -342,8 +386,10 @@
                     $(document).ready(function () {
                         console.log('페이지 로드');
                         Paging();
+
                     })
                 </script>
+
 
                 <script>
                     function Paging() {
@@ -458,7 +504,7 @@
                 <script>
                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                         mapOption = {
-                            center: new kakao.maps.LatLng(35.2284895431993, 126.60708499996532), // 지도의 중심좌표
+                            center: new kakao.maps.LatLng(36.1284895431993, 127.58708499996532), // 지도의 중심좌표
                             level: 13, // 지도의 확대 레벨
                             disableDoubleClickZoom: true
                         };
@@ -640,13 +686,13 @@
                         TdestList = dest;
                         for (let Td of TdestList) {
                             let DestDiv = document.createElement('div');
-                            DestDiv.classList.add('col-lg-4');
-                            DestDiv.classList.add('col-md-6');
+                            //        DestDiv.classList.add('col-lg-4');
+                            //      DestDiv.classList.add('col-md-6');
                             DestDiv.classList.add('contain');
 
 
                             let TdestImgDiv = document.createElement('div');
-                            TdestImgDiv.classList.add('card-mb-4');
+                            //           TdestImgDiv.classList.add('card-mb-4');
                             TdestImgDiv.classList.add('photo');
                             TdestImgDiv.addEventListener('click', function (e) {
                                 DetailPageMove(Td.tdcode);
@@ -761,7 +807,22 @@
                     });
 
                 </script>
-
+                <script>
+                    function festival_country(ctcode) {
+                        console.log('해시태그 고른거 : ' + ctcode);
+                        $.ajax({
+                            type: "get",
+                            url: "TdestCtSearchPage",
+                            data: { "ctcode": ctcode },
+                            dataType: "json",
+                            async: false,
+                            success: function (e) {
+                                console.log('성공');
+                                printTdest(e);
+                            }
+                        });
+                    }
+                </script>
 
         </body>
 

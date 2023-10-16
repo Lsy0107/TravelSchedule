@@ -1,7 +1,6 @@
 package com.TravelSchedule.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Tdest;
@@ -90,9 +90,11 @@ public class HomeController {
 		System.out.println("여행지 검색 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+//		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+		ArrayList<Country> CountryList = tsvc.CountryList();
 		
-		mav.addObject("TdestList",TdestList);
+		mav.addObject("CountryList",CountryList);
+//		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");
 		return mav;
 	}
