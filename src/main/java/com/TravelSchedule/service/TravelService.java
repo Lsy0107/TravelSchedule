@@ -82,5 +82,9 @@ public class TravelService {
 		return SearchTdest;
 	}
 
+	public Schedule getSchedule(Schedule sc, String seloption) {
+		System.out.println("travelService - getSchedule()");
+		return tdao.selectSchedule(sc, seloption);
+	}
 }
 
