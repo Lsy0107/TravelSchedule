@@ -140,8 +140,8 @@ main {
 		<!-- content 시작 -->
 		<div class="container">
 		<!-- container 시작 -->
-		<div class="row"
-			style="padding-top: 23px;">
+		<div class="row" style="margin: 45px;"></div>
+		<div class="row">
 			<div id="TitleBar" style="width: 74%;">
 				<div class="IMGBAR">
 					<div id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="z-index: 0;">
@@ -212,7 +212,7 @@ main {
 					</div>
 				</div>
 			</div>
-			<div class="card text-center" style="width: 26%; margin-top: 63px; height: 550px;">
+			<div class="card text-center" style="width: 26%;	height: 550px;">
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="nav-item"><a id="meminfoA" class="nav-link active"
@@ -303,7 +303,7 @@ main {
 								<h5 class="card-title">${td.tdname }</h5>
 								<p class="card-text">${td.tdaddress }</p>
 								<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
-									onclick="selectCdcode('${td.tdcode}')" data-bs-toggle="modal"
+									onclick="selectCdcode('${td.tdcode}','tdest')" data-bs-toggle="modal"
 									data-bs-target="#exampleModal">계획에 추가하기</button>
 							</div>
 						</div>
@@ -526,7 +526,7 @@ main {
 		}
 	</script>
 	<script type="text/javascript">
-		function selectCdcode(tdcode) {
+		function selectCdcode(tdcode, seloption) {
 			if ("${sessionScope.loginId}" == "") {
 				location.href = "${pageContext.request.contextPath}/memberLoginForm"
 			} else {
@@ -551,7 +551,7 @@ main {
 							modalBodyTag.appendChild(selTag);
 							let btnTag = document.querySelector("#selectClear");
 							btnTag.addEventListener("click", function(){
-								selectDest(tdcode, selTag.value)
+								selectDest(tdcode, selTag.value, seloption)
 							})
 						}
 						else{
@@ -561,15 +561,19 @@ main {
 					})
 			}
 		}
-		function selectDest(tdcode, cdcode){
+		function selectDest(tdcode, cdcode, seloption){
 			console.log(tdcode+ "  "+cdcode);
 			$.ajax({
 				url:"/registSelectDest",
 				type:"post",
-				data:{mid:"${sessionScope.loginId}", tdcode:tdcode, cdcode:cdcode},
+				data:{mid:"${sessionScope.loginId}", tdcode:tdcode, cdcode:cdcode, "seloption":seloption},
 				async:false,
 				success(rs){
-					alert('행선지 선택 완료');
+					if(rs == 'Y'){
+					alert('행선지 선택 완료');						
+					}else{
+					alert('이미 선택된 행선지 입니다.');	
+					}
 					location.href="/";
 				}				
 				})

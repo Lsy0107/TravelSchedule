@@ -37,8 +37,8 @@
 				<c:forEach var="sc" items="${scdestList }">
 				<c:if test="${sc.SCDATE != null}">
 				<c:choose>
-				<c:when test="${sc.TDCODE != null }"><p>${sc.TDCODE } : ${sc.SCDATE }</p></c:when>
-				<c:when test="${sc.FECODE != null }"><p>${sc.FECODE } : ${sc.SCDATE }</p></c:when>
+				<c:when test="${sc.TDCODE != null }"><p>${sc.TDNAME } : ${sc.SCDATE }</p></c:when>
+				<c:when test="${sc.FECODE != null }"><p>${sc.FENAME } : ${sc.SCDATE }</p></c:when>
 				</c:choose>
 				
 					
@@ -56,19 +56,19 @@
 						<nav style="display: -webkit-inline-box;">
 							<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
-								<div class="card" style="width: 18rem; margin: 4px;">
-									<img src="${td.TDPHOTO }" class="card-img-top" alt="...">
+								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
+									<img src="${td.TDPHOTO }" class="card-img-top" alt="..." width="286px" height="191px" loading="lazy">
 									<div class="card-body">
 										<h5 class="card-title">${td.TDNAME }</h5>
 										<p class="card-text">${td.TDADDRESS }</p>
 										<c:if test="${td.SCDATE == null}">
-										<button class="btn btn-primary"
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
 											onclick="selectDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 											추가하기</button>
 										</c:if>
 										<c:if test="${td.SCDATE != null }">
-										<button class="btn btn-info">추가된 계획</button>
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">추가된 계획</button>
 										</c:if>
 									</div>
 								</div>
@@ -84,19 +84,19 @@
 						<nav style="display: -webkit-inline-box;">
 							<c:forEach items="${ scdestList}" var="fe">
 								<c:if test="${fe.FECODE != null }">
-								<div class="card" style="width: 18rem; margin: 4px;">
+								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
 									<img src="${fe.FEPOSTER }" class="card-img-top" alt="...">
 									<div class="card-body">
 										<h5 class="card-title">${fe.FENAME }</h5>
 										<p class="card-text">${fe.FEADDRESS }</p>
 										<c:if test="${fe.SCDATE == null}">
-										<button class="btn btn-primary"
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
 											onclick="selectDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 											추가하기</button>
 										</c:if>
 										<c:if test="${fe.SCDATE != null }">
-										<button class="btn btn-info">추가된 계획</button>
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">추가된 계획</button>
 										</c:if>
 									</div>
 								</div>
@@ -217,11 +217,12 @@
 		
 	</script>
 	<script type="text/javascript">
-	$(document).ready({
-		if("${sessionScope.loginId == ''}"){
+	$(document).ready(function(){
+		if("${sessionScope.loginId}" == ""){
 			location.herf="/memberLoginForm";
 		}
-	})
+	}
+	)
 	</script>
 </body>
 </html>

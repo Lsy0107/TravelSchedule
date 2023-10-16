@@ -19,7 +19,13 @@
   insert into schedule(mid, cdcode, tdcode) values(#{mid},#{cdcode},#{tdcode})
   </insert>
   <select id="selectSchedule" resultType="sc">
-  select * from schedule where mid = #{mid} and cdcode = #{cdcode}
+  select * from schedule where mid = #{sc.mid} and cdcode = #{sc.cdcode} and 
+  <if test="seloption == 'tdest'">
+  tdcode = #{sc.tdcode}
+  </if>
+  <if test="seloption == 'festival'">
+  fecode = #{sc.fecode}
+  </if>
   </select>
   <select id="selectTdest" resultType="tdest">
   select * from tdest where tdcode = #{tdcode}
