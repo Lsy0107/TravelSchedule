@@ -83,8 +83,7 @@
 				}
 
 				#TitleBar {
-					position: relative;
-					top: 64px;
+									top: 64px;
 				}
 
 				#MainContents {
@@ -135,11 +134,11 @@
 		<!-- content 시작 -->
 		<div class="container">
 		<!-- container 시작 -->
-		<div class="row"
-			style="padding-top: 23px;">
+		<div class="row" style="margin: 45px;"></div>
+		<div class="row">
 			<div id="TitleBar" style="width: 74%;">
 				<div class="IMGBAR">
-					<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+					<div id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="z-index: 0;">
 						<div class="carousel-indicators">
 							<button type="button" data-bs-target="#myCarousel"
 								data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
@@ -207,7 +206,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card text-center" style="width: 26%; margin-top: 63px; height: 550px;">
+			<div class="card text-center" style="width: 26%;	height: 550px;">
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="nav-item"><a id="meminfoA" class="nav-link active"
@@ -298,7 +297,7 @@
 								<h5 class="card-title">${td.tdname }</h5>
 								<p class="card-text">${td.tdaddress }</p>
 								<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
-									onclick="selectCdcode('${td.tdcode}')" data-bs-toggle="modal"
+									onclick="selectCdcode('${td.tdcode}','tdest')" data-bs-toggle="modal"
 									data-bs-target="#exampleModal">계획에 추가하기</button>
 							</div>
 						</div>
@@ -523,7 +522,7 @@
 				}
 			</script>
 			<script type="text/javascript">
-				function selectCdcode(tdcode) {
+				function selectCdcode(tdcode, seloption) {
 					if ("${sessionScope.loginId}" == "") {
 						location.href = "${pageContext.request.contextPath}/memberLoginForm"
 					} else {
@@ -538,41 +537,43 @@
 								modalBodyTag.innerHTML = "";
 								if (rs.length > 0) {
 
-									let selTag = document.createElement("select")
-									for (let cd of rs) {
-										let optionTag = document.createElement("option")
-										optionTag.innerText = cd.cdname;
-										optionTag.setAttribute("value", cd.cdcode)
-										selTag.appendChild(optionTag);
-									}
-									modalBodyTag.appendChild(selTag);
-									let btnTag = document.querySelector("#selectClear");
-									btnTag.addEventListener("click", function () {
-										selectDest(tdcode, selTag.value)
-									})
-								}
-								else {
-									modalBodyTag.innerText = "달력을 추가 해주세요";
-								}
+							let selTag = document.createElement("select")
+							for(let cd of rs){
+								let optionTag = document.createElement("option")
+								optionTag.innerText = cd.cdname;
+								optionTag.setAttribute("value", cd.cdcode)
+								selTag.appendChild(optionTag);
 							}
-						})
-					}
-				}
-				function selectDest(tdcode, cdcode) {
-					console.log(tdcode + "  " + cdcode);
-					$.ajax({
-						url: "/registSelectDest",
-						type: "post",
-						data: { mid: "${sessionScope.loginId}", tdcode: tdcode, cdcode: cdcode },
-						async: false,
-						success(rs) {
-							alert('행선지 선택 완료');
-							location.href = "/";
+							modalBodyTag.appendChild(selTag);
+							let btnTag = document.querySelector("#selectClear");
+							btnTag.addEventListener("click", function(){
+								selectDest(tdcode, selTag.value, seloption)
+							})
 						}
+						else{
+							modalBodyTag.innerText="달력을 추가 해주세요";
+						}
+					}				
 					})
-				}
-			</script>
-		</body>
-
-
-		</html>
+			}
+		}
+		function selectDest(tdcode, cdcode, seloption){
+			console.log(tdcode+ "  "+cdcode);
+			$.ajax({
+				url:"/registSelectDest",
+				type:"post",
+				data:{mid:"${sessionScope.loginId}", tdcode:tdcode, cdcode:cdcode, "seloption":seloption},
+				async:false,
+				success(rs){
+					if(rs == 'Y'){
+					alert('행선지 선택 완료');						
+					}else{
+					alert('이미 선택된 행선지 입니다.');	
+					}
+					location.href="/";
+				}				
+				})
+		}
+	</script>
+</body>
+</html>

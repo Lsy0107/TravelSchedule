@@ -83,6 +83,10 @@ public class TravelService {
 		return SearchTdest;
 	}
 
+	public Schedule getSchedule(Schedule sc, String seloption) {
+		System.out.println("travelService - getSchedule()");
+		return tdao.selectSchedule(sc, seloption);
+	}
 	public Tdest detailTdest(String tdcode) {
 		System.out.println("상세 여행지 정보");
 		

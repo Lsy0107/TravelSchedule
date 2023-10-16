@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, java.text.*" %>
+<%Date date = new Date();
+	SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+	String strdate = simpleDate.format(date);%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +34,14 @@
 		<div class="container">
 			<div class="row p-1">
 				<div class="col col-3 border border-dark">계획 만들어지는 공간
-				<c:forEach var="sc" items="${sctdList }">
+				<c:forEach var="sc" items="${scdestList }">
 				<c:if test="${sc.SCDATE != null}">
-					<p>${sc.TDCODE }</p>
+				<c:choose>
+				<c:when test="${sc.TDCODE != null }"><p>${sc.TDNAME } : ${sc.SCDATE }</p></c:when>
+				<c:when test="${sc.FECODE != null }"><p>${sc.FENAME } : ${sc.SCDATE }</p></c:when>
+				</c:choose>
+				
+					
 				</c:if>
 				</c:forEach>
 				</div>
@@ -45,30 +54,57 @@
 					여행지 출력
 					<div style="overflow-x: scroll;">
 						<nav style="display: -webkit-inline-box;">
-							<c:forEach items="${ sctdList}" var="td">
-								<div class="card" style="width: 18rem; margin: 4px;">
-									<img src="${td.TDPHOTO }" class="card-img-top" alt="...">
+							<c:forEach items="${ scdestList}" var="td">
+							<c:if test="${td.TDCODE != null }">
+								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
+									<img src="${td.TDPHOTO }" class="card-img-top" alt="..." width="286px" height="191px" loading="lazy">
 									<div class="card-body">
 										<h5 class="card-title">${td.TDNAME }</h5>
 										<p class="card-text">${td.TDADDRESS }</p>
 										<c:if test="${td.SCDATE == null}">
-										<button class="btn btn-primary"
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
 											onclick="selectDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 											추가하기</button>
 										</c:if>
 										<c:if test="${td.SCDATE != null }">
-										<button class="btn btn-info">추가된 계획</button>
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">추가된 계획</button>
 										</c:if>
 									</div>
 								</div>
+							</c:if>
 							</c:forEach>
 						</nav>
 					</div>
 				</div>
 			</div>
 			<div class="row p-1">
-				<div class="col border border-dark">축제 정보 출력</div>
+				<div class="col border border-dark">축제 정보 출력
+				<div style="overflow-x: scroll;">
+						<nav style="display: -webkit-inline-box;">
+							<c:forEach items="${ scdestList}" var="fe">
+								<c:if test="${fe.FECODE != null }">
+								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
+									<img src="${fe.FEPOSTER }" class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title">${fe.FENAME }</h5>
+										<p class="card-text">${fe.FEADDRESS }</p>
+										<c:if test="${fe.SCDATE == null}">
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
+											onclick="selectDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+											추가하기</button>
+										</c:if>
+										<c:if test="${fe.SCDATE != null }">
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">추가된 계획</button>
+										</c:if>
+									</div>
+								</div>
+								</c:if>
+							</c:forEach>
+						</nav>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -82,16 +118,15 @@
 					</div>
 					<div class="modal-body" id="selectDest">
 						<p id="destName"></p>
-						<input type="date" id="selDate"> 
+						<input type="date" id="selDate" min="<%=strdate%>"> 
 						<select id="selHH">
 							<c:forEach begin="0" end="23" var="i">
 								<option value="${i}">${i}</option>
 							</c:forEach>
 						</select> : 
 						<select id="selMM">
-							<c:forEach begin="0" end="59" var="i">
-								<option value="${i}">${i}</option>
-							</c:forEach>
+							<option value="00">0</option>
+							<option value="30">30</option>
 						</select>
 					</div>
 					<div class="modal-footer">
@@ -112,9 +147,10 @@
 	<script src="resources/js/scripts.js"></script>
 	<!-- kakao map api -->
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f27f610181c7185c2861db20210a1bd5"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
 	<script type="text/javascript">
 	let lalngList = JSON.parse('${lalngList}');
+	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng( 37.56458948133976, 126.97730596902437), //지도의 중심좌표.
@@ -124,6 +160,7 @@
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	
 	var positions = [];
+	
 	for(let lalng of lalngList){
 		positions.push({title: lalng.name, latlng: new kakao.maps.LatLng(lalng.lati, lalng.longti)})
 	}
@@ -139,7 +176,7 @@
 	}
 	</script>
 	<script type="text/javascript">
-		function selectDest(mid, cdcode, tdcode, seloption){
+		function selectDest(mid, cdcode, destcode, seloption){
 			let destName = document.querySelector("#destName");
 			destName.innerText = name;
 			let modalBtn = document.querySelector("#selectClear");
@@ -154,16 +191,21 @@
 				}
 				scdate = scdate + " " + schour;
 				let scmin = document.querySelector("#selMM").value;
-				if(scmin.length == 1){
-					scmin = "0"+scmin;
-				}
 				scdate = scdate + ":" + scmin;
 				console.log(scdate);
-					
+				
+				let dataoption = {};
+				if(seloption == 'tdest'){
+					dataoption = {"mid":mid,"cdcode":cdcode,"tdcode":destcode ,"scdate":scdate,"seloption":seloption}
+				}else{
+					dataoption = {"mid":mid,"cdcode":cdcode,"fecode":destcode ,"scdate":scdate,"seloption":seloption}
+				}
+				
+				
 				$.ajax({
 					url:"/updateSc",
 					type:"post",
-					data:{"mid":mid,"cdcode":cdcode,"tdcode":tdcode ,"scdate":scdate,"seloption":seloption},
+					data:dataoption,
 					success:function(rs){
 						location.reload();
 					}
@@ -173,6 +215,14 @@
 			}
 
 		
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		if("${sessionScope.loginId}" == ""){
+			location.herf="/memberLoginForm";
+		}
+	}
+	)
 	</script>
 </body>
 </html>

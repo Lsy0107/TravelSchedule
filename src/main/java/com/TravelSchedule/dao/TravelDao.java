@@ -36,6 +36,8 @@ public interface TravelDao {
 	@Select("SELECT * FROM TDEST WHERE TDNAME LIKE '%'||#{searchVal}||'%'")
 	ArrayList<Tdest> SearchTdest(String searchVal);
 
+	Schedule selectSchedule(@Param("sc")Schedule sc, @Param("seloption")String seloption);
+
 	@Select("SELECT * FROM TDEST WHERE TDCODE = #{tdcode}")
 	Tdest detailTdestDao(String tdcode);
 
