@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 
@@ -36,4 +37,12 @@ public interface TravelDao {
 	ArrayList<Tdest> SearchTdest(String searchVal);
 
 	Schedule selectSchedule(@Param("sc")Schedule sc, @Param("seloption")String seloption);
+
+	@Select("SELECT * FROM TDEST WHERE TDCODE = #{tdcode}")
+	Tdest detailTdestDao(String tdcode);
+
+	@Select("SELECT * FROM COUNTRY")	
+	ArrayList<Country> CountryListDao();
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.TravelSchedule.dao.TravelDao;
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 
@@ -86,5 +87,21 @@ public class TravelService {
 		System.out.println("travelService - getSchedule()");
 		return tdao.selectSchedule(sc, seloption);
 	}
+	public Tdest detailTdest(String tdcode) {
+		System.out.println("상세 여행지 정보");
+		
+		Tdest detailTdestDao = tdao.detailTdestDao(tdcode);
+		return detailTdestDao;
+	}
+
+	public ArrayList<Country> CountryList() {
+		System.out.println("여행지 페이지에 도시 리스트 출력");
+		
+		ArrayList<Country> CountryListDao = tdao.CountryListDao();
+		return CountryListDao;
+	}
+
+	
+
 }
 
