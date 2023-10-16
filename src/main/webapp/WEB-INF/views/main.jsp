@@ -342,7 +342,9 @@ main {
 								<p class="card-text">${fe.feaddress }</p>
 								<p class="card-text">${fe.opendate.split(' ')[0] }~
 									${fe.enddate.split(' ')[0] }</p>
-								<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">계획에 추가하기</button>
+								<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px"
+									onclick="selectCdcode('${td.tdcode}')" data-bs-toggle="modal"
+									data-bs-target="#exampleModal">계획에 추가하기</button>
 							</div>
 						</div>
 					</c:forEach>
