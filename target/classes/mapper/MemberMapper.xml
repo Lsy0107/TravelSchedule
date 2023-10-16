@@ -18,4 +18,10 @@
 	from members
 	where mid = #{mid} and mpw = #{mpw}
 	</select>
+	<select id="selectMemberInfo" resultType="mem">
+	select *
+	from members 
+	where mid =  #{loginId}
+	</select>
+	
 </mapper>
