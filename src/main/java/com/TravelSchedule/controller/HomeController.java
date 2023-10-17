@@ -86,7 +86,7 @@ public class HomeController {
 			mav.addObject("festival", festival);
 			mav.addObject("nearby", Nearby);
 			mav.addObject("tdest", tdest);
-		mav.setViewName("travel/detailFestival");
+		mav.setViewName("festival/detailFestival");
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
