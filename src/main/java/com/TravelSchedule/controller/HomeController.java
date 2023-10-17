@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Tdest;
@@ -78,9 +79,13 @@ public class HomeController {
 			String ctcode = festival.getCtcode();
 			String fecode = festival.getFecode();
 			ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
-			System.out.println(Nearby);
+			String country = apisvc.getCountry_this(ctcode);
+			ArrayList<Tdest> tdest = tsvc.TdestSearch();
+			System.out.println(country);
+			mav.addObject("country",country);
 			mav.addObject("festival", festival);
 			mav.addObject("nearby", Nearby);
+			mav.addObject("tdest", tdest);
 		mav.setViewName("travel/detailFestival");
 		return mav;
 	}
