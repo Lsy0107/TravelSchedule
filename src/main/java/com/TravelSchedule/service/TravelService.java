@@ -1,12 +1,14 @@
 package com.TravelSchedule.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.TravelSchedule.dao.TravelDao;
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 
@@ -50,14 +52,14 @@ public class TravelService {
 		return tdao.insertFKcode(sc);
 	}
 
-	public ArrayList<Schedule> getScList(String mid, String cdcode) {
-		System.out.println("travelService - getSchedule()");
-		return tdao.selectSchedule(mid, cdcode);
+	public int updateSc(Schedule sc, String seloption) {
+		System.out.println("TravelService - updateSc()");
+		return tdao.updateSc(sc,seloption);
 	}
 
-	public Tdest getTdest(String tdcode) {
-		System.out.println("travelService - getTdest()");
-		return tdao.selectTdest(tdcode);
+	public ArrayList<HashMap<String, String>> select_sc_td_join(String mid, String cdcode) {
+		System.out.println("TravelService - select_sc_td_join()");
+		return tdao.select_sc_td_join(mid, cdcode);
 	}
 	
 	public ArrayList<Tdest> TdestSearch() {
@@ -80,6 +82,26 @@ public class TravelService {
 		ArrayList<Tdest> SearchTdest = tdao.SearchTdest(searchVal);
 		return SearchTdest;
 	}
+
+	public Schedule getSchedule(Schedule sc, String seloption) {
+		System.out.println("travelService - getSchedule()");
+		return tdao.selectSchedule(sc, seloption);
+	}
+	public Tdest detailTdest(String tdcode) {
+		System.out.println("상세 여행지 정보");
+		
+		Tdest detailTdestDao = tdao.detailTdestDao(tdcode);
+		return detailTdestDao;
+	}
+
+	public ArrayList<Country> CountryList() {
+		System.out.println("여행지 페이지에 도시 리스트 출력");
+		
+		ArrayList<Country> CountryListDao = tdao.CountryListDao();
+		return CountryListDao;
+	}
+
+	
 
 }
 

@@ -12,4 +12,6 @@ public interface MemberDao {
 
 	Member selectMember(Member mem);
 
+	Member selectMemberInfo(String loginId);
+
 }

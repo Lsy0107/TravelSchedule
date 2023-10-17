@@ -94,9 +94,11 @@ public class HomeController {
 		System.out.println("여행지 검색 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+//		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+		ArrayList<Country> CountryList = tsvc.CountryList();
 		
-		mav.addObject("TdestList",TdestList);
+		mav.addObject("CountryList",CountryList);
+//		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");
 		return mav;
 	}
@@ -118,7 +120,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("검색한 변수"+searchVal);
 		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
-		
+		ArrayList<Country> CountryList = tsvc.CountryList();
+		mav.addObject("CountryList",CountryList);
 		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");
 		
