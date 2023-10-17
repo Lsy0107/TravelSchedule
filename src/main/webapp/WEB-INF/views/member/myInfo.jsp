@@ -66,7 +66,6 @@
 				<br />
 				<form id="pwForm" action="${pageContext.request.contextPath }/updatePw" method="post" onsubmit="return pwCheck(this)">	
 					<input type="hidden" id="mid" name="mid" value="${mInfo.mid}">
-					<input type="hidden" id="mpw2" name="mpw2" value="${mInfo.mpw}">
 					<p>
 						<label>Password</label>
 						<input class="w3-input" id="old_pw" name="old_pw" type="password" required>
@@ -105,24 +104,21 @@
         <script type="text/javascript">
 	        function pwCheck(obj) {
 	        	console.log("pwCheck - 호출");
-				let mpw = obj.mpw2.value;
-				let oldPw = obj.old_pw.value;
+				let oldPw = obj.old_pw.value; // a1234
 				
-				let newPw = obj.mpw.value;
-				let newPw2 = obj.pw2.value;
-				console.log(mpw);
-				console.log(oldPw != mpw);
-				if(oldPw != mpw){
+				if(oldPw != '${mInfo.mpw}'){
 					alert('기존비밀번호가 일치하지 않습니다.');
 					oldPw.focus();
 					return false;
 				}
-				if(newPw != newPw2){
+				let newPwObj = obj.mpw;
+				let newPw2Obj = obj.pw2;
+				
+				if(newPwObj.value != newPw2Obj.value){
 					alert('새로운비밀번호가 일치하지 않습니다.');
-					newPw.focus();
+					newPwObj.focus();
 					return false;
 				}
-				return true;
 			}
         </script>
         

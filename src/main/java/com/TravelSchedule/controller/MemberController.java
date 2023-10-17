@@ -107,7 +107,7 @@ public class MemberController {
 		System.out.println("회원정보 수정 요청");
 		ModelAndView mav = new ModelAndView();
 		System.out.println("수정할 아이디 : " + mid);
-		System.out.println("수정할 닉네임 : " + mpw);
+		System.out.println("수정할 비밀번호 : " + mpw);
 		
 		int memInfo = msvc.newPassword(mid, mpw);
 		
