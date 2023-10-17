@@ -20,6 +20,7 @@
             <!-- Navigation-->
             <%@ include file="/WEB-INF/views/include/menu.jsp" %>
             <!-- contant 시작 -->
+            <div class="row" style="margin: 45px;"></div>
             <div class="row">
             	<div class="card">
             		<div class="card-body p-5 bg-secondary">컨텐츠 영역</div>

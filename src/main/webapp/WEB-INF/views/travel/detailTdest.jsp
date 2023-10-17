@@ -127,7 +127,8 @@ main {
 .wrap{
 	margin-top:150px;
 	width: 1000px;
-	padding-left: 450px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .Img{
 	width: 1000px;	
@@ -138,16 +139,16 @@ main {
 	font-size:30px;
 	font-weight:bold;
 }
-.date{
-	padding-left: 30px;
-	font-weight: bold;
-}
 .address{
 	padding-left: 30px;
 	padding-top: 10px;
 	font-weight: bold;
 	width: 1000px;
 	font-size:20px;
+}
+.addr{
+	padding-left: 30px;
+	font-weight: bold;
 }
 .hr{
 	width:1000px;
@@ -162,113 +163,64 @@ main {
 .fa-regular{
 	color: #000000;
 }
-.TdestRecommendArea {
-                    position: relative;
-                    top: 80px;
-                    display: flex;
-                }
-
-                .JejuIslandTdest {
-                    border: 1px solid;
-                    padding: 25px;
-                    border-radius: 0px 25px 0px 25px;
-                    margin-left: auto;
-                    margin-right: 50px;
-                    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-                    cursor: pointer;
-                }
-                .FestivalRecomm{
-                    border: 1px solid;
-                    padding: 25px;
-                    border-radius: 25px 0px 25px 0px;
-                    margin-left: 50px;
-                    margin-right: auto;
-                }
-
-                #RecommendTitle {
-                    font-size: 22px;
-                    font-weight: bold;
-                }
-
-                .JejuIslandTdest>img {
-                    width: 75px;
-                    height: 75px;
-                }
+.Bar{
+	border: 1px solid;
+	top: 860px;
+    position: sticky;
+	padding: 0px;
+}
+.StickyBar{
+	position: fixed;
+	bottom: 80px;
+    right: 40px;
+    z-index: 12;	
+	width: 5%;
+}
+main{
+	position: relative;
+    padding-bottom: 2000px;
+}
+footer{
+	position: relative;
+}
 </style>
 
 
 
 </head>
-<body class="d-flex flex-column h-100">
-	<main class="">
+<body class="d-flex flex-column" style="height: 2000px;">
+	<%@ include file="../include/menu.jsp"%>
+	<div class="StickyBar">
+		<button class="Bar">
+			<img style="width: 100%;" src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png" alt="">
+		</button>
+	</div>
+	
 		<!-- Navigation-->
-		<%@ include file="../include/menu.jsp"%>
 		<!-- content 시작 -->	
 		<div class="wrap">
-			<img class="card-img-top Img" src="${festival.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-			<p class="name"> ${festival.fename }</p>
-			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>
+			<img class="card-img-top Img" src="${detailTd.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+			<p class="name"> ${detailTd.tdname }</p>
+			<p class="addr"> ${detailTd.tdaddress}</p>
 			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart()" id="heart"></i>
 			<hr class="hr">
 			<div id="map" style="width:1000px;height:400px;"></div>
-			<p class="address">${festival.feaddress }</p>
- 			<div class="TdestRecommendArea">
-	            <div class="JejuIslandTdest">
-		            <img src="${pageContext.request.contextPath}/resources/tdest/제주 돌하르방.png" alt="">
-		            <span id="RecommendTitle">제주도에 이런 여행지는 어떠세요?</span>
-		            <img src="${pageContext.request.contextPath}/resources/tdest/제주도.png" alt="">
-		            <c:forEach items="${nearby }" var="fe">
-																
-										<div class="card mb-4 feList" >
-				                        	<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
-											<div class="feName">${fe.fename }</div>
-											
-										</div>
-									
-								</c:forEach>
-		           		           
-		        </div>
-		        <div class="FestivalRecomm">
-		            <span id="RecommendTitle">축제를 즐기고 싶으신가요?</span>
-	            </div>
-            </div>			
+			<p class="address">${detailTd.tdaddress }</p>
 		</div>
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="../include/footer.jsp"%>
-	</main>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="resources/js/scripts.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script>
 		AOS.init();
-	</script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
-	<script type="text/javascript">
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(${festival.felongti}, ${festival.felati}), // 지도의 중심좌표
-	        level: 3, // 지도의 확대 레벨
-	    };
-	
-		var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
-		// 마커가 표시될 위치입니다 
-		var markerPosition  = new kakao.maps.LatLng(${festival.felongti}, ${festival.felati}); 
-	
-		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-		    position: markerPosition
-		});
-	
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-		
-		
 	</script>
 	<script type="text/javascript">
 		function clickHeart(){
@@ -283,8 +235,46 @@ main {
 		}
 		
 	</script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
+	<script type="text/javascript">
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(${detailTd.tdlongti}, ${detailTd.tdlati}), // 지도의 중심좌표
+	        level: 3, // 지도의 확대 레벨
+	    };
 	
+		var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new kakao.maps.LatLng(${detailTd.tdlongti}, ${detailTd.tdlati}); 
 	
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+	
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+		
+		
+	</script>
+	<script>
+		$(document).ready(function(){
+			$(window).scroll(function(){
+				if($(this).scrollTop()>50){
+					$('.Bar').fadeIn(500);
+					console.log('생김');
+				}else{
+					$('.Bar').fadeOut(500);
+				}
+			});
+		})
+		$('.Bar').click(function(event){
+			console.log('클릭!');
+			event.preventDefault();
+			$('html,body').animate({scrollTop:0},300);
+		});
+		
+	</script>
 
 </body>
 </html>
