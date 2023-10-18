@@ -338,4 +338,9 @@ public class ApiService {
 		return apiDao.selectFestival_Nearby(ctcode, fecode);
 	}
 
+	public String getCountry_this(String ctcode) {
+		System.out.println("ApiService - getCountry_this()");
+		return apiDao.selectCountry_this(ctcode);
+	}
+
 }

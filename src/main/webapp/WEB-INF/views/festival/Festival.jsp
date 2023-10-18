@@ -254,11 +254,10 @@
                     position: relative;
                     top: 77px;
                 }
-				.tdImg{
-					width: 150px;
-					height: 150px;
-				}
-               
+                .feImg{
+                	width: 150px;
+                	height: 150px;
+                }
             </style>
         </head>
 
@@ -276,7 +275,7 @@
 
                     <div class="map_wrap">
                         <div class="hashTag">
-                            <c:forEach items="${CountryList }" var="ct">
+                            <c:forEach items="${country }" var="ct">
                                 <div class="ctList">
                                     <button onclick="festival_country('${ct.ctcode}')">#${ct.ctname }</button>
                                 </div>
@@ -304,18 +303,18 @@
                         </div>
                         <div class="TdListIn">
                             <div id="rowid" class="row TdestArea">
-                                <c:forEach var="TdList" items="${TdestList}">
+                                <c:forEach var="fe" items="${festival}">
                                     <div class="contain">
                                         <!-- Blog post-->
                                         <div class="card mb-4 photo" id="photo"
-                                            onclick="location.href='detailTdest?tdcode=${TdList.tdcode}'">
-                                            <img class="card-img-top tdImg" src="${TdList.tdphoto}" alt="..." />
+                                            onclick="location.href='detailFestival?code=${fe.fecode}'">
+                                            <img class="card-img-top feImg" src="${fe.feposter}" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'"/>
 
                                         </div>
                                         <div class="card-body">
-                                            <h3 id="title" class="card-title h4" title="${TdList.tdname}"
-                                                style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
-                                            <button class="btn btn-primary" onclick="selectCdcode('${TdList.tdcode}')"
+                                            <h3 id="title" class="card-title h4" title="${fe.fename}"
+                                                style="overflow: hidden; white-space: nowrap;">${fe.fename}</h3>
+                                            <button class="btn btn-primary" onclick="selectCdcode('${fe.fecode}','festival')"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
                                                 추가하기</button>
                                         </div>
@@ -652,7 +651,7 @@
                             let ct = positions[mar].ctcode;
                             $.ajax({
                                 type: "get",
-                                url: "TdestCtSearchPage",
+                                url: "festival_country",
                                 data: { "ctcode": ct },
                                 dataType: "json",
                                 async: false,
@@ -695,13 +694,14 @@
                             //           TdestImgDiv.classList.add('card-mb-4');
                             TdestImgDiv.classList.add('photo');
                             TdestImgDiv.addEventListener('click', function (e) {
-                                DetailPageMove(Td.tdcode);
+                                DetailPageMove(Td.fecode);
                             });
 
                             let TdestImg = document.createElement('img');
-                            TdestImg.classList.add('tdImg');
+                            TdestImg.classList.add('feImg');
+                            TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImg.classList.add('card-img-top');
-                            TdestImg.setAttribute('src', Td.tdphoto);
+                            TdestImg.setAttribute('src', Td.feposter);
 
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
@@ -712,7 +712,7 @@
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
                             TdestTitle.classList.add('h4');
-                            TdestTitle.innerText = Td.tdname;
+                            TdestTitle.innerText = Td.fename;
 
                             let TdestBtn = document.createElement('button');
                             TdestBtn.classList.add('btn');
@@ -721,7 +721,7 @@
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
                             TdestBtn.addEventListener('click', function () {
-                                selectCdcode(Td.tdcode);
+                                selectCdcode(Td.fecode, 'festival');
                             });
                             TdestTitleDiv.appendChild(TdestTitle);
 
@@ -735,12 +735,12 @@
                         }
                         Paging();
                     }
-                    function DetailPageMove(tdcode) {
-                        console.log(tdcode);
-                        location.href = 'detailTdest?tdcode=' + tdcode;
+                    function DetailPageMove(fecode) {
+                        console.log(fecode);
+                        location.href = 'detailFestival?code=' + fecode;
 
                     }
-                    function selectCdcode(tdcode) {
+                    function selectCdcode(fecode, seloption) {
                         if ("${sessionScope.loginId}" == "") {
                             location.href = "${pageContext.request.contextPath}/memberLoginForm"
                         } else {
@@ -765,7 +765,7 @@
                                         modalBodyTag.appendChild(selTag);
                                         let btnTag = document.querySelector("#selectClear");
                                         btnTag.addEventListener("click", function () {
-                                            selectDest(tdcode, selTag.value)
+                                            selectDest(fecode, selTag.value, seloption)
                                         })
                                     }
                                     else {
@@ -775,12 +775,12 @@
                             })
                         }
                     }
-                    function selectDest(tdcode, cdcode) {
-                        console.log(tdcode + "  " + cdcode);
+                    function selectDest(fecode, cdcode, seloption) {
+                        console.log(fecode + "  " + cdcode);
                         $.ajax({
                             url: "/registSelectDest",
                             type: "post",
-                            data: { mid: "${sessionScope.loginId}", tdcode: tdcode, cdcode: cdcode },
+                            data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption" : seloption },
                             async: false,
                             success(rs) {
                                 alert('행선지 선택 완료');
@@ -813,7 +813,7 @@
                         console.log('해시태그 고른거 : ' + ctcode);
                         $.ajax({
                             type: "get",
-                            url: "TdestCtSearchPage",
+                            url: "festival_country",
                             data: { "ctcode": ctcode },
                             dataType: "json",
                             async: false,

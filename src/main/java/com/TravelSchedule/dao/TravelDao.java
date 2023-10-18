@@ -44,5 +44,7 @@ public interface TravelDao {
 	@Select("SELECT * FROM COUNTRY")	
 	ArrayList<Country> CountryListDao();
 
+	int insertFEcode(Schedule sc);
+
 
 }

@@ -34,7 +34,7 @@ public class ApiController {
 //		System.out.println(result);
 		mav.addObject("festival",result);
 		
-		mav.setViewName("Festival");
+		mav.setViewName("festival/Festival");
 		
 		
 		
