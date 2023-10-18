@@ -23,5 +23,14 @@
 	from members 
 	where mid =  #{loginId}
 	</select>
-	
+	<update id="memberUpdate">
+	UPDATE members
+	SET MNICKNAME = #{mnickname}
+	WHERE mid = #{mid}
+	</update>
+	<update id="passwordUpdate">
+	UPDATE members
+	SET mpw = #{mpw}
+	WHERE mid = #{mid}	
+	</update>
 </mapper>

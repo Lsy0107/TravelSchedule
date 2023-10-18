@@ -31,10 +31,10 @@ public class ApiController {
 		// ArrayList<Festival> result  = asvc.getFestival();
 		ArrayList<Festival> result = asvc.getFestival_db(); 
 
-		System.out.println(result);
+//		System.out.println(result);
 		mav.addObject("festival",result);
 		
-		mav.setViewName("Festival");
+		mav.setViewName("festival/Festival");
 		
 		
 		

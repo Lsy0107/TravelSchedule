@@ -100,6 +100,7 @@ footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	bottom: -1000px;
 }
 
 main {
@@ -163,37 +164,81 @@ main {
 	color: #000000;
 }
 .TdestRecommendArea {
-                    position: relative;
-                    top: 80px;
-                    display: flex;
-                }
+	position: relative;
+    width: 1000px;
+}
 
-                .JejuIslandTdest {
-                    border: 1px solid;
-                    padding: 25px;
-                    border-radius: 0px 25px 0px 25px;
-                    margin-left: auto;
-                    margin-right: 50px;
-                    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-                    cursor: pointer;
-                }
-                .FestivalRecomm{
-                    border: 1px solid;
-                    padding: 25px;
-                    border-radius: 25px 0px 25px 0px;
-                    margin-left: 50px;
-                    margin-right: auto;
-                }
+.Tdest {
+    border: 1px solid;
+    padding: 25px;
+    border-radius: 0px 25px 0px 25px;
+    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    width: 1000px;
+}
+.FestivalRecomm{
+   	border: 1px solid;
+    padding: 25px;
+    border-radius: 25px 0px 25px 0px;
+    margin-top: 5px;
+    width: 1000px;
+    background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
+}
 
-                #RecommendTitle {
-                    font-size: 22px;
-                    font-weight: bold;
-                }
+#RecommendTitle {
+    font-size: 22px;
+    font-weight: bold;
+    color: dodgerblue;
+}
 
-                .JejuIslandTdest>img {
-                    width: 75px;
-                    height: 75px;
-                }
+.feImg{
+	width:200px;
+	height:150px;
+}           
+.countryImg{
+	width: 100px;
+	height: 100px;
+}     
+.feList{
+	display:inline-block;
+	cursor: pointer;
+	margin-top: 5px;
+}
+.feName{
+	font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    height: 30px;
+    width: 200px;
+    overflow: hidden;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+.more{
+	left: 30px;
+    background-color: white;
+    border-radius: 1000px;
+    width: 65px;
+    height: 65px;
+    position: relative;
+    bottom: 35px;
+}
+.moreIn{
+	position: relative;
+    left: 20px;
+    top: 20px;
+}
+.moreArea{
+	width: 117px;
+	display: inline-block;
+}
+.moreText{
+	position: relative;
+	font-weight: bold;
+	bottom: 30px;
+	left: 10px;
+}
 </style>
 
 
@@ -204,7 +249,7 @@ main {
 		<!-- Navigation-->
 		<%@ include file="../include/menu.jsp"%>
 		<!-- content 시작 -->	
-		<div class="wrap">
+		<div class="wrap">			
 			<img class="card-img-top Img" src="${festival.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 			<p class="name"> ${festival.fename }</p>
 			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>
@@ -212,31 +257,58 @@ main {
 			<hr class="hr">
 			<div id="map" style="width:1000px;height:400px;"></div>
 			<p class="address">${festival.feaddress }</p>
+			<hr class="hr">
  			<div class="TdestRecommendArea">
-	            <div class="JejuIslandTdest">
-		            <img src="${pageContext.request.contextPath}/resources/tdest/제주 돌하르방.png" alt="">
-		            <span id="RecommendTitle">제주도에 이런 여행지는 어떠세요?</span>
-		            <img src="${pageContext.request.contextPath}/resources/tdest/제주도.png" alt="">
-		            <c:forEach items="${nearby }" var="fe">
-																
-										<div class="card mb-4 feList" >
-				                        	<img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
-											<div class="feName">${fe.fename }</div>
-											
-										</div>
-									
-								</c:forEach>
-		           		           
+	            <div class="Tdest">
+	            	<div class="countryIdentity">
+			            <span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>			            
+		            </div>
+		            <c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">																
+						<div class="card feList" >
+							<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
+					            <img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
+								<div class="feName">${fe.fename }</div>
+							</a>
+						</div>
+					</c:forEach>
+					<div class="moreArea">
+						<a href="/festival">
+							<div class="feList more">
+					            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
+					        </div>
+				        </a>
+			            <h5 class="moreText">축제 더보기</h5>
+			        </div>    
 		        </div>
 		        <div class="FestivalRecomm">
-		            <span id="RecommendTitle">축제를 즐기고 싶으신가요?</span>
+		            <span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
+			            <div>
+			            <c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">																
+							<div class="card feList" >
+								<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
+						            <img class="card-img-top feImg" src="${td.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
+									<div class="feName">${td.tdname }</div>
+								</a>
+							</div>
+						</c:forEach>
+						<div class="moreArea">
+							<a href="/TdestSearchPage">
+								<div class="feList more">
+						            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
+						        </div>
+					        </a>
+				            <h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
+				        </div>
+			        </div>
 	            </div>
+	            
             </div>			
 		</div>
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="../include/footer.jsp"%>
 	</main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

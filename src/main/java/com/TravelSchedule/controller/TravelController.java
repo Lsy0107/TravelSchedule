@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Schedule;
+import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.TravelService;
 import com.google.gson.Gson;
 
@@ -178,5 +179,18 @@ public class TravelController {
 		System.out.println("cdcode 가져오기");
 		return tsvc.getCdcode(mid);
 	}
-
+	
+	@RequestMapping(value="/detailTdest")
+	public ModelAndView detailTdest(String tdcode) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("여행지 상세 정보 페이지이동");
+		System.out.println("TDCODE : "+tdcode);
+		Tdest detailTdest = tsvc.detailTdest(tdcode);
+		System.out.println(detailTdest);
+		mav.addObject("detailTd",detailTdest);
+		mav.setViewName("/travel/detailTdest");
+		
+		return mav;
+	}
+	
 }

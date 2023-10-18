@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Tdest;
@@ -78,10 +79,14 @@ public class HomeController {
 			String ctcode = festival.getCtcode();
 			String fecode = festival.getFecode();
 			ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
-			System.out.println(Nearby);
+			String country = apisvc.getCountry_this(ctcode);
+			ArrayList<Tdest> tdest = tsvc.TdestSearch();
+			System.out.println(country);
+			mav.addObject("country",country);
 			mav.addObject("festival", festival);
 			mav.addObject("nearby", Nearby);
-		mav.setViewName("travel/detailFestival");
+			mav.addObject("tdest", tdest);
+		mav.setViewName("festival/detailFestival");
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
@@ -89,9 +94,11 @@ public class HomeController {
 		System.out.println("여행지 검색 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+//		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
+		ArrayList<Country> CountryList = tsvc.CountryList();
 		
-		mav.addObject("TdestList",TdestList);
+		mav.addObject("CountryList",CountryList);
+//		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");
 		return mav;
 	}
@@ -113,7 +120,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("검색한 변수"+searchVal);
 		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
-		
+		ArrayList<Country> CountryList = tsvc.CountryList();
+		mav.addObject("CountryList",CountryList);
 		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");
 		

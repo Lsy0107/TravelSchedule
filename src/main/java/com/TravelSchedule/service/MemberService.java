@@ -72,4 +72,16 @@ public class MemberService {
 		return member;
 	}
 
+	public int memberInfo(String mid, String mnickname) {
+		System.out.println("MemberService - memberInfo");
+		
+		return mdao.memberUpdate(mid, mnickname);
+	}
+
+	public int newPassword(String mid, String mpw) {
+		System.out.println("MemberService - newPassword");
+		
+		return mdao.passwordUpdate(mid, mpw);
+	}
+
 }
