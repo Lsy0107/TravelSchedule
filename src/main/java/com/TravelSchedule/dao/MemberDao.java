@@ -14,4 +14,8 @@ public interface MemberDao {
 
 	Member selectMemberInfo(String loginId);
 
+	int memberUpdate(@Param("mid")String mid, @Param("mnickname")String mnickname);
+
+	int passwordUpdate(@Param("mid")String mid, @Param("mpw")String mpw);
+
 }
