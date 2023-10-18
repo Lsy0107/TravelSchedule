@@ -7,16 +7,17 @@
   select * from calendar where mid=#{mid}
   </select>
   <insert id="insertCalendar">
-  insert into calendar(mid, cdcode, cdname) values(#{mid}, #{cdcode}, #{cdname})
+  insert into calendar(mid, cdcode, cdname, cdstate) values(#{mid}, #{cdcode}, #{cdname}, 'Y')
   </insert>
   <select id="maxcode">
   select nvl(max(cdcode),'CD00000') from calendar where mid = #{mid}
   </select>
   <select id="selectCdcode" resultType="calendar">
-  select distinct cdcode, cdname from calendar where mid = #{mid} order by cdcode
+  select distinct cdcode, cdname, cdstate from calendar where mid = #{mid} order by cdcode
   </select>
   <insert id="insertFKcode">
-  insert into schedule(mid, cdcode, tdcode) values(#{mid},#{cdcode},#{tdcode})
+  insert into schedule(mid, cdcode,<if test="seloption == 'tdest'"> tdcode</if><if test="seloption == 'festival'"> fecode</if>) 
+  values(#{sc.mid},#{sc.cdcode},<if test="seloption == 'tdest'"> #{sc.tdcode}</if><if test="seloption == 'festival'"> #{sc.fecode}</if>)
   </insert>
   <select id="selectSchedule" resultType="sc">
   select * from schedule where mid = #{sc.mid} and cdcode = #{sc.cdcode} and 
@@ -43,4 +44,25 @@
   <select id="select_sc_td_join" resultType="hashmap">
   select sc.mid, sc.cdcode, sc.fecode, sc.tdcode, to_char(sc.scdate, 'YYYY/MM/DD HH24:MI') as scdate, td.*, fe.* from schedule sc left join tdest td on sc.tdcode = td.tdcode left join festival fe on sc.fecode = fe.fecode where sc.mid= #{mid} and sc.cdcode = #{cdcode} order by sc.scdate
   </select>
+  <delete id="deleteSchedule">
+  delete from schedule where mid = #{mid} and cdcode = #{cdcode}
+  </delete>
+  <delete id="deleteCalender">
+  delete from calendar where mid = #{mid} and cdcode = #{cdcode}
+  </delete>
+  <delete id="delteSchedule_tdfe">
+  delte from schedule where mid = #{mid} and cdcode = #{cdcode} and <if test="seloption == 'tdest'">tdcode = #{sc.tdcode}</if><if test="seloption == 'festival'">fecode = #{sc.fecode}</if>
+  </delete>
+  <update id="updateCdstate">
+  update calendar set cdstate = 'N' where mid = #{mid} and cdcode = #{cdcode}
+  </update>
+  <select id="selectCalendar_cdcode">
+  select * from calendar where mid = #{mid} and cdcode = #{cdcode}
+  </select>
+  <select id="getSchedule">
+  select * from schedule where mid = #{mid} and cdcode = #{cdcode}
+  </select>
+  <delete id="deleteSchedule_dest">
+  delete from schedule where mid = #{sc.mid} and cdcode = #{sc.cdcode} and <if test="seloption == 'tdest'">tdcode = #{sc.tdcode}</if><if test="seloption == 'festival'">fecode = #{sc.fecode}</if>
+  </delete>
   </mapper>

@@ -21,6 +21,10 @@ public class TravelService {
 		System.out.println("TravelService - getCalender()");
 		return tdao.selectCalendar(mid);
 	}
+	public Calendar getCalendar(String mid, String cdcode) {
+		System.out.println("TravelService - getCalender()");
+		return tdao.selectCalendar_cdcode(mid, cdcode);
+	}
 
 	public int registCalendar(Calendar cd) {
 		System.out.println("TravelService - registCalendar()");
@@ -45,10 +49,10 @@ public class TravelService {
 		return tdao.selectCdcode(mid);
 	}
 
-	public int registSelectDest(Schedule sc) {
+	public int registSelectDest(Schedule sc, String seloption) {
 		System.out.println("travelService - registSelectDest()");
 		
-		return tdao.insertFKcode(sc);
+		return tdao.insertFKcode(sc, seloption);
 	}
 
 	public int updateSc(Schedule sc, String seloption) {
@@ -85,6 +89,26 @@ public class TravelService {
 	public Schedule getSchedule(Schedule sc, String seloption) {
 		System.out.println("travelService - getSchedule()");
 		return tdao.selectSchedule(sc, seloption);
+	}
+
+	public int updateCdstate(String cdcode, String mid) {
+		System.out.println("travelSchedule - updateCdstate()");
+		return tdao.updateCdstate(mid, cdcode);
+	}
+	public int removeCalendar(Calendar cd) {
+		System.out.println("travelService - removeCalendar()");
+		return tdao.deleteCalender(cd);
+	}
+	public int removeSchedule(Calendar cd) {
+		return tdao.deleteSchedule(cd);
+	}
+	public ArrayList<Schedule> checkSchedule(Calendar cd) {
+		System.out.println("travelSchedule - checkSchedule()");
+		return tdao.getSchedule(cd);
+	}
+	public int removeDest(Schedule sc, String seloption) {
+		System.out.println("travelService - removeDest");
+		return tdao.deleteSchedule_dest(sc, seloption);
 	}
 }
 

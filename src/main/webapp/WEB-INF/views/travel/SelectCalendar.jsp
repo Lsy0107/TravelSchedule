@@ -40,7 +40,7 @@
 					style="min-height: 500px;">
 					<c:forEach items="${cdList }" var="cd">
 						<a class="btn btn-primary m-1"
-							href="javascript:getSchedule('${cd.cdcode }','${cd.mid }')">캘린더
+							href="javascript:getSchedule('${cd.cdcode }','${cd.mid }','${cd.cdstate }')">캘린더
 							이름 : ${cd.cdname }</a>
 						<br>
 					</c:forEach>
@@ -51,7 +51,7 @@
 				
 				</div>
 				<div class="disnone" style="text-align: end;" id="btnArea">
-				<button class="btn btn-info">캘린더 삭제하기</button>
+				<button id="removebtn" class="btn btn-info">캘린더 삭제하기</button>
 				<button id="travelMkSc" class="btn btn-info">캘린더 계획하기</button>
 				</div>
 				</div>
@@ -73,10 +73,8 @@
 	<!-- Core theme JS-->
 	<script src="resources/js/scripts.js"></script>
 	<script type="text/javascript">
-		console.log("${cdList}")
 		function makeCalender() {
 			let cdname = prompt("캘린더 이름을 입력해주세요");
-			console.log();
 			if(cdname.split(' ')[0].length>0){
 			$.ajax({
 				url:"/registCalendar",
@@ -104,7 +102,7 @@
 		}
 	}
 	)
-	function getSchedule(cdcode, mid){
+	function getSchedule(cdcode, mid, cdstate){
 		$.ajax({
 			url:"getSchedule",
 			type:"post",
@@ -112,7 +110,6 @@
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			async:false,
 			success:function(scList){
-				console.log(scList);
 				let scList_json = JSON.parse(scList);
 				let scArea = document.querySelector("#printSchedule");
 				scArea.innerHTML = "";
@@ -141,21 +138,66 @@
 					}
 					let p_name_time = document.createElement("p");
 					p_name_time.innerText = name;
-					p_name_time.innerText = p_name_time.innerText + " : " + sc.SCDATE.substring(12,16);
+					p_name_time.innerText = p_name_time.innerText + " : " + sc.SCDATE.substring(11,16);
 					scArea.appendChild(p_name_time);
-					
-					console.log(sc);
 				}
     			btnArea.classList.remove("disnone");
     			let mksc = document.querySelector("#travelMkSc");
-    			mksc.addEventListener("click", function(){
-    				location.href="/travelSc?cdcode="+cdcode;
-    			})
+    			mksc.innerText = '';
+    			console.log(cdcode+"_"+cdstate);
+    			
+    			switch (cdstate) {
+				case 'Y':
+					mksc.classList.remove("btn-dangerbtn-primary");
+					mksc.classList.add("btn-info");
+					mksc.addEventListener("click", function(){
+	    				location.href="/travelSc?cdcode="+cdcode;
+	    			})
+	    			mksc.innerText = '캘린더 계획하기';
+					break;
+				case 'N':
+					let firstdate = Date.parse(scList_json[0].SCDATE)
+					let nowdate = new Date();
+						mksc.classList.remove("btn-info");
+						mksc.classList.remove("btn-danger");
+					if(firstdate > nowdate){
+						mksc.addEventListener("click", function(){
+		    			})
+						mksc.classList.add("btn-danger");
+						
+					}else{
+						mksc.classList.add("btn-info");
+						mksc.addEventListener("click", function(){
+		    				location.href="/";
+		    			})
+					}
+						mksc.innerText = "리뷰작성하기";
+					break;
+				}
+    			
 				if(date == ""){
 					let h2Tag = document.createElement("h2");
 					h2Tag.innerText = "계획이 없습니다.";
 					scArea.appendChild(h2Tag);
 				}
+    			let removebtn = document.querySelector("#removebtn");
+    			removebtn.addEventListener('click', function(){
+    				$.ajax({
+    					url:"/removeCalendar",
+    					type:"post",
+    					data:{"cdcode":cdcode, "mid":mid},
+    					aync:false,
+    					success:function(rs){
+    						if(rs){
+    							location.reload();
+    						}else{
+    							alert('캘린더 삭제를 실패하였습니다.');
+    						}
+    					}
+    				})
+    			});
+    			
+    			
 			}
 		})
 	}
