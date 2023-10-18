@@ -23,6 +23,68 @@ public class TravelController {
 	@Autowired
 	TravelService tsvc;
 
+	@RequestMapping(value="/removeDest")
+	public @ResponseBody String removeDest(Schedule sc, String seloption){
+		System.out.println("캘린더 개획 삭제");
+		int rs = tsvc.removeDest(sc, seloption);
+		String result = "N";
+		if(rs>0) {
+			result = "Y";
+		}
+		return result;
+	}
+	
+	@RequestMapping(value="/removeCalendar")
+	public @ResponseBody boolean removeCalendar(Calendar cd) {
+		System.out.println("캘린더 삭제하기");
+		ArrayList<Schedule> scList = tsvc.checkSchedule(cd);
+		System.out.println(scList.size());
+		int resc = 1;
+		
+		boolean rs = false;
+		if(scList.size() != 0) {
+			resc = tsvc.removeSchedule(cd);
+			System.out.println(resc);
+			if(resc>0) {
+				int recd = tsvc.removeCalendar(cd);
+				if(recd>0) {
+					rs = true;
+					System.out.println(recd);
+				}
+			}
+		}else {
+			int recd = tsvc.removeCalendar(cd);
+			if(recd>0) {
+				rs = true;
+				System.out.println(recd);
+			}
+		}
+		return rs;
+	}
+	
+	@RequestMapping(value="/updateCdstate")
+	public @ResponseBody String updateCdstate(String cdcode, HttpSession session) {
+		System.out.println("계획 확정하기");
+		String mid = (String)session.getAttribute("loginId");
+		System.out.println(cdcode);
+		Calendar cd = new Calendar();
+		cd.setCdcode(cdcode);
+		cd.setMid(mid);
+		ArrayList<Schedule> scList = tsvc.checkSchedule(cd);
+		String result = "N";
+		if(scList.size()>0) {	
+			if(!scList.get(0).getScdate().equals(null)) {
+				int rs = tsvc.updateCdstate(cdcode, mid);
+				if(rs>0 ) {
+					result = "Y";					
+				}else {
+					result="C";					
+				}
+		}
+		}
+		return result;
+	}
+	
 	@RequestMapping(value = "/updateSc")
 	public @ResponseBody String updateSc(Schedule sc, String seloption) {
 		System.out.println("스케쥴 등록하기");
@@ -43,11 +105,11 @@ public class TravelController {
 		System.out.println("여행 계획 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		String mid = (String) session.getAttribute("loginId");
+		Calendar cd = tsvc.getCalendar(mid, cdcode);
 		ArrayList<HashMap<String, String>> sctdList = tsvc.select_sc_td_join(mid, cdcode);
 		ArrayList<HashMap<String, String>> lalngList = new ArrayList<HashMap<String, String>>();
 		for (HashMap<String, String> sctd : sctdList) {
 			if (!sctd.containsKey("SCDATE")) {
-				System.out.println("여기");
 				continue;
 			}
 			HashMap<String, String> lalng = new HashMap<String, String>();
@@ -63,6 +125,7 @@ public class TravelController {
 			lalng.put("scdate", sctd.get("SCDATE"));
 			lalngList.add(lalng);
 		}
+		mav.addObject("cd",cd);
 		mav.addObject("scdestList", sctdList);
 		mav.addObject("lalngList", new Gson().toJson(lalngList));
 		mav.setViewName("/travel/TravelSchedule");
@@ -74,15 +137,9 @@ public class TravelController {
 		System.out.println("여행지 선택");
 		System.out.println(sc);
 		Schedule checksc = tsvc.getSchedule(sc, seloption);
-		System.out.println("checksc : "+checksc);
 		String response = "Y";
-		int rs = -1;
 		if (checksc == null) {
-			if(seloption == "tdest") {
-				rs = tsvc.registSelectDest(sc);				
-			} else {
-				rs = tsvc.registSelectFest(sc);
-			}
+			int rs = tsvc.registSelectDest(sc, seloption);
 			if (rs <= 0) {
 				response = "N";
 			}

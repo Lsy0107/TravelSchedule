@@ -13,6 +13,8 @@ import com.TravelSchedule.dto.Tdest;
 
 public interface TravelDao {
 
+	Calendar selectCalendar_cdcode(@Param("mid")String mid, @Param("cdcode")String cdcode);
+	
 	ArrayList<Calendar> selectCalendar(@Param("mid")String mid);
 	
 	int insertCalendar(Calendar cd);
@@ -21,7 +23,7 @@ public interface TravelDao {
 
 	ArrayList<Calendar> selectCdcode(String mid);
 
-	int insertFKcode(Schedule sc);
+	int insertFKcode(@Param("sc")Schedule sc, @Param("seloption")String seloption);
 
 	int updateSc(@Param("sc")Schedule sc, @Param("seloption")String seloption);
 
@@ -38,13 +40,20 @@ public interface TravelDao {
 
 	Schedule selectSchedule(@Param("sc")Schedule sc, @Param("seloption")String seloption);
 
+	int updateCdstate(@Param("mid")String mid, @Param("cdcode")String cdcode);
+
+	int deleteCalender(Calendar cd);
+
+	int deleteSchedule(Calendar cd);
+
+	ArrayList<Schedule> getSchedule(Calendar cd);
+
+	int deleteSchedule_dest(@Param("sc")Schedule sc, @Param("seloption")String seloption);
+	
 	@Select("SELECT * FROM TDEST WHERE TDCODE = #{tdcode}")
 	Tdest detailTdestDao(String tdcode);
 
 	@Select("SELECT * FROM COUNTRY")	
 	ArrayList<Country> CountryListDao();
-
-	int insertFEcode(Schedule sc);
-
 
 }
