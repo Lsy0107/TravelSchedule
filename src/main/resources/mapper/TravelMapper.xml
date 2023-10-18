@@ -16,7 +16,10 @@
   select distinct cdcode, cdname from calendar where mid = #{mid} order by cdcode
   </select>
   <insert id="insertFKcode">
-  insert into schedule(mid, cdcode, tdcode) values(#{mid},#{cdcode},#{tdcode})
+  	insert into schedule(mid, cdcode, tdcode) values(#{mid},#{cdcode},#{tdcode})
+  </insert>
+  <insert id="insertFEcode">
+  	insert into schedule(mid, cdcode, fecode) values(#{mid},#{cdcode},#{fecode})
   </insert>
   <select id="selectSchedule" resultType="sc">
   select * from schedule where mid = #{sc.mid} and cdcode = #{sc.cdcode} and 

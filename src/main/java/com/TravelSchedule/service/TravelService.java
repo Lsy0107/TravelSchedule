@@ -101,6 +101,11 @@ public class TravelService {
 		return CountryListDao;
 	}
 
+	public int registSelectFest(Schedule sc) {
+		System.out.println("travelService - registSelectFest()");
+		return tdao.insertFEcode(sc);
+	}
+
 	
 
 }

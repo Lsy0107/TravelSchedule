@@ -72,11 +72,17 @@ public class TravelController {
 	@RequestMapping(value = "/registSelectDest")
 	public @ResponseBody String registSelectDest(Schedule sc, String seloption) {
 		System.out.println("여행지 선택");
+		System.out.println(sc);
 		Schedule checksc = tsvc.getSchedule(sc, seloption);
 		System.out.println("checksc : "+checksc);
 		String response = "Y";
+		int rs = -1;
 		if (checksc == null) {
-			int rs = tsvc.registSelectDest(sc);
+			if(seloption == "tdest") {
+				rs = tsvc.registSelectDest(sc);				
+			} else {
+				rs = tsvc.registSelectFest(sc);
+			}
 			if (rs <= 0) {
 				response = "N";
 			}
