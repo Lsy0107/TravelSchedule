@@ -31,6 +31,7 @@ public class newsCrawlingService {
         
         driver.get(connectUrl);
         List<WebElement> items = driver.findElements(By.cssSelector("#container > section > section > div > ul > li"));
+        ArrayList<News> newsList = ndao.selectNewsList();
         for(WebElement item : items) {
         	String img = "";
         	try {
@@ -46,8 +47,14 @@ public class newsCrawlingService {
         	System.out.print(" && url : "+url);
         	String time = item.findElement(By.cssSelector("div.meta > p")).getText();
         	System.out.println(" && time : " + time);
-        	
-        	if(!img.equals("")) {
+        	boolean eq = true;
+        	for(News news : newsList){
+        		if(news.getNewtitle().equals(title)) {
+        			eq = false;
+        			break;
+        		}
+        	}
+        	if(!img.equals("") && eq) {
         		int rs = ndao.insertNews(img_1,title,time, url);          		
         	}
         	

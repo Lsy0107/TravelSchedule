@@ -32,8 +32,9 @@
 		<!-- contant 시작 -->
 		<div class="row" style="margin: 45px;"></div>
 		<div class="container">
-			<div class="row p-1">
+			<div class="row" >
 				<div class="col col-3 border border-dark">계획 만들어지는 공간
+				<div class="row p-1" style="min-height: 375px; display: flow;">
 				<c:forEach var="sc" items="${scdestList }">
 				<c:if test="${sc.SCDATE != null}">
 				<c:choose>
@@ -44,6 +45,12 @@
 					
 				</c:if>
 				</c:forEach>
+				</div>
+				<div class="row p-1">
+				<c:if test="${cd.cdstate == 'Y' }">
+				<button class="btn btn-primary" onclick="updateCdstate('${cd.cdcode}')">계획 확정하기</button>
+				</c:if>
+				</div>
 				</div>
 				
 				
@@ -62,14 +69,15 @@
 										<h5 class="card-title">${td.TDNAME }</h5>
 										<p class="card-text">${td.TDADDRESS }</p>
 										<c:if test="${td.SCDATE == null}">
-										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 6px; width: 48%; font-size: 15px;"
 											onclick="selectDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 											추가하기</button>
 										</c:if>
 										<c:if test="${td.SCDATE != null }">
-										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">추가된 계획</button>
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 6px; width: 48%; font-size: 15px;">추가된 계획</button>
 										</c:if>
+										<button class="btn btn-danger position-absolute bottom-0 end-0" onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')" style="margin: 6px; font-size: 15px; width: 43%;">계획 삭제하기</button>
 									</div>
 								</div>
 							</c:if>
@@ -85,7 +93,7 @@
 							<c:forEach items="${ scdestList}" var="fe">
 								<c:if test="${fe.FECODE != null }">
 								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
-									<img src="${fe.FEPOSTER }" class="card-img-top" alt="...">
+									<img src="${fe.FEPOSTER }" class="card-img-top" alt="..."  width="286px" height="191px" loading="lazy">
 									<div class="card-body">
 										<h5 class="card-title">${fe.FENAME }</h5>
 										<p class="card-text">${fe.FEADDRESS }</p>
@@ -223,6 +231,59 @@
 		}
 	}
 	)
+	</script>
+	<script type="text/javascript">
+	function updateCdstate(cdcode){
+		console.log(cdcode);
+		$.ajax({
+			url:'/updateCdstate',
+			type:"post",
+			data:{'cdcode':cdcode},
+			aync:false,
+			success:function(rs){
+				console.log(rs)
+				switch (rs) {
+				case 'Y':
+					location.href="/selectCalendar";
+					break;
+				case 'C':
+					alert("계획확정에 실패하였습니다.");
+					break;
+				case 'N':
+					alert("계획을 1개 이상 추가해주세요");
+					break;
+				}
+			}
+		})
+	}
+		console.log("${cd.cdstate == 'Y' }");
+	</script>
+	<script type="text/javascript">
+	function removeDest(mid, cdcode, destcode, seloption){
+		console.log(mid+cdcode+destcode+seloption)
+		let dataOption = {};
+		if(seloption == 'tdest'){
+			dataOption = {"mid":mid, "cdcode":cdcode, "tdcode":destcode, "seloption":seloption};
+		}
+		if(seloption == 'festival'){
+			dataOption = {"mid":mid, "cdcode":cdcode, "fecode":destcode, "seloption":seloption};
+		}
+		$.ajax({
+			url:"/removeDest",
+			type:"post",
+			data:dataOption,
+			aync:false,
+			success:function(rs){
+				console.log(rs);
+				if(rs == "Y"){
+					location.reload();
+				}
+				if(rs == "N"){
+					alert("행선지 삭제에 실패하였습니다.");
+				}
+			}
+		})
+	}
 	</script>
 </body>
 </html>

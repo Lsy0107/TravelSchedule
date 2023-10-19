@@ -79,10 +79,14 @@ public class HomeController {
 			String ctcode = festival.getCtcode();
 			String fecode = festival.getFecode();
 			ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
-			System.out.println(Nearby);
+			String country = apisvc.getCountry_this(ctcode);
+			ArrayList<Tdest> tdest = tsvc.TdestSearch();
+			System.out.println(country);
+			mav.addObject("country",country);
 			mav.addObject("festival", festival);
 			mav.addObject("nearby", Nearby);
-		mav.setViewName("travel/detailFestival");
+			mav.addObject("tdest", tdest);
+		mav.setViewName("festival/detailFestival");
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
