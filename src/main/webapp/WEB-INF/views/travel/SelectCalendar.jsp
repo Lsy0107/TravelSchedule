@@ -144,7 +144,6 @@
     			btnArea.classList.remove("disnone");
     			let mksc = document.querySelector("#travelMkSc");
     			mksc.innerText = '';
-    			console.log(cdcode+"_"+cdstate);
     			
     			switch (cdstate) {
 				case 'Y':
