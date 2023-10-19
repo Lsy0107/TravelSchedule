@@ -42,20 +42,23 @@
   select * from country
   </select>
   <select id="selectFestival_country">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where ctcode = #{ctcode} and enddate >= sysdate
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where ctcode = #{ctcode} and enddate >= sysdate
   </select>
   <select id="selectFestival_db">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where enddate >= sysdate order by  DBMS_RANDOM.RANDOM()
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where enddate >= sysdate order by  DBMS_RANDOM.RANDOM()
   </select>
   <select id="selectFestival_detail">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where fecode = #{code} and enddate >= sysdate
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where fecode = #{code} and enddate >= sysdate
   </select>
   <select id="selectFestival_Nearby">
   <![CDATA[
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, feup, fedown, felati, felongti from festival where ctcode = #{ctcode} and fecode not in(#{fecode}) and enddate >= sysdate order by  DBMS_RANDOM.RANDOM() 
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where ctcode = #{ctcode} and fecode not in(#{fecode}) and enddate >= sysdate order by  DBMS_RANDOM.RANDOM() 
   ]]>
   </select>
   <select id="selectCountry_this">
   select ctname from country where ctcode = #{ctcode}
+  </select>
+  <select id="selectSearchFestival">
+  SELECT * FROM festival WHERE fename LIKE '%'||#{searchVal}||'%'
   </select>
   </mapper>

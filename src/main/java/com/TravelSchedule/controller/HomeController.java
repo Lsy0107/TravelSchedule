@@ -128,4 +128,17 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/SearchService_fe")
+	public @ResponseBody ModelAndView SearchService_fe(String searchVal) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("검색한 변수"+searchVal);
+		ArrayList<Festival> FestivalList = apisvc.SearchFestivalList(searchVal);
+		ArrayList<Country> CountryList = tsvc.CountryList();
+		mav.addObject("country",CountryList);
+		mav.addObject("festival",FestivalList);
+		mav.setViewName("/festival/Festival");
+		
+		return mav;
+	}
+	
 }

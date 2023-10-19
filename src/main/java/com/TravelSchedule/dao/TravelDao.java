@@ -46,5 +46,7 @@ public interface TravelDao {
 
 	int insertFEcode(Schedule sc);
 
+	ArrayList<Tdest> selectTdest_Nearby(@Param("ctcode")String ctcode,@Param("tdcode") String tdcode);
+
 
 }

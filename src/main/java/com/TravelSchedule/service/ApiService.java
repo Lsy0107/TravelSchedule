@@ -343,4 +343,9 @@ public class ApiService {
 		return apiDao.selectCountry_this(ctcode);
 	}
 
+	public ArrayList<Festival> SearchFestivalList(String searchVal) {
+		System.out.println("ApiService - SearchFestivalList()");
+		return apiDao.selectSearchFestival(searchVal);
+	}
+
 }

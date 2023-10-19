@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
+import com.TravelSchedule.service.ApiService;
 import com.TravelSchedule.service.TravelService;
 import com.google.gson.Gson;
 
@@ -23,6 +25,9 @@ public class TravelController {
 	@Autowired
 	TravelService tsvc;
 
+	@Autowired
+	ApiService apisvc;
+	
 	@RequestMapping(value = "/updateSc")
 	public @ResponseBody String updateSc(Schedule sc, String seloption) {
 		System.out.println("스케쥴 등록하기");
@@ -129,8 +134,16 @@ public class TravelController {
 		System.out.println("여행지 상세 정보 페이지이동");
 		System.out.println("TDCODE : "+tdcode);
 		Tdest detailTdest = tsvc.detailTdest(tdcode);
+		String ctcode = detailTdest.getCtcode();
 		System.out.println(detailTdest);
+		ArrayList<Tdest> Nearby = tsvc.tdest_Nearby(ctcode, tdcode);
+		String country = apisvc.getCountry_this(ctcode);
+		ArrayList<Festival> festival = apisvc.getFestival_db();
+		mav.addObject("country",country);
 		mav.addObject("detailTd",detailTdest);
+		mav.addObject("nearby", Nearby);		
+		mav.addObject("festival", festival);
+		
 		mav.setViewName("/travel/detailTdest");
 		
 		return mav;

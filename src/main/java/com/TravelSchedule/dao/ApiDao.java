@@ -37,5 +37,7 @@ public interface ApiDao {
 	ArrayList<Festival> selectFestival_Nearby(@Param("ctcode")String ctcode, @Param("fecode")String fecode);
 
 	String selectCountry_this(@Param("ctcode") String ctcode);
+
+	ArrayList<Festival> selectSearchFestival(@Param("searchVal") String searchVal);
 	
 }

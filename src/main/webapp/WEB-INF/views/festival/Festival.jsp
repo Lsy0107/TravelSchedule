@@ -293,7 +293,7 @@
                     <div class="Tdest_wrap">
                         <div>
                             <div class="SearchArea">
-                                <form action="SearchService" method="get">
+                                <form action="SearchService_fe" method="get">
                                     <div class="SArea">
                                         <input name="searchVal" class="Search" type="text">
                                         <button class="SearchBtn">검색</button>
