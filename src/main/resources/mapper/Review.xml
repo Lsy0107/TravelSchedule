@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<select id="PrintScheduleDao" resultType="com.TravelSchedule.dao">
+select * 
+<if test="tdcode == null">
+from schedule s, festival f where s.fecode = f.fecode and cdcode = #{cdcode}
+</if>
+<if test="fecode == null">
+from schedule s, tdest t where s.tdcode = t.tdcode and cdcode = #{cdcode}
+</if>
+</select>

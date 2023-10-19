@@ -206,6 +206,11 @@ footer{
 			<hr class="hr">
 			<div id="map" style="width:1000px;height:400px;"></div>
 			<p class="address">${detailTd.tdaddress }</p>
+
+			<div class="RelativeRecomm">
+				
+			</div>
+
 		</div>
 		<!-- content 종료 -->
 		<!-- Footer-->

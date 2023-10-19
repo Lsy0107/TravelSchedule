@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.TravelService;
@@ -123,6 +124,7 @@ public class TravelController {
 		System.out.println("여행지 상세 정보 페이지이동");
 		System.out.println("TDCODE : "+tdcode);
 		Tdest detailTdest = tsvc.detailTdest(tdcode);
+		
 		System.out.println(detailTdest);
 		mav.addObject("detailTd",detailTdest);
 		mav.setViewName("/travel/detailTdest");

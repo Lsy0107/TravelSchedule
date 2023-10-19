@@ -18,7 +18,7 @@
 
             <style>
                 .pagination {
-                    position: relative;                    
+                    position: relative;
                     margin-left: 80px;
                 }
 
@@ -278,7 +278,7 @@
                         <div class="hashTag">
                             <c:forEach items="${CountryList }" var="ct">
                                 <div class="ctList">
-                                    <button onclick="festival_country('${ct.ctcode}')">#${ct.ctname }</button>
+                                    <button onclick="Select_country('${ct.ctcode}')">#${ct.ctname }</button>
                                 </div>
                             </c:forEach>
                         </div>
@@ -315,7 +315,7 @@
                                         <div class="card-body">
                                             <h3 id="title" class="card-title h4" title="${TdList.tdname}"
                                                 style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
-                                            <button class="btn btn-primary" onclick="selectCdcode('${TdList.tdcode}')"
+                                            <button class="btn btn-primary" onclick="selectCdcode('${TdList.tdcode}','tdest')"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
                                                 추가하기</button>
                                         </div>
@@ -327,7 +327,7 @@
                         <div class="pagination">
                             <i id="leftCur" class="fa-solid fa-arrow-left"></i>
                             <ol id="numbers">
-        
+
                             </ol>
                             <i id="rightCur" class="fa-solid fa-arrow-right"></i>
                         </div>
@@ -720,7 +720,7 @@
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
                             TdestBtn.addEventListener('click', function () {
-                                selectCdcode(Td.tdcode);
+                                selectCdcode(Td.tdcode,'tdest');
                             });
                             TdestTitleDiv.appendChild(TdestTitle);
 
@@ -739,7 +739,7 @@
                         location.href = 'detailTdest?tdcode=' + tdcode;
 
                     }
-                    function selectCdcode(tdcode) {
+                    function selectCdcode(tdcode, seloption) {
                         if ("${sessionScope.loginId}" == "") {
                             location.href = "${pageContext.request.contextPath}/memberLoginForm"
                         } else {
@@ -764,7 +764,7 @@
                                         modalBodyTag.appendChild(selTag);
                                         let btnTag = document.querySelector("#selectClear");
                                         btnTag.addEventListener("click", function () {
-                                            selectDest(tdcode, selTag.value)
+                                            selectDest(tdcode, selTag.value, seloption)
                                         })
                                     }
                                     else {
@@ -774,16 +774,21 @@
                             })
                         }
                     }
-                    function selectDest(tdcode, cdcode) {
+                    function selectDest(tdcode, cdcode, seloption) {
                         console.log(tdcode + "  " + cdcode);
                         $.ajax({
                             url: "/registSelectDest",
                             type: "post",
-                            data: { mid: "${sessionScope.loginId}", tdcode: tdcode, cdcode: cdcode },
+                            data: { mid: "${sessionScope.loginId}", tdcode: tdcode, cdcode: cdcode, "seloption": seloption },
                             async: false,
                             success(rs) {
-                                alert('행선지 선택 완료');
-                                location.href = "/";
+                                if (rs == 'Y') {
+                                    alert('행선지 선택 완료');
+                                    location.href = "/";
+                                } else {
+                                    alert('이미 선택된 행선지 입니다.');
+                                    
+                                }
                             }
                         })
                     }
@@ -808,7 +813,7 @@
 
                 </script>
                 <script>
-                    function festival_country(ctcode) {
+                    function Select_country(ctcode) {
                         console.log('해시태그 고른거 : ' + ctcode);
                         $.ajax({
                             type: "get",
