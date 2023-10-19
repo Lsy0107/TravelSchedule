@@ -40,32 +40,39 @@
 				<h3>My Page</h3>
 			</div>
 			<div>
-				<form id="myForm" action="" method="post">
+				<form id="myForm" action="${pageContext.request.contextPath }/memberUpdate" method="post">
 					<p>
-						<img src="" class="img-thumbnail" alt="...">
+					<c:choose>
+						<c:when test="${mInfo.mprofile  == null}">
+							<img src="/resources/memberProfile/default.jpg" class="img-thumbnail" alt="..." style="width: 150px;">
+						</c:when>
+						<c:otherwise>
+							<img src="/resources/memberProfile/${mInfo.mprofile }" class="img-thumbnail" alt="${mInfo.mprofile }" style="width: 150px;">
+						</c:otherwise>
+					</c:choose>
 					</p>
 					<p>
 						<label><h5>ID</h5></label> 
-						<input class="w3-input" type="text" id="id" name="id" readonly value="${mInfo.mid}"> 
+						<input class="w3-input" type="text" name="mid" readonly value="${mInfo.mid}"> 
 					</p>
 					<p>
 						<label><h5>Nickname</h5></label> 
-						<input class="w3-input" type="text" id="email" name="email" value="${mInfo.mnickname}" required> 
+						<input class="w3-input" type="text" id="mnickname" name="mnickname" value="${mInfo.mnickname}" required> 
 					</p>
 					<p class="w3-center">
 						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
 					</p>
 				</form>
 				<br />
-				<form id="pwForm" action="" method="post">	
-					<input type="hidden" name="id" value="">
+				<form id="pwForm" action="${pageContext.request.contextPath }/updatePw" method="post" onsubmit="return pwCheck(this)">	
+					<input type="hidden" id="mid" name="mid" value="${mInfo.mid}">
 					<p>
 						<label>Password</label>
 						<input class="w3-input" id="old_pw" name="old_pw" type="password" required>
 					</p>
 					<p>
 						<label>New Password</label> 
-						<input class="w3-input" id="pw" name="pw" type="password" required>
+						<input class="w3-input" id="mpw" name="mpw" type="password" required>
 					</p>
 					<p>
 						<label>Confirm</label>
@@ -87,28 +94,32 @@
         <!-- Core theme JS-->
         <script src="resources/js/scripts.js"></script>
         
+		<script type="text/javascript">
+			let msg = '${msg }'
+			if(msg.length > 0){
+				alert(msg);
+			}
+		</script>
+        
         <script type="text/javascript">
-	        $(function(){
-	    		if(${msg ne null}){
-	    			alert('${msg}');
-	    		};
-	    		
-	    		if($("#pwForm").submit(function(){
-	    			if($("#pw").val() !== $("#pw2").val()){
-	    				alert("비밀번호가 다릅니다.");
-	    				$("#pw").val("").focus();
-	    				$("#pw2").val("");
-	    				return false;
-	    			}else if ($("#pw").val().length < 8) {
-	    				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-	    				$("#pw").val("").focus();
-	    				return false;
-	    			}else if($.trim($("#pw").val()) !== $("#pw").val()){
-	    				alert("공백은 입력이 불가능합니다.");
-	    				return false;
-	    			}
-	    		}));
-	    	})
+	        function pwCheck(obj) {
+	        	console.log("pwCheck - 호출");
+				let oldPw = obj.old_pw.value; // a1234
+				
+				if(oldPw != '${mInfo.mpw}'){
+					alert('기존비밀번호가 일치하지 않습니다.');
+					oldPw.focus();
+					return false;
+				}
+				let newPwObj = obj.mpw;
+				let newPw2Obj = obj.pw2;
+				
+				if(newPwObj.value != newPw2Obj.value){
+					alert('새로운비밀번호가 일치하지 않습니다.');
+					newPwObj.focus();
+					return false;
+				}
+			}
         </script>
         
     </body>
