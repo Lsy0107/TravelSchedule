@@ -51,6 +51,7 @@
 						</c:otherwise>
 					</c:choose>
 					</p>
+					<p>프로필변경</p>
 					<p>
 						<label><h5>ID</h5></label> 
 						<input class="w3-input" type="text" name="mid" readonly value="${mInfo.mid}"> 
