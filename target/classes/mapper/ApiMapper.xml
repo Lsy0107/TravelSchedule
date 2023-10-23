@@ -61,4 +61,31 @@
   <select id="selectSearchFestival">
   SELECT * FROM festival WHERE fename LIKE '%'||#{searchVal}||'%'
   </select>
+  <select id="maxcode_lk">
+  select nvl(max(lkcode),'LK00000') from likelist
+  </select>
+  <select id="selectLK" resultType="lk">
+  select * from likelist where mid = #{lk.mid} and
+  <if test="seloption == 'festival'">fecode = #{lk.fecode} </if>
+  <if test="seloption == 'tdest'"> tdcode = #{lk.tdcode}</if>
+  <if test="seloption == 'review'"> recode = #{lk.recode}</if>
+  </select>
+  <insert id="insertLK">
+  insert into likelist (lkcode,
+  <if test="seloption == 'festival'"> fecode, </if>
+  <if test="seloption == 'tdest'"> tdcode, </if>
+  <if test="seloption == 'review'"> recode, </if>
+  mid)
+  values(#{lk.lkcode},
+  <if test="seloption == 'festival'"> #{lk.fecode}, </if>
+  <if test="seloption == 'tdest'"> #{lk.tdcode}, </if>
+  <if test="seloption == 'review'"> #{lk.recode}, </if>
+  #{lk.mid}) 
+  </insert>
+  <delete id="deleteLK">
+  delete from likelist where mid = #{lk.mid} and
+  <if test="seloption == 'festival'">fecode = #{lk.fecode} </if>
+  <if test="seloption == 'tdest'"> tdcode = #{lk.tdcode}</if>
+  <if test="seloption == 'review'"> recode = #{lk.recode}</if>
+  </delete>
   </mapper>

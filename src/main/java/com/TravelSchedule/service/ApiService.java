@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.TravelSchedule.dao.ApiDao;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Tdest;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -347,5 +348,44 @@ public class ApiService {
 		System.out.println("ApiService - SearchFestivalList()");
 		return apiDao.selectSearchFestival(searchVal);
 	}
+
+	public String getLkcode(Likelist lk) {
+		System.out.println("ApiService - getLkcode()");
+		String lkcode = apiDao.maxcode_lk();
+		if(lkcode.equals("LK00000")) {
+		lkcode = "LK00001";	
+		}else {
+			
+		String codeName = lkcode.substring(0,2);
+		int codeNum = Integer.parseInt(lkcode.substring(2))+1;
+		String codeNum_String = String.format("%05d", codeNum);
+		lkcode = codeName + codeNum_String;
+		}
+		System.out.println(lkcode);
+		
+		return lkcode;
+	}
+
+	public String getLikelist(Likelist lk, String seloption) {
+		System.out.println("ApiService - getLikelist()");
+		Likelist result = apiDao.selectLK(lk, seloption);
+		if(result == null) {
+			return "N";
+		} else {
+			return "Y";
+		}
+	}
+
+	public int insertLk(Likelist lk, String seloption) {
+		System.out.println("ApiService - insertLK()");
+		
+		return apiDao.insertLK(lk, seloption);
+	}
+
+	public int deleteLk(Likelist lk, String seloption) {
+		// TODO Auto-generated method stub
+		return apiDao.deleteLK(lk, seloption);
+	}
+
 
 }

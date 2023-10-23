@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Tdest;
 
 public interface ApiDao {
@@ -39,5 +40,13 @@ public interface ApiDao {
 	String selectCountry_this(@Param("ctcode") String ctcode);
 
 	ArrayList<Festival> selectSearchFestival(@Param("searchVal") String searchVal);
+
+	String maxcode_lk();
+
+	Likelist selectLK(@Param("lk") Likelist lk, @Param("seloption") String seloption);
+
+	int insertLK(@Param("lk") Likelist lk, @Param("seloption") String seloption);
+
+	int deleteLK(@Param("lk") Likelist lk, @Param("seloption") String seloption);
 	
 }

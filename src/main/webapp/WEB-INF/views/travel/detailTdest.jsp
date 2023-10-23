@@ -400,7 +400,7 @@ a{
                          modalBodyTag.appendChild(selTag);
                          let btnTag = document.querySelector("#selectClear");
                          btnTag.addEventListener("click", function () {
-                             selectDest(tdcode, selTag.value)
+                             selectDest(tdcode, selTag.value, seloption)
                          })
                      }
                      else {

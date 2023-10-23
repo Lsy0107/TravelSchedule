@@ -2,6 +2,8 @@ package com.TravelSchedule.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.TravelSchedule.crawling.newsCrawlingService;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
@@ -71,21 +74,28 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/detailFestival")
-	public ModelAndView detailPage(String code) {
+	public ModelAndView detailPage(String code, HttpSession session) {
 		System.out.println("상세페이지_축제 이동");
 		ModelAndView mav = new ModelAndView();
+		Likelist lk = new Likelist();
+		lk.setFecode(code);		
+		lk.setMid((String)session.getAttribute("loginId"));
+		System.out.println(lk.getMid());
+		String seloption = "festival";
 		//System.out.println(codeName);
-			Festival festival = apisvc.detailFestival(code);
-			String ctcode = festival.getCtcode();
-			String fecode = festival.getFecode();
-			ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
-			String country = apisvc.getCountry_this(ctcode);
-			ArrayList<Tdest> tdest = tsvc.TdestSearch();
-			System.out.println(country);
-			mav.addObject("country",country);
-			mav.addObject("festival", festival);
-			mav.addObject("nearby", Nearby);
-			mav.addObject("tdest", tdest);
+		String Like = apisvc.getLikelist(lk, seloption);
+		Festival festival = apisvc.detailFestival(code);
+		String ctcode = festival.getCtcode();
+		String fecode = festival.getFecode();
+		ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
+		String country = apisvc.getCountry_this(ctcode);
+		ArrayList<Tdest> tdest = tsvc.TdestSearch();
+		System.out.println(country);
+		mav.addObject("country",country);
+		mav.addObject("festival", festival);
+		mav.addObject("nearby", Nearby);
+		mav.addObject("tdest", tdest);
+		mav.addObject("like", Like);
 		mav.setViewName("festival/detailFestival");
 		return mav;
 	}
@@ -141,4 +151,28 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/clickHeart")
+	public @ResponseBody String clickHeart(String mid, String code, String seloption, Likelist lk) {
+		System.out.println("셀옵션 : " + seloption);
+		String Lkcode = apisvc.getLkcode(lk);		
+		lk.setLkcode(Lkcode);
+		lk.setMid(mid);
+		if(seloption.equals("festival") ) {
+			lk.setFecode(code);
+		} else if(seloption.equals("festival")) {
+			lk.setTdcode(code);
+		} else {
+			//lk.setRecode(code);
+		}
+		String result = apisvc.getLikelist(lk, seloption); // "Y","N"
+		if(result.equals("Y")) {
+			int delete = apisvc.deleteLk(lk, seloption);
+		} else {
+			int insert = apisvc.insertLk(lk, seloption);
+		}
+		
+				
+		return result;
+		
+	}
 }

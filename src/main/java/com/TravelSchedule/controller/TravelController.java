@@ -140,6 +140,7 @@ public class TravelController {
 	public @ResponseBody String registSelectDest(Schedule sc, String seloption) {
 		System.out.println("여행지 선택");
 		System.out.println(sc);
+		System.out.println(seloption);
 		Schedule checksc = tsvc.getSchedule(sc, seloption);
 		String response = "Y";
 		if (checksc == null) {

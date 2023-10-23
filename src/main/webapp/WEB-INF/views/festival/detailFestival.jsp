@@ -252,8 +252,9 @@ a{
 		<div class="wrap">			
 			<img class="card-img-top Img" src="${festival.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 			<p class="name"> ${festival.fename }</p>
-			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>
-			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart()" id="heart"></i>
+			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>			
+			
+			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
 			<button class="btn btn-primary" onclick="selectCdcode('${festival.fecode}','festival')"
             data-bs-toggle="modal" data-bs-target="#exampleModal">계획에 추가하기</button>
 			<hr class="hr">
@@ -361,17 +362,33 @@ a{
 		
 		
 	</script>
-	<script type="text/javascript">
-		function clickHeart(){
-			console.log('클릭');
-			let heart = document.querySelector('#heart');
-			const cl = document.querySelector('#heart').classList;
-			if(cl.contains("fa-regular") ){
-			heart.classList.replace('fa-regular', 'fa-solid');
-			} else{
-			heart.classList.replace('fa-solid', 'fa-regular');
-			}
+	<script type="text/javascript">		
+		function clickHeart(code, seloption){
+			console.log(code);
+			if ("${sessionScope.loginId}" == "") {
+	            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+	        } else{
+	        	$.ajax({
+	        		url: "/clickHeart",
+	        		type: "post",
+	        		data: { mid: "${sessionScope.loginId}", code : code, "seloption" : seloption},
+	        		aysnc: false,
+	        		success: function(result){
+					console.log('클릭');
+					let heart = document.querySelector('#heart');
+					const cl = document.querySelector('#heart').classList;
+					if(cl.contains("fa-regular") ){
+					heart.classList.replace('fa-regular', 'fa-solid');
+					} else{
+					heart.classList.replace('fa-solid', 'fa-regular');
+					}
+	        			
+	        		}
+	        	});
+	        	
+	        }
 		}
+		
 		
 	</script>
 	<script type="text/javascript">
@@ -423,8 +440,17 @@ a{
             }
         })
     }
-	</script>
 	
+	</script>
+	<script type="text/javascript">
+	let heart = document.querySelector('#heart');
+	const cl = document.querySelector('#heart').classList;
+	let Y = 'Y';
+	let N = 'N';
+	if(${like} == 'Y'){
+		heart.classList.replace('fa-regular', 'fa-solid');
+	}
+	</script>
 	
 
 </body>
