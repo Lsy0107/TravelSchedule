@@ -126,5 +126,17 @@ public class TravelService {
 		return CountryListDao;
 	}
 
+	public int registSelectFest(Schedule sc) {
+		System.out.println("travelService - registSelectFest()");
+		return tdao.insertFEcode(sc);
+	}
+
+	public ArrayList<Tdest> tdest_Nearby(String ctcode, String tdcode) {
+		System.out.println("travelService - tdest_Nearby()");
+		return tdao.selectTdest_Nearby(ctcode, tdcode);			
+	}
+
+	
+
 }
 

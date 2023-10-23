@@ -8,6 +8,7 @@
 		<typeAlias type="com.TravelSchedule.dto.Festival" alias="festival"/>
 		<typeAlias type="com.TravelSchedule.dto.Calendar" alias="calendar"/>
 		<typeAlias type="com.TravelSchedule.dto.Schedule" alias="sc"/>
+		<typeAlias type="com.TravelSchedule.dto.Likelist" alias="lk"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
