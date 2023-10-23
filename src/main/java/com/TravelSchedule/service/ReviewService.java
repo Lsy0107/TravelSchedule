@@ -14,26 +14,34 @@ public class ReviewService {
 
 	@Autowired
 	ReviewDao rdao;
-	
+
 	public ArrayList<Calendar> CalendarList() {
 		System.out.println("계획 출력 서비스");
-		
+
 		ArrayList<Calendar> CalendarListDao = rdao.CalendarListDao();
 		return CalendarListDao;
 	}
 
-	public ArrayList<Schedule> PrintSchedule(String cdcode, String tdcode, String fecode) {
+	public ArrayList<Schedule> PrintSchedule(String cdcode) {
 		System.out.println("PrintSchedule- 서비스 호출");
-		
-		ArrayList<Schedule> PrintScheduleDao = rdao.PrintScheduleDao(cdcode,tdcode,fecode);
-		
+
+		ArrayList<Schedule> PrintScheduleDao = rdao.PrintScheduleDao(cdcode);
+
 		return PrintScheduleDao;
 	}
 
-	public Calendar Rev() {
+	public String getTdName(String tdcode, String cdcode) {
+		System.out.println("tdcode의 이름 조회서비스");
 
-		Calendar Rr = rdao.Rr();
-		return Rr;
+		String getTdNameSvc = rdao.getTdNameSvc(tdcode, cdcode);
+		return getTdNameSvc;
+	}
+
+	public String getFeName(String fecode, String cdcode) {
+		System.out.println("fecode의 이름 조회서비스");
+
+		String getFeNameSvc = rdao.getFeNameSvc(fecode, cdcode);
+		return getFeNameSvc;
 	}
 
 }

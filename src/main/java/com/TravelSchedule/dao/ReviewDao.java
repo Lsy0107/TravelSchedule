@@ -13,10 +13,14 @@ public interface ReviewDao {
 	@Select("SELECT * FROM CALENDAR") 
 	ArrayList<Calendar> CalendarListDao();
 
-	ArrayList<Schedule> PrintScheduleDao(@Param("cdcode")String cdcode,@Param("tdcode") String tdcode,@Param("fecode") String fecode);
+	@Select("SELECT * FROM SCHEDULE WHERE CDCODE = #{cdcode}")
+	ArrayList<Schedule> PrintScheduleDao(@Param("cdcode")String cdcode);
 
-	@Select("SELECT CDNAME, TDCODE,FECODE,C.CDCODE\r\n"
-			+ "FROM CALENDAR C LEFT OUTER JOIN SCHEDULE S ON S.CDCODE = C.CDCODE")
-	Calendar Rr();
+	@Select("SELECT TDNAME FROM SCHEDULE S,TDEST T WHERE S.TDCODE=T.TDCODE AND T.TDCODE = #{tdcode} AND CDCODE = #{cdcode}")
+	String getTdNameSvc(@Param("tdcode")String tdcode, @Param("cdcode")String cdcode);
+
+	@Select("SELECT FENAME FROM SCHEDULE S,FESTIVAL F WHERE S.FECODE = F.FECODE AND F.FECODE = #{fecode} AND CDCODE= #{cdcode}")
+	String getFeNameSvc(@Param("fecode")String fecode, @Param("cdcode")String cdcode);
+
 
 }

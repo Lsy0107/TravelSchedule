@@ -30,21 +30,39 @@ public class ReviewController {
 		System.out.println("현재 아이디 : "+mid);
 		
 		ArrayList<Calendar> CalendarList = rsvc.CalendarList();
-		Calendar Rev = rsvc.Rev();
-		System.out.println(Rev);
+		
+		
 		mav.addObject("Cal",CalendarList);
 		mav.setViewName("review/TravelReview");
 		return mav;
 	}
 	@RequestMapping(value="PrintSchedule")
-	public @ResponseBody String PrintSchedule(String cdcode,String tdcode, String fecode) {
+	public @ResponseBody String PrintSchedule(String cdcode) {
 		System.out.println("받아온 cdcode : "+cdcode);
-		System.out.println("받아온 tdcode : "+tdcode);
-		System.out.println("받아온 fecode : "+fecode);
+
 		
-		ArrayList<Schedule> PrintSchedule = rsvc.PrintSchedule(cdcode,tdcode,fecode);
+		ArrayList<Schedule> PrintSchedule = rsvc.PrintSchedule(cdcode);
 		System.out.println(PrintSchedule);							
 		
 		return new Gson().toJson(PrintSchedule);
+	}
+	
+	@RequestMapping(value="getTdName")
+	public @ResponseBody String getTdName(String tdcode,String cdcode) {
+		System.out.println("받아온tdcode : "+tdcode);
+		System.out.println("받아온cdcode : "+cdcode);
+		
+		String getTdName = rsvc.getTdName(tdcode,cdcode);
+		System.out.println(getTdName);
+		return new Gson().toJson(getTdName);
+	}
+	@RequestMapping(value="getFeName")
+	public @ResponseBody String getFeName(String fecode,String cdcode) {
+		System.out.println("받아온fecode : "+fecode);
+		System.out.println("받아온cdcode : "+cdcode);
+		
+		String getFeName = rsvc.getFeName(fecode,cdcode);
+		System.out.println(getFeName);
+		return new Gson().toJson(getFeName);
 	}
 }

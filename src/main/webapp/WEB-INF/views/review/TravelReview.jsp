@@ -62,7 +62,7 @@
                 <div class="InnerCal">
                     <c:forEach items="${Cal}" var="cl">
                         <div class="Ctitle" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            onclick="PrintSchedule('${cl.cdcode}','${cl.tdcode}','${cl.fecode}')">
+                            onclick="PrintSchedule('${cl.cdcode}')">
                             <p class="cdname">${cl.cdname}</p>
                             <button class="reviewBtn btn btn-outline-primary">리뷰 작성</button>
                         </div>
@@ -75,12 +75,16 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">상세 계획</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">${sessionScope.loginId}님의 상세계획표</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="selectCalendar">
-                            <div>
-                                컨텐츠
+                            <div class="tdArea">
+                                여행지 부분
+                            </div>
+                            <hr>
+                            <div class="feArea">
+                                축제 부분
                             </div>
                         </div>
 
@@ -101,35 +105,101 @@
 
                 </script>
                 <script>
-                    function PrintSchedule(cdcode, tdcode, fecode) {
-                        console.log('선택한 캘린더 : ' + cdcode+'_'+tdcode+'_'+fecode);
+                    let currentCdcode = null;
+                    function PrintSchedule(cdcode) {
+                        console.log('선택한 캘린더 : ' + cdcode);
                         $.ajax({
                             type: 'post',
                             url: 'PrintSchedule',
                             data: {
                                 'cdcode': cdcode,
-                                'tdcode': tdcode,
-                                'fecode': fecode
                             },
                             dataType: 'json',
                             async: false,
                             success: function (e) {
+                                console.log(e);
+                                currentCdcode = cdcode;
                                 Print(e);
                             }
                         })
                     }
+
                     function Print(Val) {
-                        console.log(Val);
-                        let ScheduleListDiv = document.querySelector('modal-body');
-                        ScheduleListDiv.innerHTML = "";
-                        let ScList = [];
-                        ScList = Val;
-                        for (let Sc of ScList) {
-                            let InnerDiv = document.createElement('div');
-                            InnerDiv.innerText = Sc.cd
+                        let tdnameList = [];
+                        let fenameList = [];
+                        let codeList = [];
+                        codeList = Val;
+                        for (let code in codeList) {
+                            //         console.log(codeList[code].tdcode);
+                            //        console.log(codeList[code].fecode);
+                            if (codeList[code].fecode == null) {
+                                $.ajax({
+                                    type: 'get',
+                                    url: 'getTdName',
+                                    data: {
+                                        'tdcode': codeList[code].tdcode,
+                                        'cdcode': currentCdcode
+                                    },
+                                    async:false,
+                                    dataType: 'json',
+                                    success: function (tdname) {
+                                        tdnameList.push(tdname);
+                                        console.log(tdnameList);
+                                    }
+                                });
+                            }
+                            if (codeList[code].tdcode == null) {
+                                $.ajax({
+                                    type: 'get',
+                                    url: 'getFeName',
+                                    data: {
+                                        'fecode': codeList[code].fecode,
+                                        'cdcode': currentCdcode
+                                    },
+                                    async:false,
+                                    dataType: 'json',
+                                    success: function (fename) {
+                                        fenameList.push(fename);
+                                        console.log(fenameList);
+                                    }
+                                });
+                            }
+                        }
+
+                        printList(tdnameList, fenameList);
+                    }
+
+                    function printList(tdnameList, fenameList) {
+                     //   console.log('여행지이름 추가 확인 : ' + tdnameList);
+                      //  console.log('축제 이름 추가 확인 : ' + fenameList);
+                       
+                        //여행지 부분
+                        console.log(tdnameList);
+
+                        let tdAreaDiv = document.querySelector('.tdArea');
+                        tdAreaDiv.innerHTML = "";
+                        for (let td in tdnameList) {
+                            let tdnameDiv = document.createElement('div');
+                            tdnameDiv.innerText = tdnameList[td];
+
+                            tdAreaDiv.appendChild(tdnameDiv);
 
                         }
+
+
+
+                        //축제 부분
+                        let feAreaDiv = document.querySelector('.feArea');
+                        feAreaDiv.innerHTML ="";
+                        for(let fe in fenameList){
+                            let fenameDiv = document.createElement('div');
+                            fenameDiv.innerText = fenameList[fe];
+
+                            feAreaDiv.appendChild(fenameDiv);
+                        }
                     }
+                </script>
+                <script>
                 </script>
     </body>
 
