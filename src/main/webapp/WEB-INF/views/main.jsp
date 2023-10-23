@@ -412,8 +412,8 @@ main {
 							<c:forEach items="${ tdList}" var="td">
 								<div class="card p-2 zoom"
 									style="width: 18rem; margin:17px 9px 20px 7px; height: 370px; border:none;" onmouseenter ="asd(this)" onmouseleave ="fdsa(this)">
-									<img src="${td.tdphoto }" class="card-img-top" alt="..."
-										width="286px" height="191px" loading="lazy">
+									<a href="/detailTdest?tdcode=${td.tdcode }"><img src="${td.tdphoto }" class="card-img-top" alt="..."
+										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
 										<h5 class="card-title">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
@@ -457,8 +457,8 @@ main {
 					<c:forEach items="${ feList}" var="fe">
 						<div class="card position-relative p-2 zoom"
 							style="width: 18rem; margin:17px 9px 20px 7px; height: 420px;"onmouseenter ="asd(this)" onmouseleave ="fdsa(this)">
-							<img src="${fe.feposter }" class="card-img-top" alt="..."
-								width="286px" height="191px" loading="lazy">
+							<a href="/detailFestival?code=${fe.fecode }"><img src="${fe.feposter }" class="card-img-top" alt="..."
+								width="286px" height="191px" loading="lazy"></a>
 							<div class="card-body">
 								<h5 class="card-title">${fe.fename }</h5>
 								<p class="card-text">${fe.feaddress }</p>

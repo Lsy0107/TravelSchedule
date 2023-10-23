@@ -44,6 +44,11 @@
   <select id="select_sc_td_join" resultType="hashmap">
   select sc.mid, sc.cdcode, sc.fecode, sc.tdcode, to_char(sc.scdate, 'YYYY/MM/DD HH24:MI') as scdate, td.*, fe.* from schedule sc left join tdest td on sc.tdcode = td.tdcode left join festival fe on sc.fecode = fe.fecode where sc.mid= #{mid} and sc.cdcode = #{cdcode} order by sc.scdate
   </select>
+  <select id="selectTdest_Nearby">
+  <![CDATA[
+  select * from tdest where ctcode = #{ctcode} and tdcode not in(#{tdcode}) order by  DBMS_RANDOM.RANDOM() 
+  ]]>
+  </select>
   <delete id="deleteSchedule">
   delete from schedule where mid = #{mid} and cdcode = #{cdcode}
   </delete>
