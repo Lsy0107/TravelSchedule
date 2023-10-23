@@ -76,14 +76,17 @@ public class HomeController {
 	@RequestMapping(value="/detailFestival")
 	public ModelAndView detailPage(String code, HttpSession session) {
 		System.out.println("상세페이지_축제 이동");
-		ModelAndView mav = new ModelAndView();
-		Likelist lk = new Likelist();
-		lk.setFecode(code);		
-		lk.setMid((String)session.getAttribute("loginId"));
-		System.out.println(lk.getMid());
-		String seloption = "festival";
-		//System.out.println(codeName);
-		String Like = apisvc.getLikelist(lk, seloption);
+		ModelAndView mav = new ModelAndView();		
+		if(session.getAttribute("loginId") != null) {
+			Likelist lk = new Likelist();
+			lk.setFecode(code);		
+			lk.setMid((String)session.getAttribute("loginId"));
+			System.out.println(lk.getMid());
+			String seloption = "festival";
+			//System.out.println(codeName);
+			String Like = apisvc.getLikelist(lk, seloption);
+			mav.addObject("like", Like);
+		}
 		Festival festival = apisvc.detailFestival(code);
 		String ctcode = festival.getCtcode();
 		String fecode = festival.getFecode();
@@ -95,7 +98,6 @@ public class HomeController {
 		mav.addObject("festival", festival);
 		mav.addObject("nearby", Nearby);
 		mav.addObject("tdest", tdest);
-		mav.addObject("like", Like);
 		mav.setViewName("festival/detailFestival");
 		return mav;
 	}
