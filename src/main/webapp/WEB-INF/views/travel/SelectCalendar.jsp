@@ -51,7 +51,7 @@
 				
 				</div>
 				<div class="disnone" style="text-align: end;" id="btnArea">
-				<button id="removebtn" class="btn btn-info">캘린더 삭제하기</button>
+				<button id="removebtn" class="btn btn-info" onclick="removeCal()">캘린더 삭제하기</button>
 				<button id="travelMkSc" class="btn btn-info">캘린더 계획하기</button>
 				</div>
 				</div>
@@ -103,6 +103,8 @@
 	}
 	)
 	function getSchedule(cdcode, mid, cdstate){
+		selcdcode = cdcode;
+		selmid = mid;
 		$.ajax({
 			url:"getSchedule",
 			type:"post",
@@ -180,26 +182,28 @@
 					scArea.appendChild(h2Tag);
 				}
     			let removebtn = document.querySelector("#removebtn");
-    			removebtn.addEventListener('click', function(){
-    				$.ajax({
-    					url:"/removeCalendar",
-    					type:"post",
-    					data:{"cdcode":cdcode, "mid":mid},
-    					aync:false,
-    					success:function(rs){
-    						if(rs){
-    							location.reload();
-    						}else{
-    							alert('캘린더 삭제를 실패하였습니다.');
-    						}
-    					}
-    				})
-    			});
-    			
-    			
 			}
 		})
 	}
+	let selcdcode = "";
+	let selmid = "";
+	function removeCal() {
+		$.ajax({
+			url:"/removeCalendar",
+			type:"post",
+			data:{"cdcode":selcdcode, "mid":selmid},
+			aync:false,
+			success:function(rs){
+				if(rs){
+					alert("캘린더 삭제를 성공하였습니다.");
+					location.reload();
+				}else{
+					alert("캘린더 삭제를 실패하였습니다.");
+				}
+			}
+		})
+	}
+	
 	</script>
 </body>
 </html>

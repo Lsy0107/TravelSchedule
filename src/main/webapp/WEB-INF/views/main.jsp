@@ -100,7 +100,7 @@
 				main {
 					position: relative;
 					min-height: 100%;
-					padding-bottom: 2000px;
+					padding-bottom: 1725px;
 				}
 
 				.profile {
@@ -141,22 +141,22 @@
 						<div id="myCarousel" class="carousel slide"
 							data-bs-ride="carousel" style="z-index: 0;">
 							<div class="carousel-indicators">
-								<button type="button" data-bs-target="#myCarousel"
+								<button type="button" data-bs-target="#myCarousel" class="active"
 									data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
 								<button type="button" data-bs-target="#myCarousel"
-									data-bs-slide-to="1" aria-label="Slide 2" class="active"
+									data-bs-slide-to="1" aria-label="Slide 2" 
 									aria-current="true"></button>
 								<button type="button" data-bs-target="#myCarousel"
 									data-bs-slide-to="2" aria-label="Slide 3"></button>
 							</div>
 							<div class="carousel-inner">
-								<div class="carousel-item">
+								<div class="carousel-item active">
 									<svg class="bd-placeholder-img" width="100%" height="550px"
 										xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 										preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="800px" fill="#777"></rect></svg>
+								<rect width="100%" height="800px" fill="#6DF"></rect></svg>
 									<div class="carousel-caption text-start">
-										<a href="${newList[0].url}"><img
+										<a href="${newList[0].url}"><img style="border-radius: 10px;"
 											src="${newList[0].photo }" width="676px" height="400px"
 											loading="lazy"></a>
 										<div>
@@ -165,13 +165,13 @@
 										</div>
 									</div>
 								</div>
-								<div class="carousel-item active">
+								<div class="carousel-item">
 									<svg class="bd-placeholder-img" width="100%" height="550px"
 										xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 										preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="800px" fill="#777"></rect></svg>
+								<rect width="100%" height="800px" fill="#6DF"></rect></svg>
 									<div class="carousel-caption text-start">
-										<a href="${newList[1].url}"><img
+										<a href="${newList[1].url}"><img style="border-radius: 10px;"
 											src="${newList[1].photo }" width="676px" height="400px"
 											loading="lazy"></a>
 										<div>
@@ -184,10 +184,10 @@
 									<svg class="bd-placeholder-img" width="100%" height="550px"
 										xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 										preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="800px" fill="#777"></rect></svg>
+								<rect width="100%" height="800px" fill="#6DF"></rect></svg>
 
 									<div class="carousel-caption text-start">
-										<a href="${newList[2].url}"><img
+										<a href="${newList[2].url}"><img style="border-radius: 10px;"
 											src="${newList[2].photo }" width="676px" height="400px"
 											loading="lazy"></a>
 										<div>
@@ -333,6 +333,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="row" style="margin-top: 20px;">
 				<h2>축제</h2>
 				<div style="overflow-x: scroll;">

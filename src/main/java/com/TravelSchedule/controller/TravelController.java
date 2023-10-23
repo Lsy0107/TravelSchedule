@@ -70,25 +70,19 @@ public class TravelController {
 		Calendar cd = new Calendar();
 		cd.setCdcode(cdcode);
 		cd.setMid(mid);
-		ArrayList<Schedule> scList = new ArrayList<Schedule>();
-		try {
-			scList = tsvc.checkSchedule(cd);			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		System.out.println(scList);
+		ArrayList<Schedule> scList = tsvc.checkSchedule(cd);
 		String result = "N";
-		if(scList != null) {	
-			System.out.println("asd");
-			System.out.println(scList.get(0).getScdate());
+		if(scList.size() >0) {	
+			System.out.println(scList);
 			if(scList.get(0).getScdate()!=null) {
+				System.out.println("asd");
 				int rs = tsvc.updateCdstate(cdcode, mid);
 				if(rs>0 ) {
 					result = "Y";					
 				}else {
 					result="C";					
 				}
-		}
+			}
 		}
 		return result;
 	}
