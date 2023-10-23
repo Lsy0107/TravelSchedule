@@ -333,6 +333,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="row" style="margin-top: 20px;">
 				<h2>축제</h2>
 				<div style="overflow-x: scroll;">

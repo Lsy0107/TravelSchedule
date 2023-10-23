@@ -64,7 +64,7 @@
                         <div class="Ctitle" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             onclick="PrintSchedule('${cl.cdcode}')">
                             <p class="cdname">${cl.cdname}</p>
-                            <button class="reviewBtn btn btn-outline-primary">리뷰 작성</button>
+                            <button class="reviewBtn btn btn-outline-primary" onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">리뷰 작성</button>
                         </div>
                     </c:forEach>
                 </div>

@@ -52,7 +52,7 @@
 				</div>
 				<div class="disnone" style="text-align: end;" id="btnArea">
 				<button id="removebtn" class="btn btn-info">캘린더 삭제하기</button>
-				<button id="travelMkSc" class="btn btn-info">캘린더 계획하기</button>
+				<button id="travelMkSc" class="btn btn-info" onclick="location.href='TravelReview'">캘린더 계획하기</button>
 				</div>
 				</div>
 			</div>
