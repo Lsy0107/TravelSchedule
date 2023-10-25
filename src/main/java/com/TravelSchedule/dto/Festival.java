@@ -12,9 +12,9 @@ public class Festival {
 	private String opendate;
 	private String enddate;
 	private String feinfo;
-	private String feup;
-	private String fedown;
 	private String fetel;
 	private String felati;
 	private String felongti;
+	private String contentid;
+	private String homepage;
 }

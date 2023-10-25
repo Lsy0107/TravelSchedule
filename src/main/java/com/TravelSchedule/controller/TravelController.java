@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
@@ -186,8 +187,19 @@ public class TravelController {
 	}
 	
 	@RequestMapping(value="/detailTdest")
-	public ModelAndView detailTdest(String tdcode) {
+	public ModelAndView detailTdest(String tdcode, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(tdcode);
+		if(session.getAttribute("loginId") != null) {
+			Likelist lk = new Likelist();
+			lk.setTdcode(tdcode);		
+			lk.setMid((String)session.getAttribute("loginId"));
+			System.out.println(lk.getMid());
+			String seloption = "tdest";
+			//System.out.println(codeName);
+			String Like = apisvc.getLikelist(lk, seloption);
+			mav.addObject("like", Like);
+		}
 		System.out.println("여행지 상세 정보 페이지이동");
 		System.out.println("TDCODE : "+tdcode);
 		Tdest detailTdest = tsvc.detailTdest(tdcode);
