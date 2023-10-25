@@ -293,7 +293,7 @@
                     <div class="Tdest_wrap">
                         <div>
                             <div class="SearchArea">
-                                <form action="SearchService" method="get">
+                                <form action="SearchService_fe" method="get">
                                     <div class="SArea">
                                         <input name="searchVal" class="Search" type="text">
                                         <button class="SearchBtn">검색</button>
@@ -303,24 +303,7 @@
                         </div>
                         <div class="TdListIn">
                             <div id="rowid" class="row TdestArea">
-                                <c:forEach var="fe" items="${festival}">
-                                    <div class="contain">
-                                        <!-- Blog post-->
-                                        <div class="card mb-4 photo" id="photo"
-                                            onclick="location.href='detailFestival?code=${fe.fecode}'">
-                                            <img class="card-img-top feImg" src="${fe.feposter}" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'"/>
-
-                                        </div>
-                                        <div class="card-body">
-                                            <h3 id="title" class="card-title h4" title="${fe.fename}"
-                                                style="overflow: hidden; white-space: nowrap;">${fe.fename}</h3>
-                                            <button class="btn btn-primary" onclick="selectCdcode('${fe.fecode}','festival')"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
-                                                추가하기</button>
-                                        </div>
-                                    </div>
-
-                                </c:forEach>
+                                
                             </div>
                         </div>
                         <div class="pagination">
@@ -335,16 +318,6 @@
 
                 <hr style="position: relative; top: 65px;">
                 </hr>
-                <div class="TdestRecommendArea">
-                    <div class="JejuIslandTdest" onclick="location.href='/'">
-                        <img src="${pageContext.request.contextPath}/resources/tdest/제주 돌하르방.png" alt="">
-                        <span id="RecommendTitle">제주도에 이런 여행지는 어떠세요?</span>
-                        <img src="${pageContext.request.contextPath}/resources/tdest/제주도.png" alt="">
-                    </div>
-                    <div class="FestivalRecomm" onclick="location.href='festival'">
-                        <span id="RecommendTitle">축제를 즐기고 싶으신가요?</span>
-                    </div>
-                </div>
 
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

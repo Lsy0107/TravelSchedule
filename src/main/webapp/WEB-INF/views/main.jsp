@@ -205,7 +205,10 @@ main {
             font-weight: 600;
             cursor: pointer;
         }
-
+		
+		.scheduleHave {
+			background-color: rgb(101, 178, 255);
+		}
 
 
 
@@ -394,9 +397,9 @@ main {
 									<div class="cloud"></div>
 								</div>
 							</div>
+
 						</div>
 					</div>
-
 
 				</div>
 			</div>
@@ -789,6 +792,7 @@ main {
                  newDIV.onclick = function () { choiceDate(this); }
              }
          }
+         
      }
 
      // 날짜 선택

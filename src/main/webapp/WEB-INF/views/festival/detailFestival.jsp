@@ -252,8 +252,11 @@ a{
 		<div class="wrap">			
 			<img class="card-img-top Img" src="${festival.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 			<p class="name"> ${festival.fename }</p>
-			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>
-			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart()" id="heart"></i>
+			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>			
+			
+			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
+			<button class="btn btn-primary" onclick="selectCdcode('${festival.fecode}','festival')"
+            data-bs-toggle="modal" data-bs-target="#exampleModal">계획에 추가하기</button>
 			<hr class="hr">
 			<div id="map" style="width:1000px;height:400px;"></div>
 			<p class="address">${festival.feaddress }</p>
@@ -304,6 +307,24 @@ a{
 	            
             </div>			
 		</div>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="selectCalendar">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    id="selectClear">선택</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="../include/footer.jsp"%>
@@ -341,20 +362,95 @@ a{
 		
 		
 	</script>
-	<script type="text/javascript">
-		function clickHeart(){
-			console.log('클릭');
-			let heart = document.querySelector('#heart');
-			const cl = document.querySelector('#heart').classList;
-			if(cl.contains("fa-regular") ){
-			heart.classList.replace('fa-regular', 'fa-solid');
-			} else{
-			heart.classList.replace('fa-solid', 'fa-regular');
-			}
+	<script type="text/javascript">		
+		function clickHeart(code, seloption){
+			console.log(code);
+			if ("${sessionScope.loginId}" == "") {
+	            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+	        } else{
+	        	$.ajax({
+	        		url: "/clickHeart",
+	        		type: "post",
+	        		data: { mid: "${sessionScope.loginId}", code : code, "seloption" : seloption},
+	        		aysnc: false,
+	        		success: function(result){
+					console.log('클릭');
+					let heart = document.querySelector('#heart');
+					const cl = document.querySelector('#heart').classList;
+					if(cl.contains("fa-regular") ){
+					heart.classList.replace('fa-regular', 'fa-solid');
+					} else{
+					heart.classList.replace('fa-solid', 'fa-regular');
+					}
+	        			
+	        		}
+	        	});
+	        	
+	        }
 		}
 		
+		
 	</script>
+	<script type="text/javascript">
+	function selectCdcode(fecode, seloption) {
+        if ("${sessionScope.loginId}" == "") {
+            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+        } else {
+            $.ajax({
+                url: "/getCdcode",
+                type: "post",
+                data: { mid: "${sessionScope.loginId}" },
+                async: false,
+                success(rs) {
+                    console.log(rs.length);
+                    let modalBodyTag = document.querySelector("#selectCalendar")
+                    modalBodyTag.innerHTML = "";
+                    if (rs.length > 0) {
+
+                        let selTag = document.createElement("select")
+                        for (let cd of rs) {
+                            let optionTag = document.createElement("option")
+                            optionTag.innerText = cd.cdname;
+                            optionTag.setAttribute("value", cd.cdcode)
+                            selTag.appendChild(optionTag);
+                        }
+                        modalBodyTag.appendChild(selTag);
+                        let btnTag = document.querySelector("#selectClear");
+                        btnTag.addEventListener("click", function () {
+                            selectDest(fecode, selTag.value, seloption)
+                        })
+                    }
+                    else {
+                        modalBodyTag.innerText = "달력을 추가 해주세요";
+                    }
+                }
+            })
+        }
+    }
+	function selectDest(fecode, cdcode, seloption) {
+        console.log(fecode + "  " + cdcode);
+        $.ajax({
+            url: "/registSelectDest",
+            type: "post",
+            data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption" : seloption },
+            async: false,
+            success(rs) {
+                alert('행선지 선택 완료');
+                location.href = "/detailFestival?code="+fecode;
+            }
+        })
+    }
 	
+	</script>
+	<script type="text/javascript">
+	let heart = document.querySelector('#heart');
+	const cl = document.querySelector('#heart').classList;
+	let Y = 'Y';
+	let N = 'N';
+	if(${like} == 'Y'){
+		heart.classList.replace('fa-regular', 'fa-solid');
+	}
+	</script>
 	
 
 </body>

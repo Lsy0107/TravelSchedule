@@ -19,6 +19,13 @@
         <link href="resources/css/styles.css" rel="stylesheet" />
         
         <style type="text/css">
+        .input-file-btn{
+		  padding: 6px 25px;
+		  border-radius: 4px;
+
+		  margin-left: 11px;
+		}
+		
 			.profile-img.big {
 				width: 150px;
 				height: 150px;
@@ -51,8 +58,10 @@
 						</c:otherwise>
 					</c:choose>
 					</p>
-						
-						<input type="file" name="mprofiledata" value="${mInfo.mprofile }">
+						<label class="input-file-btn w3-button w3-black w3-ripple w3-round" for="input-file">
+						  프로필 변경
+						</label>
+						<input id="input-file" type="file" name="mprofiledata" value="${mInfo.mprofile }" style="display:none;">
 						
 					<p>
 						<label><h5>ID</h5></label> 
@@ -64,7 +73,7 @@
 					</p>
 					
 					<p class="w3-center">
-						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
+						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 저장</button>
 					</p>
 				</form>
 				<br />
