@@ -3,10 +3,12 @@ package com.TravelSchedule.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 
 public interface ReviewDao {
@@ -32,6 +34,12 @@ public interface ReviewDao {
 			+ "FROM SCHEDULE S INNER JOIN FESTIVAL F ON S.FECODE = F.FECODE\r\n"
 			+ "WHERE MID = 'asd' AND SCDATE IS NOT NULL")
 	ArrayList<HashMap<String, String>> getFeInfoDao(@Param("cdcode")String cdcode, @Param("mid")String mid);
+
+	@Select("SELECT NVL(MAX(RECODE),0) FROM REVIEW")
+	String maxcode();
+
+	@Insert("INSERT INTO REVIEW VALUES(#{recode},#{mid},#{recomment},#{retitle},#{rephoto},0,'Y')")
+	int ReviewInsertDao(Review review);
 
 
 }

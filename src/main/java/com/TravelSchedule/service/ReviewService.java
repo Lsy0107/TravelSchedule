@@ -1,13 +1,20 @@
 package com.TravelSchedule.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.TravelSchedule.dao.ReviewDao;
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 
 @Service
@@ -58,5 +65,62 @@ public class ReviewService {
 		ArrayList<HashMap<String, String>> getFeInfoDao = rdao.getFeInfoDao(cdcode, mid);
 		return getFeInfoDao;
 	}
+
+	public Review getPhoto(Review review,HttpSession session) {
+		System.out.println("리뷰작성페이지 파일첨부 서비스");
+		MultipartFile[] profiledata = review.getProfiledata();
+		//System.out.println(profiledata);
+		String photoFile = "";
+		String savePath="";
+		//첨부파일이 있을 경우 파일 이름과 경로를 설정 
+		UUID uuid = UUID.randomUUID();
+		savePath = session.getServletContext().getRealPath("/resources/ReviewPhoto");
+	//	System.out.println(savePath);
+		if(profiledata.length > 0) {
+			System.out.println("첨부파일 O");
+			
+			for(int i=0; i<profiledata.length; i++) {	
+				String filename = uuid+"_"+profiledata[i].getOriginalFilename();
+				photoFile += uuid+"_"+profiledata[i].getOriginalFilename()+"/";
+				System.out.println(photoFile);
+				File newFile = new File(savePath, filename);//File("경로", "파일이름")
+				try {
+					profiledata[i].transferTo(newFile);
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			
+		}else {
+			System.out.println("첨부파일 x");
+		}
+		review.setProfiledata(profiledata);
+		review.setRephoto(photoFile);
+		return review;
+	}
+
+	public int ReviewInsert(Review review) {
+		System.out.println("리뷰 등록 서비스");
+    	
+    	String recode = rdao.maxcode();
+		String codeName = recode.substring(0,2);
+		int codeNum = Integer.parseInt(recode.substring(2))+1;
+		String codeNum_String = String.format("%05d", codeNum);
+		recode = codeName + codeNum_String;
+		
+    	System.out.println(recode);
+    	review.setRecode(recode);
+    	
+    	int ReviewInsertDao = rdao.ReviewInsertDao(review);
+		
+		return ReviewInsertDao;
+	}
+	
+
 
 }

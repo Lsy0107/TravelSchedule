@@ -31,6 +31,7 @@ public class MemberService {
 		UUID uuid = UUID.randomUUID();
 		savePath = session.getServletContext().getRealPath("/resources/memberProfile");
 		System.out.println(savePath);
+		
 		if(!mprofiledata.isEmpty()) {
 			System.out.println("첨부파일 O");
 			mprofile = uuid+"_"+mprofiledata.getOriginalFilename();
@@ -48,6 +49,8 @@ public class MemberService {
 		}else {
 			mprofile = "default.jpg";
 		}
+		
+		
 		meminfo.setMprofiledata(mprofiledata);
 		meminfo.setMprofile(mprofile);
 		return meminfo;

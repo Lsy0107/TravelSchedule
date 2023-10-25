@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.service.ReviewService;
 import com.google.gson.Gson;
@@ -90,6 +91,32 @@ public class ReviewController {
 		mav.addObject("Td", getTdInfo);
 		mav.addObject("Fe", getFeInfo);
 		mav.setViewName("review/ReviewWriteForm");
+		return mav;
+	}
+	
+	@RequestMapping(value="InsertReview")
+	public @ResponseBody ModelAndView InsertReview(Review review,String title, String contents,String codeList,HttpSession session){
+		System.out.println("리뷰 작성 호출");
+		System.out.println("받아온 title : "+title);
+		System.out.println("받아온 contents : "+contents);
+		System.out.println("받아온 codeList : "+codeList);
+		ModelAndView mav = new ModelAndView();
+		String mid = (String)session.getAttribute("loginId");
+		
+		Review photo = rsvc.getPhoto(review,session);
+		System.out.println(photo);
+		
+		review.setMid(mid);
+		review.setRecomment(contents);
+		review.setRetitle(title);
+		
+		int ReviewInsert = rsvc.ReviewInsert(review);
+		if(ReviewInsert>0) {
+			System.out.println("등록 성공");
+			mav.setViewName("redirect:/");
+		}else {
+			System.out.println("등록 실패");
+		}
 		return mav;
 	}
 	
