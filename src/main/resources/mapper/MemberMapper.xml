@@ -25,7 +25,7 @@
 	</select>
 	<update id="memberUpdate">
 	UPDATE members
-	SET MNICKNAME = #{mnickname}
+	SET MNICKNAME = #{mnickname}, MPROFILE = #{mprofile}
 	WHERE mid = #{mid}
 	</update>
 	<update id="passwordUpdate">
