@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
+import com.TravelSchedule.service.ApiService;
 import com.TravelSchedule.service.TravelService;
 import com.google.gson.Gson;
 
@@ -24,6 +26,8 @@ public class TravelController {
 	@Autowired
 	TravelService tsvc;
 
+	@Autowired
+	ApiService apisvc;
 	@RequestMapping(value="/removeDest")
 	public @ResponseBody String removeDest(Schedule sc, String seloption){
 		System.out.println("캘린더 개획 삭제");
@@ -73,15 +77,17 @@ public class TravelController {
 		cd.setMid(mid);
 		ArrayList<Schedule> scList = tsvc.checkSchedule(cd);
 		String result = "N";
-		if(scList.size()>0) {	
-			if(!scList.get(0).getScdate().equals(null)) {
+		if(scList.size() >0) {	
+			System.out.println(scList);
+			if(scList.get(0).getScdate()!=null) {
+				System.out.println("asd");
 				int rs = tsvc.updateCdstate(cdcode, mid);
 				if(rs>0 ) {
 					result = "Y";					
 				}else {
 					result="C";					
 				}
-		}
+			}
 		}
 		return result;
 	}
@@ -137,6 +143,7 @@ public class TravelController {
 	public @ResponseBody String registSelectDest(Schedule sc, String seloption) {
 		System.out.println("여행지 선택");
 		System.out.println(sc);
+		System.out.println(seloption);
 		Schedule checksc = tsvc.getSchedule(sc, seloption);
 		String response = "Y";
 		if (checksc == null) {
@@ -187,9 +194,16 @@ public class TravelController {
 		System.out.println("여행지 상세 정보 페이지이동");
 		System.out.println("TDCODE : "+tdcode);
 		Tdest detailTdest = tsvc.detailTdest(tdcode);
-		
+		String ctcode = detailTdest.getCtcode();
 		System.out.println(detailTdest);
+		ArrayList<Tdest> Nearby = tsvc.tdest_Nearby(ctcode, tdcode);
+		String country = apisvc.getCountry_this(ctcode);
+		ArrayList<Festival> festival = apisvc.getFestival_db();
+		mav.addObject("country",country);
 		mav.addObject("detailTd",detailTdest);
+		mav.addObject("nearby", Nearby);		
+		mav.addObject("festival", festival);
+		
 		mav.setViewName("/travel/detailTdest");
 		
 		return mav;

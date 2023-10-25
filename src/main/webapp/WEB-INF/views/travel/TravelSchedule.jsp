@@ -158,7 +158,6 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
 	<script type="text/javascript">
 	let lalngList = JSON.parse('${lalngList}');
-	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng( 37.56458948133976, 126.97730596902437), //지도의 중심좌표.
@@ -200,7 +199,6 @@
 				scdate = scdate + " " + schour;
 				let scmin = document.querySelector("#selMM").value;
 				scdate = scdate + ":" + scmin;
-				console.log(scdate);
 				
 				let dataoption = {};
 				if(seloption == 'tdest'){
@@ -234,14 +232,14 @@
 	</script>
 	<script type="text/javascript">
 	function updateCdstate(cdcode){
-		console.log(cdcode);
+		let check = confirm("계획을 확정하면 더는 수정할 수 없습니다.");
+		if(check){
 		$.ajax({
 			url:'/updateCdstate',
 			type:"post",
 			data:{'cdcode':cdcode},
 			aync:false,
 			success:function(rs){
-				console.log(rs)
 				switch (rs) {
 				case 'Y':
 					location.href="/selectCalendar";
@@ -255,12 +253,11 @@
 				}
 			}
 		})
+		}
 	}
-		console.log("${cd.cdstate == 'Y' }");
 	</script>
 	<script type="text/javascript">
 	function removeDest(mid, cdcode, destcode, seloption){
-		console.log(mid+cdcode+destcode+seloption)
 		let dataOption = {};
 		if(seloption == 'tdest'){
 			dataOption = {"mid":mid, "cdcode":cdcode, "tdcode":destcode, "seloption":seloption};
@@ -274,7 +271,6 @@
 			data:dataOption,
 			aync:false,
 			success:function(rs){
-				console.log(rs);
 				if(rs == "Y"){
 					location.reload();
 				}
