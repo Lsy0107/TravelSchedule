@@ -72,10 +72,36 @@ public class MemberService {
 		return member;
 	}
 
-	public int memberInfo(String mid, String mnickname) {
+	public int memberInfo(Member mem, HttpSession session) {
 		System.out.println("MemberService - memberInfo");
 		
-		return mdao.memberUpdate(mid, mnickname);
+		MultipartFile mfile = mem.getMprofiledata();
+		String mprofile = "";
+		String savePath = session.getServletContext().getRealPath("/resources/memberProfile");
+		
+		if(!mfile.isEmpty()) { 
+			UUID uuid = UUID.randomUUID();
+			String code = uuid.toString();
+			System.out.println("code : " + code);
+			mprofile = code + "_" + mfile.getOriginalFilename();
+			
+			System.out.println("savePath" + savePath);
+			File newFile = new File(savePath, mprofile);
+				try {
+					mfile.transferTo(newFile);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		System.out.println("프로필 : " + mprofile);
+		mem.setMprofile(mprofile);
+		System.out.println(mem);
+		
+		int result = mdao.memberUpdate(mem);
+		
+		return result;
 	}
 
 	public int newPassword(String mid, String mpw) {
