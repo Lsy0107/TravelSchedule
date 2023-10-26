@@ -35,9 +35,10 @@
 
 <style type="text/css">
 .zoom:hover {
-  transform: scale(1.02222222222);
-  transition: .5s; /* 부드럽게 */
+	transform: scale(1.02222222222);
+	transition: .5s; /* 부드럽게 */
 }
+
 .signIn {
 	border: 1px solid black;
 	border-radius: 25px;
@@ -134,6 +135,26 @@ main {
 .btn_position {
 	
 }
+
+.marquee {
+	height:408px;
+	overflow-x: hidden;
+	position: relative;
+}
+
+.marquee_div {
+	display: inline-flex;
+	position: absolute;
+	overflow: hidden;
+}
+.marquee_anifast{
+	animation: marquee 50s linear infinite;
+}
+
+@keyframes marquee { 
+0% {left: 0;}
+100%{left:-2860px;}
+}
 </style>
 
 
@@ -145,171 +166,180 @@ main {
 		<!-- content 시작 -->
 		<div class="row" style="margin: 31px;"></div>
 		<!-- container 시작 -->
-		<div class="p-4" style="background-color: #F4FFFF;">		
-		<div class="container">
-		<div class="row">
-			<div id="TitleBar" style="width: 74%;">
-				<div class="IMGBAR">
-					<div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel"
-						style="z-index: 0;">
-						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#myCarousel"
-								data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-							<button type="button" data-bs-target="#myCarousel"
-								data-bs-slide-to="1" aria-label="Slide 2" class="active"
-								aria-current="true"></button>
-							<button type="button" data-bs-target="#myCarousel"
-								data-bs-slide-to="2" aria-label="Slide 3"></button>
-						</div>
-						<div class="carousel-inner">
-							<div class="carousel-item">
-								<svg class="bd-placeholder-img" width="100%" height="550px"
-									xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-									preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="800px" fill="#F4FFFF"></rect></svg>
-								<div class="carousel-caption text-start">
-									<a href="${newList[0].url}"><img src="${newList[0].photo }"
-										width="676px" height="400px" loading="lazy"></a>
-									<div>
-										<p style="margin: 0px;">${newList[0].newtitle }</p>
-										<p style="margin: 0px;">${newList[0].newsdate }</p>
-									</div>
+		<div class="p-4" style="background-color: #F4FFFF;">
+			<div class="container">
+				<div class="row">
+					<div id="TitleBar" style="width: 74%;">
+						<div class="IMGBAR">
+							<div id="myCarousel" class="carousel carousel-dark slide"
+								data-bs-ride="carousel" style="z-index: 0;">
+								<div class="carousel-indicators">
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="1" aria-label="Slide 2" class="active"
+										aria-current="true"></button>
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="2" aria-label="Slide 3"></button>
 								</div>
-							</div>
-							<div class="carousel-item active">
-								<svg class="bd-placeholder-img" width="100%" height="550px"
-									xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-									preserveAspectRatio="xMidYMid slice" focusable="false">
+								<div class="carousel-inner">
+									<div class="carousel-item">
+										<svg class="bd-placeholder-img" width="100%" height="550px"
+											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#F4FFFF"></rect></svg>
-								<div class="carousel-caption text-start">
-									<a href="${newList[1].url}"><img src="${newList[1].photo }"
-										width="676px" height="400px" loading="lazy"></a>
-									<div>
-										<p style="margin: 0px;">${newList[1].newtitle }</p>
-										<p style="margin: 0px;">${newList[1].newsdate }</p>
+										<div class="carousel-caption text-start">
+											<a href="${newList[0].url}"><img
+												src="${newList[0].photo }" width="676px" height="400px"
+												loading="lazy"></a>
+											<div>
+												<p style="margin: 0px;">${newList[0].newtitle }</p>
+												<p style="margin: 0px;">${newList[0].newsdate }</p>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-							<div class="carousel-item">
-								<svg class="bd-placeholder-img" width="100%" height="550px"
-									xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-									preserveAspectRatio="xMidYMid slice" focusable="false">
+									<div class="carousel-item active">
+										<svg class="bd-placeholder-img" width="100%" height="550px"
+											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
+								<rect width="100%" height="800px" fill="#F4FFFF"></rect></svg>
+										<div class="carousel-caption text-start">
+											<a href="${newList[1].url}"><img
+												src="${newList[1].photo }" width="676px" height="400px"
+												loading="lazy"></a>
+											<div>
+												<p style="margin: 0px;">${newList[1].newtitle }</p>
+												<p style="margin: 0px;">${newList[1].newsdate }</p>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<svg class="bd-placeholder-img" width="100%" height="550px"
+											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
 								<rect width="100%" height="800px" fill="#F4FFFF"></rect></svg>
 
-								<div class="carousel-caption text-start">
-									<a href="${newList[2].url}"><img src="${newList[2].photo }"
-										width="676px" height="400px" loading="lazy"></a>
-									<div>
-										<p style="margin: 0px;">${newList[2].newtitle }</p>
-										<p style="margin: 0px;">${newList[2].newsdate }</p>
+										<div class="carousel-caption text-start">
+											<a href="${newList[2].url}"><img
+												src="${newList[2].photo }" width="676px" height="400px"
+												loading="lazy"></a>
+											<div>
+												<p style="margin: 0px;">${newList[2].newtitle }</p>
+												<p style="margin: 0px;">${newList[2].newsdate }</p>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<button class="carousel-control-prev" type="button"
-							data-bs-target="#myCarousel" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button"
-							data-bs-target="#myCarousel" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button>
-					</div>
-				</div>
-			</div>
-			<div class="card text-center" style="width: 26%; height: 550px;">
-				<div class="card-header">
-					<ul class="nav nav-tabs card-header-tabs">
-						<li class="nav-item"><a id="meminfoA" class="nav-link active"
-							aria-current="true" href="javascript:chageDisplay('meminfo')">내정보</a></li>
-						<li class="nav-item"><a id="weatherA" class="nav-link"
-							href="javascript:chageDisplay('weather')">날씨</a></li>
-					</ul>
-				</div>
-				<div class="card-body" id="meminfoTag">
-					<c:choose>
-						<c:when test="${sessionScope.loginId ==null }">
-							<button class="btn btn-primary"
-								onclick="location.href='${pageContext.request.contextPath }/memberLoginForm'">로그인</button>
-						</c:when>
-						<c:otherwise>
-							<h1 class="card-title" style="text-align: justify;">
-								<img src="/resources/memberProfile/${sessionScope.loginProfile}"
-									class="profile">${sessionScope.loginId }</h1>
-							<p class="card-text">오늘의 일정</p>
-							<a href="#" class="btn btn-primary">일정보러가기</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<div class="card-body disnone" id="weatherTag"
-					style="background-color: rgb(101, 178, 255); margin: 10px;">
-					<div class="row">
-						<div class="row align-items-start">
-							<div class="col">
-								<h3
-									style="margin-left: 15px; color: #fff; font-family: 'Jua' !important;">오늘의
-									날씨</h3>
-							</div>
-						</div>
-						<div class="row align-items-center" style="color: #fff;">
-							<div class="col">
-								<div style="float: left;">
-									<div class="weather_icon"></div>
-								</div>
-							</div>
-							<div class="col">
-								<select class="weatherCity" style="width: 75px;"
-									onchange="selectWeather(this.value)">
-									<option value="Seoul">서울</option>
-									<option value="Incheon">인천</option>
-									<option value="Busan">부산</option>
-									<option value="Daejeon">대전</option>
-									<option value="Daegu">대구</option>
-									<option value="Uisan">울산</option>
-									<option value="Gwangju">광주</option>
-									<option value="Jeju">제주</option>
-								</select>
-							</div>
-						</div>
-						<div class="row align-items-end" style="color: #fff;">
-							<div class="col">
-								<div>
-									<div class="current_temp" style="font-size: 30pt"></div>
-									<div class="weather_description" style="font-size: 20pt"></div>
-									<div class="city" style="font-size: 13pt"></div>
-								</div>
-							</div>
-							<div class="col">
-								<div
-									style="float: right; margin: -5px 0px 0px 0px; font-size: 11pt">
-									<div class="temp_min"></div>
-									<div class="temp_max"></div>
-									<div class="humidity"></div>
-									<div class="wind"></div>
-									<div class="cloud"></div>
-								</div>
+								<button class="carousel-control-prev" type="button"
+									data-bs-target="#myCarousel" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button"
+									data-bs-target="#myCarousel" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
 							</div>
 						</div>
 					</div>
+					<div class="card text-center" style="width: 26%; height: 550px;">
+						<div class="card-header">
+							<ul class="nav nav-tabs card-header-tabs">
+								<li class="nav-item"><a id="meminfoA"
+									class="nav-link active" aria-current="true"
+									href="javascript:chageDisplay('meminfo')">내정보</a></li>
+								<li class="nav-item"><a id="weatherA" class="nav-link"
+									href="javascript:chageDisplay('weather')">날씨</a></li>
+							</ul>
+						</div>
+						<div class="card-body" id="meminfoTag">
+							<c:choose>
+								<c:when test="${sessionScope.loginId ==null }">
+									<button class="btn btn-primary"
+										onclick="location.href='${pageContext.request.contextPath }/memberLoginForm'">로그인</button>
+								</c:when>
+								<c:otherwise>
+									<h1 class="card-title" style="text-align: justify;">
+										<img
+											src="/resources/memberProfile/${sessionScope.loginProfile}"
+											class="profile">${sessionScope.loginId }</h1>
+									<p class="card-text">오늘의 일정</p>
+									<a href="#" class="btn btn-primary">일정보러가기</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="card-body disnone" id="weatherTag"
+							style="background-color: rgb(101, 178, 255); margin: 10px;">
+							<div class="row">
+								<div class="row align-items-start">
+									<div class="col">
+										<h3
+											style="margin-left: 15px; color: #fff; font-family: 'Jua' !important;">오늘의
+											날씨</h3>
+									</div>
+								</div>
+								<div class="row align-items-center" style="color: #fff;">
+									<div class="col">
+										<div style="float: left;">
+											<div class="weather_icon"></div>
+										</div>
+									</div>
+									<div class="col">
+										<select class="weatherCity" style="width: 75px;"
+											onchange="selectWeather(this.value)">
+											<option value="Seoul">서울</option>
+											<option value="Incheon">인천</option>
+											<option value="Busan">부산</option>
+											<option value="Daejeon">대전</option>
+											<option value="Daegu">대구</option>
+											<option value="Uisan">울산</option>
+											<option value="Gwangju">광주</option>
+											<option value="Jeju">제주</option>
+										</select>
+									</div>
+								</div>
+								<div class="row align-items-end" style="color: #fff;">
+									<div class="col">
+										<div>
+											<div class="current_temp" style="font-size: 30pt"></div>
+											<div class="weather_description" style="font-size: 20pt"></div>
+											<div class="city" style="font-size: 13pt"></div>
+										</div>
+									</div>
+									<div class="col">
+										<div
+											style="float: right; margin: -5px 0px 0px 0px; font-size: 11pt">
+											<div class="temp_min"></div>
+											<div class="temp_max"></div>
+											<div class="humidity"></div>
+											<div class="wind"></div>
+											<div class="cloud"></div>
+										</div>
+									</div>
+								</div>
+							</div>
 
+
+						</div>
+					</div>
 
 				</div>
 			</div>
-
 		</div>
-		</div>
-		</div>
+		<!-- 
+		 -->
 		<div class="p-4" style="background-color: #E8F5FF;">
 			<div class="container">
-				<div class="row" style="">
-					<div style="overflow-x: hidden; ">
-						<nav style="display: -webkit-inline-box;">
+				<div class="row marquee" style="">
+					<div class="" style="overflow-x: hidden; margin:0px;padding: 0px;">
+						<div class="marquee_div marquee_anifast">
 							<c:forEach items="${ tdList}" var="td">
-								<div class="card p-2 zoom"
-									style="width: 18rem; margin:17px 9px 20px 7px; height: 370px; border:none;" onmouseenter ="asd(this)" onmouseleave ="fdsa(this)">
-									<a href="/detailTdest?tdcode=${td.tdcode }"><img src="${td.tdphoto }" class="card-img-top" alt="..."
+								<div class="card p-2 zoom marquee_item" tabindex="0"
+									style="width: 18rem; margin: 17px 9px 20px 7px; height: 370px; border: none;"
+									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
+									<a href="/detailTdest?tdcode=${td.tdcode }"><img
+										src="${td.tdphoto }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
 										<h5 class="card-title">${td.tdname }</h5>
@@ -323,7 +353,28 @@ main {
 									</div>
 								</div>
 							</c:forEach>
-						</nav>
+							<c:forEach items="${ tdList}" var="td">
+								<div class="card p-2 zoom marquee_item" tabindex="0"
+									style="width: 18rem; margin: 17px 9px 20px 7px; height: 370px; border: none;"
+									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
+									<a href="/detailTdest?tdcode=${td.tdcode }"><img
+										src="${td.tdphoto }" class="card-img-top" alt="..."
+										width="286px" height="191px" loading="lazy"></a>
+									<div class="card-body">
+										<h5 class="card-title">${td.tdname }</h5>
+										<p class="card-text">${td.tdaddress }</p>
+										<button
+											class="btn btn-primary position-absolute bottom-0 start-0"
+											style="margin: 10px"
+											onclick="selectCdcode('${td.tdcode}','tdest')"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+											추가하기</button>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+						
+						
 					</div>
 				</div>
 			</div>
@@ -345,36 +396,58 @@ main {
 				</div>
 			</div>
 		</div>
-
-<div class="p-4" style="background-color: #DCEBFF;">
+		<div class="p-4" style="background-color: #DCEBFF;">
 			<div class="container">
-		<div class="row">
-			<div style="overflow-x: hidden;">
-				<nav style="display: -webkit-inline-box;">
-					<c:forEach items="${ feList}" var="fe">
-						<div class="card position-relative p-2 zoom"
-							style="width: 18rem; margin:17px 9px 20px 7px; height: 420px;"onmouseenter ="asd(this)" onmouseleave ="fdsa(this)">
-							<a href="/detailFestival?code=${fe.fecode }"><img src="${fe.feposter }" class="card-img-top" alt="..."
-								width="286px" height="191px" loading="lazy"></a>
-							<div class="card-body">
-								<h5 class="card-title">${fe.fename }</h5>
-								<p class="card-text">${fe.feaddress }</p>
-								<p class="card-text">${fe.opendate.split(' ')[0] }~
-									${fe.enddate.split(' ')[0] }</p>
-								<button
-									class="btn btn-primary position-absolute bottom-0 start-0"
-									style="margin: 10px"
-									onclick="selectCdcode('${fe.fecode}','festival')"
-									data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
-									추가하기</button>
-							</div>
+				<div class="row marquee" style="height:457px;">
+					<div class="" style="overflow-x: hidden; margin:0px;padding: 0px;">
+						<div class="marquee_div marquee_anifast">
+							<c:forEach items="${ feList}" var="fe">
+								<div class="card position-relative p-2 zoom"
+									style="width: 18rem; margin: 17px 9px 20px 7px; height: 420px; border: none;"
+									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
+									<a href="/detailFestival?code=${fe.fecode }"><img
+										src="${fe.feposter }" class="card-img-top" alt="..."
+										width="286px" height="191px" loading="lazy"></a>
+									<div class="card-body">
+										<h5 class="card-title">${fe.fename }</h5>
+										<p class="card-text">${fe.feaddress }</p>
+										<p class="card-text">${fe.opendate.split(' ')[0] }~
+											${fe.enddate.split(' ')[0] }</p>
+										<button
+											class="btn btn-primary position-absolute bottom-0 start-0"
+											style="margin: 10px"
+											onclick="selectCdcode('${fe.fecode}','festival')"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+											추가하기</button>
+									</div>
+								</div>
+							</c:forEach>
+							<c:forEach items="${ feList}" var="fe">
+								<div class="card position-relative p-2 zoom"
+									style="width: 18rem; margin: 17px 9px 20px 7px; height: 420px; border: none;"
+									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
+									<a href="/detailFestival?code=${fe.fecode }"><img
+										src="${fe.feposter }" class="card-img-top" alt="..."
+										width="286px" height="191px" loading="lazy"></a>
+									<div class="card-body">
+										<h5 class="card-title">${fe.fename }</h5>
+										<p class="card-text">${fe.feaddress }</p>
+										<p class="card-text">${fe.opendate.split(' ')[0] }~
+											${fe.enddate.split(' ')[0] }</p>
+										<button
+											class="btn btn-primary position-absolute bottom-0 start-0"
+											style="margin: 10px"
+											onclick="selectCdcode('${fe.fecode}','festival')"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+											추가하기</button>
+									</div>
+								</div>
+							</c:forEach>
 						</div>
-					</c:forEach>
-				</nav>
+					</div>
+				</div>
 			</div>
 		</div>
-</div>
-</div>
 		<!-- container 종료 -->
 		<!-- content 종료 -->
 		<!-- Footer-->
@@ -385,13 +458,11 @@ main {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="resources/js/scripts.js"></script>
-
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script>
 				AOS.init();
 			</script>
 	<script type="text/javascript">
-				console.log("${feList[0]}");
 				function chageDisplay(seloption) {
 					let meminfoTag = document.querySelector('#meminfoTag');
 					let weatherinfoTag = document.querySelector('#weatherTag');
@@ -468,7 +539,6 @@ main {
 											.floor(resp.main.temp_max - 273.15)
 										+ 'º';
 
-									console.log("$Icon" + $Icon);
 
 									$('.weather_icon').html("");
 									$('.weather_description').html("");
@@ -495,7 +565,6 @@ main {
 								}
 							}))
 				function selectWeather(val) {
-					console.log(typeof (val));
 					var apiURI = "http://api.openweathermap.org/data/2.5/weather?q="
 						+ val + "&appid=" + "c33fdd907b64fe0b48ffcfa1513f7eb5";
 					$
@@ -524,7 +593,6 @@ main {
 									+ Math.floor(resp.main.temp_max - 273.15)
 									+ 'º';
 
-								console.log("$Icon" + $Icon);
 
 								$('.weather_icon').html("");
 								$('.weather_description').html("");
@@ -563,17 +631,13 @@ main {
 					data:{mid:"${sessionScope.loginId}"},
 					async:false,
 					success(rs){
-						console.log(rs.length);
 						let modalBodyTag = document.querySelector("#selectCalendar")
 						modalBodyTag.innerHTML = "";
 						if(rs.length > 0){
 							let checkinfo = false;
 							let selTag = document.createElement("select")
 							for(let cd of rs){
-								console.log(cd);
-								console.log(cd.cdstate);
 								if(cd.cdstate == 'Y'){
-									console.log('여기');
 								let optionTag = document.createElement("option")
 								optionTag.innerText = cd.cdname;
 								optionTag.setAttribute("value", cd.cdcode)
@@ -581,7 +645,6 @@ main {
 								checkinfo = true;
 								}
 							}
-							console.log(checkinfo);
 							if(checkinfo){
 							modalBodyTag.appendChild(selTag);
 							let btnTag = document.querySelector("#selectClear");
@@ -624,12 +687,17 @@ main {
 		}
 	</script>
 	<script type="text/javascript">
-	 function asd(obj){
+	 function addW3(obj){
 		 obj.classList.add("w3-card-4");
-		 
+		//let marqueeDiv = obj.parentNode
+		//marqueeDiv.classList.add("marquee_anislow")
+		//marqueeDiv.classList.remove("marquee_ani")
 	 }
-	 function fdsa(obj){
+	 function removeW3(obj){
 		 obj.classList.remove("w3-card-4");
+		 //let marqueeDiv = obj.parentNode
+		 //marqueeDiv.classList.remove("marquee_anislow")
+		 //marqueeDiv.classList.add("marquee_anifast")
 	 }
 	</script>
 </body>

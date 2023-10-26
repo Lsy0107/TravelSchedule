@@ -216,16 +216,19 @@ td {
 				let scList_json = JSON.parse(scList);
 				console.log(scList_json)
 				let scArea = document.querySelector("#printSchedule");
-				scArea.innerHTML = '<table class="Calendar"><thead><tr><td id="prevCalendar"style="cursor: pointer;">&#60;</td><td colspan="5"><span id="calYear"></span>년 <span id="calMonth"></span>월</td>					<td id="nextCalendar" style="cursor: pointer;">&#62;</td>				</tr>				<tr>					<td>일</td>					<td>월</td>					<td>화</td>					<td>수</td>					<td>목</td>					<td>금</td>					<td>토</td>				</tr>			</thead>			<tbody>			</tbody>		</table>';
+				scArea.innerHTML = '<table class="Calendar"><thead><tr><td id="prevCalendar"style="cursor: pointer;">&#60;</td><td colspan="5"><span id="calYear"></span>년 <span id="calMonth"></span>월</td><td id="nextCalendar" style="cursor: pointer;">&#62;</td></tr><tr><td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>	</tr></thead><tbody></tbody></table>';
 				nowMonth = new Date();
 				buildCalendar(scList_json)
 				// onClick="prevCalendar('+scList_json+');" 
 				let prevCalendarBtn = document.querySelector("#prevCalendar");
-				prevCalendarBtn.setAttribute("onclick", "prevCalendar('"+scList_json+"')");
+				prevCalendarBtn.addEventListener("click",function(){
+					prevCalendar(scList_json);
+				})
 				
 				let nextCalendarBtn = document.querySelector("#nextCalendar");
-				nextCalendarBtn.setAttribute("onclick", "nextCalendar('"+scList_json+"')");
-				
+				nextCalendarBtn.addEventListener("click",function(){
+					nextCalendar(scList_json);
+				})
 				let btnArea = document.querySelector("#btnArea");
 				let date = "";
 				/*
@@ -327,7 +330,7 @@ td {
 
         // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
         function buildCalendar(scList) {
-
+			console.log(scList);
             let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
             let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
 
