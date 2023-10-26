@@ -1,6 +1,7 @@
 package com.TravelSchedule.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.TravelSchedule.dto.Member;
 
@@ -14,7 +15,7 @@ public interface MemberDao {
 
 	Member selectMemberInfo(String loginId);
 
-	int memberUpdate(@Param("mid")String mid, @Param("mnickname")String mnickname);
+	int memberUpdate(Member mem);
 
 	int passwordUpdate(@Param("mid")String mid, @Param("mpw")String mpw);
 
