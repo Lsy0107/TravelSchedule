@@ -76,6 +76,7 @@ public class HomeController {
 	@RequestMapping(value="/detailFestival")
 	public ModelAndView detailPage(String code, HttpSession session) {
 		System.out.println("상세페이지_축제 이동");
+		System.out.println(code);
 		ModelAndView mav = new ModelAndView();		
 		if(session.getAttribute("loginId") != null) {
 			Likelist lk = new Likelist();
@@ -161,7 +162,7 @@ public class HomeController {
 		lk.setMid(mid);
 		if(seloption.equals("festival") ) {
 			lk.setFecode(code);
-		} else if(seloption.equals("festival")) {
+		} else if(seloption.equals("tdest")) {
 			lk.setTdcode(code);
 		} else {
 			//lk.setRecode(code);

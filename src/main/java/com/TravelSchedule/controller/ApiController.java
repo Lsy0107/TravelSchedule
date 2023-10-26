@@ -28,11 +28,11 @@ public class ApiController {
 		ArrayList<Country> country = asvc.getCountry();
 		mav.addObject("country",country);
 		
-		// ArrayList<Festival> result  = asvc.getFestival();
-		ArrayList<Festival> result = asvc.getFestival_db(); 
+		//ArrayList<Festival> result  = asvc.getFestival();
+		//ArrayList<Festival> result = asvc.getFestival_db(); 
 
 //		System.out.println(result);
-		mav.addObject("festival",result);
+		//mav.addObject("festival",result);
 		
 		mav.setViewName("festival/Festival");
 		
