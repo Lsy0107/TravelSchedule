@@ -335,17 +335,6 @@
                 </div>
 
                 <hr style="position: relative; top: 65px;">
-                </hr>
-                <div class="TdestRecommendArea">
-                    <div class="JejuIslandTdest" onclick="location.href='/'">
-                        <img src="${pageContext.request.contextPath}/resources/tdest/제주 돌하르방.png" alt="">
-                        <span id="RecommendTitle">제주도에 이런 여행지는 어떠세요?</span>
-                        <img src="${pageContext.request.contextPath}/resources/tdest/제주도.png" alt="">
-                    </div>
-                    <div class="FestivalRecomm" onclick="location.href='festival'">
-                        <span id="RecommendTitle">축제를 즐기고 싶으신가요?</span>
-                    </div>
-                </div>
 
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

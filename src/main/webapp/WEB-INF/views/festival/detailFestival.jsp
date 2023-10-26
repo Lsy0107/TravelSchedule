@@ -128,7 +128,8 @@ main {
 .wrap{
 	margin-top:150px;
 	width: 1000px;
-	padding-left: 450px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .Img{
 	width: 1000px;	
@@ -239,6 +240,36 @@ a{
 	bottom: 30px;
 	left: 10px;
 }
+.feinfo{
+	width: 1000px;
+	padding-left: 30px;
+    padding-right: 30px;
+}
+.homepage{
+	margin-left: 30px;
+	background-color: white;
+	border-radius: 20px;
+	padding: 10px;
+	border-color: gray;
+}
+.fetel{
+	width: 900px;
+	padding-left: 15px;
+	padding-right: 30px;
+	font-weight: bold;
+	display: inline-block;
+	padding-top: 10px;
+}
+.phoneImg{
+	width:50px;
+	height:50px;
+	margin-left:30px;
+}
+.phoneArea{
+	display: flex;
+	width: 1000px;
+	margin-bottom: 10px;
+}
 </style>
 
 
@@ -252,11 +283,17 @@ a{
 		<div class="wrap">			
 			<img class="card-img-top Img" src="${festival.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 			<p class="name"> ${festival.fename }</p>
-			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>			
-			
+			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>								 			
 			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
 			<button class="btn btn-primary" onclick="selectCdcode('${festival.fecode}','festival')"
             data-bs-toggle="modal" data-bs-target="#exampleModal">계획에 추가하기</button>
+			<hr class="hr">
+			<p class="feinfo">${festival.feinfo }</p>
+			<div class="phoneArea">
+				<img class="phoneImg" src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
+				<p class="fetel">${festival.fetel }</p>
+			</div>
+			<button class="homepage" onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
 			<hr class="hr">
 			<div id="map" style="width:1000px;height:400px;"></div>
 			<p class="address">${festival.feaddress }</p>
@@ -288,7 +325,7 @@ a{
 			            <div>
 			            <c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">																
 							<div class="card feList" >
-								<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
+								<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
 						            <img class="card-img-top feImg" src="${td.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
 									<div class="feName">${td.tdname }</div>
 								</a>

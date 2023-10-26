@@ -36,30 +36,30 @@
   select nvl(max(fecode), 'Y') from festival where fename = #{fename}
   </select>
   <insert id="insertFestival">
-  insert into festival(fecode, ctcode, fename, feaddress, feposter, opendate, enddate, felati, felongti) values(#{fecode}, #{ctcode}, #{fename}, #{feaddress}, #{feposter}, #{opendate}, #{enddate}, #{felati}, #{felongti} )
+  insert into festival(fecode, ctcode, fename, feaddress, feposter, opendate, enddate, feinfo, felati, felongti, fetel, homepage) values(#{fecode}, #{ctcode}, #{fename}, #{feaddress}, #{feposter}, #{opendate}, #{enddate}, #{feinfo}, #{felati}, #{felongti}, #{fetel}, #{homepage})
   </insert>
   <select id="selectCountry">
   select * from country
   </select>
   <select id="selectFestival_country">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where ctcode = #{ctcode} and enddate >= sysdate
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where ctcode = #{ctcode} and enddate >= sysdate
   </select>
   <select id="selectFestival_db">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where enddate >= sysdate order by  DBMS_RANDOM.RANDOM()
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where enddate >= sysdate order by  DBMS_RANDOM.RANDOM()
   </select>
   <select id="selectFestival_detail">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where fecode = #{code} and enddate >= sysdate
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where fecode = #{code} and enddate >= sysdate
   </select>
   <select id="selectFestival_Nearby">
   <![CDATA[
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti from festival where ctcode = #{ctcode} and fecode not in(#{fecode}) and enddate >= sysdate order by  DBMS_RANDOM.RANDOM() 
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where ctcode = #{ctcode} and fecode not in(#{fecode}) and enddate >= sysdate order by  DBMS_RANDOM.RANDOM() 
   ]]>
   </select>
   <select id="selectCountry_this">
   select ctname from country where ctcode = #{ctcode}
   </select>
   <select id="selectSearchFestival">
-  SELECT * FROM festival WHERE fename LIKE '%'||#{searchVal}||'%'
+  SELECT * FROM festival WHERE fename LIKE '%'||#{searchVal}||'%' and enddate >= sysdate 
   </select>
   <select id="maxcode_lk">
   select nvl(max(lkcode),'LK00000') from likelist

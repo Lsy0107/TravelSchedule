@@ -40,7 +40,7 @@
 				<h3>My Page</h3>
 			</div>
 			<div>
-				<form id="myForm" action="${pageContext.request.contextPath }/memberUpdate" method="post">
+				<form id="myForm" enctype="multipart/form-data" action="${pageContext.request.contextPath }/memberUpdate" method="post" >
 					<p>
 					<c:choose>
 						<c:when test="${mInfo.mprofile  == null}">
@@ -51,7 +51,9 @@
 						</c:otherwise>
 					</c:choose>
 					</p>
-					<p>프로필변경</p>
+						
+						<input type="file" name="mprofiledata" value="${mInfo.mprofile }">
+						
 					<p>
 						<label><h5>ID</h5></label> 
 						<input class="w3-input" type="text" name="mid" readonly value="${mInfo.mid}"> 
@@ -60,6 +62,7 @@
 						<label><h5>Nickname</h5></label> 
 						<input class="w3-input" type="text" id="mnickname" name="mnickname" value="${mInfo.mnickname}" required> 
 					</p>
+					
 					<p class="w3-center">
 						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
 					</p>
@@ -105,9 +108,10 @@
         <script type="text/javascript">
 	        function pwCheck(obj) {
 	        	console.log("pwCheck - 호출");
-				let oldPw = obj.old_pw.value; // a1234
+				//let oldPw = obj.old_pw.value; // a1234
+				let oldPw = obj.old_pw;
 				
-				if(oldPw != '${mInfo.mpw}'){
+				if(oldPw.value != '${mInfo.mpw}'){
 					alert('기존비밀번호가 일치하지 않습니다.');
 					oldPw.focus();
 					return false;
@@ -120,6 +124,15 @@
 					newPwObj.focus();
 					return false;
 				}
+			}
+        </script>
+        
+        <script type="text/javascript">
+        	function mproFile(obj) {
+				console.log("프로필변경");
+				
+				
+				
 			}
         </script>
         
