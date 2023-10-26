@@ -60,14 +60,28 @@
 
             <div class="Cal">
                 <div class="InnerCal">
-                    <c:forEach items="${Cal}" var="cl">
+                    <c:forEach items="${Cal}" var="cl" varStatus="Cl">
                         <div class="Ctitle" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             onclick="PrintSchedule('${cl.cdcode}')">
                             <p class="cdname">${cl.cdname}</p>
-                            <button class="reviewBtn btn btn-outline-primary" onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">리뷰 작성</button>
+
+                            <c:choose>
+                                <c:when test="${cl.cdstate == 'N'}">
+                                    <button class="reviewBtn btn btn-outline-primary"
+                                        onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">리뷰 작성</button>
+                                </c:when>
+                                <c:when test="${cl.cdstate == 'R'}">
+                                    <button class="reviewBtn btn btn-outline-success"
+                                    onclick="location.href='ReviewFix?cdcode=${cl.cdcode}'">리뷰 수정</button>
+                                    <button class="reviewBtn btn btn-outline-danger"
+                                    onclick="return DeleteReview('${cl.cdcode}')">리뷰 삭제</button>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </c:forEach>
                 </div>
+
+            </div>
             </div>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -140,7 +154,7 @@
                                         'tdcode': codeList[code].tdcode,
                                         'cdcode': currentCdcode
                                     },
-                                    async:false,
+                                    async: false,
                                     dataType: 'json',
                                     success: function (tdname) {
                                         tdnameList.push(tdname);
@@ -156,7 +170,7 @@
                                         'fecode': codeList[code].fecode,
                                         'cdcode': currentCdcode
                                     },
-                                    async:false,
+                                    async: false,
                                     dataType: 'json',
                                     success: function (fename) {
                                         fenameList.push(fename);
@@ -170,9 +184,9 @@
                     }
 
                     function printList(tdnameList, fenameList) {
-                     //   console.log('여행지이름 추가 확인 : ' + tdnameList);
-                      //  console.log('축제 이름 추가 확인 : ' + fenameList);
-                       
+                        //   console.log('여행지이름 추가 확인 : ' + tdnameList);
+                        //  console.log('축제 이름 추가 확인 : ' + fenameList);
+
                         //여행지 부분
                         console.log(tdnameList);
 
@@ -190,8 +204,8 @@
 
                         //축제 부분
                         let feAreaDiv = document.querySelector('.feArea');
-                        feAreaDiv.innerHTML ="";
-                        for(let fe in fenameList){
+                        feAreaDiv.innerHTML = "";
+                        for (let fe in fenameList) {
                             let fenameDiv = document.createElement('div');
                             fenameDiv.innerText = fenameList[fe];
 
@@ -200,6 +214,28 @@
                     }
                 </script>
                 <script>
+                    function DeleteReview(cdcode){
+                        let DeleteConfirm = confirm('해당 리뷰를 삭제하시겠습니까?');
+
+                        if(DeleteConfirm == true){
+                            console.log(cdcode);
+                            $.ajax({
+                                type : 'get',
+                                url : 'DeleteReview',
+                                data : {'cdcode':cdcode},
+                                dataType : 'json',
+                                async : false,
+                                success : function(e){
+                                    console.log('삭제 성공');
+                                    alert('리뷰를 성공적으로 삭제하였습니다.');
+                                    location.href='${pageContext.request.contextPath}/'
+                                }
+                            });
+                        }
+                        else{
+                            return false;
+                        }
+                    }
                 </script>
     </body>
 

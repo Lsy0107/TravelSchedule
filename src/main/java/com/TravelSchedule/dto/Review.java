@@ -13,6 +13,8 @@ public class Review {
 	private String rephoto;
 	private String rehit;
 	private String restate;
+	private String cdcode;
+	private String codelist;
 	
 	private MultipartFile[] profiledata;
 }

@@ -14,8 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.TravelSchedule.dao.ReviewDao;
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
+import com.TravelSchedule.dto.Tdest;
 
 @Service
 public class ReviewService {
@@ -108,7 +110,9 @@ public class ReviewService {
 		System.out.println("리뷰 등록 서비스");
     	
     	String recode = rdao.maxcode();
+    	//String codeName = "RE";
 		String codeName = recode.substring(0,2);
+    	//int codeNum = Integer.parseInt(recode+1);
 		int codeNum = Integer.parseInt(recode.substring(2))+1;
 		String codeNum_String = String.format("%05d", codeNum);
 		recode = codeName + codeNum_String;
@@ -119,6 +123,58 @@ public class ReviewService {
     	int ReviewInsertDao = rdao.ReviewInsertDao(review);
 		
 		return ReviewInsertDao;
+	}
+
+
+	public int CalendarUpdate(String cdcode, String mid) {
+		System.out.println("리뷰작성후 켈린더 상태 업데이트");
+		
+		int CalendarUpdateDao = rdao.CalendarUpdateDao(cdcode,mid);
+		return CalendarUpdateDao;
+	}
+
+	public Calendar getCal(String cdcode, String mid) {
+		// TODO Auto-generated method stub
+		Calendar getCalD = rdao.getCalD(cdcode,mid);
+		return getCalD;
+	}
+
+	public HashMap<String, String> getReview(String mid, String cdcode) {
+		System.out.println("리뷰수정 페이지 -> 해당 리뷰 데이터 가져오기 서비스");
+		
+		HashMap<String,String> getReviewDao = rdao.getReviewDao(mid,cdcode);
+		return getReviewDao;
+	}
+
+	public Tdest TdInfo(String s, String cdcode, String mid) {
+		System.out.println("코드를 분리시킨뒤 여행지 정보 조회");
+		Tdest TdInfoDao = rdao.TdInfoDao(s,cdcode,mid);
+		return TdInfoDao;
+	}
+
+	public Festival FeInfo(String s, String cdcode, String mid) {
+		System.out.println("코드를 분리시킨뒤 축제 정보 조회");
+		
+		Festival FeInfoDao = rdao.FeInfoDao(s,cdcode,mid);
+		return FeInfoDao;
+	}
+
+	public int UpdateReview(String title, String contents, String recode, String mid) {
+		
+		int UpdateReviewDao = rdao.UpdateReviewDao(title,contents,recode,mid);
+		return UpdateReviewDao;
+	}
+
+	public int DeleteReview(String cdcode, String mid) {
+		
+		int DeleteReviewDao = rdao.DeleteReview(cdcode,mid);
+		return DeleteReviewDao;
+	}
+
+	public int UpdateCdState(String cdcode,String mid) {
+		
+		int UpdateCdState = rdao.UpdateCdState(cdcode,mid);
+		return UpdateCdState;
 	}
 	
 

@@ -104,7 +104,7 @@
                         <div class="imgDiv">
                             <div class="tdest" id="meminfoTag">
                                 <div class="tImg">
-                                    <c:forEach var="td" items="${Td}">
+                                    <c:forEach var="td" items="${Td}">                                       
                                         <input type="checkbox" name="TF" id="${td.TDCODE}" value="${td.TDCODE}">
                                         <label for="${td.TDCODE}"><img src="${td.TDPHOTO}" alt=""></label>
                                     </c:forEach>
@@ -113,7 +113,7 @@
                             <div class="fest disnone" id="weatherTag">
                                 <div class="fImg">
                                     <c:forEach var="fe" items="${Fe}">
-                                        <input type="checkbox" name="TF" id="${fe.FECODE}">
+                                        <input type="checkbox" name="TF" id="${fe.FECODE}" value="${fe.FECODE}"> 
                                         <label for="${fe.FECODE}"><img src="${fe.FEPOSTER}" alt=""></label>
                                     </c:forEach>
                                 </div>
@@ -127,6 +127,7 @@
                         <label for="file1">파일</label>
                         <form action="InsertReview" class="FormTag" enctype="multipart/form-data" method="post">
                             <input type="file" id="file1" multiple name="profiledata">
+                            <input type="text" name="cdcode" value="${Cl.cdcode}" class="Disn">
                         </form>
                     </div>
                     <div class="RePhotoArr">
@@ -229,8 +230,6 @@
                             let titleIn = document.querySelector('.Title');
                             let title = titleIn.value;
 
-
-
                             //내용
                             let contentsIn = document.querySelector('.ReTextArea');
                             let contents = contentsIn.value;
@@ -289,6 +288,7 @@
                             foEl.appendChild(inputTtitle);
                             foEl.appendChild(inputContents);
                             foEl.appendChild(inputCodeList);
+                            
 
                             foEl.submit();
 
