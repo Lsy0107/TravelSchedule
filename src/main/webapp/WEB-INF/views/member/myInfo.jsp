@@ -51,17 +51,17 @@
 					<p>
 					<c:choose>
 						<c:when test="${mInfo.mprofile  == null}">
-							<img src="/resources/memberProfile/default.jpg" class="img-thumbnail" alt="..." style="width: 150px;">
+							<img id="profileImg" src="/resources/memberProfile/default.jpg" class="img-thumbnail" alt="..." style="width: 150px;">
 						</c:when>
 						<c:otherwise>
-							<img src="/resources/memberProfile/${mInfo.mprofile }" class="img-thumbnail" alt="${mInfo.mprofile }" style="width: 150px;">
+							<img id="profileImg" src="/resources/memberProfile/${mInfo.mprofile }" class="img-thumbnail" alt="${mInfo.mprofile }" style="width: 150px;">
 						</c:otherwise>
 					</c:choose>
 					</p>
 						<label class="input-file-btn w3-button w3-black w3-ripple w3-round" for="input-file">
 						  프로필 변경
 						</label>
-						<input id="input-file" type="file" name="mprofiledata" value="${mInfo.mprofile }" style="display:none;">
+						<input id="input-file" onchange="changeProfile(this)" type="file" name="mprofiledata" value="${mInfo.mprofile }" style="display:none;">
 						
 					<p>
 						<label><h5>ID</h5></label> 
@@ -144,7 +144,20 @@
 				
 			}
         </script>
-        
+        <script type="text/javascript">
+        	function changeProfile(obj){
+        		let imgTag = document.querySelector("#profileImg");
+        		if (obj.files && obj.files[0]) {
+        		    var reader = new FileReader();
+        		    reader.onload = function(e) {
+        		    	imgTag.src = e.target.result;
+        		    };
+        		    reader.readAsDataURL(obj.files[0]);
+        		  } else {
+        			  imgTag.src = "";
+        		  }
+        	}
+        </script>
     </body>
 </html>
     

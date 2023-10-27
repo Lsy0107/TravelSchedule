@@ -44,6 +44,8 @@ public class HomeController {
 		ArrayList<Tdest> tdList = apisvc.getTdList();
 		ArrayList<Schedule> scList = tsvc.getScList();
 		
+		System.out.println(scList);
+		
 		mav.addObject("feList", feList);
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);

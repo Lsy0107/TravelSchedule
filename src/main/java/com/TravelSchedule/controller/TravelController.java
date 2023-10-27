@@ -76,15 +76,17 @@ public class TravelController {
 		cd.setMid(mid);
 		ArrayList<Schedule> scList = tsvc.checkSchedule(cd);
 		String result = "N";
-		if(scList.size()>0) {	
-			if(!scList.get(0).getScdate().equals(null)) {
+		if(scList.size() >0) {	
+			System.out.println(scList);
+			if(scList.get(0).getScdate()!=null) {
+				System.out.println("asd");
 				int rs = tsvc.updateCdstate(cdcode, mid);
 				if(rs>0 ) {
 					result = "Y";					
 				}else {
 					result="C";					
 				}
-		}
+			}
 		}
 		return result;
 	}

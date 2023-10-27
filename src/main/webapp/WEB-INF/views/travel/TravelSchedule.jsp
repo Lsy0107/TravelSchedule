@@ -106,7 +106,7 @@
 										<c:if test="${fe.SCDATE != null }">
 										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 6px; width: 48%; font-size: 15px;">추가된 계획</button>
 										</c:if>
-										<button class="btn btn-danger position-absolute bottom-0 end-0" onclick="removeDest('${td.MID}','${td.CDCODE }','${td.FECODE }','festival')" style="margin: 6px; font-size: 15px; width: 43%;">계획 삭제하기</button>
+										<button class="btn btn-danger position-absolute bottom-0 end-0" onclick="removeDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')" style="margin: 6px; font-size: 15px; width: 43%;">계획 삭제하기</button>
 									</div>
 								</div>
 								</c:if>
@@ -159,7 +159,6 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
 	<script type="text/javascript">
 	let lalngList = JSON.parse('${lalngList}');
-	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng( 37.56458948133976, 126.97730596902437), //지도의 중심좌표.
@@ -201,7 +200,6 @@
 				scdate = scdate + " " + schour;
 				let scmin = document.querySelector("#selMM").value;
 				scdate = scdate + ":" + scmin;
-				console.log(scdate);
 				
 				let dataoption = {};
 				if(seloption == 'tdest'){
@@ -235,14 +233,14 @@
 	</script>
 	<script type="text/javascript">
 	function updateCdstate(cdcode){
-		console.log(cdcode);
+		let check = confirm("계획을 확정하면 더는 수정할 수 없습니다.");
+		if(check){
 		$.ajax({
 			url:'/updateCdstate',
 			type:"post",
 			data:{'cdcode':cdcode},
 			aync:false,
 			success:function(rs){
-				console.log(rs)
 				switch (rs) {
 				case 'Y':
 					location.href="/selectCalendar";
@@ -256,12 +254,11 @@
 				}
 			}
 		})
+		}
 	}
-		console.log("${cd.cdstate == 'Y' }");
 	</script>
 	<script type="text/javascript">
 	function removeDest(mid, cdcode, destcode, seloption){
-		console.log(mid+cdcode+destcode+seloption)
 		let dataOption = {};
 		if(seloption == 'tdest'){
 			dataOption = {"mid":mid, "cdcode":cdcode, "tdcode":destcode, "seloption":seloption};
@@ -275,7 +272,6 @@
 			data:dataOption,
 			aync:false,
 			success:function(rs){
-				console.log(rs);
 				if(rs == "Y"){
 					location.reload();
 				}
