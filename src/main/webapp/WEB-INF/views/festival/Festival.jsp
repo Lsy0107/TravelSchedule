@@ -60,7 +60,7 @@
                 }
 
                 div#map {
-                    width: 100%;
+                    width: 45%;
                     position: relative;
                     top: 77px;
                     height: 685px;
