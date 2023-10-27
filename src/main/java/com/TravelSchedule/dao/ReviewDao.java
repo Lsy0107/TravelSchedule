@@ -42,7 +42,7 @@ public interface ReviewDao {
 	@Select("SELECT NVL(MAX(RECODE),'RE00000') FROM REVIEW")
 	String maxcode();
 
-	@Insert("INSERT INTO REVIEW VALUES(#{recode},#{mid},#{recomment},#{retitle},#{rephoto},0,'Y',#{cdcode},#{codelist})")
+	@Insert("INSERT INTO REVIEW(RECODE,MID,RECOMMENT,RETITLE,REPHOTO,REHIT,RESTATE,CDCODE,CODELIST,REDATE) VALUES(#{recode},#{mid},#{recomment},#{retitle},#{rephoto},0,'Y',#{cdcode},#{codelist},TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI'))")
 	int ReviewInsertDao(Review review);
 
 
