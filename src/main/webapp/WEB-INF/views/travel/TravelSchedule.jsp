@@ -34,7 +34,7 @@
 		<div class="container">
 			<div class="row" >
 				<div class="col col-3 border border-dark">계획 만들어지는 공간
-				<div class="row p-1" style="min-height: 375px; display: flow;">
+				<div id="scArea" class="row p-1" style="min-height: 375px; display: flow;">
 				<c:forEach var="sc" items="${scdestList }">
 				<c:if test="${sc.SCDATE != null}">
 				<c:choose>
@@ -60,7 +60,7 @@
 				<div class="col border border-dark">
 					여행지 출력
 					<div style="overflow-x: scroll;">
-						<nav style="display: -webkit-inline-box;">
+						<nav id="tdArea" style="display: -webkit-inline-box;">
 							<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
 								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
@@ -89,7 +89,7 @@
 			<div class="row p-1">
 				<div class="col border border-dark">축제 정보 출력
 				<div style="overflow-x: scroll;">
-						<nav style="display: -webkit-inline-box;">
+						<nav id="feArea" style="display: -webkit-inline-box;">
 							<c:forEach items="${ scdestList}" var="fe">
 								<c:if test="${fe.FECODE != null }">
 								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
@@ -232,7 +232,16 @@
 	</script>
 	<script type="text/javascript">
 	function updateCdstate(cdcode){
-		let check = confirm("계획을 확정하면 더는 수정할 수 없습니다.");
+		let check = null;
+		let scAreaTag = document.querySelector("#scArea").childElementCount;
+		let tdAreaTag = document.querySelector("#tdArea").childElementCount;
+		let feAreaTag = document.querySelector("#feArea").childElementCount;
+		if(scAreaTag == tdAreaTag + feAreaTag){
+			check = confirm("계획을 확정하면 더는 수정할 수 없습니다.");			
+		}else{
+			alert("선택하지 않은 여행지가 있습니다!")
+			return;
+		}
 		if(check){
 		$.ajax({
 			url:'/updateCdstate',

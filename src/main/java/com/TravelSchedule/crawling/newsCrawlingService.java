@@ -48,13 +48,14 @@ public class newsCrawlingService {
         	String time = item.findElement(By.cssSelector("div.meta > p")).getText();
         	System.out.println(" && time : " + time);
         	boolean eq = true;
+        	
         	for(News news : newsList){
         		if(news.getNewtitle().equals(title)) {
         			eq = false;
         			break;
         		}
         	}
-        	if(!img.equals("") && eq) {
+        	if(!img.equals("") && eq && title.length()<=50) {
         		int rs = ndao.insertNews(img_1,title,time, url);          		
         	}
         	
