@@ -144,6 +144,8 @@ main {
 	animation: marquee 50s linear infinite;
 }
 
+
+
 @keyframes marquee { 
 0% {left: 0;}
 100%{left:-2860px;}
