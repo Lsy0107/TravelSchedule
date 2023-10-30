@@ -115,6 +115,8 @@
 						
 						
 						<hr style="border-top:2px solid lightgray">
+						<p style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
+						<hr style="border-top:2px solid lightgray">
 						<p onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
 					</div>
 				</li>
