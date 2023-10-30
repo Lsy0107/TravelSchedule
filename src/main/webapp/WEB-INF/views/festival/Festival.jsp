@@ -303,7 +303,24 @@
                         </div>
                         <div class="TdListIn">
                             <div id="rowid" class="row TdestArea">
-                                
+                                <c:forEach var="fe" items="${festival}">
+                                    <div class="contain">
+                                        <!-- Blog post-->
+                                        <div class="card mb-4 photo" id="photo"
+                                            onclick="location.href='detailFestival?code=${fe.fecode}'">
+                                            <img class="card-img-top feImg" src="${fe.feposter}" alt="..." />
+
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 id="title" class="card-title h4" title="${fe.fename}"
+                                                style="overflow: hidden; white-space: nowrap;">${fe.fename}</h3>
+                                            <button class="btn btn-primary" onclick="selectCdcode('${fe.fecode}')"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+                                                추가하기</button>
+                                        </div>
+                                    </div>
+
+                                </c:forEach>
                             </div>
                         </div>
                         <div class="pagination">
