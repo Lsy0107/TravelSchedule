@@ -149,78 +149,22 @@ main {
 100%{left:-2860px;}
 }
 
+.navbg{
+background-color: black;
+}
+.navbg-white{
+background-color: aqua;
+}
+.change{
+	animation-name:color;
+	animation-duration: 1s;
+}
+@keyframes color { 
+from {background:none;}
+to{background-color:aqua;}
+}
+
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
-
-        .date {
-            background-color : white;
-            height: auto;
-            width: 291px;
-            margin: 0px;
-            margin: 0 auto;
-            border-radius:5px;
-        }
-
-        td {
-            width: 10px;
-            height: 10px;
-        }
-
-        .Calendar {
-            text-align: center;
-        }
-
-        .Calendar>thead>tr:first-child>td {
-            font-family: 'Questrial', sans-serif;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .Calendar>thead>tr:last-child>td {
-            font-family: 'Questrial', sans-serif;
-            font-weight: 600;     
-        }
-
-        .Calendar>tbody>tr>td>p {
-            font-family: 'Montserrat', sans-serif;
-            height: 37px;
-            width: 35px;
-            border-radius: 50px;
-            transition-duration: .2s;
-            line-height: 36px;
-            margin: 2px;
-            display: block;
-            text-align: center;
-        }        
-
-        .pastDay {
-            color: lightgray;
-        }
-
-        .today {
-            background-color: #F5D042;            
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .futureDay {
-            background-color: #FFFFFF;
-            cursor: pointer;
-        }
-        .futureDay:hover{
-            background:#eee;
-        }
-
-        .futureDay.choiceDay,
-        .today.choiceDay {
-            background: #0A174E;
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-
-
 
 </style>
 
@@ -231,7 +175,6 @@ main {
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
-		<div class="row" style="margin: 31px;"></div>
 		<!-- container 시작 -->
 		<div class="p-4" style="background-color: #F4FFFF;">
 			<div class="container">
@@ -240,17 +183,21 @@ main {
 						<div class="IMGBAR">
 							<div id="myCarousel" class="carousel carousel-dark slide"
 								data-bs-ride="carousel" style="z-index: 0;">
+								<!-- 슬라이스 갯수 -->
 								<div class="carousel-indicators">
 									<button type="button" data-bs-target="#myCarousel"
-										data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+										data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
 									<button type="button" data-bs-target="#myCarousel"
-										data-bs-slide-to="1" aria-label="Slide 2" class="active"
+										data-bs-slide-to="1" aria-label="Slide 2" class=""
 										aria-current="true"></button>
 									<button type="button" data-bs-target="#myCarousel"
 										data-bs-slide-to="2" aria-label="Slide 3"></button>
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="3" aria-label="Slide 4"></button>
 								</div>
+								<!-- 이미지 텍스트 영역 -->
 								<div class="carousel-inner">
-									<div class="carousel-item">
+									<div class="carousel-item active">
 										<svg class="bd-placeholder-img" width="100%" height="550px"
 											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 											preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -265,7 +212,7 @@ main {
 											</div>
 										</div>
 									</div>
-									<div class="carousel-item active">
+									<div class="carousel-item ">
 										<svg class="bd-placeholder-img" width="100%" height="550px"
 											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 											preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -296,21 +243,8 @@ main {
 											</div>
 										</div>
 									</div>
-								</div>
-								<button class="carousel-control-prev" type="button"
-									data-bs-target="#myCarousel" data-bs-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Previous</span>
-								</button>
-								<button class="carousel-control-next" type="button"
-									data-bs-target="#myCarousel" data-bs-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Next</span>
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="card text-center" style="width: 26%; height: 550px;">
+									<div class="carousel-item">
+										<div class="card text-center" style="width: 26%; height: 550px;">
 						<div class="card-header">
 							<ul class="nav nav-tabs card-header-tabs">
 								<li class="nav-item"><a id="meminfoA"
@@ -390,6 +324,25 @@ main {
 
 						</div>
 					</div>
+									</div>
+								</div>
+								<!-- 기다란 넘기기 버튼 -->
+								<button class="carousel-control-prev" type="button"
+									data-bs-target="#myCarousel" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button"
+									data-bs-target="#myCarousel" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- 
+					
+					 -->
 
 				</div>
 				
@@ -769,6 +722,27 @@ main {
 		 //marqueeDiv.classList.add("marquee_anifast")
 	 }
 	</script>
-	
+	<script type="text/javascript">
+	$(window).scroll(function(){
+		  let navbarTag = document.querySelector(".navbar");
+		  var height = $(window).scrollTop();
+		  if(height != 0){
+			  console.log(navbarTag.classList);
+			  //navbarTag.classList.remove('navbg');
+			  navbarTag.classList.add('change');
+			  navbarTag.classList.add('navbg-white');
+		  }else{
+			  
+			  navbarTag.classList.remove('change');
+			  navbarTag.classList.remove('navbg-white');
+			  //navbarTag.classList.add('navbg')
+		  }
+		});
+	$(document).ready(function(){
+		let navbarTag = document.querySelector(".navbar");
+		navbarTag.classList.remove("bg-dark");
+		//navbarTag.classList.add("navbg")
+	})
+	</script>
 </body>
 </html>
