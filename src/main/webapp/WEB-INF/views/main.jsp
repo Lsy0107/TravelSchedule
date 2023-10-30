@@ -144,11 +144,15 @@ main {
 	animation: marquee 50s linear infinite;
 }
 
-
-
 @keyframes marquee { 
-0% {left: 0;}
-100%{left:-2860px;}
+	0% {left: 0;}
+	100%{left:-2860px;}
+}
+
+@keyframes color {
+	from{background-color: black;}
+	to{background-color:white;}
+	
 }
 
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
