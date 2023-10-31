@@ -18,6 +18,7 @@ import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.News;
+import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
@@ -43,10 +44,13 @@ public class HomeController {
 		ArrayList<Festival> feList = apisvc.getFeList();
 		ArrayList<News> newsList = nsvc.getNewsList();
 		ArrayList<Tdest> tdList = apisvc.getTdList();
+		ArrayList<Schedule> scList = tsvc.getScList();
+		
 		mav.addObject("feList", feList);
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);
-
+		mav.addObject("scList", scList);
+		
 		mav.setViewName("/main");
 		return mav;
 	}
