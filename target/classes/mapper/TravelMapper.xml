@@ -70,4 +70,7 @@
   <delete id="deleteSchedule_dest">
   delete from schedule where mid = #{sc.mid} and cdcode = #{sc.cdcode} and <if test="seloption == 'tdest'">tdcode = #{sc.tdcode}</if><if test="seloption == 'festival'">fecode = #{sc.fecode}</if>
   </delete>
+  <select id="selectScList">
+  select * from schedule where rownum between 1 and 1 and scdate > sysdate order by scdate
+  </select>
   </mapper>

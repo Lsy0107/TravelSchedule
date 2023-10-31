@@ -98,14 +98,15 @@
 										<h5 class="card-title">${fe.FENAME }</h5>
 										<p class="card-text">${fe.FEADDRESS }</p>
 										<c:if test="${fe.SCDATE == null}">
-										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 6px; width: 48%; font-size: 15px;"
 											onclick="selectDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 											추가하기</button>
 										</c:if>
 										<c:if test="${fe.SCDATE != null }">
-										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">추가된 계획</button>
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 6px; width: 48%; font-size: 15px;">추가된 계획</button>
 										</c:if>
+										<button class="btn btn-danger position-absolute bottom-0 end-0" onclick="removeDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')" style="margin: 6px; font-size: 15px; width: 43%;">계획 삭제하기</button>
 									</div>
 								</div>
 								</c:if>
@@ -158,6 +159,7 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
 	<script type="text/javascript">
 	let lalngList = JSON.parse('${lalngList}');
+	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng( 37.56458948133976, 126.97730596902437), //지도의 중심좌표.
@@ -290,5 +292,7 @@
 		})
 	}
 	</script>
+	
+
 </body>
 </html>
