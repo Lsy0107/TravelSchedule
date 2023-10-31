@@ -15,7 +15,8 @@
 	crossorigin="anonymous"></script>
 
 <!-- Favicon-->
-<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua:400"
+	rel="stylesheet">
 
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Bootstrap icons-->
@@ -97,10 +98,9 @@
 }
 
 footer {
-	position: absolute;
-	bottom: 0;
+	position: relative;
+	bottom: -50px;
 	width: 100%;
-	bottom: -1000px;
 }
 
 main {
@@ -125,134 +125,156 @@ main {
 	font-size: 12pt;
 	text-align: center;
 }
-.wrap{
-	margin-top:150px;
+
+.wrap {
+	margin-top: 150px;
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
 }
-.Img{
-	width: 1000px;	
+
+.Img {
+	width: 1000px;
 }
-.name{
+
+.name {
 	padding-left: 30px;
 	padding-top: 20px;
-	font-size:30px;
-	font-weight:bold;
+	font-size: 30px;
+	font-weight: bold;
 }
-.date{
+
+.date {
 	padding-left: 30px;
 	font-weight: bold;
 }
-.address{
+
+.address {
 	padding-left: 30px;
 	padding-top: 10px;
 	font-weight: bold;
 	width: 1000px;
-	font-size:20px;
+	font-size: 20px;
 }
-.hr{
-	width:1000px;
+
+.hr {
+	width: 1000px;
 }
-.heart{
+
+.heart {
 	padding-left: 30px;
-	cursor:pointer;
+	cursor: pointer;
 }
-.fa-solid{
+
+.fa-solid {
 	color: #ff0000;
 }
-.fa-regular{
+
+.fa-regular {
 	color: #000000;
 }
+
 .TdestRecommendArea {
 	position: relative;
-    width: 1000px;
+	width: 1000px;
 }
 
 .Tdest {
-    border: 1px solid;
-    padding: 25px;
-    border-radius: 0px 25px 0px 25px;
-    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-    width: 1000px;
+	border: 1px solid;
+	padding: 25px;
+	border-radius: 0px 25px 0px 25px;
+	background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+	width: 1000px;
 }
-.FestivalRecomm{
-   	border: 1px solid;
-    padding: 25px;
-    border-radius: 25px 0px 25px 0px;
-    margin-top: 5px;
-    width: 1000px;
-    background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
+
+.FestivalRecomm {
+	border: 1px solid;
+	padding: 25px;
+	border-radius: 25px 0px 25px 0px;
+	margin-top: 5px;
+	width: 1000px;
+	background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
 }
 
 #RecommendTitle {
-    font-size: 22px;
-    font-weight: bold;
-    color: dodgerblue;
+	font-size: 22px;
+	font-weight: bold;
+	color: dodgerblue;
 }
 
-.feImg{
-	width:200px;
-	height:150px;
-}           
-.countryImg{
+.feImg {
+	width: 200px;
+	height: 150px;
+}
+
+.countryImg {
 	width: 100px;
 	height: 100px;
-}     
-.feList{
-	display:inline-block;
+}
+
+.feList {
+	display: inline-block;
 	cursor: pointer;
 	margin-top: 5px;
 }
-.feName{
+
+.feName {
 	font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    height: 30px;
-    width: 200px;
-    overflow: hidden;
+	font-weight: bold;
+	text-align: center;
+	height: 30px;
+	width: 200px;
+	overflow: hidden;
 }
-a{
+
+a {
 	text-decoration: none;
 	color: black;
 }
-.more{
+
+.more {
 	left: 30px;
-    background-color: white;
-    border-radius: 1000px;
-    width: 65px;
-    height: 65px;
-    position: relative;
-    bottom: 35px;
-}
-.moreIn{
+	background-color: white;
+	border-radius: 1000px;
+	width: 65px;
+	height: 65px;
 	position: relative;
-    left: 20px;
-    top: 20px;
+	bottom: 35px;
 }
-.moreArea{
+
+.moreIn {
+	position: relative;
+	left: 20px;
+	top: 20px;
+}
+
+.moreArea {
 	width: 117px;
 	display: inline-block;
 }
-.moreText{
+
+.moreText {
 	position: relative;
 	font-weight: bold;
 	bottom: 30px;
 	left: 10px;
 }
-.feinfo{
+
+.feinfo {
 	width: 1000px;
 	padding-left: 30px;
-    padding-right: 30px;
+	padding-right: 30px;
 }
-.homepage{
+
+.homepage {
 	margin-left: 30px;
 	background-color: white;
 	border-radius: 20px;
 	padding: 10px;
 	border-color: gray;
 }
-.fetel{
+
+.fetel {
 	width: 900px;
 	padding-left: 15px;
 	padding-right: 30px;
@@ -260,12 +282,14 @@ a{
 	display: inline-block;
 	padding-top: 10px;
 }
-.phoneImg{
-	width:50px;
-	height:50px;
-	margin-left:30px;
+
+.phoneImg {
+	width: 50px;
+	height: 50px;
+	margin-left: 30px;
 }
-.phoneArea{
+
+.phoneArea {
 	display: flex;
 	width: 1000px;
 	margin-bottom: 10px;
@@ -279,54 +303,71 @@ a{
 	<main class="">
 		<!-- Navigation-->
 		<%@ include file="../include/menu.jsp"%>
-		<!-- content 시작 -->	
-		<div class="wrap">			
-			<img class="card-img-top Img" src="${festival.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-			<p class="name"> ${festival.fename }</p>
-			<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>								 			
-			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
-			<button class="btn btn-primary" onclick="selectCdcode('${festival.fecode}','festival')"
-            data-bs-toggle="modal" data-bs-target="#exampleModal">계획에 추가하기</button>
+		<!-- content 시작 -->
+		<div class="wrap">
+			<img class="card-img-top Img" src="${festival.feposter }" alt="..."
+				onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+			<p class="name">${festival.fename }</p>
+			<p class="date">${festival.opendate}~ ${festival.enddate }</p>
+			<i class="fa-regular fa-heart fa-xl heart"
+				onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
+			<button class="btn btn-primary"
+				onclick="selectCdcode('${festival.fecode}','festival')"
+				data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+				추가하기</button>
 			<hr class="hr">
 			<p class="feinfo">${festival.feinfo }</p>
-			<div class="phoneArea">
-				<img class="phoneImg" src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
-				<p class="fetel">${festival.fetel }</p>
-			</div>
-			<button class="homepage" onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
+			<c:if test="${festival.fetel ne null }">
+				<div class="phoneArea">
+					<img class="phoneImg"
+						src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
+					<p class="fetel">${festival.fetel }</p>
+				</div>
+			</c:if>
+			<c:if test="${festival.homepage ne null }">
+				<button class="homepage"
+					onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
+			</c:if>
 			<hr class="hr">
-			<div id="map" style="width:1000px;height:400px;"></div>
+			<div id="map" style="width: 1000px; height: 400px;"></div>
 			<p class="address">${festival.feaddress }</p>
 			<hr class="hr">
- 			<div class="TdestRecommendArea">
-	            <div class="Tdest">
-	            	<div class="countryIdentity">
-			            <span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>			            
-		            </div>
-		            <c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">																
-						<div class="card feList" >
-							<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
-					            <img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
-								<div class="feName">${fe.fename }</div>
-							</a>
+			<div class="TdestRecommendArea">
+				<c:if test="${nearby[0] ne null }">
+					<div class="Tdest">
+						<div class="countryIdentity">
+							<span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>
 						</div>
-					</c:forEach>
-					<div class="moreArea">
-						<a href="/festival">
-							<div class="feList more">
-					            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
-					        </div>
-				        </a>
-			            <h5 class="moreText">축제 더보기</h5>
-			        </div>    
-		        </div>
-		        <div class="FestivalRecomm">
-		            <span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
-			            <div>
-			            <c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">																
-							<div class="card feList" >
-								<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
-						            <img class="card-img-top feImg" src="${td.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
+						<c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">
+							<div class="card feList">
+								<a
+									href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
+									<img class="card-img-top feImg" src="${fe.feposter }" alt="..."
+									onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+									<div class="feName">${fe.fename }</div>
+								</a>
+							</div>
+						</c:forEach>
+						<div class="moreArea">
+							<a href="/festival">
+								<div class="feList more">
+									<i class="fa-solid fa-arrow-right fa-2xl moreIn"
+										style="color: #000000;"></i>
+								</div>
+							</a>
+							<h5 class="moreText">축제 더보기</h5>
+						</div>
+					</div>
+				</c:if>
+				<div class="FestivalRecomm">
+					<span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
+					<div>
+						<c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">
+							<div class="card feList">
+								<a
+									href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
+									<img class="card-img-top feImg" src="${td.tdphoto }" alt="..."
+									onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 									<div class="feName">${td.tdname }</div>
 								</a>
 							</div>
@@ -334,39 +375,40 @@ a{
 						<div class="moreArea">
 							<a href="/TdestSearchPage">
 								<div class="feList more">
-						            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
-						        </div>
-					        </a>
-				            <h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
-				        </div>
-			        </div>
-	            </div>
-	            
-            </div>			
+									<i class="fa-solid fa-arrow-right fa-2xl moreIn"
+										style="color: #000000;"></i>
+								</div>
+							</a>
+							<h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</div>
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body" id="selectCalendar">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                    id="selectClear">선택</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="selectCalendar"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							data-bs-dismiss="modal" id="selectClear">선택</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="../include/footer.jsp"%>
 	</main>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -377,7 +419,8 @@ a{
 	<script>
 		AOS.init();
 	</script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
 	<script type="text/javascript">
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
@@ -488,7 +531,7 @@ a{
 		heart.classList.replace('fa-regular', 'fa-solid');
 	}
 	</script>
-	
+
 
 </body>
 </html>
