@@ -17,7 +17,7 @@
         <style>
             .Cal {
                 border: 1px solid;
-                margin-top: 100px;
+                margin-top: 225px;
                 width: 70%;
                 margin-left: auto;
                 margin-right: auto;
@@ -26,6 +26,8 @@
                 overflow-x: hidden;
                 background-color: white;
                 border-radius: 15px;
+                z-index: 1;
+                overflow-y: hidden;
             }
 
             .InnerCal {
@@ -39,7 +41,7 @@
             }
 
             .Ctitle:hover {
-                background-color: lightgrey;
+                border: 3px solid #41acd4;
                 cursor: pointer;
             }
 
@@ -49,10 +51,44 @@
             }
 
             .reviewBtn {}
+
+            .WriteBtn {
+                animation-duration: 3s;
+                animation-name: BtnMove;
+            }
+
+            @keyframes BtnMove {
+                from {
+                    top: 5px;
+
+                }
+
+                to {
+                    bottom: 5px;
+                }
+
+            }
+
+            #Circle1 {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: aquamarine;
+            }
+
+            .BottomDiv {
+                width: 100%;
+                height: 480px;
+                background: white;
+                border-radius: 60px 60px 0px 0px;
+                position: absolute;
+                bottom: 0px;
+                z-index: 0;
+            }
         </style>
     </head>
 
-    <body class="d-flex flex-column h-100" style="background-color: #e9e9e9;">
+    <body class="d-flex flex-column h-100" style="background-color: #bfe9e1">
 
         <!-- Navigation-->
         <%@ include file="/WEB-INF/views/include/menu.jsp" %>
@@ -67,14 +103,16 @@
 
                             <c:choose>
                                 <c:when test="${cl.cdstate == 'N'}">
-                                    <button class="reviewBtn btn btn-outline-primary"
-                                        onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">리뷰 작성</button>
+                                    <button class="WriteBtn reviewBtn btn btn-outline-primary"
+                                        onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">리뷰
+                                        작성</button>
                                 </c:when>
                                 <c:when test="${cl.cdstate == 'R'}">
                                     <button class="reviewBtn btn btn-outline-success"
-                                    onclick="location.href='ReviewFix?cdcode=${cl.cdcode}'">리뷰 수정</button>
+                                        onclick="location.href='ReviewFix?cdcode=${cl.cdcode}'">리뷰
+                                        수정</button>
                                     <button class="reviewBtn btn btn-outline-danger"
-                                    onclick="return DeleteReview('${cl.cdcode}')">리뷰 삭제</button>
+                                        onclick="return DeleteReview('${cl.cdcode}')">리뷰 삭제</button>
                                 </c:when>
                             </c:choose>
                         </div>
@@ -82,6 +120,9 @@
                 </div>
 
             </div>
+
+            <div class="BottomDiv"></div>
+
             </div>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -89,17 +130,14 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">${sessionScope.loginId}님의 상세계획표</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">${sessionScope.loginId}님의
+                                상세계획표</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="selectCalendar">
-                            <div class="tdArea">
-                                여행지 부분
-                            </div>
+                            <div class="tdArea">여행지 부분</div>
                             <hr>
-                            <div class="feArea">
-                                축제 부분
-                            </div>
+                            <div class="feArea">축제 부분</div>
                         </div>
 
                     </div>
@@ -200,8 +238,6 @@
 
                         }
 
-
-
                         //축제 부분
                         let feAreaDiv = document.querySelector('.feArea');
                         feAreaDiv.innerHTML = "";
@@ -214,25 +250,26 @@
                     }
                 </script>
                 <script>
-                    function DeleteReview(cdcode){
+                    function DeleteReview(cdcode) {
                         let DeleteConfirm = confirm('해당 리뷰를 삭제하시겠습니까?');
 
-                        if(DeleteConfirm == true){
+                        if (DeleteConfirm == true) {
                             console.log(cdcode);
                             $.ajax({
-                                type : 'get',
-                                url : 'DeleteReview',
-                                data : {'cdcode':cdcode},
-                                dataType : 'json',
-                                async : false,
-                                success : function(e){
+                                type: 'get',
+                                url: 'DeleteReview',
+                                data: {
+                                    'cdcode': cdcode
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function (e) {
                                     console.log('삭제 성공');
                                     alert('리뷰를 성공적으로 삭제하였습니다.');
-                                    location.href='${pageContext.request.contextPath}/'
+                                    location.href = '${pageContext.request.contextPath}/'
                                 }
                             });
-                        }
-                        else{
+                        } else {
                             return false;
                         }
                     }

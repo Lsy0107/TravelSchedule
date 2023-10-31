@@ -44,7 +44,7 @@
                     display: flex;
                 }
 
-                img {
+                .img {
                     width: 300px;
                     height: 300px;
                     padding: 20px;
@@ -82,6 +82,7 @@
                     width: 150px;
                     height: 150px;
                 }
+                
             </style>
         </head>
 
@@ -91,7 +92,7 @@
                 <div class="wrap">
                     <div class="ReTitle">
                         <input type="text" class="Title" name="title" placeholder="제목">
-                    </div>
+                    </div>    
                     <div class="ReSelImg">
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs">
@@ -106,7 +107,7 @@
                                 <div class="tImg">
                                     <c:forEach var="td" items="${Td}">                                       
                                         <input type="checkbox" name="TF" id="${td.TDCODE}" value="${td.TDCODE}">
-                                        <label for="${td.TDCODE}"><img src="${td.TDPHOTO}" alt=""></label>
+                                        <label for="${td.TDCODE}"><img class="img" src="${td.TDPHOTO}" alt=""></label>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -114,7 +115,7 @@
                                 <div class="fImg">
                                     <c:forEach var="fe" items="${Fe}">
                                         <input type="checkbox" name="TF" id="${fe.FECODE}" value="${fe.FECODE}"> 
-                                        <label for="${fe.FECODE}"><img src="${fe.FEPOSTER}" alt=""></label>
+                                        <label for="${fe.FECODE}"><img class="img" src="${fe.FEPOSTER}" alt=""></label>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -213,6 +214,7 @@
                                         //$("#img").attr("src", );
                                         imgTag.setAttribute("src",e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
                                         imgTag.setAttribute("data-file",f.name);
+                                        imgTag.classList.add('img');
                                         console.log(imgTag)
                                         //imgDiv.appendChild(imgTag);
                                         imgDiv.appendChild(imgTag);
