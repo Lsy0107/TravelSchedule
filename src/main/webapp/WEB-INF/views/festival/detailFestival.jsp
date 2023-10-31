@@ -126,6 +126,8 @@
 					width: 1000px;
 					margin-left: auto;
 					margin-right: auto;
+					position: relative;
+					z-index: 1;
 				}
 
 				.Img {
@@ -289,14 +291,41 @@
 					width: 1000px;
 					margin-bottom: 10px;
 				}
-				.ReviewAreaDiv{
+
+				.ReviewAreaDiv {
 					border: 1px solid;
 				}
-				.mid{
+
+				.mid {
 					display: inline-block;
 				}
-				.title{
+
+				.title {
 					display: inline-block;
+				}
+
+				.topDiv {
+					width: 100%;
+					height: 1000px;
+					position: absolute;
+					z-index: 0;
+					border-radius: 0px 0px 50px 50px;
+					background: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+				}
+
+				.bottomDiv {
+					width: 100%;
+					height: 750px;
+					position: absolute;
+					z-index: 0;
+					
+					background: linear-gradient(to bottom, #ffffff, #dce35b, #45b649);
+					border-radius: 0px 0px 75px 75px;
+				}
+
+				footer {
+					position: relative;
+					bottom: 0px;
 				}
 			</style>
 
@@ -305,240 +334,257 @@
 		</head>
 
 		<body class="d-flex flex-column h-100">
-			<main class="">
-				<!-- Navigation-->
-				<%@ include file="../include/menu.jsp" %>
-					<!-- content 시작 -->
-					<div class="wrap">
-						<img class="card-img-top Img" src="${festival.feposter }" alt="..."
-							onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-						<p class="name"> ${festival.fename }</p>
-						<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>
-						<i class="fa-regular fa-heart fa-xl heart"
-							onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
-						<button class="btn btn-primary" onclick="selectCdcode('${festival.fecode}','festival')"
-							data-bs-toggle="modal" data-bs-target="#exampleModal">계획에 추가하기</button>
-						<hr class="hr">
-						<p class="feinfo">${festival.feinfo }</p>
-						<div class="phoneArea">
-							<img class="phoneImg"
-								src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
-							<p class="fetel">${festival.fetel }</p>
-						</div>
-						<button class="homepage" onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
-						<hr class="hr">
-						<div id="map" style="width:1000px;height:400px;"></div>
-						<p class="address">${festival.feaddress }</p>
-						<hr class="hr">
-						<div class="TdestRecommendArea">
-							<div class="Tdest">
-								<div class="countryIdentity">
-									<span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>
+
+			<!-- Navigation-->
+			<%@ include file="../include/menu.jsp" %>
+				<!-- content 시작 -->
+				<div class="topDiv"></div>
+				
+
+
+
+				<div class="wrap">
+
+					<img class="card-img-top Img" src="${festival.feposter }" alt="..."
+						onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+					<p class="name"> ${festival.fename }</p>
+					<p class="date"> ${festival.opendate} ~ ${festival.enddate }</p>
+					<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${festival.fecode}', 'festival')"
+						id="heart"></i>
+					<button class="btn btn-primary" onclick="selectCdcode('${festival.fecode}','festival')"
+						data-bs-toggle="modal" data-bs-target="#exampleModal">계획에 추가하기</button>
+					<hr class="hr">
+					<p class="feinfo">${festival.feinfo }</p>
+					<div class="phoneArea">
+						<img class="phoneImg"
+							src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
+						<p class="fetel">${festival.fetel }</p>
+					</div>
+					<button class="homepage" onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
+					<hr class="hr">
+					<div id="map" style="width:1000px;height:400px;"></div>
+					<p class="address">${festival.feaddress }</p>
+					<hr class="hr">
+					<div class="TdestRecommendArea">
+						<div class="Tdest">
+							<div class="countryIdentity">
+								<span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>
+							</div>
+							<c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">
+								<div class="card feList">
+									<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
+										<img class="card-img-top feImg" src="${fe.feposter }" alt="..."
+											onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+										<div class="feName">${fe.fename }</div>
+									</a>
 								</div>
-								<c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">
+							</c:forEach>
+							<div class="moreArea">
+								<a href="/festival">
+									<div class="feList more">
+										<i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
+									</div>
+								</a>
+								<h5 class="moreText">축제 더보기</h5>
+							</div>
+						</div>
+						<div class="FestivalRecomm">
+							<span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
+							<div>
+								<c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">
 									<div class="card feList">
-										<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
-											<img class="card-img-top feImg" src="${fe.feposter }" alt="..."
+										<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
+											<img class="card-img-top feImg" src="${td.tdphoto }" alt="..."
 												onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-											<div class="feName">${fe.fename }</div>
+											<div class="feName">${td.tdname }</div>
 										</a>
 									</div>
 								</c:forEach>
 								<div class="moreArea">
-									<a href="/festival">
+									<a href="/TdestSearchPage">
 										<div class="feList more">
 											<i class="fa-solid fa-arrow-right fa-2xl moreIn"
 												style="color: #000000;"></i>
 										</div>
 									</a>
-									<h5 class="moreText">축제 더보기</h5>
+									<h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
 								</div>
 							</div>
-							<div class="FestivalRecomm">
-								<span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
-								<div>
-									<c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">
-										<div class="card feList">
-											<a
-												href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
-												<img class="card-img-top feImg" src="${td.tdphoto }" alt="..."
-													onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-												<div class="feName">${td.tdname }</div>
-											</a>
-										</div>
-									</c:forEach>
-									<div class="moreArea">
-										<a href="/TdestSearchPage">
-											<div class="feList more">
-												<i class="fa-solid fa-arrow-right fa-2xl moreIn"
-													style="color: #000000;"></i>
-											</div>
-										</a>
-										<h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
-									</div>
-								</div>
-							</div>
-
 						</div>
-
-						<div class="ReviewAreaDiv">
-							<c:forEach var="Re" items="${Re}">
-								<div class="mid">
-									${Re.MID}
-								</div>
-								<div class="title">
-									${Re.RETITLE}
-								</div>
-							</c:forEach>
-						</div>
-
-
 
 					</div>
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body" id="selectCalendar">
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-										id="selectClear">선택</button>
-								</div>
+					<div class="ReviewAreaDiv">
+						<c:forEach var="Re" items="${Re}">
+							<div class="mid">
+								${Re.MID}
+							</div>
+							<div class="title">
+								${Re.RETITLE}
+							</div>
+						</c:forEach>
+					</div>
+
+
+
+				</div>
+
+
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body" id="selectCalendar">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+									id="selectClear">선택</button>
 							</div>
 						</div>
 					</div>
-					<!-- content 종료 -->
-					<!-- Footer-->
-					<%@ include file="../include/footer.jsp" %>
-			</main>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-			<!-- Bootstrap core JS-->
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-			<!-- Core theme JS-->
-			<script src="resources/js/scripts.js"></script>
+				</div>
 
-			<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-			<script>
-				AOS.init();
-			</script>
-			<script type="text/javascript"
-				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
-			<script type="text/javascript">
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-					mapOption = {
-						center: new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati }), // 지도의 중심좌표
-						level: 3, // 지도의 확대 레벨
-					};
-
-				var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
-				// 마커가 표시될 위치입니다 
-				var markerPosition = new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati });
-
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					position: markerPosition
-				});
-
-				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
+				<!-- content 종료 -->
+				<!-- Footer-->
+				<%@ include file="../include/footer.jsp" %>
 
 
-			</script>
-			<script type="text/javascript">
-				function clickHeart(code, seloption) {
-					console.log(code);
-					if ("${sessionScope.loginId}" == "") {
-						location.href = "${pageContext.request.contextPath}/memberLoginForm"
-					} else {
-						$.ajax({
-							url: "/clickHeart",
-							type: "post",
-							data: { mid: "${sessionScope.loginId}", code: code, "seloption": seloption },
-							aysnc: false,
-							success: function (result) {
-								console.log('클릭');
-								let heart = document.querySelector('#heart');
-								const cl = document.querySelector('#heart').classList;
-								if (cl.contains("fa-regular")) {
-									heart.classList.replace('fa-regular', 'fa-solid');
-								} else {
-									heart.classList.replace('fa-solid', 'fa-regular');
-								}
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+					<!-- Bootstrap core JS-->
+					<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+					<!-- Core theme JS-->
+					<script src="resources/js/scripts.js"></script>
 
-							}
+					<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+					<script>
+						AOS.init();
+					</script>
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
+					<script type="text/javascript">
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+							mapOption = {
+								center: new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati }), // 지도의 중심좌표
+								level: 3, // 지도의 확대 레벨
+							};
+
+						var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
+						// 마커가 표시될 위치입니다 
+						var markerPosition = new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati });
+
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							position: markerPosition
 						});
 
-					}
-				}
+						// 마커가 지도 위에 표시되도록 설정합니다
+						marker.setMap(map);
 
 
-			</script>
-			<script type="text/javascript">
-				function selectCdcode(fecode, seloption) {
-					if ("${sessionScope.loginId}" == "") {
-						location.href = "${pageContext.request.contextPath}/memberLoginForm"
-					} else {
-						$.ajax({
-							url: "/getCdcode",
-							type: "post",
-							data: { mid: "${sessionScope.loginId}" },
-							async: false,
-							success(rs) {
-								console.log(rs.length);
-								let modalBodyTag = document.querySelector("#selectCalendar")
-								modalBodyTag.innerHTML = "";
-								if (rs.length > 0) {
+					</script>
+					<script type="text/javascript">
+						function clickHeart(code, seloption) {
+							console.log(code);
+							if ("${sessionScope.loginId}" == "") {
+								location.href = "${pageContext.request.contextPath}/memberLoginForm"
+							} else {
+								$.ajax({
+									url: "/clickHeart",
+									type: "post",
+									data: { mid: "${sessionScope.loginId}", code: code, "seloption": seloption },
+									aysnc: false,
+									success: function (result) {
+										console.log('클릭');
+										let heart = document.querySelector('#heart');
+										const cl = document.querySelector('#heart').classList;
+										if (cl.contains("fa-regular")) {
+											heart.classList.replace('fa-regular', 'fa-solid');
+										} else {
+											heart.classList.replace('fa-solid', 'fa-regular');
+										}
 
-									let selTag = document.createElement("select")
-									for (let cd of rs) {
-										let optionTag = document.createElement("option")
-										optionTag.innerText = cd.cdname;
-										optionTag.setAttribute("value", cd.cdcode)
-										selTag.appendChild(optionTag);
 									}
-									modalBodyTag.appendChild(selTag);
-									let btnTag = document.querySelector("#selectClear");
-									btnTag.addEventListener("click", function () {
-										selectDest(fecode, selTag.value, seloption)
-									})
-								}
-								else {
-									modalBodyTag.innerText = "달력을 추가 해주세요";
-								}
-							}
-						})
-					}
-				}
-				function selectDest(fecode, cdcode, seloption) {
-					console.log(fecode + "  " + cdcode);
-					$.ajax({
-						url: "/registSelectDest",
-						type: "post",
-						data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption": seloption },
-						async: false,
-						success(rs) {
-							alert('행선지 선택 완료');
-							location.href = "/detailFestival?code=" + fecode;
-						}
-					})
-				}
+								});
 
-			</script>
-			<script type="text/javascript">
-				let heart = document.querySelector('#heart');
-				const cl = document.querySelector('#heart').classList;
-				let Y = 'Y';
-				let N = 'N';
-				if (${ like } == 'Y') {
-					heart.classList.replace('fa-regular', 'fa-solid');
-				}
-			</script>
+							}
+						}
+
+
+					</script>
+					<script type="text/javascript">
+						function selectCdcode(fecode, seloption) {
+							if ("${sessionScope.loginId}" == "") {
+								location.href = "${pageContext.request.contextPath}/memberLoginForm"
+							} else {
+								$.ajax({
+									url: "/getCdcode",
+									type: "post",
+									data: { mid: "${sessionScope.loginId}" },
+									async: false,
+									success(rs) {
+										console.log(rs.length);
+										let modalBodyTag = document.querySelector("#selectCalendar")
+										modalBodyTag.innerHTML = "";
+										if (rs.length > 0) {
+
+											let selTag = document.createElement("select")
+											for (let cd of rs) {
+												let optionTag = document.createElement("option")
+												optionTag.innerText = cd.cdname;
+												optionTag.setAttribute("value", cd.cdcode)
+												selTag.appendChild(optionTag);
+											}
+											modalBodyTag.appendChild(selTag);
+											let btnTag = document.querySelector("#selectClear");
+											btnTag.addEventListener("click", function () {
+												selectDest(fecode, selTag.value, seloption)
+											})
+										}
+										else {
+											modalBodyTag.innerText = "달력을 추가 해주세요";
+										}
+									}
+								})
+							}
+						}
+						function selectDest(fecode, cdcode, seloption) {
+							console.log(fecode + "  " + cdcode);
+							$.ajax({
+								url: "/registSelectDest",
+								type: "post",
+								data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption": seloption },
+								async: false,
+								success(rs) {
+									alert('행선지 선택 완료');
+									location.href = "/detailFestival?code=" + fecode;
+								}
+							})
+						}
+
+					</script>
+					<script type="text/javascript">
+						let heart = document.querySelector('#heart');
+						const cl = document.querySelector('#heart').classList;
+						let Y = 'Y';
+						let N = 'N';
+						if (${ like } == 'Y') {
+							heart.classList.replace('fa-regular', 'fa-solid');
+						}
+					</script>
+
+<script>
+/*
+	console.log( document.querySelector('body').scrollHeight);
+	console.log(document.querySelector(".bottomDiv"))
+	
+	document.querySelector(".bottomDiv").style.bottom = -(Number((document.querySelector('body').scrollHeight))-750)+'px';
+*/
+
+</script>
 
 
 		</body>
