@@ -231,12 +231,15 @@
                 }
 
                 .content_wrap {
-                    display: flex;
+                    width: 75%;
+                    margin-left: auto;
+                    margin-right: auto;
                 }
 
                 .map_wrap {
-                    width: 70%;
-                    border-right: 1px solid;
+                    width: 100%;
+
+
                 }
 
                 .Tdest_wrap {
@@ -250,19 +253,29 @@
                     margin: 7px;
                 }
 
-                .hashTag {
-                    position: relative;
-                    top: 77px;
+                .hashTag {}
+
+                .tdImg {
+                    width: 150px;
+                    height: 150px;
                 }
-				.tdImg{
-					width: 150px;
-					height: 150px;
-				}
-               
+
+                .TitleWrap {
+                    width: 100%;
+                    height: 400px;
+                    background: linear-gradient(45deg, #a2d0ae, lightcyan, peachpuff);
+                    margin-top: 200px;
+                }
+
+                .CtBtn {
+                    width: 100%;
+                    height: 200px;
+                    padding: 8px;
+                }
             </style>
         </head>
 
-        <body class="d-flex flex-column h-100">
+        <body class="">
             <!-- Navigation-->
             <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                 <div class="StickyBar">
@@ -272,25 +285,24 @@
                     </button>
                 </div>
                 <!-- contant 시작 -->
+
+                <div class="TitleWrap">
+                    <span>타이틀 공간</span>
+                </div>
+
                 <div class="content_wrap">
 
-                    <div class="map_wrap">
-                        <div class="hashTag">
+                    <table class="map_wrap">
+                        <tr class="hashTag">
                             <c:forEach items="${CountryList }" var="ct">
-                                <div class="ctList">
-                                    <button onclick="Select_country('${ct.ctcode}')">#${ct.ctname }</button>
-                                </div>
+                                <td class="ctList col-md-3">
+                                    <button class="CtBtn" onclick="Select_country('${ct.ctcode}')">#${ct.ctname
+                                        }</button>
+                                </td>
                             </c:forEach>
-                        </div>
-                        <div id="map">
-                        </div>
-                        <div id="SelectMapType" class="custom_typecontrol radius_border">
-                            <span id="btnRoadmap" class="selected" onclick="setMapType('roadmap')">지도</span>
-                            <span id="btnSkyview" class="unselected" onclick="setMapType('skyview')">스카이뷰</span>
-                        </div>
-                        <!-- 지도타입 컨트롤 div 입니다 -->
+                        </tr>
+                    </table>
 
-                    </div>
                     <div class="Tdest_wrap">
                         <div>
                             <div class="SearchArea">
@@ -315,7 +327,8 @@
                                         <div class="card-body">
                                             <h3 id="title" class="card-title h4" title="${TdList.tdname}"
                                                 style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
-                                            <button class="btn btn-primary" onclick="selectCdcode('${TdList.tdcode}','tdest')"
+                                            <button class="btn btn-primary"
+                                                onclick="selectCdcode('${TdList.tdcode}','tdest')"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
                                                 추가하기</button>
                                         </div>
@@ -487,186 +500,7 @@
 
                     }
                 </script>
-                <script type="text/javascript"
-                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
-
                 <script>
-                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                        mapOption = {
-                            center: new kakao.maps.LatLng(36.1284895431993, 127.58708499996532), // 지도의 중심좌표
-                            level: 13, // 지도의 확대 레벨
-                            disableDoubleClickZoom: true
-                        };
-
-                    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-                    var map = new kakao.maps.Map(mapContainer, mapOption);
-
-                    // 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
-                    function setMapType(maptype) {
-                        var roadmapControl = document.getElementById('btnRoadmap');
-                        var skyviewControl = document.getElementById('btnSkyview');
-                        if (maptype === 'roadmap') {
-                            map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
-                            roadmapControl.className = 'selected';
-                            skyviewControl.className = 'unselected';
-                        } else {
-                            map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
-                            skyviewControl.className = 'selected';
-                            roadmapControl.className = 'unselected';
-                        }
-                    }
-
-                    var positions = [
-                        {
-                            content: '<div>서울</div>',
-                            latlng: new kakao.maps.LatLng(37.54664359142577, 126.99315381710171),
-                            ctcode: 'CT00001'
-                        },
-                        {
-                            content: '<div>경기</div>',
-                            latlng: new kakao.maps.LatLng(37.39440609862812, 126.97365324765146),
-                            ctcode: 'CT00009'
-                        },
-                        {
-                            content: '<div>인천</div>',
-                            latlng: new kakao.maps.LatLng(37.45805515784067, 126.70743142446902),
-                            ctcode: 'CT00003'
-                        },
-                        {
-                            content: '<div>제주</div>',
-                            latlng: new kakao.maps.LatLng(33.38396073538159, 126.55947926554452),
-                            ctcode: 'CT00017'
-                        },
-                        {
-                            content: '<div>부산</div>',
-                            latlng: new kakao.maps.LatLng(35.175398937500916, 129.07635140268044),
-                            ctcode: 'CT00002'
-                        },
-                        {
-                            content: '<div>대구</div>',
-                            latlng: new kakao.maps.LatLng(35.875709389940255, 128.61405215864136),
-                            ctcode: 'CT00004'
-                        },
-                        {
-                            content: '<div>대전</div>',
-                            latlng: new kakao.maps.LatLng(36.35024083449214, 127.38504504613894),
-                            ctcode: 'CT00005'
-                        },
-                        {
-                            content: '<div>광주</div>',
-                            latlng: new kakao.maps.LatLng(35.15850075532579, 126.85427796577575),
-                            ctcode: 'CT00006'
-                        },
-                        {
-                            content: '<div>울산</div>',
-                            latlng: new kakao.maps.LatLng(35.530793233360946, 129.35179422986909),
-                            ctcode: 'CT00007'
-                        },
-                        {
-                            content: '<div>세종</div>',
-                            latlng: new kakao.maps.LatLng(36.47450836419142, 127.29068102611524),
-                            ctcode: 'CT00008'
-                        },
-                        {
-                            content: '<div>충북</div>',
-                            latlng: new kakao.maps.LatLng(36.87055575768208, 127.73074019412219),
-                            ctcode: 'CT00010'
-                        },
-                        {
-                            content: '<div>충남</div>',
-                            latlng: new kakao.maps.LatLng(36.535856613465555, 126.81995401264338),
-                            ctcode: 'CT00011'
-                        },
-                        {
-                            content: '<div>전북</div>',
-                            latlng: new kakao.maps.LatLng(35.712288073108894, 127.13016897048418),
-                            ctcode: 'CT00012'
-                        },
-                        {
-                            content: '<div>전남</div>',
-                            latlng: new kakao.maps.LatLng(34.93014343723772, 127.0000328350848),
-                            ctcode: 'CT00013'
-                        },
-                        {
-                            content: '<div>경북</div>',
-                            latlng: new kakao.maps.LatLng(36.4614466650289, 128.71070899570446),
-                            ctcode: 'CT00014'
-                        },
-                        {
-                            content: '<div>경남</div>',
-                            latlng: new kakao.maps.LatLng(35.40390554860735, 128.22311181830486),
-                            ctcode: 'CT00015'
-                        },
-                        {
-                            content: '<div>강원</div>',
-                            latlng: new kakao.maps.LatLng(37.60700024383932, 128.42062228646495),
-                            ctcode: 'CT00016'
-                        },
-                    ];
-                    map.setDraggable(false);
-                    map.setZoomable(false);
-
-                    let markerList = [];
-                    let ctcodeList = [];
-                    for (var i = 0; i < positions.length; i++) {
-                        // 마커를 생성합니다
-
-                        let ctcode = positions[i].ctcode;
-
-                        ctcodeList.push(ctcode);
-
-                        var marker = new kakao.maps.Marker({
-                            map: map, // 마커를 표시할 지도
-                            position: positions[i].latlng, // 마커의 위치
-                            ctcode: positions[i].ctcode
-                        });
-                        markerList.push(marker);
-
-                        // 마커에 표시할 인포윈도우를 생성합니다 
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content: positions[i].content // 인포윈도우에 표시할 내용
-                        });
-
-                        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-                        // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-                        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-                        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-                        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-                    }
-
-                    for (let mar in markerList) {
-                        markerList[mar].addListener('click', function () {
-                            console.log(markerList[mar].getPosition());
-                            console.log(positions[mar].ctcode);
-                            let ct = positions[mar].ctcode;
-                            $.ajax({
-                                type: "get",
-                                url: "TdestCtSearchPage",
-                                data: { "ctcode": ct },
-                                dataType: "json",
-                                async: false,
-                                success: function (e) {
-                                    console.log('성공');
-                                    printTdest(e);
-                                }
-                            });
-                        });
-                    }
-
-
-                    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-                    function makeOverListener(map, marker, infowindow) {
-                        return function () {
-                            infowindow.open(map, marker);
-                        };
-                    }
-
-                    // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-                    function makeOutListener(infowindow) {
-                        return function () {
-                            infowindow.close();
-                        };
-                    }
 
                     function printTdest(dest) {
                         let TdestAreaDiv = document.querySelector('div.TdestArea');
@@ -710,7 +544,7 @@
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
                             TdestBtn.addEventListener('click', function () {
-                                selectCdcode(Td.tdcode,'tdest');
+                                selectCdcode(Td.tdcode, 'tdest');
                             });
                             TdestTitleDiv.appendChild(TdestTitle);
 
@@ -777,7 +611,7 @@
                                     location.href = "/";
                                 } else {
                                     alert('이미 선택된 행선지 입니다.');
-                                    
+
                                 }
                             }
                         })

@@ -28,7 +28,7 @@
                 background-color: lightgrey;
             }
 
-            img {
+            .img {
                 width: 300px;
                 height: 300px;
                 padding: 20px;
@@ -100,14 +100,14 @@
                         <div class="tdest" id="meminfoTag">
                             <div class="tImg">
                                 <c:forEach var="td" items="${Td}">
-                                    <img src="${td.tdphoto}" alt="">
+                                    <img class="img" src="${td.tdphoto}" alt="">
                                 </c:forEach>
                             </div>
                         </div>
                         <div class="fest disnone" id="weatherTag">
                             <div class="fImg">
                                 <c:forEach var="fe" items="${Fe}">
-                                    <img src="${fe.feposter}" alt="">
+                                    <img class="img" src="${fe.feposter}" alt="">
                                 </c:forEach>
                             </div>
                         </div>

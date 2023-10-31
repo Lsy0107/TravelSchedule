@@ -148,7 +148,6 @@ main {
 0% {left: 0;}
 100%{left:-2860px;}
 }
-
 .navbg{
 background-color: black;
 }
@@ -166,6 +165,10 @@ to{background-color:white;}
 }
 
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+.navbar-brand, .nav-link{
+color:black;}
+.navbar-brand:hover, .nav-link:hover{
+color:black;}
 
 .bg {
         height: 100vh;
@@ -191,7 +194,7 @@ to{background-color:white;}
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
 		<!-- container 시작 -->
-		<div class="p-4 bg" style="background-image: ">
+		<div class="p-4 bg">
 			<div class="container">
 				
 				
@@ -452,7 +455,7 @@ to{background-color:white;}
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
-	
+		
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
