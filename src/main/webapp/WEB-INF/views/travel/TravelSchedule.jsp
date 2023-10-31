@@ -21,15 +21,138 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- ajax -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<style type="text/css">
+	.disnone{
+	display:none;
+	animation:fade-out 1s;
+	}
+	.dison{
+	animation:fade-on 1s;
+	}
+	.disoff{
+	animation:fade-off 1s
+	}
+	@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+
+  }
+  to {
+    opacity: 0;
+  }
+}
+.asd{
+height: 688px;
+}
+	</style>
 </head>
 <body class="d-flex flex-column h-100">
 	<main class="flex-shrink-0">
 		<!-- Navigation-->
-		<%@ include file="/WEB-INF/views/include/menu.jsp"%>
+		
 		<!-- contant 시작 -->
+		<div class="p-4"style="display:flex;float: left; position: absolute; background-color: beige; z-index: 3; height:-webkit-fill-available;">
+		<div class="">
+		<h2 onclick="location.href='${pageContext.request.contextPath }/'">여행</h2>
+		<nav>
+		
+			<ul style="list-style: none; padding:0;">
+			<li><div class="container-fluid "style="padding:0;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span>여행지 선택</span>
+    </button>
+  </div></li>
+			<li>
+			<div id="scArea" class="row p-1" style="min-height: 375px; display: flow;">
+				<c:forEach var="sc" items="${scdestList }">
+				<c:if test="${sc.SCDATE != null}">
+				<c:choose>
+				<c:when test="${sc.TDCODE != null }"><p>${sc.TDNAME } : ${sc.SCDATE }</p></c:when>
+				<c:when test="${sc.FECODE != null }"><p>${sc.FENAME } : ${sc.SCDATE }</p></c:when>
+				</c:choose>
+				
+					
+				</c:if>
+				</c:forEach>
+				</div>
+				<div class="row p-1">
+				<c:if test="${cd.cdstate == 'Y' }">
+				<button class="btn btn-primary" onclick="updateCdstate('${cd.cdcode}')">계획 확정하기</button>
+				</c:if>
+				</div>
+				</li>
+			</ul>
+		</nav>
+		</div>
+  <div class="collapse p-4 asd dison" id="navbarToggleExternalContent" style="overflow: scroll;background-color: white; ">
+  <button class="btn btn-info"onclick="disnonefe()">여행지</button>
+  <button class="btn btn-info"onclick="disnonetd()">축제</button>
+    <div>
+						<nav id="tdArea1" class=""  style="">
+							<c:forEach items="${ scdestList}" var="td">
+							<c:if test="${td.TDCODE != null }">
+								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
+									<img src="${td.TDPHOTO }" class="card-img-top" alt="..." width="286px" height="191px" loading="lazy">
+									<div class="card-body">
+										<h5 class="card-title">${td.TDNAME }</h5>
+										<p class="card-text">${td.TDADDRESS }</p>
+										<c:if test="${td.SCDATE == null}">
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 6px; width: 48%; font-size: 15px;"
+											onclick="selectDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+											추가하기</button>
+										</c:if>
+										<c:if test="${td.SCDATE != null }">
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 6px; width: 48%; font-size: 15px;">추가된 계획</button>
+										</c:if>
+										<button class="btn btn-danger position-absolute bottom-0 end-0" onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')" style="margin: 6px; font-size: 15px; width: 43%;">계획 삭제하기</button>
+									</div>
+								</div>
+							</c:if>
+							</c:forEach>
+						</nav>
+						<nav id="feArea1" class="disnone" style="">
+							<c:forEach items="${ scdestList}" var="fe">
+								<c:if test="${fe.FECODE != null }">
+								<div class="card" style="width: 18rem; margin: 4px; height: 370px;">
+									<img src="${fe.FEPOSTER }" class="card-img-top" alt="..."  width="286px" height="191px" loading="lazy">
+									<div class="card-body">
+										<h5 class="card-title">${fe.FENAME }</h5>
+										<p class="card-text">${fe.FEADDRESS }</p>
+										<c:if test="${fe.SCDATE == null}">
+										<button class="btn btn-primary position-absolute bottom-0 start-0" style="margin: 10px"
+											onclick="selectDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')"
+											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+											추가하기</button>
+										</c:if>
+										<c:if test="${fe.SCDATE != null }">
+										<button class="btn btn-info position-absolute bottom-0 start-0" style="margin: 10px">추가된 계획</button>
+										</c:if>
+									</div>
+								</div>
+								</c:if>
+							</c:forEach>
+						</nav>
+					</div>
+  </div>
+
+</div>
+<div id="map" class="col border border-dark" style="height: 740px;"></div>
+<!-- 
+		</div>
 		<div class="row" style="margin: 45px;"></div>
 		<div class="container">
 			<div class="row" >
@@ -144,10 +267,11 @@
 				</div>
 			</div>
 		</div>
+ -->
 		<!-- contant 종료 -->
 	</main>
-	<!-- Footer-->
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+	<!-- Footer
+	-->
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -289,6 +413,27 @@
 				}
 			}
 		})
+	}
+	function disnonetd(){
+		let tdArea =document.querySelector("#tdArea1");
+		let feArea = document.querySelector("#feArea1");
+		console.log('disnonetd')
+		console.log(tdArea.classList);
+		console.log(feArea.classList);
+		tdArea.classList.add('disnone');
+		feArea.classList.remove('disnone');
+		
+		
+	}
+	function disnonefe(){
+		console.log('disnonefe')
+		let tdArea =document.querySelector("#tdArea1");
+		let feArea = document.querySelector("#feArea1");
+		console.log(tdArea.classList);
+		console.log(feArea.classList);
+		tdArea.classList.remove('disnone');
+		feArea.classList.add('disnone');
+		
 	}
 	</script>
 </body>

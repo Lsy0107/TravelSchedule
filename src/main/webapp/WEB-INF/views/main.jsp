@@ -148,7 +148,9 @@ main {
 0% {left: 0;}
 100%{left:-2860px;}
 }
-
+.bg-dark{
+display:none;
+}
 .navbg{
 background-color: black;
 }
@@ -165,7 +167,10 @@ to{background-color:aqua;}
 }
 
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
-
+.navbar-brand, .nav-link{
+color:black;}
+.navbar-brand:hover, .nav-link:hover{
+color:black;}
 </style>
 
 
@@ -308,7 +313,7 @@ to{background-color:aqua;}
 											<div class="city" style="font-size: 13pt"></div>
 										</div>
 									</div>
-									<div class="col">
+									<div class="col"> 	
 										<div
 											style="float: right; margin: -5px 0px 0px 0px; font-size: 11pt">
 											<div class="temp_min"></div>
