@@ -19,6 +19,13 @@
         <link href="resources/css/styles.css" rel="stylesheet" />
         
         <style type="text/css">
+        .input-file-btn{
+		  padding: 6px 25px;
+		  border-radius: 4px;
+
+		  margin-left: 11px;
+		}
+		
 			.profile-img.big {
 				width: 150px;
 				height: 150px;
@@ -44,15 +51,17 @@
 					<p>
 					<c:choose>
 						<c:when test="${mInfo.mprofile  == null}">
-							<img src="/resources/memberProfile/default.jpg" class="img-thumbnail" alt="..." style="width: 150px;">
+							<img id="profileImg" src="/resources/memberProfile/default.jpg" class="img-thumbnail" alt="..." style="width: 150px;">
 						</c:when>
 						<c:otherwise>
-							<img src="/resources/memberProfile/${mInfo.mprofile }" class="img-thumbnail" alt="${mInfo.mprofile }" style="width: 150px;">
+							<img id="profileImg" src="/resources/memberProfile/${mInfo.mprofile }" class="img-thumbnail" alt="${mInfo.mprofile }" style="width: 150px;">
 						</c:otherwise>
 					</c:choose>
 					</p>
-						
-						<input type="file" name="mprofiledata" value="${mInfo.mprofile }">
+						<label class="input-file-btn w3-button w3-black w3-ripple w3-round" for="input-file">
+						  프로필 변경
+						</label>
+						<input id="input-file" onchange="changeProfile(this)" type="file" name="mprofiledata" value="${mInfo.mprofile }" style="display:none;">
 						
 					<p>
 						<label><h5>ID</h5></label> 
@@ -64,7 +73,7 @@
 					</p>
 					
 					<p class="w3-center">
-						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
+						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 저장</button>
 					</p>
 				</form>
 				<br />
@@ -135,7 +144,20 @@
 				
 			}
         </script>
-        
+        <script type="text/javascript">
+        	function changeProfile(obj){
+        		let imgTag = document.querySelector("#profileImg");
+        		if (obj.files && obj.files[0]) {
+        		    var reader = new FileReader();
+        		    reader.onload = function(e) {
+        		    	imgTag.src = e.target.result;
+        		    };
+        		    reader.readAsDataURL(obj.files[0]);
+        		  } else {
+        			  imgTag.src = "";
+        		  }
+        	}
+        </script>
     </body>
 </html>
     

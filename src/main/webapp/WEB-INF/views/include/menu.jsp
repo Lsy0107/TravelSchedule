@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://kit.fontawesome.com/c8056a816e.js"
+	crossorigin="anonymous"></script>
 <style>
 .navbar {
 	position: fixed;
@@ -12,10 +14,13 @@
 	width: 20%;
 	border-radius: 50px;
 }
+.bk{
+	color: black;
+}
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
 	<div class="container px-5">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }/">여행페이지</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath }/"><i class="fa-solid fa-earth-asia"></i> 여행페이지</a>
 		<div class="col" style="display: flex; align-items: center;"></div>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
@@ -27,22 +32,22 @@
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 			<c:choose>
 					<c:when test="${sessionScope.loginId ==null }">
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item "><a class="nav-link bk"
 							href="/memberLoginForm">여행계획</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"><a class="nav-link bk"
 							href="/selectCalendar">여행계획</a></li>
 					</c:otherwise>
 				</c:choose>
-				<li class="nav-item"><a class="nav-link"
+				<li class="nav-item"><a class="nav-link bk"
 					href="/TdestSearchPage">여행지검색</a></li>
-				<li class="nav-item"><a class="nav-link" href="/festival">축제</a></li>
+				<li class="nav-item"><a class="nav-link bk" href="/festival">축제</a></li>
 				<c:choose>
 					<c:when test="${sessionScope.loginId ==null }">
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"><a class="nav-link bk"
 							href="${pageContext.request.contextPath }/memberLoginForm">로그인</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"><a class="nav-link bk"
 							href="${pageContext.request.contextPath }/memberJoinForm">회원가입</a></li>
 					</c:when>
 					<c:otherwise>
@@ -61,7 +66,10 @@
 						<p onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
 						<p>몇월 몇일 몇개 일정이 있습니다.</p>
 						<hr style="border-top:2px solid lightgray">
-						날씨
+						
+						
+						
+						
 						<hr style="border-top:2px solid lightgray">
 						<p style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
 						<hr style="border-top:2px solid lightgray">
@@ -75,4 +83,3 @@
 		</div>
 	</div>
 </nav>
-

@@ -309,7 +309,7 @@
                                         <!-- Blog post-->
                                         <div class="card mb-4 photo" id="photo"
                                             onclick="location.href='detailTdest?tdcode=${TdList.tdcode}'">
-                                            <img class="card-img-top tdImg" src="${TdList.tdphoto}" alt="..." />
+                                            <img class="card-img-top tdImg img-thumbnail" src="${TdList.tdphoto}" alt="..." />
 
                                         </div>
                                         <div class="card-body">

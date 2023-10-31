@@ -153,7 +153,7 @@ main {
 background-color: black;
 }
 .navbg-white{
-background-color: aqua;
+	background-color: white;
 }
 .change{
 	animation-name:color;
@@ -161,10 +161,24 @@ background-color: aqua;
 }
 @keyframes color { 
 from {background:none;}
-to{background-color:aqua;}
+to{background-color:white;}
 }
 
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+.bg {
+        height: 100vh;
+        width: 100vw;
+        background-image: url('https://post-phinf.pstatic.net/MjAxODAzMTdfNzYg/MDAxNTIxMjIxNjQxNDQ3.Z4UwpknVj4agsPoHEg4Mk8HLscjzd_dMO5l7Z20MS3Ag.32_e21NxEl-bxbQjWcEXIXxVPRL3nFwmeoLZKhPUw-Mg.JPEG/1.jpg');
+        background-repeat : no-repeat;
+        background-size : cover;
+        image-rendering: -moz-crisp-edges; /* firefox */
+		image-rendering: -o-crisp-edges; /* opera */
+		image-rendering: -webkit-optimize-contrast; /* chrome */
+		image-rendering: crisp-edges;
+		transform: translateZ(0);
+		backface-visibility: hidden;
+      }
 
 </style>
 
@@ -176,176 +190,12 @@ to{background-color:aqua;}
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
 		<!-- container 시작 -->
-		<div class="p-4" style="background-color: #F4FFFF;">
+		<div class="p-4 bg" style="background-image: ">
 			<div class="container">
-				<div class="row">
-					<div id="TitleBar" style="width: 74%;">
-						<div class="IMGBAR">
-							<div id="myCarousel" class="carousel carousel-dark slide"
-								data-bs-ride="carousel" style="z-index: 0;">
-								<!-- 슬라이스 갯수 -->
-								<div class="carousel-indicators">
-									<button type="button" data-bs-target="#myCarousel"
-										data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
-									<button type="button" data-bs-target="#myCarousel"
-										data-bs-slide-to="1" aria-label="Slide 2" class=""
-										aria-current="true"></button>
-									<button type="button" data-bs-target="#myCarousel"
-										data-bs-slide-to="2" aria-label="Slide 3"></button>
-									<button type="button" data-bs-target="#myCarousel"
-										data-bs-slide-to="3" aria-label="Slide 4"></button>
-								</div>
-								<!-- 이미지 텍스트 영역 -->
-								<div class="carousel-inner">
-									<div class="carousel-item active">
-										<svg class="bd-placeholder-img" width="100%" height="550px"
-											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-											preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="800px" fill="#F4FFFF"></rect></svg>
-										<div class="carousel-caption text-start">
-											<a href="${newList[0].url}"><img
-												src="${newList[0].photo }" width="676px" height="400px"
-												loading="lazy"></a>
-											<div>
-												<p style="margin: 0px;">${newList[0].newtitle }</p>
-												<p style="margin: 0px;">${newList[0].newsdate }</p>
-											</div>
-										</div>
-									</div>
-									<div class="carousel-item ">
-										<svg class="bd-placeholder-img" width="100%" height="550px"
-											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-											preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="800px" fill="#F4FFFF"></rect></svg>
-										<div class="carousel-caption text-start">
-											<a href="${newList[1].url}"><img
-												src="${newList[1].photo }" width="676px" height="400px"
-												loading="lazy"></a>
-											<div>
-												<p style="margin: 0px;">${newList[1].newtitle }</p>
-												<p style="margin: 0px;">${newList[1].newsdate }</p>
-											</div>
-										</div>
-									</div>
-									<div class="carousel-item">
-										<svg class="bd-placeholder-img" width="100%" height="550px"
-											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-											preserveAspectRatio="xMidYMid slice" focusable="false">
-								<rect width="100%" height="800px" fill="#F4FFFF"></rect></svg>
-
-										<div class="carousel-caption text-start">
-											<a href="${newList[2].url}"><img
-												src="${newList[2].photo }" width="676px" height="400px"
-												loading="lazy"></a>
-											<div>
-												<p style="margin: 0px;">${newList[2].newtitle }</p>
-												<p style="margin: 0px;">${newList[2].newsdate }</p>
-											</div>
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="card text-center" style="width: 26%; height: 550px;">
-						<div class="card-header">
-							<ul class="nav nav-tabs card-header-tabs">
-								<li class="nav-item"><a id="meminfoA"
-									class="nav-link active" aria-current="true"
-									href="javascript:chageDisplay('meminfo')">내정보</a></li>
-								<li class="nav-item"><a id="weatherA" class="nav-link"
-									href="javascript:chageDisplay('weather')">날씨</a></li>
-							</ul>
-						</div>
-						<div class="card-body" id="meminfoTag">
-							<c:choose>
-								<c:when test="${sessionScope.loginId ==null }">
-									<button class="btn btn-primary"
-										onclick="location.href='${pageContext.request.contextPath }/memberLoginForm'">로그인</button>
-								</c:when>
-								<c:otherwise>
-									<h1 class="card-title" style="text-align: justify;">
-										<img
-											src="/resources/memberProfile/${sessionScope.loginProfile}"
-											class="profile">${sessionScope.loginId }</h1>
-									<p class="card-text">오늘의 일정</p>
-									<a href="#" class="btn btn-primary">일정보러가기</a>
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<div class="card-body disnone" id="weatherTag"
-							style="background-color: rgb(101, 178, 255); margin: 10px;">
-							<div class="row">
-								<div class="row align-items-start">
-									<div class="col">
-										<h3
-											style="margin-left: 15px; color: #fff; font-family: 'Jua' !important;">오늘의
-											날씨</h3>
-									</div>
-								</div>
-								<div class="row align-items-center" style="color: #fff;">
-									<div class="col">
-										<div style="float: left;">
-											<div class="weather_icon"></div>
-										</div>
-									</div>
-									<div class="col">
-										<select class="weatherCity" style="width: 75px;"
-											onchange="selectWeather(this.value)">
-											<option value="Seoul">서울</option>
-											<option value="Incheon">인천</option>
-											<option value="Busan">부산</option>
-											<option value="Daejeon">대전</option>
-											<option value="Daegu">대구</option>
-											<option value="Uisan">울산</option>
-											<option value="Gwangju">광주</option>
-											<option value="Jeju">제주</option>
-										</select>
-									</div>
-								</div>
-								<div class="row align-items-end" style="color: #fff;">
-									<div class="col">
-										<div>
-											<div class="current_temp" style="font-size: 30pt"></div>
-											<div class="weather_description" style="font-size: 20pt"></div>
-											<div class="city" style="font-size: 13pt"></div>
-										</div>
-									</div>
-									<div class="col">
-										<div
-											style="float: right; margin: -5px 0px 0px 0px; font-size: 11pt">
-											<div class="temp_min"></div>
-											<div class="temp_max"></div>
-											<div class="humidity"></div>
-											<div class="wind"></div>
-											<div class="cloud"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-									</div>
-								</div>
-								<!-- 기다란 넘기기 버튼 -->
-								<button class="carousel-control-prev" type="button"
-									data-bs-target="#myCarousel" data-bs-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Previous</span>
-								</button>
-								<button class="carousel-control-next" type="button"
-									data-bs-target="#myCarousel" data-bs-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Next</span>
-								</button>
-							</div>
-						</div>
-					</div>
-					<!-- 
-					
-					 -->
-
-				</div>
-			</div>
+				
+				
+			</div><!-- container 끝 -->
+			
 		</div>
 		<!-- 
 		 -->
@@ -416,6 +266,135 @@ to{background-color:aqua;}
 				</div>
 			</div>
 		</div>
+		
+		<div class="row d-flex justify-content-center">
+					<div id="TitleBar" style="width: 74%;">
+						<div class="IMGBAR">
+							<div id="myCarousel" class="carousel carousel-dark slide"
+								data-bs-ride="carousel" style="z-index: 0;">
+								<!-- 슬라이스 갯수 -->
+								<div class="carousel-indicators">
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="1" aria-label="Slide 2" class=""
+										aria-current="true"></button>
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="2" aria-label="Slide 3"></button>
+									<button type="button" data-bs-target="#myCarousel"
+										data-bs-slide-to="3" aria-label="Slide 4"></button>
+								</div>
+								<!-- 이미지 텍스트 영역 -->
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<svg class="bd-placeholder-img" width="100%" height="550px"
+											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
+								<rect width="100%" height="800px" fill="#fff"></rect></svg>
+										<div class="carousel-caption text-start">
+											<a class="d-flex justify-content-center" href="${newList[0].url}"><img
+												src="${newList[0].photo }" width="676px" height="400px"
+												loading="lazy"></a>
+											<div class="">
+												<p style="margin: 0px; text-align: center;">${newList[0].newtitle }</p>
+												<p style="margin: 0px; text-align: center;">${newList[0].newsdate }</p>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item ">
+										<svg class="bd-placeholder-img" width="100%" height="550px"
+											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
+								<rect width="100%" height="800px" fill="#fff"></rect></svg>
+										<div class="carousel-caption text-start">
+											<a class="d-flex justify-content-center" href="${newList[1].url}"><img
+												src="${newList[1].photo }" width="676px" height="400px"
+												loading="lazy"></a>
+											<div>
+												<p style="margin: 0px; text-align: center;">${newList[1].newtitle }</p>
+												<p style="margin: 0px; text-align: center;">${newList[1].newsdate }</p>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<svg class="bd-placeholder-img" width="100%" height="550px"
+											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
+								<rect width="100%" height="800px" fill="#fff"></rect></svg>
+
+										<div class="carousel-caption text-start">
+											<a class="d-flex justify-content-center" href="${newList[2].url}"><img
+												src="${newList[2].photo }" width="676px" height="400px"
+												loading="lazy"></a>
+											<div>
+												<p style="margin: 0px; text-align: center;">${newList[2].newtitle }</p>
+												<p style="margin: 0px; text-align: center;">${newList[2].newsdate }</p>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<svg class="bd-placeholder-img" width="100%" height="550px"
+											xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
+										<rect width="100%" height="800px" fill="#fff"></rect></svg>
+										<div class="carousel-caption" style="position: absolutel top: 50%; transform: translate(0, -50%);">
+											<div class="row position-relative" style="margin-bottom: 25px; margin-top: 15px;">
+											<h2 class="text-center" style="font-family: 'Jua' !important;">오늘의 날씨</h2>
+												<select class="weatherCity position-absolute top-0 end-0" style="width: 80px;" onchange="selectWeather(this.value)">
+													<option value="Seoul">서울</option>
+													<option value="Incheon">인천</option>
+													<option value="Busan">부산</option>
+													<option value="Daejeon">대전</option>
+													<option value="Daegu">대구</option>
+													<option value="Uisan">울산</option>
+													<option value="Gwangju">광주</option>
+													<option value="Jeju">제주</option>
+												</select>
+												<hr>
+												<div class="col" style="display: flex; justify-content: center;">
+													<div style="width: 125px; margin-top: 15px;">
+														<div class="weather_icon"></div>
+													</div>
+
+													<div class="text-start" style="width: 150px;">
+														<div class="current_temp" style="font-size: 30pt"></div>
+														<div class="weather_description" style="font-size: 20pt"></div>
+														<div class="city" style="font-size: 13pt"></div>
+													</div>
+
+
+													<div style="margin-top: 10px;">
+														<div class="temp_min"></div>
+														<div class="temp_max"></div>
+														<div class="humidity"></div>
+														<div class="wind"></div>
+														<div class="cloud"></div>
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<!-- 기다란 넘기기 버튼 -->
+								<button class="carousel-control-prev" type="button"
+									data-bs-target="#myCarousel" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button"
+									data-bs-target="#myCarousel" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					
+
+				</div>
+		
 		<div class="p-4" style="background-color: #DCEBFF;">
 			<div class="container">
 				<div class="row marquee" style="height:457px;">

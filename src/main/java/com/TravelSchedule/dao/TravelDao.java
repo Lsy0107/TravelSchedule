@@ -60,5 +60,7 @@ public interface TravelDao {
 
 	ArrayList<Tdest> selectTdest_Nearby(@Param("ctcode")String ctcode,@Param("tdcode") String tdcode);
 
+	ArrayList<Schedule> selectScList();
+
 
 }
