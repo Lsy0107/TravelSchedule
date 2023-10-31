@@ -15,6 +15,8 @@
 	width: 20%;
 	border-radius: 50px;
 }
+.info:hover{
+	cursor:pointer;
 .bk{
 	color: black;
 }
@@ -64,7 +66,7 @@
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
 								class="profile">${sessionScope.loginId }</h1>
 						<hr style="border-top:2px solid lightgray">
-						<p onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
+						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
 						<p>몇월 몇일 몇개 일정이 있습니다.</p>
 						<hr style="border-top:2px solid lightgray">
 						
@@ -72,9 +74,9 @@
 						
 						
 						<hr style="border-top:2px solid lightgray">
-						<p style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
+						<p class="info" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
 						<hr style="border-top:2px solid lightgray">
-						<p onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
+						<p class="info"onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
 					</div>
 				</li>
 					</c:otherwise>
