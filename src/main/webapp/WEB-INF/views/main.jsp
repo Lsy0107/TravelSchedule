@@ -148,9 +148,6 @@ main {
 0% {left: 0;}
 100%{left:-2860px;}
 }
-.bg-dark{
-display:none;
-}
 .navbg{
 background-color: black;
 }
@@ -190,8 +187,7 @@ color:black;}
 
 
 </head>
-<body class="d-flex flex-column h-100">
-	<main class="">
+<body class="">
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
@@ -457,7 +453,6 @@ color:black;}
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
-	</main>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
