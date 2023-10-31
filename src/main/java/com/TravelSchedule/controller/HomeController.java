@@ -140,7 +140,7 @@ public class HomeController {
 		
 		mav.addObject("CountryList",CountryList);
 //		mav.addObject("TdestList",TdestList);
-		mav.setViewName("/festival/test");
+		mav.setViewName("/travel/TdestSearch");
 		return mav;
 	}
 	@RequestMapping(value="TdestCtSearchPage")
