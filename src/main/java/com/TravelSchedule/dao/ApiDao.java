@@ -1,12 +1,15 @@
 package com.TravelSchedule.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Tdest;
 
 public interface ApiDao {
@@ -48,5 +51,11 @@ public interface ApiDao {
 	int insertLK(@Param("lk") Likelist lk, @Param("seloption") String seloption);
 
 	int deleteLK(@Param("lk") Likelist lk, @Param("seloption") String seloption);
+
+	@Select("SELECT * FROM REVIEW R, MEMBERS M WHERE M.MID = R.MID")
+	ArrayList<HashMap<String, String>> reListDao();
+
+	@Select("SELECT * FROM REVIEW R WHERE CODELIST LIKE '%'||#{cs}||'%'")
+	Review getReDao(String cs);
 	
 }

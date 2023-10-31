@@ -135,6 +135,10 @@ public class TravelService {
 		System.out.println("travelService - tdest_Nearby()");
 		return tdao.selectTdest_Nearby(ctcode, tdcode);			
 	}
+	public ArrayList<Schedule> getScList() {
+		System.out.println("travelService - getScList");
+		return tdao.selectScList();
+	}
 
 	
 

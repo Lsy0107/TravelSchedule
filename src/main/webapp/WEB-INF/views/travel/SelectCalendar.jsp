@@ -19,6 +19,7 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
 <!-- ajax -->
+<script src="https://kit.fontawesome.com/65020fc203.js" crossorigin="anonymous"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<%-- background-color : white; 
@@ -115,17 +116,22 @@ td {
 		<div class="container">
 			<div class="row mb-2">
 				<div
-					class="col col-6 border border-dark p-3 overflow-auto rounded-start"
+					class="col col-2 border border-dark p-3 overflow-auto rounded-start"
 					style="min-height: 500px;">
+					<div style="height:505px;">
+					<h4 style="text-align:center;margin-top:0;">캘린더</h4>
 					<c:forEach items="${cdList }" var="cd">
-						<a class="btn btn-primary m-1"
-							href="javascript:getSchedule('${cd.cdcode }','${cd.mid }','${cd.cdstate }')">캘린더
-							이름 : ${cd.cdname }</a>
+						<a style="display:block;"class="btn btn-primary m-1"
+							href="javascript:getSchedule('${cd.cdcode }','${cd.mid }','${cd.cdstate }')">${cd.cdname }</a>
 						<br>
 					</c:forEach>
+					</div>
+					<div style="text-align:end;">
+					<button style="border-radius:30px; height: 41px; width: 41px;" class="btn btn-info" onclick="makeCalender()"><i class="fa-solid fa-plus"></i></button>
+					</div>
 				</div>
-				<div class="col col-6 border border-dark rounded-end p-3">
-					<div class="row" style="display: block; min-height: 429px;"
+				<div class="col col-10 border border-dark rounded-end p-3">
+					<div class="row" style="display: block; min-height: 510px;"
 						id="printSchedule">
 						<table class="Calendar">
 							<thead>
@@ -157,12 +163,6 @@ td {
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col border border-dark rounded p-4 mb-2">
-					<button class="btn btn-info" onclick="makeCalender()">캘린더
-						추가하기</button>
-				</div>
-			</div>
 		</div>
 		<!-- contant 종료 -->
 	</main>
@@ -176,6 +176,9 @@ td {
 	<script type="text/javascript">
 		function makeCalender() {
 			let cdname = prompt("캘린더 이름을 입력해주세요");
+			if(cdname == null){	
+				return;
+			}
 			if(cdname.split(' ')[0].length>0){
 			$.ajax({
 				url:"/registCalendar",
@@ -216,46 +219,21 @@ td {
 				let scList_json = JSON.parse(scList);
 				console.log(scList_json)
 				let scArea = document.querySelector("#printSchedule");
-				scArea.innerHTML = '<table class="Calendar"><thead><tr><td id="prevCalendar"style="cursor: pointer;">&#60;</td><td colspan="5"><span id="calYear"></span>년 <span id="calMonth"></span>월</td>					<td id="nextCalendar" style="cursor: pointer;">&#62;</td>				</tr>				<tr>					<td>일</td>					<td>월</td>					<td>화</td>					<td>수</td>					<td>목</td>					<td>금</td>					<td>토</td>				</tr>			</thead>			<tbody>			</tbody>		</table>';
+				scArea.innerHTML = '<table class="Calendar"><thead><tr><td id="prevCalendar"style="cursor: pointer;">&#60;</td><td colspan="5"><span id="calYear"></span>년 <span id="calMonth"></span>월</td><td id="nextCalendar" style="cursor: pointer;">&#62;</td></tr><tr><td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>	</tr></thead><tbody></tbody></table>';
 				nowMonth = new Date();
 				buildCalendar(scList_json)
 				// onClick="prevCalendar('+scList_json+');" 
 				let prevCalendarBtn = document.querySelector("#prevCalendar");
-				prevCalendarBtn.setAttribute("onclick", "prevCalendar('"+scList_json+"')");
+				prevCalendarBtn.addEventListener("click",function(){
+					prevCalendar(scList_json);
+				})
 				
 				let nextCalendarBtn = document.querySelector("#nextCalendar");
-				nextCalendarBtn.setAttribute("onclick", "nextCalendar('"+scList_json+"')");
-				
+				nextCalendarBtn.addEventListener("click",function(){
+					nextCalendar(scList_json);
+				})
 				let btnArea = document.querySelector("#btnArea");
 				let date = "";
-				/*
-				for(let sc of scList_json){
-					if(sc.SCDATE == null){
-						continue;
-					}
-						
-					if(date != sc.SCDATE.substring(0,10)){
-						if(date != ""){
-							let hrTag = document.createElement("hr");
-							scArea.appendChild(hrTag);
-						}
-						let p_date = document.createElement("p");
-						date = sc.SCDATE.substring(0,10)
-						p_date.innerText = date;
-						scArea.appendChild(p_date);
-					}
-					let name = "";
-					if(sc.TDCODE != null){
-						name = sc.TDNAME;
-					}else if(sc.FECODE != null){
-						name = sc.FENAME
-					}
-					let p_name_time = document.createElement("p");
-					p_name_time.innerText = name;
-					p_name_time.innerText = p_name_time.innerText + " : " + sc.SCDATE.substring(11,16);
-					scArea.appendChild(p_name_time);
-				}
-				*/
     			btnArea.classList.remove("disnone");
     			let mksc = document.querySelector("#travelMkSc");
     			mksc.innerText = '';
@@ -327,7 +305,6 @@ td {
 
         // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
         function buildCalendar(scList) {
-
             let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
             let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
 
@@ -348,7 +325,7 @@ td {
             for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {   // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복  
 
                 let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
-
+                nowColumn.setAttribute("style", "text-align: -webkit-center;");
 
                 let newDIV = document.createElement("p");
                 newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력

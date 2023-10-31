@@ -1,6 +1,7 @@
 package com.TravelSchedule.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,8 @@ import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.News;
+import com.TravelSchedule.dto.Schedule;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
 import com.TravelSchedule.service.TravelService;
@@ -41,10 +44,13 @@ public class HomeController {
 		ArrayList<Festival> feList = apisvc.getFeList();
 		ArrayList<News> newsList = nsvc.getNewsList();
 		ArrayList<Tdest> tdList = apisvc.getTdList();
+		ArrayList<Schedule> scList = tsvc.getScList();
+		
 		mav.addObject("feList", feList);
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);
-
+		mav.addObject("scList", scList);
+		
 		mav.setViewName("/main");
 		return mav;
 	}
@@ -88,6 +94,28 @@ public class HomeController {
 			String Like = apisvc.getLikelist(lk, seloption);
 			mav.addObject("like", Like);
 		}
+		//System.out.println("키값 : "+codeList);
+		
+		ArrayList<HashMap<String,String>> ReList = new ArrayList<>();
+		
+		ArrayList<HashMap<String,String>> reList = apisvc.reList();
+		for(HashMap<String, String> re : reList) {
+			String codeList = (String)re.get("CODELIST");
+			String[] codeSplit = codeList.split("/");
+			for(String cs : codeSplit) { //cs => codeList를 /로 나눈 코드들
+				System.out.println(cs);
+				if(cs.contains(code)) {
+					ReList.add(re);
+				}			
+			}
+			
+		}
+		
+		
+		
+		System.out.println("리뷰리스트"+ReList);
+		mav.addObject("Re",ReList);
+		
 		Festival festival = apisvc.detailFestival(code);
 		String ctcode = festival.getCtcode();
 		String fecode = festival.getFecode();

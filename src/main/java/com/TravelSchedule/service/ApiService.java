@@ -10,6 +10,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.TravelSchedule.dao.ApiDao;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Tdest;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -571,6 +573,18 @@ public class ApiService {
 	public int deleteLk(Likelist lk, String seloption) {
 		// TODO Auto-generated method stub
 		return apiDao.deleteLK(lk, seloption);
+	}
+
+	public ArrayList<HashMap<String, String>> reList() {
+		
+		ArrayList<HashMap<String, String>> reListDao = apiDao.reListDao();
+		return reListDao;
+	}
+
+	public Review getRe(String cs) {
+		
+		Review getReDao = apiDao.getReDao(cs);
+		return getReDao;
 	}
 
 
