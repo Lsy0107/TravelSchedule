@@ -60,8 +60,48 @@ to {
 
 }
 .asd {
-	height: 688px;
+	height: auto;
 }
+.travelList{
+	margin: 10px;
+    display: flex;
+    box-shadow: 0px 0px 4px #A2A2A2;
+    width: 405px;
+    border-radius: 10px;
+}
+.btn-pmc{
+	border-radius: 25px;
+    height: 40px;
+    width: 40px;
+}
+.w-btn-pink-outline {
+    border: 3px solid #f199bc;
+    color: #6e6e6e;
+}
+.w-btn-pink-outline:hover {
+    background-color: #f199bc;
+    color: #d4dfe6;
+}
+.w-btn-blue-outline:hover {
+    background-color: #6aafe6;
+    color: #d4dfe6;
+}
+.w-btn-blue-outline {
+    border: 3px solid #6aafe6;
+    color: #6e6e6e;
+}
+.w-btn-outline {
+    position: relative;
+    padding: 5px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    margin: 3px;
+}
+
 </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -70,11 +110,10 @@ to {
 
 		<!-- contant 시작 -->
 		<div class="p-4"
-			style="display: flex; float: left; position: absolute; background-color: #DCEBFF; z-index: 3; height: -webkit-fill-available;">
+			style="display: flex; float: left; position: absolute; background-color: white; z-index: 3; height: -webkit-fill-available;">
 			<div class="">
-				<h2 onclick="location.href='${pageContext.request.contextPath }/'">여행</h2>
+				<h4 onclick="location.href='${pageContext.request.contextPath }/'"><i class="fa-solid fa-earth-asia"></i> 여행</h4>
 				<nav>
-
 					<ul style="list-style: none; padding: 0;">
 						<li><div class="container-fluid " style="padding: 0;">
 								<button class="navbar-toggler" type="button"
@@ -87,7 +126,7 @@ to {
 							</div></li>
 						<li>
 							<div id="scArea" class="row p-1"
-								style="min-height: 375px; display: flow;">
+								style="min-height: 614px; display: flow; text-overflow: ellipsis;">
 								<c:forEach var="sc" items="${scdestList }">
 									<c:if test="${sc.SCDATE != null}">
 										<c:choose>
@@ -105,8 +144,10 @@ to {
 							</div>
 							<div class="row p-1">
 								<c:if test="${cd.cdstate == 'Y' }">
+								<div class="col d-flex justify-content-center">
 									<button class="btn btn-primary"
-										onclick="updateCdstate('${cd.cdcode}')">계획 확정하기</button>
+										onclick="updateCdstate('${cd.cdcode}')" style="width: 140px;">계획 확정하기</button>
+								</div>
 								</c:if>
 							</div>
 						</li>
@@ -115,31 +156,32 @@ to {
 			</div>
 			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
 				style="overflow: scroll; background-color: white;">
-				<button class="btn btn-info" onclick="disnonefe()">여행지</button>
-				<button class="btn btn-info" onclick="disnonetd()">축제</button>
+				<div class="col d-flex justify-content-center" style="margin-bottom: 15px;">
+				<button class="w-btn-outline w-btn-pink-outline" onclick="disnonefe()">여행지</button>
+				<button class="w-btn-outline w-btn-blue-outline" onclick="disnonetd()">축제</button>
+				</div>
 				<div>
 					<nav id="tdArea1" class="" style="">
 						<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
-								<div class="col "
-									style="margin: 4px; border: 1px solid black; display: flex; width: 405px; border-radius: 13px;">
-									<img class="col-4" src="${td.TDPHOTO }" class="card-img-top"
-										alt="..." style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
+								<div class="travelList">
+									<img class="col-3 img-thumbnail" src="${td.TDPHOTO }" alt="..." 
+										style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
 									<div class="col-6 p-1">
-										<h6 class="">${td.TDNAME }</h6>
-										<p class="" style="font-size: 13px;">${td.TDADDRESS }</p>
+										<h6 style="font-weight: bold;">${td.TDNAME }</h6>
+										<p class="" style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.TDADDRESS }</p>
 									</div>
-									<div class="col-2 p-1">
+									<div class="col-3 p-1" style="margin: auto;">
 										<c:if test="${td.SCDATE == null}">
-											<button class="btn btn-primary"
+											<button class="btn btn-primary btn-pmc"
 												onclick="selectDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')"
-												data-bs-toggle="modal" data-bs-target="#exampleModal">추가</button>
+												data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
 										</c:if>
 										<c:if test="${td.SCDATE != null }">
-											<button class="btn btn-info">완료</button>
+											<button class="btn btn-info btn-pmc"><i class="fa-solid fa-check"></i></button>
 										</c:if>
-										<button class="btn btn-danger"
-											onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')">삭제</button>
+										<button class="btn btn-danger btn-pmc"
+											onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')"><i class="fa-solid fa-minus"></i></button>
 									</div>
 								</div>
 							</c:if>
@@ -148,29 +190,24 @@ to {
 					<nav id="feArea1" class="disnone" style="">
 						<c:forEach items="${ scdestList}" var="fe">
 							<c:if test="${fe.FECODE != null }">
-								<div class="col"
-									style="margin: 4px; border: 1px solid black; display: flex; width: 405px; border-radius: 13px;">
-									<img src="${fe.FEPOSTER }" class="col-4" alt="..."
+								<div class="travelList">
+									<img class="col-3 img-thumbnail" src="${fe.FEPOSTER }" alt="..."
 										style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
 									<div class="col-6 p-1">
-										<h6 class="card-title">${fe.FENAME }</h6>
-										<p style="font-size: 13px;"class="card-text">${fe.FEADDRESS }</p>
+										<h6 style="font-weight: bold;">${fe.FENAME }</h6>
+										<p style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.FEADDRESS }</p>
 									</div>
-									<div class="col-2 p-1">
+									<div class="col-3 p-1" style="margin: auto;">
 										<c:if test="${fe.SCDATE == null}">
-											<button
-												class="btn btn-primary"
-												style="margin: 10px"
+											<button class="btn btn-primary btn-pmc"
 												onclick="selectDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')"
-												data-bs-toggle="modal" data-bs-target="#exampleModal">
-												추가</button>
+												data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
 										</c:if>
 										<c:if test="${fe.SCDATE != null }">
-											<button
-												class="btn btn-info"
-												>완료</button>
+											<button class="btn btn-info btn-pmc"><i class="fa-solid fa-check"></i></button>
 										</c:if>
-										<button class="btn btn-danger" onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')" >삭제</button>
+										<button class="btn btn-danger btn-pmc" 
+										onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')" ><i class="fa-solid fa-minus"></i></button>
 									</div>
 								</div>
 							</c:if>
@@ -311,7 +348,9 @@ to {
 	<!-- kakao map api -->
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
+	<script src="https://kit.fontawesome.com/c8056a816e.js" crossorigin="anonymous"></script>
 	<script type="text/javascript">
+	
 	let lalngList = JSON.parse('${lalngList}');
 	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

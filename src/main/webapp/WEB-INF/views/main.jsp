@@ -153,6 +153,7 @@ background-color: black;
 }
 .navbg-white{
 	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
 }
 .change{
 	animation-name:color;
@@ -187,7 +188,8 @@ color:black;}
 
 
 </head>
-<body class="">
+<body>
+	
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
@@ -453,6 +455,7 @@ color:black;}
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
+		
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -718,7 +721,7 @@ color:black;}
 		});
 	$(document).ready(function(){
 		let navbarTag = document.querySelector(".navbar");
-		navbarTag.classList.remove("bg-dark");
+		navbarTag.classList.remove("bg-wh");
 		//navbarTag.classList.add("navbg")
 	})
 	</script>
