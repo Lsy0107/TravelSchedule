@@ -211,7 +211,7 @@ color:black;}
 									style="width: 18rem; margin: 17px 9px 20px 7px; height: 370px; border: none;"
 									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
 									<a href="/detailTdest?tdcode=${td.tdcode }"><img
-										src="${td.tdphoto }" class="card-img-top" alt="..."
+										src="${td.tdphoto }" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
 										<h5 class="card-title">${td.tdname }</h5>
