@@ -153,6 +153,7 @@ main {
 }
 .hr{
 	width:1000px;
+    border-top: 1px solid black;
 }
 .heart{
 	padding-left: 30px;
@@ -284,7 +285,7 @@ a{
 			<img class="card-img-top Img" src="${detailTd.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 			<p class="name"> ${detailTd.tdname }</p>
 			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${detailTd.tdcode}', 'tdest')" id="heart"></i>
-			<button class="btn btn-primary" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
+			<button class="btn btn-outline-success" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
 			data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 			추가하기</button>
 			<hr class="hr">
@@ -360,7 +361,7 @@ a{
                             <div class="modal-body" id="selectCalendar">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
                                     id="selectClear">선택</button>
                             </div>
                         </div>

@@ -217,7 +217,7 @@ color:black;}
 										<h5 class="card-title">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${td.tdcode}','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -236,7 +236,7 @@ color:black;}
 										<h5 class="card-title">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${td.tdcode}','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -262,7 +262,7 @@ color:black;}
 					</div>
 					<div class="modal-body" id="selectCalendar"></div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn btn-outline-success"
 							data-bs-dismiss="modal" id="selectClear">선택</button>
 					</div>
 				</div>
@@ -415,7 +415,7 @@ color:black;}
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${fe.fecode}','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -436,7 +436,7 @@ color:black;}
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${fe.fecode}','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에

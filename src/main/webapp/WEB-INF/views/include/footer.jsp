@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<footer class="bg-dark py-4 mt-auto" style="position: relative; bottom: 0px;">
+<footer class="bg-dark py-4 mt-auto" style="position: relative; bottom: -50px;">
 			<div class="container px-5">
 				<div
 					class="row align-items-center justify-content-between flex-column flex-sm-row">

@@ -314,7 +314,7 @@
                                         <div class="card-body">
                                             <h3 id="title" class="card-title h4" title="${fe.fename}"
                                                 style="overflow: hidden; white-space: nowrap;">${fe.fename}</h3>
-                                            <button class="btn btn-primary" onclick="selectCdcode('${fe.fecode}')"
+                                            <button class="btn btn-outline-success" onclick="selectCdcode('${fe.fecode}')"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
                                                 추가하기</button>
                                         </div>
@@ -349,7 +349,7 @@
                             <div class="modal-body" id="selectCalendar">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
                                     id="selectClear">선택</button>
                             </div>
                         </div>
@@ -706,7 +706,7 @@
 
                             let TdestBtn = document.createElement('button');
                             TdestBtn.classList.add('btn');
-                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.classList.add('btn-outline-success');
                             TdestBtn.innerText = '계획에 추가하기';
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
