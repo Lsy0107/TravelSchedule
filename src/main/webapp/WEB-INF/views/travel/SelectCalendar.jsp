@@ -237,10 +237,10 @@ td {
     			btnArea.classList.remove("disnone");
     			let mksc = document.querySelector("#travelMkSc");
     			mksc.innerText = '';
-    			
+    			console.log(cdstate);
     			switch (cdstate) {
 				case 'Y':
-					mksc.classList.remove("btn-dangerbtn-primary");
+					mksc.classList.remove("btn-danger");
 					mksc.classList.add("btn-info");
 					mksc.addEventListener("click", function(){
 	    				location.href="/travelSc?cdcode="+cdcode;
@@ -260,7 +260,7 @@ td {
 					}else{
 						mksc.classList.add("btn-info");
 						mksc.addEventListener("click", function(){
-		    				location.href="/";
+		    				location.href="/ReviewWriteForm?cdcode="+cdcode;
 		    			})
 					}
 						mksc.innerText = "리뷰작성하기";

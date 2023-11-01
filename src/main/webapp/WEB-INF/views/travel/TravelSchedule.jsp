@@ -118,7 +118,7 @@ to {
 				<button class="btn btn-info" onclick="disnonefe()">여행지</button>
 				<button class="btn btn-info" onclick="disnonetd()">축제</button>
 				<div>
-					<nav id="tdArea1" class="" style="">
+					<nav id="tdArea" class="" style="">
 						<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
 								<div class="col "
@@ -145,7 +145,7 @@ to {
 							</c:if>
 						</c:forEach>
 					</nav>
-					<nav id="feArea1" class="disnone" style="">
+					<nav id="feArea" class="disnone" style="">
 						<c:forEach items="${ scdestList}" var="fe">
 							<c:if test="${fe.FECODE != null }">
 								<div class="col"
@@ -446,8 +446,8 @@ to {
 		})
 	}
 	function disnonetd(){
-		let tdArea =document.querySelector("#tdArea1");
-		let feArea = document.querySelector("#feArea1");
+		let tdArea =document.querySelector("#tdArea");
+		let feArea = document.querySelector("#feArea");
 		console.log('disnonetd')
 		console.log(tdArea.classList);
 		console.log(feArea.classList);
@@ -458,8 +458,8 @@ to {
 	}
 	function disnonefe(){
 		console.log('disnonefe')
-		let tdArea =document.querySelector("#tdArea1");
-		let feArea = document.querySelector("#feArea1");
+		let tdArea =document.querySelector("#tdArea");
+		let feArea = document.querySelector("#feArea");
 		console.log(tdArea.classList);
 		console.log(feArea.classList);
 		tdArea.classList.remove('disnone');
