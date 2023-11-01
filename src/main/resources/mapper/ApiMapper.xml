@@ -17,7 +17,7 @@
   </select>
   
   <insert id="insertTdest">
-  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto, tdlati, tdlongti) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdlati},#{tdlongti})
+  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto, tdinfo, tdlati, tdlongti, homepage, tdtel) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdinfo},#{tdlati},#{tdlongti},#{homepage}, #{tdtel})
   </insert>
   <select id="selectTdcode">
   select nvl(max(tdcode), 'Y') from tdest where tdname = #{tdname}

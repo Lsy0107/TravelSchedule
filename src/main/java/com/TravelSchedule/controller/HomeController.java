@@ -122,7 +122,7 @@ public class HomeController {
 		ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
 		String country = apisvc.getCountry_this(ctcode);
 		ArrayList<Tdest> tdest = tsvc.TdestSearch();
-		System.out.println(country);
+		System.out.println(Nearby);
 		mav.addObject("country",country);
 		mav.addObject("festival", festival);
 		mav.addObject("nearby", Nearby);
@@ -131,10 +131,10 @@ public class HomeController {
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
-	public ModelAndView TdestSearchPage() {
+	public ModelAndView TdestSearchPage() throws Exception {
 		System.out.println("여행지 검색 페이지 이동");
 		ModelAndView mav = new ModelAndView();
-		
+		//ArrayList<Tdest> TdestList = apisvc.getTdestList();
 //		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
 		ArrayList<Country> CountryList = tsvc.CountryList();
 		
