@@ -165,11 +165,11 @@ to {
 						<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
 								<div class="travelList">
-									<img class="col-3 img-thumbnail" src="${td.TDPHOTO }" class="card-img-top"
-										alt="..." style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
+									<img class="col-3 img-thumbnail" src="${td.TDPHOTO }" alt="..." 
+										style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
 									<div class="col-6 p-1">
-										<h6 class="">${td.TDNAME }</h6>
-										<p class="" style="font-size: 13px;">${td.TDADDRESS }</p>
+										<h6 style="font-weight: bold;">${td.TDNAME }</h6>
+										<p class="" style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.TDADDRESS }</p>
 									</div>
 									<div class="col-3 p-1" style="margin: auto;">
 										<c:if test="${td.SCDATE == null}">
@@ -190,29 +190,24 @@ to {
 					<nav id="feArea1" class="disnone" style="">
 						<c:forEach items="${ scdestList}" var="fe">
 							<c:if test="${fe.FECODE != null }">
-								<div class="col"
-									style="margin: 4px; border: 1px solid black; display: flex; width: 405px; border-radius: 13px;">
-									<img src="${fe.FEPOSTER }" class="col-4" alt="..."
+								<div class="travelList">
+									<img class="col-3 img-thumbnail" src="${fe.FEPOSTER }" alt="..."
 										style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
 									<div class="col-6 p-1">
-										<h6 class="card-title">${fe.FENAME }</h6>
-										<p style="font-size: 13px;"class="card-text">${fe.FEADDRESS }</p>
+										<h6 style="font-weight: bold;">${fe.FENAME }</h6>
+										<p style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.FEADDRESS }</p>
 									</div>
-									<div class="col-2 p-1">
+									<div class="col-3 p-1" style="margin: auto;">
 										<c:if test="${fe.SCDATE == null}">
-											<button
-												class="btn btn-primary"
-												style="margin: 10px"
+											<button class="btn btn-primary btn-pmc"
 												onclick="selectDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')"
-												data-bs-toggle="modal" data-bs-target="#exampleModal">
-												추가</button>
+												data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
 										</c:if>
 										<c:if test="${fe.SCDATE != null }">
-											<button
-												class="btn btn-info"
-												>완료</button>
+											<button class="btn btn-info btn-pmc"><i class="fa-solid fa-check"></i></button>
 										</c:if>
-										<button class="btn btn-danger" onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')" >삭제</button>
+										<button class="btn btn-danger btn-pmc" 
+										onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')" ><i class="fa-solid fa-minus"></i></button>
 									</div>
 								</div>
 							</c:if>
