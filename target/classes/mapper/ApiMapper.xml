@@ -17,19 +17,19 @@
   </select>
   
   <insert id="insertTdest">
-  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto, tdlati, tdlongti) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdlati},#{tdlongti})
+  insert into tdest(tdcode, ctcode, tdname, tdaddress, tdphoto, tdinfo, tdlati, tdlongti, homepage, tdtel) values(#{tdcode}, #{ctcode}, #{tdname},#{tdaddress},#{tdphoto},#{tdinfo},#{tdlati},#{tdlongti},#{homepage}, #{tdtel})
   </insert>
   <select id="selectTdcode">
   select nvl(max(tdcode), 'Y') from tdest where tdname = #{tdname}
   </select>
   <select id="selectTdest" resultType="tdest">
   <![CDATA[
-  select * from tdest where rownum <= 10
+  select * from (select * from tdest td left join (select tdcode, count(*) as lknum  from likelist group by tdcode) lk on td.tdcode=lk.tdcode order by lknum) where rownum <= 10
   ]]>
   </select>
   <select id="selectFestival" resultType="festival">
   <![CDATA[
-  select * from festival where rownum <= 10 and enddate >= sysdate
+  select * from (select * from festival fe left join (select fecode, count(*) as lknum  from likelist group by fecode) lk on fe.fecode=lk.fecode where enddate >= sysdate order by lknum) where rownum <= 10
   ]]>
   </select>
   <select id="selectFecode">

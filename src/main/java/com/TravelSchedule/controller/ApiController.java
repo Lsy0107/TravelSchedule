@@ -44,11 +44,10 @@ public class ApiController {
 	@RequestMapping(value="/TdestSearch")
 	public ModelAndView areaBasedList1() throws Exception {
 		System.out.println("/TdestSearch 컨트롤러 호출");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();		
+		//ArrayList<Tdest> TdestList = asvc.getTdestList();  					
 		
-		ArrayList<Tdest> TdestList = asvc.getTdestList();  
-		
-		mav.addObject("TdestList",TdestList);
+		//mav.addObject("TdestList",TdestList);
 		mav.setViewName("travel/TdestSearch");
 		
 		return mav;

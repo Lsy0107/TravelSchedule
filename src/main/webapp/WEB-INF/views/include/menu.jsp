@@ -17,11 +17,13 @@
 }
 .info:hover{
 	cursor:pointer;
+}
 .bk{
 	color: black;
 }
+
 </style>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-wh">
 	<div class="container px-5">
 		<a class="navbar-brand" href="${pageContext.request.contextPath }/"><i class="fa-solid fa-earth-asia"></i> 여행페이지</a>
 		<div class="col" style="display: flex; align-items: center;"></div>

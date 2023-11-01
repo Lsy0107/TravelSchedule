@@ -58,6 +58,10 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
 #TripRecommend {
 	background-color: #ffd045;
@@ -97,10 +101,10 @@
 }
 
 footer {
-	position: absolute;
-	bottom: 0;
+	position: relative;
+	bottom: -50px;
 	width: 100%;
-	bottom: -1000px;
+	
 }
 
 main {
@@ -240,6 +244,36 @@ a{
 	bottom: 30px;
 	left: 10px;
 }
+.feinfo{
+	width: 1000px;
+	padding-left: 30px;
+    padding-right: 30px;
+}
+.homepage{
+	margin-left: 30px;
+	background-color: white;
+	border-radius: 20px;
+	padding: 10px;
+	border-color: gray;
+}
+.fetel{
+	width: 900px;
+	padding-left: 15px;
+	padding-right: 30px;
+	font-weight: bold;
+	display: inline-block;
+	padding-top: 10px;
+}
+.phoneImg{
+	width:50px;
+	height:50px;
+	margin-left:30px;
+}
+.phoneArea{
+	display: flex;
+	width: 1000px;
+	margin-bottom: 10px;
+}
 </style>
 
 
@@ -257,6 +291,17 @@ a{
 			<button class="btn btn-primary" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
 			data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 			추가하기</button>
+			<hr class="hr">
+			<p class="feinfo">${detailTd.tdinfo }</p>
+			<c:if test="${detailTd.tdtel ne null }">
+					<div class="phoneArea">
+						<img class="phoneImg" src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
+						<p class="fetel">${detailTd.tdtel }</p>
+					</div>
+			</c:if>
+			<c:if test="${detailTd.homepage ne null }">
+				<button class="homepage" onclick="location.href='${detailTd.homepage }';">공식 홈페이지</button>
+			</c:if>
 			<hr class="hr">
 			<div id="map" style="width:1000px;height:400px;"></div>
 			<p class="address">${detailTd.tdaddress }</p>

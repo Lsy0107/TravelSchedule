@@ -36,6 +36,10 @@
 .disnone {
 	display: none;
 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
 @import
 	url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
@@ -241,6 +245,7 @@ td {
     			switch (cdstate) {
 				case 'Y':
 					mksc.classList.remove("btn-danger");
+					mksc.classList.remove("btn-success");
 					mksc.classList.add("btn-info");
 					mksc.addEventListener("click", function(){
 	    				location.href="/travelSc?cdcode="+cdcode;
@@ -252,6 +257,7 @@ td {
 					let nowdate = new Date();
 						mksc.classList.remove("btn-info");
 						mksc.classList.remove("btn-danger");
+						mksc.classList.remove("btn-success");
 					if(firstdate > nowdate){
 						mksc.addEventListener("click", function(){
 		    			})
@@ -264,6 +270,15 @@ td {
 		    			})
 					}
 						mksc.innerText = "리뷰작성하기";
+					break;
+				case 'R':
+					mksc.classList.remove("btn-info");
+					mksc.classList.remove("btn-danger");
+					mksc.classList.add("btn-success");
+					mksc.addEventListener("click", function(){
+	    				location.href="ReviewFix?cdcode="+cdcode;
+	    			})
+    				mksc.innerText = "리뷰수정하기";
 					break;
 				}
     			/*

@@ -28,6 +28,10 @@
                     padding: 0px;
                     position: absolute;
                 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
                 ol>li:hover {
                     background-color: lightgrey;
