@@ -76,5 +76,8 @@ public interface ReviewDao {
 	@Update("UPDATE CALENDAR SET CDSTATE = 'N' WHERE MID = #{mid} AND CDCODE = #{cdcode}")
 	int UpdateCdState(@Param("cdcode")String cdcode, @Param("mid")String mid);
 
+	@Select("SELECT COUNT(*) FROM CALENDAR WHERE MID = #{mid} AND NOT CDSTATE = 'Y'")
+	int selectCalendarCount(@Param("mid") String mid);
+
 
 }

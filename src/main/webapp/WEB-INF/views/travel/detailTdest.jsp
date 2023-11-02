@@ -130,6 +130,7 @@ main {
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 50px;
 }
 .Img{
 	width: 1000px;	
@@ -159,7 +160,7 @@ main {
 	padding-left: 30px;
 	cursor:pointer;
 }
-.fa-solid{
+.wrap>.fa-solid{
 	color: #ff0000;
 }
 .fa-regular{

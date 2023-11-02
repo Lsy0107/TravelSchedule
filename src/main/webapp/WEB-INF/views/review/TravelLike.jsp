@@ -16,6 +16,8 @@
         <link href="resources/css/styles.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
         <style>
             .Cal {                
@@ -35,7 +37,7 @@
                 margin: 15px;
             }
 
-            .Ctitle {
+            .Ctitle {                
                 display: flex;
             }
 
@@ -48,18 +50,13 @@
                 font-size: 16px;
                 width: 70%;
                 text-overflow: ellipsis;
-			    height: 20px;
     			overflow: hidden;
     			margin-left: 10px;
 				font-family: 'Noto Sans KR', sans-serif;
                 
-            }
+            }            
 
-            .reviewBtn {
-            	height: 30px;
-            	font-family: 'Noto Sans KR', sans-serif;
-            	padding-bottom: 25px;
-            }
+            .reviewBtn {}
 
             .WriteBtn {
                 animation-duration: 3s;
@@ -134,18 +131,27 @@
             .book{
             	margin-left: 15px;
             }
+            .select>p{
+            	cursor: pointer;
+            }
             .hr2{
             	border-top: 1px solid black;
             }
-            .select>p{            	
+            .sel{
+            	display: inline;
             	cursor: pointer;
-            }            
-            .count{
-            	margin-left: 5px;
+            }
+            .line{
+            	display: inline;
+            }
+            .InnerCal>a{
+            	text-decoration: none;
+            	color: black;
             }
             .wrap>*{
             	font-family: 'Noto Sans KR', sans-serif;
             }
+            
         </style>
     </head>
 
@@ -155,63 +161,47 @@
         <%@ include file="/WEB-INF/views/include/menu.jsp" %>
             <!-- contant 시작 -->
             <div class="wrap">
-				<div class="Area">
-		            <div class="Cal">	            
-		                <div class="InnerCal">
-		                	<div class="topicArea">
-			                	<i class="fa-solid fa-book fa-2xl book"></i>
-			                	<h2 class="topic">리뷰</h1>
-		                	</div>
-		                	<hr class="hr">
-		                	<p class="count">총 ${count }건</p>
-		                	<hr class="hr2">
-		                    <c:forEach items="${Cal}" var="cl" varStatus="Cl">
-		                        <div class="Ctitle" data-bs-toggle="modal" data-bs-target="#exampleModal"
-		                            onclick="PrintSchedule('${cl.cdcode}')">
-		                            <p class="cdname">${cl.cdname}</p>
-		
-		                            <c:choose>
-		                                <c:when test="${cl.cdstate == 'N'}">
-		                                    <button class="WriteBtn reviewBtn btn btn-outline-primary"
-		                                        onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">작성</button>
-		                                </c:when>
-		                                <c:when test="${cl.cdstate == 'R'}">
-		                                    <button class="ModifyBtn reviewBtn btn btn-outline-success"
-		                                        onclick="location.href='ReviewFix?cdcode=${cl.cdcode}'">수정</button>
-		                                    <button class="DeleteBtn reviewBtn btn btn-outline-danger"
-		                                        onclick="return DeleteReview('${cl.cdcode}')">삭제</button>
-		                                </c:when>
-		                            </c:choose>
+			<div class="Area">
+	            <div class="Cal">	            
+	                <div class="InnerCal">
+	                	<div class="topicArea">
+		                	<i class="fa-solid fa-heart fa-2xl book"></i>
+		                	<h2 class="topic">즐겨찾기</h1>
+	                	</div>
+	                	<hr class="hr">
+	                	<p class="td sel" style="${css1}" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">여행지</p>
+	                	<p class="line">|</p>
+	                	<p class="fe sel" style="${css2}" onclick="location.href='${pageContext.request.contextPath }/FestivalLike'">축제</p>
+	                	<p class="line">|</p>
+	                	<p class="re sel" style="${css3}" onclick="location.href='${pageContext.request.contextPath }/ReviewLike'">리뷰</p>
+	                	<hr class="hr2">
+	                    <c:forEach items="${td}" var="td">
+	                    	<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode}">
+		                        <div class="Ctitle">	                            
+		                            <p class="cdname">${td.tdname}</p>		                           
 		                        </div>
-		                    </c:forEach>
-		                </div>
-		
-		            </div>
-		            <div class="select">
-		            	<p style="margin-top:20px;" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">즐겨찾기</p>
-		            	<p style="${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
-		            </div>
-				</div>
-	            
-	
-	            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-	                aria-hidden="true">
-	                <div class="modal-dialog">
-	                    <div class="modal-content">
-	                        <div class="modal-header">
-	                            <h5 class="modal-title" id="exampleModalLabel">${sessionScope.loginId}님의
-	                                상세계획표</h5>
-	                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                        </a>
+	                    </c:forEach>
+	                    <c:forEach items="${fe}" var="fe">
+	                    	<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode}">
+		                        <div class="Ctitle" >	                            
+		                            <p class="cdname">${fe.fename}</p>		                           
+		                        </div>
+	                        </a>
+	                    </c:forEach>
+	                    <c:forEach items="${re}" var="re">
+	                        <div class="Ctitle" >	                            
+	                            <p class="cdname">${re.retitle}</p>		                           
 	                        </div>
-	                        <div class="modal-body" id="selectCalendar">
-	                            <div class="tdArea">여행지 부분</div>
-	                            <hr>
-	                            <div class="feArea">축제 부분</div>
-	                        </div>
-	
-	                    </div>
+	                    </c:forEach>
 	                </div>
+	
 	            </div>
+	            <div class="select">
+	            	<p style="margin-top:20px; ${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">즐겨찾기</p>
+	            	<p onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
+	            </div>
+			</div>                     
 			</div>
             <!-- contant 종료 -->
 

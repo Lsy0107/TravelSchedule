@@ -176,6 +176,11 @@ public class ReviewService {
 		int UpdateCdState = rdao.UpdateCdState(cdcode,mid);
 		return UpdateCdState;
 	}
+
+	public int CalendarCount(String mid) {
+		
+		return rdao.selectCalendarCount(mid);
+	}
 	
 
 

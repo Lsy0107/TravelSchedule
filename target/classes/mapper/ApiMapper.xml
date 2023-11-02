@@ -88,4 +88,22 @@
   <if test="seloption == 'tdest'"> tdcode = #{lk.tdcode}</if>
   <if test="seloption == 'review'"> recode = #{lk.recode}</if>
   </delete>
+  <select id="selectlikeList_td">
+  select * from likelist where mid = #{mid} and not tdcode is null
+  </select>
+  <select id="selectTd">
+  select * from tdest where tdcode = #{tdcode}
+  </select>
+  <select id="selectlikeList_fe">
+  select * from likelist where mid = #{mid} and not fecode is null
+  </select>
+  <select id="selectFe">
+  select * from festival where fecode = #{fecode}
+  </select>
+  <select id="selectlikeList_re">
+  select * from likelist where mid = #{mid} and not recode is null
+  </select>
+  <select id="selectReview">
+  select * from review where recode = #{recode}
+  </select>
   </mapper>

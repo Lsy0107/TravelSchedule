@@ -131,6 +131,7 @@ main {
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 50px;
 }
 
 .Img {
@@ -167,7 +168,7 @@ main {
 	cursor: pointer;
 }
 
-.fa-solid {
+.wrap>.fa-solid {
 	color: #ff0000;
 }
 
