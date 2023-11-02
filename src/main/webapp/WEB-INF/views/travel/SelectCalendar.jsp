@@ -37,6 +37,10 @@
 .disnone {
 	display: none;
 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
 @import
 	url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
@@ -291,10 +295,11 @@ body, div, p, h4, a, td, span, tr, button{
     			btnArea.classList.remove("disnone");
     			let mksc = document.querySelector("#travelMkSc");
     			mksc.innerText = '';
-    			
+    			console.log(cdstate);
     			switch (cdstate) {
 				case 'Y':
-					mksc.classList.remove("btn-dangerbtn-primary");
+					mksc.classList.remove("btn-danger");
+					mksc.classList.remove("btn-success");
 					mksc.classList.add("btn-info");
 					mksc.addEventListener("click", function(){
 	    				location.href="/travelSc?cdcode="+cdcode;
@@ -306,6 +311,7 @@ body, div, p, h4, a, td, span, tr, button{
 					let nowdate = new Date();
 						mksc.classList.remove("btn-info");
 						mksc.classList.remove("btn-danger");
+						mksc.classList.remove("btn-success");
 					if(firstdate > nowdate){
 						mksc.addEventListener("click", function(){
 		    			})
@@ -314,10 +320,19 @@ body, div, p, h4, a, td, span, tr, button{
 					}else{
 						mksc.classList.add("btn-info");
 						mksc.addEventListener("click", function(){
-		    				location.href="/";
+		    				location.href="/ReviewWriteForm?cdcode="+cdcode;
 		    			})
 					}
 						mksc.innerText = "리뷰작성하기";
+					break;
+				case 'R':
+					mksc.classList.remove("btn-info");
+					mksc.classList.remove("btn-danger");
+					mksc.classList.add("btn-success");
+					mksc.addEventListener("click", function(){
+	    				location.href="ReviewFix?cdcode="+cdcode;
+	    			})
+    				mksc.innerText = "리뷰수정하기";
 					break;
 				}
     			/*

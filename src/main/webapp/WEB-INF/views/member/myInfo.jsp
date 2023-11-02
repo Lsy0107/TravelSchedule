@@ -32,6 +32,11 @@
 				border-radius: 100px;
 				border: 3px solid black;
 			}
+			.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
+			
         </style>
         
     </head>

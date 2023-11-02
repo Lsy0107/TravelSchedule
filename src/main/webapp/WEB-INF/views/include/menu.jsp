@@ -44,11 +44,11 @@
 			<c:choose>
 					<c:when test="${sessionScope.loginId ==null }">
 						<li class="nav-item "><a class="nav-link bk"
-							href="/memberLoginForm">여행계획</a></li>
+							href="/memberLoginForm">여행달력</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item"><a class="nav-link bk"
-							href="/selectCalendar">여행계획</a></li>
+							href="/selectCalendar">여행달력</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li class="nav-item"><a class="nav-link bk"
