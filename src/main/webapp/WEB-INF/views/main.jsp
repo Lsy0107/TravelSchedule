@@ -218,7 +218,7 @@ color:black;}
 										src="${td.tdphoto }" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${td.tdname }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
 										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
@@ -238,7 +238,7 @@ color:black;}
 										src="${td.tdphoto }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${td.tdname }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
 										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
@@ -416,7 +416,7 @@ color:black;}
 										src="${fe.feposter }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${fe.fename }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
@@ -438,7 +438,7 @@ color:black;}
 										src="${fe.feposter }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${fe.fename }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>

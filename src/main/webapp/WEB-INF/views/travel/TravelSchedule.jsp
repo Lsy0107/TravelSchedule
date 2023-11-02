@@ -116,8 +116,8 @@ to {
 		<div class="p-4"
 			style="display: flex; float: left; position: absolute; background-color: aliceblue; z-index: 3; height: -webkit-fill-available;">
 			<div class="">
-				<h4 onclick="location.href='${pageContext.request.contextPath }/'"><i class="fa-solid fa-earth-asia"></i> 여행</h4>
-				<nav class=" border border-dark" style="background-color:white; border-radius:10px;">
+				<h5 onclick="location.href='${pageContext.request.contextPath }/'"><i class="fa-solid fa-earth-asia"></i> 여행</h5>
+				<nav class="" style="border:1px solid #A2A2A2;border-radius:10px; background-color:white; box-shadow: 0 0 8px #A2A2A2">
 					<ul style="list-style: none; padding: 0;">
 						<li><div class="container-fluid " style="padding: 0;">
 								<button class="navbar-toggler" type="button"
@@ -159,7 +159,7 @@ to {
 				</nav>
 			</div>
 			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
-				style="overflow: scroll; background-color: aliceblue;">
+				style="overflow: scroll; background-color: aliceblue;margin-left: 15px;">
 				<div class="col d-flex justify-content-center" style="margin-bottom: 15px;">
 				<button class="w-btn-outline w-btn-pink-outline" onclick="disnonefe()">여행지</button>
 				<button class="w-btn-outline w-btn-blue-outline" onclick="disnonetd()">축제</button>
@@ -211,7 +211,7 @@ to {
 											<button class="btn btn-info btn-pmc"><i class="fa-solid fa-check"></i></button>
 										</c:if>
 										<button class="btn btn-danger btn-pmc" 
-										onclick="removeDest('${td.MID}','${td.CDCODE }','${td.TDCODE }','tdest')" ><i class="fa-solid fa-minus"></i></button>
+										onclick="removeDest('${fe.MID}','${fe.CDCODE }','${fe.FECODE }','festival')" ><i class="fa-solid fa-minus"></i></button>
 									</div>
 								</div>
 							</c:if>
@@ -221,7 +221,7 @@ to {
 			</div>
 
 		</div>
-		<div id="map" class="col border border-dark" style="height: 740px;"></div>
+		<div id="map" class="col border border-dark" style="height: 963px;margin-left:243px;"></div>
 		<!-- 
 		</div>
 		<div class="row" style="margin: 45px;"></div>

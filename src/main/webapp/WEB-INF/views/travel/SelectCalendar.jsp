@@ -32,6 +32,7 @@
 	background-color: white;
 	margin: 0 auto;
 	--%>
+<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
 <style type="text/css">
 .disnone {
 	display: none;
@@ -109,23 +110,76 @@ td {
 	font-weight: 600;
 	cursor: pointer;
 }
+.calendarShadow{
+	box-shadow: 0px 0px 10px #A2A2A2;
+	border-radius: 10px;
+}
+.w-btn {
+    position: relative;
+    border: none;
+    padding: 8px 2px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    text-align: center;
+}
+
+element.style {
+}
+.w-btn-gra-anim {
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+}
+.w-btn-gra1 {
+    background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
+    color: white;
+}
+.w-btn:active {
+    transform: scale(0.1);
+}
+.w-btn:hover {
+    letter-spacing: 1px;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+body, div, p, h4, a, td, span, tr, button{
+	font-family: 'Jua' !important;
+}
+.bg-c{
+    height: 100vh;
+    width: 100vw;
+	background-image: url("https://thumb.ac-illust.com/d0/d06e2d3177a17ae4c850d644f1423766_t.jpeg");
+	background-repeat : no-repeat;
+    background-size : cover;
+    image-rendering: -moz-crisp-edges; /* firefox */
+	image-rendering: -o-crisp-edges; /* opera */
+	image-rendering: -webkit-optimize-contrast; /* chrome */
+	image-rendering: crisp-edges;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	position: absolute;
+	z-index: 1;
+}
 </style>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 bg-c">
 	<main class="flex-shrink-0">
 		<!-- Navigation-->
 		<%@ include file="/WEB-INF/views/include/menu.jsp"%>
 		<!-- contant 시작 -->
 		<div class="row" style="margin: 45px;"></div>
 		<div class="container">
-			<div class="row mb-2">
+			<div class="row mb-2 calendarShadow font-jua" style="positon :relative; z-index: 2;">
 				<div
-					class="col col-2 border border-dark p-3 overflow-auto rounded-start"
-					style="min-height: 500px;">
+					class="col col-2 p-3 overflow-auto rounded-start"
+					style="min-height: 500px; border-right: 1px solid #a2a2a28f; border-radius: 10px; background-color: ivory;">
 					<div style="height:505px;">
 					<h4 style="text-align:center;margin-top:0;">캘린더</h4>
 					<c:forEach items="${cdList }" var="cd">
-						<a style="display:block;"class="btn btn-primary m-1"
+						<a style="display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"class="btn btn-primary m-1 w-btn w-btn-gra1 w-btn-gra-anim"
 							href="javascript:getSchedule('${cd.cdcode }','${cd.mid }','${cd.cdstate }')">${cd.cdname }</a>
 						<br>
 					</c:forEach>
@@ -134,7 +188,7 @@ td {
 					<button style="border-radius:30px; height: 41px; width: 41px;" class="btn btn-info" onclick="makeCalender()"><i class="fa-solid fa-plus"></i></button>
 					</div>
 				</div>
-				<div class="col col-10 border border-dark rounded-end p-3">
+				<div class="col col-10 rounded-end p-3 "style=" background-color: white;">
 					<div class="row" style="display: block; min-height: 510px;"
 						id="printSchedule">
 						<table class="Calendar">
