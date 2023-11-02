@@ -148,12 +148,12 @@ main {
 0% {left: 0;}
 100%{left:-2860px;}
 }
-
 .navbg{
 background-color: black;
 }
 .navbg-white{
 	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
 }
 .change{
 	animation-name:color;
@@ -165,6 +165,10 @@ to{background-color:white;}
 }
 
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+.navbar-brand, .nav-link{
+color:black;}
+.navbar-brand:hover, .nav-link:hover{
+color:black;}
 
 .bg {
         height: 100vh;
@@ -184,13 +188,13 @@ to{background-color:white;}
 
 
 </head>
-<body class="d-flex flex-column h-100">
-	<main class="">
+<body>
+	
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
 		<!-- container 시작 -->
-		<div class="p-4 bg" style="background-image: ">
+		<div class="p-4 bg">
 			<div class="container">
 				
 				
@@ -209,10 +213,10 @@ to{background-color:white;}
 									style="width: 18rem; margin: 17px 9px 20px 7px; height: 370px; border: none;"
 									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
 									<a href="/detailTdest?tdcode=${td.tdcode }"><img
-										src="${td.tdphoto }" class="card-img-top" alt="..."
+										src="${td.tdphoto }" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${td.tdname }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
 										<button
 											class="btn btn-primary position-absolute bottom-0 start-0"
@@ -231,7 +235,7 @@ to{background-color:white;}
 										src="${td.tdphoto }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${td.tdname }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
 										<button
 											class="btn btn-primary position-absolute bottom-0 start-0"
@@ -408,7 +412,7 @@ to{background-color:white;}
 										src="${fe.feposter }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${fe.fename }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
@@ -429,7 +433,7 @@ to{background-color:white;}
 										src="${fe.feposter }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${fe.fename }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
@@ -451,7 +455,7 @@ to{background-color:white;}
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
-	</main>
+		
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -717,7 +721,7 @@ to{background-color:white;}
 		});
 	$(document).ready(function(){
 		let navbarTag = document.querySelector(".navbar");
-		navbarTag.classList.remove("bg-dark");
+		navbarTag.classList.remove("bg-wh");
 		//navbarTag.classList.add("navbg")
 	})
 	</script>

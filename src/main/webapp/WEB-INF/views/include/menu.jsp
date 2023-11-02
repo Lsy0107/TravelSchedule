@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://kit.fontawesome.com/c8056a816e.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c8056a816e.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
 <style>
 .navbar {
 	position: fixed;
@@ -15,11 +15,21 @@
 	width: 20%;
 	border-radius: 50px;
 }
+.info:hover{
+	cursor:pointer;
+}
 .bk{
 	color: black;
 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
+.font-jua{
+	font-family: 'Jua' !important;
+}
 </style>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-wh font-jua">
 	<div class="container px-5">
 		<a class="navbar-brand" href="${pageContext.request.contextPath }/"><i class="fa-solid fa-earth-asia"></i> 여행페이지</a>
 		<div class="col" style="display: flex; align-items: center;"></div>
@@ -64,7 +74,7 @@
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
 								class="profile">${sessionScope.loginId }</h1>
 						<hr style="border-top:2px solid lightgray">
-						<p onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
+						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
 						<p>몇월 몇일 몇개 일정이 있습니다.</p>
 						<hr style="border-top:2px solid lightgray">
 						
@@ -72,9 +82,9 @@
 						
 						
 						<hr style="border-top:2px solid lightgray">
-						<p style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
+						<p class="info" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
 						<hr style="border-top:2px solid lightgray">
-						<p onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
+						<p class="info"onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
 					</div>
 				</li>
 					</c:otherwise>
