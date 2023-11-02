@@ -54,7 +54,7 @@
                 i#leftCur {
                     position: absolute;
                     top: 15px;
-                    left: 28px;
+                    left: -20px;
                 }
 
                 i#rightCur {
@@ -86,9 +86,9 @@
                     margin-left: auto;
                     margin-right: auto;
                     max-height: 628px;
-                    overflow: scroll;
+                    
                     width: 100%;
-                    overflow-x: hidden;
+                    
                 }
 
                 .SearchArea {
@@ -204,7 +204,8 @@
                     cursor: pointer;
                 }
 
-                div.contain {
+                div.containDest,
+                div.containFest {
                     padding: 9px;
                     display: flex;
 
@@ -247,7 +248,7 @@
                 }
 
                 .Tdest_wrap {
-                    width: 30%;
+                    width: 100%;
                     position: relative;
                     top: 77px;
                 }
@@ -266,15 +267,83 @@
 
                 .TitleWrap {
                     width: 100%;
-                    height: 400px;
+                    height: 550px;
                     background: linear-gradient(45deg, #a2d0ae, lightcyan, peachpuff);
-                    margin-top: 200px;
                 }
 
                 .CtBtn {
                     width: 100%;
                     height: 200px;
                     padding: 8px;
+                }
+
+                #SelCity {
+                    width: 210px;
+                    height: 50px;
+                    padding: 15px;
+                    border-radius: 10px;
+                    border: 1px solid;
+                    font-weight: bold;
+                    outline: none;
+                }
+
+                #SelCate {
+                    width: 210px;
+                    height: 50px;
+                    padding: 15px;
+                    border-radius: 10px;
+                    border: 1px solid;
+                    font-weight: bold;
+                    outline: none;
+                }
+
+                option {
+                    font-weight: bold;
+                    color: black;
+                }
+
+                .SelOpDiv {
+                    text-align: center;
+                    position: relative;
+                    top: 140px;
+                }
+
+                .SearchBtn {
+                    width: 120px;
+                    height: 50px;
+                    border-radius: 15px;
+
+                    border: none;
+                }
+
+                .TitleSpan {
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                    font-size: 70px;
+                    position: relative;
+                    top: 100px;
+                    font-family: fantasy;
+                    color: black;
+                    text-shadow: 7px 10px 6px gray;
+                }
+
+                .ResetBtn {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 10px;
+                }
+
+                .Selection {
+                    border: 1px solid blue;
+                }
+
+                .hTag {
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+                html,body{
+                    height: 100%;
                 }
             </style>
         </head>
@@ -291,67 +360,61 @@
                 <!-- contant 시작 -->
 
                 <div class="TitleWrap">
-                    <span>타이틀 공간</span>
+                    <span class="TitleSpan">R.O.K Travel</span>
+                    <div class="SelOpDiv">
+                        <select name="ctcode" id="SelCity" onchange="selectCity(this)">
+                            <option class="OptionCity" value="지역">지역</option>
+                            <c:forEach items="${CountryList }" var="ct">
+                                <option class="OptionCity" value="${ct.ctname}">${ct.ctname}</option>
+                            </c:forEach>
+                        </select>
+
+                        <select name="category" id="SelCate" required="required" onchange="selectCategory(this)">
+                            <option value="">카테고리</option>
+                            <option value="여행지">여행지</option>
+                            <option value="축제">축제</option>
+                        </select>
+                        <button class="SearchBtn btn btn-primary" onclick="SearchClick()">검색<i style="padding: 5px;"
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+
                 </div>
 
                 <div class="content_wrap">
-
-                    <table class="map_wrap">
-                        <tr class="hashTag">
-                            <c:forEach items="${CountryList }" var="ct">
-                                <td class="ctList col-md-3">
-                                    <button class="CtBtn" onclick="Select_country('${ct.ctcode}')">#${ct.ctname
-                                        }</button>
-                                </td>
-                            </c:forEach>
-                        </tr>
-                    </table>
-
                     <div class="Tdest_wrap">
-                        <div>
-                            <div class="SearchArea">
-                                <form action="SearchService" method="get">
-                                    <div class="SArea">
-                                        <input name="searchVal" class="Search" type="text">
-                                        <button class="SearchBtn">검색</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                         <div class="TdListIn">
                             <div id="rowid" class="row TdestArea">
-                                <c:forEach var="TdList" items="${TdestList}">
-                                    <div class="contain">
-                                        <!-- Blog post-->
-                                        <div class="card mb-4 photo" id="photo"
-                                            onclick="location.href='detailTdest?tdcode=${TdList.tdcode}'">
-                                            <img class="card-img-top tdImg img-thumbnail" src="${TdList.tdphoto}" alt="..." />
 
-                                        </div>
-                                        <div class="card-body">
-                                            <h3 id="title" class="card-title h4" title="${TdList.tdname}"
-                                                style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
-                                            <button class="btn btn-primary"
-                                                onclick="selectCdcode('${TdList.tdcode}','tdest')"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
-                                                추가하기</button>
-                                        </div>
+                                <div class="containDest">
+                                    <!-- Blog post-->
+                                    <div class="card mb-4 photo" id="photo"
+                                        onclick="location.href='detailTdest?tdcode=${Ts.tdcode}'">
+                                        <img class="card-img-top tdImg img-thumbnail" src="${Ts.tdphoto}" alt="..." />
+
                                     </div>
+                                    <div class="card-body">
+                                        <h3 id="title" class="card-title h4" title="${TdList.tdname}"
+                                            style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
+                                        <button class="btn btn-primary"
+                                            onclick="selectCdcode('${TdList.tdcode}','tdest')" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">계획에
+                                            추가하기</button>
+                                    </div>
+                                </div>
 
-                                </c:forEach>
                             </div>
                         </div>
-                        <div class="pagination">
-                            <i id="leftCur" class="fa-solid fa-arrow-left"></i>
-                            <ol id="numbers">
-
-                            </ol>
-                            <i id="rightCur" class="fa-solid fa-arrow-right"></i>
-                        </div>
+                        
+                    </div>
+                    <div class="pagination">
+                        <i id="leftCur" class="fa-solid fa-arrow-left"></i>
+                        <ol id="numbers">
+    
+                        </ol>
+                        <i id="rightCur" class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
-
-                <hr style="position: relative; top: 65px;">
+                
 
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -389,140 +452,107 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
                 <script src="https://kit.fontawesome.com/148f0d76e9.js" crossorigin="anonymous"></script>
                 <script>
+
                     $(document).ready(function () {
                         console.log('페이지 로드');
-                        Paging();
-
+                        let selectCity = document.querySelector(".SelCity");
+                        selectCity.innerText = "";
+                        
                     })
                 </script>
 
-
                 <script>
-                    function Paging() {
-                        const rowsPerPage = 15; //페이지당 출력할 수
-                        const rows = document.querySelectorAll('.contain');
-                        const rowsCount = rows.length;
-                        //console.log(rows);
-
-                        const pageCount = Math.ceil(rowsCount / rowsPerPage);
-                        console.log(pageCount);
-                        const numbers = document.querySelector('#numbers');
-
-                        const prevPageBtn = document.querySelector('.fa-arrow-left');
-                        const nextPageBtn = document.querySelector('.fa-arrow-right');
-
-                        let pageActiveIdx = 0; //현재 페이지 그룹 번호
-                        let currentPageNum = 0;
-                        let maxPageNum = 10; //페이지 그룹 최대 개수
-
-                        //페이지 넘버 생성 파트
-                        numbers.innerHTML = "";
-                        numbers.setAttribute("id", "numbers");
-                        for (let i = 1; i <= pageCount; i++) {
-                            numbers.innerHTML += '<li><a href="">' + i + '</a></li>';
+                    function selectCity(selOp) {
+                        console.log(selOp.value);
+                        if (selOp.value == '지역') {
+                            $('#SelCity').css('color', 'black');
                         }
-                        const numberBtn = numbers.querySelectorAll('li');
-                        console.log(numberBtn);
-
-                        for (nb of numberBtn) {
-                            nb.style.display = 'none';
+                        else if (selOp.value != '지역') {
+                            $('#SelCity').css('color', 'blue');
                         }
-
-                        numberBtn.forEach((item, idx) => {
-                            item.addEventListener('click', (e) => {
-                                e.preventDefault();
-                                //    console.log(idx);
-                                displayRow(idx);
-                            });
-                        });
-
-                        function displayRow(idx) {
-
-                            let start = idx * rowsPerPage;
-                            let end = start + rowsPerPage;
-
-                            let rowsArray = [...rows];
-                            //console.log(rowsArray);
-
-                            for (row of rowsArray) {
-                                row.style.display = 'none';
-                            }
-
-                            let newRows = rowsArray.slice(start, end);
-                            for (nr of newRows) {
-                                nr.style.display = '';
-                            }
-                            for (nb of numberBtn) {
-                                nb.classList.remove('active');
-                            }
-                            numberBtn[idx].classList.add('active');
-                        }
-                        displayRow(0);
-
-                        //페이지네이션 그룹 표시
-                        function displayPage(num) {
-                            //페이지 네이션번호 감추기
-                            for (nb of numberBtn) {
-                                nb.style.display = 'none';
-                            }
-                            let totalPageCount = Math.ceil(pageCount / maxPageNum);
-
-                            let pageArr = [...numberBtn]
-                            let start = num * maxPageNum;
-                            let end = start + maxPageNum;
-                            let pageListArr = pageArr.slice(start, end);
-
-                            for (let item of pageListArr) {
-                                item.style.display = 'block';
-                            }
-                            if (pageActiveIdx == 0) {
-                                prevPageBtn.style.display = 'none';
-                            } else {
-                                prevPageBtn.style.display = 'block';
-                            }
-                            if (pageActiveIdx == totalPageCount - 1) {
-                                nextPageBtn.style.display = 'none';
-                            } else {
-                                nextPageBtn.style.display = 'block';
-                            }
-                        }
-                        displayPage(0);
-
-                        nextPageBtn.addEventListener('click', (e) => {
-                            let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
-                            displayRow(nextPageNum);
-                            ++pageActiveIdx;
-                            displayPage(pageActiveIdx);
-                        });
-
-                        prevPageBtn.addEventListener('click', (e) => {
-                            let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
-                            displayRow(nextPageNum);
-                            --pageActiveIdx;
-                            displayPage(pageActiveIdx);
-                        });
-
                     }
+                    function selectCategory(selOp) {
+                        console.log(selOp);
+                        if (selOp.value == '') {
+                            $('#SelCate').css('color', 'black');
+                        }
+                        else if (selOp.value != '') {
+                            $('#SelCate').css('color', 'blue');
+                        }
+                    }
+
                 </script>
                 <script>
+                    let currentCity = null;
+                    let currentCate = null;
+                    function SearchClick() {
 
-                    function printTdest(dest) {
+
+                        let SelCate = document.querySelector('#SelCate').value;
+                        let SelCity = document.querySelector('#SelCity').value;
+
+                        if (SelCate == '여행지') {
+                            $.ajax({
+                                type: 'post',
+                                url: 'TravelSearch',
+                                data: {
+                                    'ctcode': SelCity,
+                                    'category': SelCate
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function (e) {
+                                    console.log('전송 성공');
+                                    console.log(e);
+                                    currentCate = SelCate;
+                                    PrintTdest(e);
+                                }
+                            });
+                        }
+                        else if (SelCate == '축제') {
+                            $.ajax({
+                                type: 'post',
+                                url: 'FestSearch',
+                                data: {
+                                    'ctcode': SelCity,
+                                    'category': SelCate
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function (e) {
+                                    console.log('전송 성공');
+                                    console.log(e);
+                                    currentCate = SelCate;
+                                    
+                                    PrintFest(e);
+                                }
+                            });
+                        }else if(SelCate == ''){
+                            alert('카테고리 선택은 필수입니다!!');
+                            return false;
+                        }
+                    }
+
+
+                    function PrintTdest(resultDest) {
                         let TdestAreaDiv = document.querySelector('div.TdestArea');
                         TdestAreaDiv.innerHTML = "";
                         let TdestList = [];
-                        TdestList = dest;
+                        TdestList = resultDest;
                         for (let Td of TdestList) {
                             let DestDiv = document.createElement('div');
                             //        DestDiv.classList.add('col-lg-4');
                             //      DestDiv.classList.add('col-md-6');
-                            DestDiv.classList.add('contain');
+                            DestDiv.classList.add('containDest');
+                            DestDiv.classList.add('col-lg-4');
+                            DestDiv.classList.add('col-md-6');
 
 
                             let TdestImgDiv = document.createElement('div');
                             //           TdestImgDiv.classList.add('card-mb-4');
                             TdestImgDiv.classList.add('photo');
                             TdestImgDiv.addEventListener('click', function (e) {
-                                DetailPageMove(Td.tdcode);
+                                DetailPageMoveDest(Td.tdcode);
                             });
 
                             let TdestImg = document.createElement('img');
@@ -539,6 +569,7 @@
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
                             TdestTitle.classList.add('h4');
+                            TdestTitle.classList.add('hTag');
                             TdestTitle.innerText = Td.tdname;
 
                             let TdestBtn = document.createElement('button');
@@ -548,7 +579,7 @@
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
                             TdestBtn.addEventListener('click', function () {
-                                selectCdcode(Td.tdcode, 'tdest');
+                                DestselectCdcode(Td.tdcode, 'tdest');
                             });
                             TdestTitleDiv.appendChild(TdestTitle);
 
@@ -559,15 +590,197 @@
 
                             TdestAreaDiv.appendChild(DestDiv);
 
-                        }
+                        }  
+                        Paging();                      
+                    }
+
+
+                    function PrintFest(resultFest) {
+                        let TdestAreaDiv = document.querySelector('div.TdestArea');
+                        TdestAreaDiv.innerHTML = "";
+                        let FestList = [];
+                        FestList = resultFest;
+                        for (let Fe of FestList) {
+                            let DestDiv = document.createElement('div');
+                            //        DestDiv.classList.add('col-lg-4');
+                            //      DestDiv.classList.add('col-md-6');
+                            DestDiv.classList.add('containDest');
+                            DestDiv.classList.add('col-lg-4');
+                            DestDiv.classList.add('col-md-6')
+
+
+                            let TdestImgDiv = document.createElement('div');
+                            //           TdestImgDiv.classList.add('card-mb-4');
+                            TdestImgDiv.classList.add('photo');
+                            TdestImgDiv.addEventListener('click', function (e) {
+                                DetailPageMoveFest(Fe.fecode);
+                            });
+
+                            let TdestImg = document.createElement('img');
+                            TdestImg.classList.add('tdImg');
+                            TdestImg.classList.add('card-img-top');
+                            TdestImg.setAttribute('src', Fe.feposter);
+
+                            TdestImgDiv.appendChild(TdestImg);
+                            DestDiv.appendChild(TdestImgDiv);
+
+                            let TdestTitleDiv = document.createElement('div');
+                            TdestTitleDiv.classList.add('caard-body');
+
+                            let TdestTitle = document.createElement('h3');
+                            TdestTitle.classList.add('card-title');
+                            TdestTitle.classList.add('h4');
+                            TdestTitle.classList.add('hTag');
+                            TdestTitle.innerText = Fe.fename;
+
+                            let TdestBtn = document.createElement('button');
+                            TdestBtn.classList.add('btn');
+                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.innerText = '계획에 추가하기';
+                            TdestBtn.setAttribute('data-bs-toggle', 'modal');
+                            TdestBtn.setAttribute('data-bs-target', '#exampleModal');
+                            TdestBtn.addEventListener('click', function () {
+                                FestselectCdcode(Fe.fecode, 'festival');
+                            });
+                            TdestTitleDiv.appendChild(TdestTitle);
+
+
+                            TdestTitleDiv.appendChild(TdestBtn);
+
+                            DestDiv.appendChild(TdestTitleDiv);
+
+                            TdestAreaDiv.appendChild(DestDiv);
+
+                        }    
                         Paging();
                     }
-                    function DetailPageMove(tdcode) {
+                </script>
+                <script>
+            function Paging() {
+                const rowsPerPage = 30; //페이지당 출력할 수
+                console.log(currentCate);
+                let rows=null;
+                
+                    rows = document.querySelectorAll('.containDest');
+                
+                
+                const rowsCount = rows.length;
+                //console.log(rows);
+
+                const pageCount = Math.ceil(rowsCount / rowsPerPage);
+                console.log(pageCount);
+                const numbers = document.querySelector('#numbers');
+
+                const prevPageBtn = document.querySelector('.fa-arrow-left');
+                const nextPageBtn = document.querySelector('.fa-arrow-right');
+
+                let pageActiveIdx = 0; //현재 페이지 그룹 번호
+                let currentPageNum = 0;
+                let maxPageNum = 10; //페이지 그룹 최대 개수
+
+                //페이지 넘버 생성 파트
+                numbers.innerHTML = "";
+                numbers.setAttribute("id", "numbers");
+                for (let i = 1; i <= pageCount; i++) {
+                    numbers.innerHTML += '<li><a href="">' + i + '</a></li>';
+                }
+                const numberBtn = numbers.querySelectorAll('li');
+                console.log(numberBtn);
+
+                for (nb of numberBtn) {
+                    nb.style.display = 'none';
+                }
+
+                numberBtn.forEach((item, idx) => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        //    console.log(idx);
+                        displayRow(idx);
+                    });
+                });
+
+                function displayRow(idx) {
+
+                    let start = idx * rowsPerPage;
+                    let end = start + rowsPerPage;
+
+                    let rowsArray = [...rows];
+                    //console.log(rowsArray);
+
+                    for (row of rowsArray) {
+                        row.style.display = 'none';
+                    }
+
+                    let newRows = rowsArray.slice(start, end);
+                    for (nr of newRows) {
+                        nr.style.display = '';
+                    }
+                    for (nb of numberBtn) {
+                        nb.classList.remove('active');
+                    }
+                    numberBtn[idx].classList.add('active');
+                }
+                displayRow(0);
+
+                //페이지네이션 그룹 표시
+                function displayPage(num) {
+                    //페이지 네이션번호 감추기
+                    for (nb of numberBtn) {
+                        nb.style.display = 'none';
+                    }
+                    let totalPageCount = Math.ceil(pageCount / maxPageNum);
+
+                    let pageArr = [...numberBtn]
+                    let start = num * maxPageNum;
+                    let end = start + maxPageNum;
+                    let pageListArr = pageArr.slice(start, end);
+
+                    for (let item of pageListArr) {
+                        item.style.display = 'block';
+                    }
+                    if (pageActiveIdx == 0) {
+                        prevPageBtn.style.display = 'none';
+                    } else {
+                        prevPageBtn.style.display = 'block';
+                    }
+                    if (pageActiveIdx == totalPageCount - 1) {
+                        nextPageBtn.style.display = 'none';
+                    } else {
+                        nextPageBtn.style.display = 'block';
+                    }
+                }
+                displayPage(0);
+
+                nextPageBtn.addEventListener('click', (e) => {
+                    let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
+                    displayRow(nextPageNum);
+                    ++pageActiveIdx;
+                    displayPage(pageActiveIdx);
+                });
+
+                prevPageBtn.addEventListener('click', (e) => {
+                    let nextPageNum = pageActiveIdx * maxPageNum - maxPageNum;
+                    displayRow(nextPageNum);
+                    --pageActiveIdx;
+                    displayPage(pageActiveIdx);
+                });
+
+            }
+                </script>
+                <script>
+
+                    
+                    function DetailPageMoveDest(tdcode) {
                         console.log(tdcode);
                         location.href = 'detailTdest?tdcode=' + tdcode;
 
                     }
-                    function selectCdcode(tdcode, seloption) {
+                    function DetailPageMoveFest(fecode) {
+                        console.log(fecode);
+                        location.href = 'detailFestival?code=' + fecode;
+
+                    }
+                    function DestselectCdcode(tdcode, seloption) {
                         if ("${sessionScope.loginId}" == "") {
                             location.href = "${pageContext.request.contextPath}/memberLoginForm"
                         } else {
@@ -621,6 +834,55 @@
                         })
                     }
 
+
+                    function FestselectCdcode(fecode, seloption) {
+                        if ("${sessionScope.loginId}" == "") {
+                            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+                        } else {
+                            $.ajax({
+                                url: "/getCdcode",
+                                type: "post",
+                                data: { mid: "${sessionScope.loginId}" },
+                                async: false,
+                                success(rs) {
+                                    console.log(rs.length);
+                                    let modalBodyTag = document.querySelector("#selectCalendar")
+                                    modalBodyTag.innerHTML = "";
+                                    if (rs.length > 0) {
+
+                                        let selTag = document.createElement("select")
+                                        for (let cd of rs) {
+                                            let optionTag = document.createElement("option")
+                                            optionTag.innerText = cd.cdname;
+                                            optionTag.setAttribute("value", cd.cdcode)
+                                            selTag.appendChild(optionTag);
+                                        }
+                                        modalBodyTag.appendChild(selTag);
+                                        let btnTag = document.querySelector("#selectClear");
+                                        btnTag.addEventListener("click", function () {
+                                            selectFest(fecode, selTag.value, seloption)
+                                        })
+                                    }
+                                    else {
+                                        modalBodyTag.innerText = "달력을 추가 해주세요";
+                                    }
+                                }
+                            })
+                        }
+                    }
+                    function selectFest(fecode, cdcode, seloption) {
+                        console.log(fecode + "  " + cdcode);
+                        $.ajax({
+                            url: "/registSelectDest",
+                            type: "post",
+                            data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption" : seloption },
+                            async: false,
+                            success(rs) {
+                                alert('행선지 선택 완료');
+                                location.href = "/";
+                            }
+                        })
+                    }
                 </script>
                 <script>
                     $(document).ready(function () {
@@ -639,22 +901,6 @@
                         $('html,body').animate({ scrollTop: 0 }, 300);
                     });
 
-                </script>
-                <script>
-                    function Select_country(ctcode) {
-                        console.log('해시태그 고른거 : ' + ctcode);
-                        $.ajax({
-                            type: "get",
-                            url: "TdestCtSearchPage",
-                            data: { "ctcode": ctcode },
-                            dataType: "json",
-                            async: false,
-                            success: function (e) {
-                                console.log('성공');
-                                printTdest(e);
-                            }
-                        });
-                    }
                 </script>
 
         </body>
