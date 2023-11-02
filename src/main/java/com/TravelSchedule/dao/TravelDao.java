@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Country;
+import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 
@@ -61,6 +62,13 @@ public interface TravelDao {
 	ArrayList<Tdest> selectTdest_Nearby(@Param("ctcode")String ctcode,@Param("tdcode") String tdcode);
 
 	ArrayList<Schedule> selectScList();
+
+	ArrayList<Tdest> TravelSearchList(@Param("ctcode")String getctcode, @Param("category")String category);
+
+	ArrayList<Festival> FestSearchList(@Param("ctcode")String getctcode, @Param("category")String category);
+
+	@Select("SELECT CTCODE FROM COUNTRY WHERE CTNAME = #{ctcode}")
+	String getctcodeD(String ctcode);
 
 
 }

@@ -17,4 +17,6 @@ public class Festival {
 	private String felongti;
 	private String contentid;
 	private String homepage;
+	
+	private String lknum;
 }

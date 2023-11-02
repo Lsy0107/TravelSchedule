@@ -86,6 +86,10 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
 #TitleBar {
 	position: relative;

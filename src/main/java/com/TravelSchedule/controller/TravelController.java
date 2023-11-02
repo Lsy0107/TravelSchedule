@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
+import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Schedule;
@@ -220,5 +221,32 @@ public class TravelController {
 		return mav;
 	}
 	
-	
+	//여행지 + 축제 페이지
+	@RequestMapping(value="TravelSearch")
+	public @ResponseBody String TravelSearch(String category,String ctcode) { //ctcode => 도시 이름
+		ModelAndView mav = new ModelAndView();
+		System.out.println("받아온 도시 : "+ctcode); //도시 이름 자체로 가져옴
+		System.out.println("받아온 카테고리 : "+category);
+		
+		String getctcode = tsvc.getctcode(ctcode);
+		System.out.println(getctcode);
+		ArrayList<Tdest> TravelSearch = tsvc.TravelSearch(getctcode,category);
+
+			
+		return new Gson().toJson(TravelSearch);
+	}
+	@RequestMapping(value="FestSearch")
+	public @ResponseBody String FestSearch(String category,String ctcode) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("받아온 도시 : "+ctcode); //도시 이름 자체로 가져옴
+		System.out.println("받아온 카테고리 : "+category);
+		
+		String getctcode = tsvc.getctcode(ctcode);
+		System.out.println(getctcode);
+		
+		ArrayList<Festival> FestSearch = tsvc.FestSearch(getctcode,category);
+
+			
+		return new Gson().toJson(FestSearch);
+	}
 }

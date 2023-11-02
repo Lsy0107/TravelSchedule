@@ -34,6 +34,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
+.bg-wh{
+
+}
 .zoom:hover {
 	transform: scale(1.02222222222);
 	transition: .5s; /* 부드럽게 */
@@ -153,6 +156,7 @@ background-color: black;
 }
 .navbg-white{
 	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
 }
 .change{
 	animation-name:color;
@@ -162,7 +166,6 @@ background-color: black;
 from {background:none;}
 to{background-color:white;}
 }
-
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
 .navbar-brand, .nav-link{
 color:black;}
@@ -187,7 +190,8 @@ color:black;}
 
 
 </head>
-<body class="">
+<body>
+	
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
@@ -214,8 +218,9 @@ color:black;}
 										src="${td.tdphoto }" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${td.tdname }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
 											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
@@ -233,8 +238,9 @@ color:black;}
 										src="${td.tdphoto }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${td.tdname }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
 											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
@@ -410,10 +416,11 @@ color:black;}
 										src="${fe.feposter }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${fe.fename }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${fe.lknum }</p>
 										<button
 											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
@@ -431,10 +438,11 @@ color:black;}
 										src="${fe.feposter }" class="card-img-top" alt="..."
 										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
-										<h5 class="card-title">${fe.fename }</h5>
+										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
+											<p class="card-text position-absolute bottom-0" style="right:20px;">추천수:${fe.lknum }</p>
 										<button
 											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
@@ -453,6 +461,7 @@ color:black;}
 		<!-- content 종료 -->
 		<!-- Footer-->
 		<%@ include file="include/footer.jsp"%>
+		
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -718,7 +727,7 @@ color:black;}
 		});
 	$(document).ready(function(){
 		let navbarTag = document.querySelector(".navbar");
-		navbarTag.classList.remove("bg-dark");
+		navbarTag.classList.remove("bg-wh");
 		//navbarTag.classList.add("navbg")
 	})
 	</script>

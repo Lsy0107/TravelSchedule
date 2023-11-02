@@ -16,4 +16,6 @@ public class Tdest {
 	private String contentid;
 	private String homepage;
 	private String tdtel;
+	
+	private String lknum;
 }

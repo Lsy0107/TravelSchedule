@@ -71,6 +71,11 @@
         top: 30px;
         
     }
+    .bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
+    
     @keyframes fadeInUp {
     0% {
         opacity: 0;
