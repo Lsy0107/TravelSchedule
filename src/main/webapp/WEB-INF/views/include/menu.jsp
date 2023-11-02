@@ -21,9 +21,6 @@
 .bk{
 	color: black;
 }
-<<<<<<< HEAD
-
-=======
 .bg-wh{
 	background-color: white;
 	box-shadow: 0px 0px 10px #A2A2A2;
@@ -31,7 +28,6 @@
 .font-jua{
 	font-family: 'Jua' !important;
 }
->>>>>>> 671cba66e1fd0401bcb0a349821149216db95b8e
 </style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-wh font-jua">
 	<div class="container px-5">
