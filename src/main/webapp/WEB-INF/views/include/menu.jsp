@@ -65,13 +65,13 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle " id="navbarDropdownPortfolio"
 					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false" style="padding:0px; padding-left:7.5px;"><img style="width:38px;"src="/resources/memberProfile/${sessionScope.loginProfile}"
+					aria-expanded="false" style="padding:0px; padding-left:7.5px;"><img style="width:38px;"src="/resources/memberProfile/${sessionScope.loginProfile}" onerror="this.src='${pageContext.request.contextPath}/resources/memberProfile/default2.jpg'"
 								class="profile"></a>
 					<div class="dropdown-menu dropdown-menu-end w3-card-4 p-3"
 						style="width: 300px; border: none;"
 						aria-labelledby="navbarDropdownPortfolio">
 						<h1 style="text-align: justify;">
-							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
+							<img src="/resources/memberProfile/${sessionScope.loginProfile}" onerror="this.src='${pageContext.request.contextPath}/resources/memberProfile/default2.jpg'"
 								class="profile">${sessionScope.loginId }</h1>
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>

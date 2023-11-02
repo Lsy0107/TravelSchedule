@@ -222,7 +222,7 @@ color:black;}
 										<p class="card-text">${td.tdaddress }</p>
 										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${td.tdcode}','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -242,7 +242,7 @@ color:black;}
 										<p class="card-text">${td.tdaddress }</p>
 										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${td.tdcode}','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -268,7 +268,7 @@ color:black;}
 					</div>
 					<div class="modal-body" id="selectCalendar"></div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn btn-outline-success"
 							data-bs-dismiss="modal" id="selectClear">선택</button>
 					</div>
 				</div>
@@ -422,7 +422,7 @@ color:black;}
 											${fe.enddate.split(' ')[0] }</p>
 										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${fe.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${fe.fecode}','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -444,7 +444,7 @@ color:black;}
 											${fe.enddate.split(' ')[0] }</p>
 											<p class="card-text position-absolute bottom-0" style="right:20px;">추천수:${fe.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${fe.fecode}','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
