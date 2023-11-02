@@ -435,6 +435,30 @@ to {
 		let scAreaTag = document.querySelector("#scArea").childElementCount;
 		let tdAreaTag = document.querySelector("#tdArea").childElementCount;
 		let feAreaTag = document.querySelector("#feArea").childElementCount;
+		console.log(lalngList);
+		let today = new Date();
+		console.log(today.getFullYear());
+		console.log(today.getMonth());
+		console.log(today.getDate());
+		console.log(lalngList[0].scdate);
+		let scDate = lalngList[0].scdate.split(" ")[0];
+		let checkDate = false;
+		if(Number(scDate.split('/')[0]) > today.getFullYear()){
+			checkDate = true;
+		}else if(Number(scDate.split('/')[0]) == today.getFullYear()){
+			if(Number(scDate.split('/')[1])>today.getMonth()+1){
+				checkDate=true;
+			}else if(Number(scDate.split('/')[1])==today.getMonth()+1){
+				if(Number(scDate.split('/')[2])>=today.getDate()){
+					checkDate=true;
+				}
+			}
+		}
+		if(!checkDate){
+			alert('이미 지난 계획이 있습니다.');
+			return;
+		}
+		
 		if(scAreaTag == tdAreaTag + feAreaTag){
 			check = confirm("계획을 확정하면 더는 수정할 수 없습니다.");			
 		}else{
