@@ -25,6 +25,7 @@
 <!-- ajax -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
 <style type="text/css">
 .disnone {
 	display: none;
@@ -101,7 +102,9 @@ to {
     transition: 0.25s;
     margin: 3px;
 }
-
+div, nav, h5, button{
+	font-family: 'Jua' !important;
+}
 </style>
 </head>
 <body class="d-flex flex-column h-100">
