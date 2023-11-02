@@ -220,6 +220,7 @@ color:black;}
 									<div class="card-body">
 										<h5 class="card-title">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
 											class="btn btn-primary position-absolute bottom-0 start-0"
 											style="margin: 10px"
@@ -239,7 +240,7 @@ color:black;}
 									<div class="card-body">
 										<h5 class="card-title">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
-										<p class="card-text">추천수:${td.lknum }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
 											class="btn btn-primary position-absolute bottom-0 start-0"
 											style="margin: 10px"
@@ -419,7 +420,7 @@ color:black;}
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
-										
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${fe.lknum }</p>
 										<button
 											class="btn btn-primary position-absolute bottom-0 start-0"
 											style="margin: 10px"
@@ -441,6 +442,7 @@ color:black;}
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
+											<p class="card-text position-absolute bottom-0" style="right:20px;">추천수:${fe.lknum }</p>
 										<button
 											class="btn btn-primary position-absolute bottom-0 start-0"
 											style="margin: 10px"

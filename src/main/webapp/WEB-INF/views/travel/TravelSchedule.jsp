@@ -114,10 +114,10 @@ to {
 
 		<!-- contant 시작 -->
 		<div class="p-4"
-			style="display: flex; float: left; position: absolute; background-color: white; z-index: 3; height: -webkit-fill-available;">
+			style="display: flex; float: left; position: absolute; background-color: aliceblue; z-index: 3; height: -webkit-fill-available;">
 			<div class="">
 				<h4 onclick="location.href='${pageContext.request.contextPath }/'"><i class="fa-solid fa-earth-asia"></i> 여행</h4>
-				<nav>
+				<nav class=" border border-dark" style="background-color:white; border-radius:10px;">
 					<ul style="list-style: none; padding: 0;">
 						<li><div class="container-fluid " style="padding: 0;">
 								<button class="navbar-toggler" type="button"
@@ -159,7 +159,7 @@ to {
 				</nav>
 			</div>
 			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
-				style="overflow: scroll; background-color: white;">
+				style="overflow: scroll; background-color: aliceblue;">
 				<div class="col d-flex justify-content-center" style="margin-bottom: 15px;">
 				<button class="w-btn-outline w-btn-pink-outline" onclick="disnonefe()">여행지</button>
 				<button class="w-btn-outline w-btn-blue-outline" onclick="disnonetd()">축제</button>
@@ -168,7 +168,7 @@ to {
 					<nav id="tdArea" class="" style="">
 						<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
-								<div class="travelList">
+								<div class="travelList" style="background-color:white;">
 									<img class="col-3 img-thumbnail" src="${td.TDPHOTO }" alt="..." 
 										onerror="this.src='/resources/tdest/3509.jpg'"style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
 									<div class="col-6 p-1">
@@ -194,7 +194,7 @@ to {
 					<nav id="feArea" class="disnone" style="">
 						<c:forEach items="${ scdestList}" var="fe">
 							<c:if test="${fe.FECODE != null }">
-								<div class="travelList">
+								<div class="travelList" style="background-color:white;">
 									<img class="col-3 img-thumbnail" src="${fe.FEPOSTER }" alt="..."
 										onerror="this.src='/resources/tdest/3509.jpg'"style="width =: 286px; height: 90px;border-radius: 12px; " loading="lazy">
 									<div class="col-6 p-1">
