@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.TravelSchedule.dao.TravelDao;
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Country;
+import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 
@@ -138,6 +139,18 @@ public class TravelService {
 	public ArrayList<Schedule> getScList() {
 		System.out.println("travelService - getScList");
 		return tdao.selectScList();
+	}
+	public ArrayList<Tdest> TravelSearch(String getctcode, String category) {
+		ArrayList<Tdest>  TravelSerchList = tdao.TravelSearchList(getctcode,category);
+		return TravelSerchList;
+	}
+	public ArrayList<Festival> FestSearch(String getctcode, String category) {
+		ArrayList<Festival> FestSearchList = tdao.FestSearchList(getctcode,category); 
+		return FestSearchList;
+	}
+	public String getctcode(String ctcode) {
+		 
+		return tdao.getctcodeD(ctcode);
 	}
 
 	

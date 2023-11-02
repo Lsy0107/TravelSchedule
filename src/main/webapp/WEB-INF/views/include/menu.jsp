@@ -43,7 +43,7 @@
 				</c:choose>
 				<li class="nav-item"><a class="nav-link bk"
 					href="/TdestSearchPage">여행지검색</a></li>
-				<li class="nav-item"><a class="nav-link bk" href="/festival">축제</a></li>
+				
 				<c:choose>
 					<c:when test="${sessionScope.loginId ==null }">
 						<li class="nav-item"><a class="nav-link bk"
