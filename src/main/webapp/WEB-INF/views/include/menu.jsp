@@ -25,9 +25,10 @@
 	background-color: white;
 	box-shadow: 0px 0px 10px #A2A2A2;
 }
-.font-jua{
+div, h1, h2, h3, h4, h5, h6{
 	font-family: 'Jua' !important;
 }
+
 </style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-wh font-jua">
 	<div class="container px-5">
@@ -44,11 +45,11 @@
 			<c:choose>
 					<c:when test="${sessionScope.loginId ==null }">
 						<li class="nav-item "><a class="nav-link bk"
-							href="/memberLoginForm">여행계획</a></li>
+							href="/memberLoginForm">여행달력</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item"><a class="nav-link bk"
-							href="/selectCalendar">여행계획</a></li>
+							href="/selectCalendar">여행달력</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li class="nav-item"><a class="nav-link bk"
