@@ -46,7 +46,7 @@ div, h1, h2, h3, h4, h5, h6{
 					<c:when test="${sessionScope.loginId ==null }">
 						<li class="nav-item "><a class="nav-link bk"
 							href="/memberLoginForm">여행달력</a></li>
-					</c:when>
+					</c:when>	
 					<c:otherwise>
 						<li class="nav-item"><a class="nav-link bk"
 							href="/selectCalendar">여행달력</a></li>

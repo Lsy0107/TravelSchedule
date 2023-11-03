@@ -587,5 +587,35 @@ public class ApiService {
 		return getReDao;
 	}
 
+	public ArrayList<Likelist> likeList_td(String mid) {
+		
+		return apiDao.selectlikeList_td(mid);
+	}
+
+	public Tdest getTdest(String tdcode) {
+
+		return apiDao.selectTd(tdcode);
+	}
+
+	public ArrayList<Likelist> likeList_fe(String mid) {
+
+		return apiDao.selectlikeList_fe(mid);
+	}
+
+	public Festival getFe(String fecode) {
+	
+		return apiDao.selectFe(fecode);
+	}
+
+	public ArrayList<Likelist> likeList_re(String mid) {
+		
+		return apiDao.selectlikeList_re(mid);
+	}
+
+	public Review getReview(String recode) {
+		
+		return apiDao.selectReview(recode);
+	}
+
 
 }
