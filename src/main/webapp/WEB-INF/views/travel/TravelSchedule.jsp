@@ -316,7 +316,7 @@ div {
 
 		</div>
 		<div id="map" class="col border border-dark"
-			style="height: 963px; margin-left: 243px;"></div>
+			style="height: 100vh; margin-left: 243px;"></div>
 
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
