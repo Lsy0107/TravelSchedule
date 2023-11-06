@@ -48,7 +48,7 @@
   select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where enddate >= sysdate order by  DBMS_RANDOM.RANDOM()
   </select>
   <select id="selectFestival_detail">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where fecode = #{code} and enddate >= sysdate
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where fecode = #{code} 
   </select>
   <select id="selectFestival_Nearby">
   <![CDATA[
