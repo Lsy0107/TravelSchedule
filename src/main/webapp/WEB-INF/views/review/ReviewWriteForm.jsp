@@ -17,7 +17,7 @@
             <link href="resources/css/styles.css" rel="stylesheet" />
             <style>
                 .wrap {
-                    width: 60%;
+                    width: 45%;
                     margin-left: auto;
                     margin-right: auto;
                     margin-top: 115px;
@@ -61,7 +61,12 @@
                     width: 100%;
                     height: 60px;
                     padding: 10px;
-                    border-radius: 10px;
+                    border: none;
+				    border-bottom: 1px solid;
+				    margin-bottom: 10px;
+                }
+                input:focus {
+                	outline: none;
                 }
 
                 body {
@@ -87,8 +92,7 @@
         </head>
 
         <body class="d-flex flex-column h-100">
-            <%@ include file="/WEB-INF/views/include/menu.jsp" %>
-
+            <%@ include file="/WEB-INF/views/include/menu.jsp" %>				
                 <div class="wrap">
                     <div class="ReTitle">
                         <input type="text" class="Title" name="title" placeholder="제목">

@@ -24,12 +24,12 @@
   </select>
   <select id="selectTdest" resultType="tdest">
   <![CDATA[
-  select * from tdest where rownum <= 10
+  select * from (select td.*,nvl(lknum, '0') lknum from tdest td left join (select tdcode, count(*) as lknum  from likelist group by tdcode ) lk on td.tdcode=lk.tdcode order by lknum desc) where rownum <= 10
   ]]>
   </select>
   <select id="selectFestival" resultType="festival">
   <![CDATA[
-  select * from festival where rownum <= 10 and enddate >= sysdate
+  select * from (select fe.*, nvl(lknum, '0') lknum from festival fe left join (select fecode, count(*) as lknum  from likelist group by fecode) lk on fe.fecode=lk.fecode where enddate >= sysdate order by lknum desc) where rownum <= 10
   ]]>
   </select>
   <select id="selectFecode">
@@ -48,7 +48,9 @@
   select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where enddate >= sysdate order by  DBMS_RANDOM.RANDOM()
   </select>
   <select id="selectFestival_detail">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where fecode = #{code} and enddate >= sysdate
+  <![CDATA[
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage, lknum from (select fe.*, nvl(lknum, '0') lknum from festival fe left join (select fecode, count(*) as lknum  from likelist group by fecode) lk on fe.fecode=lk.fecode order by lknum desc) where fecode = #{code}
+  ]]>
   </select>
   <select id="selectFestival_Nearby">
   <![CDATA[
@@ -88,4 +90,28 @@
   <if test="seloption == 'tdest'"> tdcode = #{lk.tdcode}</if>
   <if test="seloption == 'review'"> recode = #{lk.recode}</if>
   </delete>
+  <select id="selectlikeList_td">
+  select * from likelist where mid = #{mid} and not tdcode is null
+  </select>
+  <select id="selectTd">
+  select * from tdest where tdcode = #{tdcode}
+  </select>
+  <select id="selectlikeList_fe">
+  select * from likelist where mid = #{mid} and not fecode is null
+  </select>
+  <select id="selectFe">
+  select * from festival where fecode = #{fecode}
+  </select>
+  <select id="selectlikeList_re">
+  select * from likelist where mid = #{mid} and not recode is null
+  </select>
+  <select id="selectReview">
+  select * from review where recode = #{recode}
+  </select>
+  <select id="selectLknum">
+  select count(*) from likelist where
+  <if test="seloption == 'festival'">fecode = #{code}</if>
+  <if test="seloption == 'tdest'">tdcode = #{code}</if>
+  <if test="seloption == 'review'">recode = #{code}</if>
+  </select>
   </mapper>

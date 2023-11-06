@@ -19,6 +19,9 @@
             <!-- Data AOS-->
             <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+            <!-- Data AOS-->
+            <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
             <style>
                 .pagination {
                     position: relative;
@@ -29,8 +32,12 @@
                     list-style: none;
                     display: flex;
                     padding: 0px;
-                    position: absolute;
+                    position: relative;
                 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
                 ol>li:hover {
                     background-color: lightgrey;
@@ -43,23 +50,30 @@
 
                 ol>li {
                     padding: 3px;
+                    border: 1px solid blue;
+                    margin: 3px;
+                    text-align: center;
+                    min-width: 57px;
+                    min-height: 45px;
                 }
 
                 ol>li>a {
                     padding: 10px;
                     max-width: 50px;
+                    position: relative;
+                    top: 21%;
                 }
 
                 i#leftCur {
-                    position: absolute;
+                    position: relative;
                     top: 15px;
-                    left: -20px;
+                    right: 0px;
                 }
 
                 i#rightCur {
-                    position: absolute;
+                    position: relative;
                     top: 15px;
-                    left: 200px;
+                    left: 0px;
                 }
 
                 div#map {
@@ -459,18 +473,20 @@
                     </div>
                     <div class="SearchBox">
                         <div class="SearchD">
-                            <select name="cateVal" class="SearchCate" required="required"
+                            <select name="cateVal" id="selectCategory" class="SearchCate" required="required"
                                 onchange="selectCategory(this)">
                                 <option value="">카테고리</option>
                                 <option value="축제">축제</option>
                                 <option value="여행지">여행지</option>
                             </select>
-                            <input class="SearchInput" onkeyup="searchPreview()" type="text" placeholder="검색어를 입력해주세요.">
+                            <input class="SearchInput" onkeyup="previewInput(this)" type="text" placeholder="검색어를 입력해주세요.">
                             <button class="SearchBtn2" onclick="SearchDetail()"><i id=""
                                     class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         <button id="CloseIcon"><i id="Close" class="fa-solid fa-circle-xmark"
                                 style="color: #000000;"></i></button>
+                    <div id="previewtext" style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius:10px;">
+                    </div>
                     </div>
 
                 </div>
@@ -528,7 +544,7 @@
                             <div class="modal-body" id="selectCalendar">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
                                     id="selectClear">선택</button>
                             </div>
                         </div>
@@ -559,7 +575,6 @@
                 <script>
 
                     $(document).ready(function () {
-                        console.log('페이지 로드');
                         let selectCity = document.querySelector(".SelCity");
                         selectCity.innerText = "";
 
@@ -568,7 +583,6 @@
 
                 <script>
                     function selectCity(selOp) {
-                        console.log(selOp.value);
                         if (selOp.value == '지역') {
                             $('#SelCity').css('color', 'black');
                         }
@@ -577,7 +591,6 @@
                         }
                     }
                     function selectCategory(selOp) {
-                        console.log(selOp);
                         if (selOp.value == '') {
                             $('#SelCate').css('color', 'black');
                         }
@@ -664,7 +677,7 @@
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Td.tdphoto);
-
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
@@ -679,7 +692,7 @@
 
                             let TdestBtn = document.createElement('button');
                             TdestBtn.classList.add('btn');
-                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.classList.add('btn-outline-success');
                             TdestBtn.innerText = '계획에 추가하기';
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
@@ -725,7 +738,7 @@
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Fe.feposter);
-
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
@@ -763,7 +776,6 @@
                 <script>
                     function Paging() {
                         const rowsPerPage = 30; //페이지당 출력할 수
-                        console.log(currentCate);
                         let rows = null;
 
                         rows = document.querySelectorAll('.containDest');
@@ -773,7 +785,6 @@
                         //console.log(rows);
 
                         const pageCount = Math.ceil(rowsCount / rowsPerPage);
-                        console.log(pageCount);
                         const numbers = document.querySelector('#numbers');
 
                         const prevPageBtn = document.querySelector('.fa-arrow-left');
@@ -790,7 +801,6 @@
                             numbers.innerHTML += '<li><a href="">' + i + '</a></li>';
                         }
                         const numberBtn = numbers.querySelectorAll('li');
-                        console.log(numberBtn);
 
                         for (nb of numberBtn) {
                             nb.style.display = 'none';
@@ -895,7 +905,6 @@
                                 data: { mid: "${sessionScope.loginId}" },
                                 async: false,
                                 success(rs) {
-                                    console.log(rs.length);
                                     let modalBodyTag = document.querySelector("#selectCalendar")
                                     modalBodyTag.innerHTML = "";
                                     if (rs.length > 0) {
@@ -950,7 +959,6 @@
                                 data: { mid: "${sessionScope.loginId}" },
                                 async: false,
                                 success(rs) {
-                                    console.log(rs.length);
                                     let modalBodyTag = document.querySelector("#selectCalendar")
                                     modalBodyTag.innerHTML = "";
                                     if (rs.length > 0) {
@@ -994,14 +1002,12 @@
                         $(window).scroll(function () {
                             if ($(this).scrollTop() > 50) {
                                 $('.Bar').fadeIn(500);
-                                console.log('생김');
                             } else {
                                 $('.Bar').fadeOut(500);
                             }
                         });
                     })
                     $('.Bar').click(function (event) {
-                        console.log('클릭!');
                         event.preventDefault();
                         $('html,body').animate({ scrollTop: 0 }, 300);
                     });
@@ -1028,32 +1034,215 @@
                     function SearchDetail() {
                         let cateTag = document.querySelector('.SearchCate').value;
                         let inputTag = document.querySelector('.SearchInput').value;
+                        currentCate = cateTag;
 
-                        $.ajax({
-                            type: 'get',
-                            url: 'SearchService',
-                            data: {
-                                'searchval': inputTag,
-                                'searchcate': cateTag
-                            },
-                             dataType: 'json',
-                            async: false,
-                            success: function (e) {
+                        if (currentCate == '축제') {
+                            $.ajax({
+                                type: 'get',
+                                url: 'SearchServiceFe',
+                                data: {
+                                    'searchval': inputTag,
+                                    'searchcate': cateTag
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function (e) {
+                                    FestDetailSearch(e);
+                                }
 
-                            }
-                        })
-
+                            });
+                        }
+                        else if (currentCate == '여행지') {
+                            $.ajax({
+                                type: 'get',
+                                url: 'SearchServiceTd',
+                                data: {
+                                    'searchval': inputTag,
+                                    'searchcate': cateTag
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function (e) {
+                                    DestDetailSearch(e);
+                                }
+                            });
+                        }
 
                     }
-                </script>
-                <script>
-                    function searchPreview(){
-                        let inputTag = document.querySelector('.SearchInput').value;
-                        console.log(inputTag);
+
+                    function FestDetailSearch(Fest) {
+                        let TdestAreaDiv = document.querySelector('div.TdestArea');
+                        TdestAreaDiv.innerHTML = "";
+                        let FestList = [];
+                        FestList = Fest;
+                        for (let Fe of FestList) {
+                            let DestDiv = document.createElement('div');
+                            //        DestDiv.classList.add('col-lg-4');
+                            //      DestDiv.classList.add('col-md-6');
+                            DestDiv.classList.add('containDest');
+                            DestDiv.classList.add('col-lg-4');
+                            DestDiv.classList.add('col-md-6')
+
+
+                            let TdestImgDiv = document.createElement('div');
+                            //           TdestImgDiv.classList.add('card-mb-4');
+                            TdestImgDiv.classList.add('photo');
+                            TdestImgDiv.addEventListener('click', function (e) {
+                                DetailPageMoveFest(Fe.fecode);
+                            });
+
+                            let TdestImg = document.createElement('img');
+                            TdestImg.classList.add('tdImg');
+                            TdestImg.classList.add('card-img-top');
+                            TdestImg.setAttribute('src', Fe.feposter);
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
+
+                            TdestImgDiv.appendChild(TdestImg);
+                            DestDiv.appendChild(TdestImgDiv);
+
+                            let TdestTitleDiv = document.createElement('div');
+                            TdestTitleDiv.classList.add('caard-body');
+
+                            let TdestTitle = document.createElement('h3');
+                            TdestTitle.classList.add('card-title');
+                            TdestTitle.classList.add('h4');
+                            TdestTitle.classList.add('hTag');
+                            TdestTitle.innerText = Fe.fename;
+
+                            let TdestBtn = document.createElement('button');
+                            TdestBtn.classList.add('btn');
+                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.innerText = '계획에 추가하기';
+                            TdestBtn.setAttribute('data-bs-toggle', 'modal');
+                            TdestBtn.setAttribute('data-bs-target', '#exampleModal');
+                            TdestBtn.addEventListener('click', function () {
+                                FestselectCdcode(Fe.fecode, 'festival');
+                            });
+                            TdestTitleDiv.appendChild(TdestTitle);
+
+
+                            TdestTitleDiv.appendChild(TdestBtn);
+
+                            DestDiv.appendChild(TdestTitleDiv);
+
+                            TdestAreaDiv.appendChild(DestDiv);
+
+                        }
+                        Paging();
                     }
 
-                </script>
+                    function DestDetailSearch(Tdest) {
+                        let TdestAreaDiv = document.querySelector('div.TdestArea');
+                        TdestAreaDiv.innerHTML = "";
+                        let TdestList = [];
+                        TdestList = Tdest;
+                        for (let Td of TdestList) {
+                            let DestDiv = document.createElement('div');
+                            //        DestDiv.classList.add('col-lg-4');
+                            //      DestDiv.classList.add('col-md-6');
+                            DestDiv.classList.add('containDest');
+                            DestDiv.classList.add('col-lg-4');
+                            DestDiv.classList.add('col-md-6');
 
+
+                            let TdestImgDiv = document.createElement('div');
+                            //           TdestImgDiv.classList.add('card-mb-4');
+                            TdestImgDiv.classList.add('photo');
+                            TdestImgDiv.addEventListener('click', function (e) {
+                                DetailPageMoveDest(Td.tdcode);
+                            });
+
+                            let TdestImg = document.createElement('img');
+                            TdestImg.classList.add('tdImg');
+                            TdestImg.classList.add('card-img-top');
+                            TdestImg.setAttribute('src', Td.tdphoto);
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'")
+
+                            TdestImgDiv.appendChild(TdestImg);
+                            DestDiv.appendChild(TdestImgDiv);
+
+                            let TdestTitleDiv = document.createElement('div');
+                            TdestTitleDiv.classList.add('caard-body');
+
+                            let TdestTitle = document.createElement('h3');
+                            TdestTitle.classList.add('card-title');
+                            TdestTitle.classList.add('h4');
+                            TdestTitle.classList.add('hTag');
+                            TdestTitle.innerText = Td.tdname;
+
+                            let TdestBtn = document.createElement('button');
+                            TdestBtn.classList.add('btn');
+                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.innerText = '계획에 추가하기';
+                            TdestBtn.setAttribute('data-bs-toggle', 'modal');
+                            TdestBtn.setAttribute('data-bs-target', '#exampleModal');
+                            TdestBtn.addEventListener('click', function () {
+                                DestselectCdcode(Td.tdcode, 'tdest');
+                            });
+                            TdestTitleDiv.appendChild(TdestTitle);
+
+
+                            TdestTitleDiv.appendChild(TdestBtn);
+
+                            DestDiv.appendChild(TdestTitleDiv);
+
+                            TdestAreaDiv.appendChild(DestDiv);
+
+                        }
+                        Paging();
+                    }
+                </script>
+				<script type="text/javascript">
+				function previewInput(obj){
+					console.log(obj);
+					let SelCateTag = document.querySelector('#selectCategory');
+					let previewText = document.querySelector('#previewtext');
+					let Data = {};
+					switch(SelCateTag.value){
+					case '':
+						previewText.innerHTML = "";
+						previewText.innerText = '카테고리를 선택해주세요!';
+						return;
+						break;
+					case '축제':
+						Data = {"searchInfo": obj.value, "seloption":'fe'};
+						break;
+					case '여행지':
+						Data = {"searchInfo": obj.value, "seloption":'td'};
+						break;
+					}
+					$.ajax({
+						url:"/sreachPreview",
+						type:"post",
+						data:Data,
+                        success: function (rs) {
+                        	printPreview(rs, previewText, SelCateTag.value, obj);
+                        }
+					})
+				}
+				//미리보기 텍스트 출력
+				function printPreview(rs, previewText, seloption, searchbox){
+					console.log(rs);
+					console.log(previewText);
+					previewText.innerHTML = '';
+					for(let pre of rs){
+					let pTag = document.createElement('p');
+					if(seloption == '축제'){
+						pTag.innerText = pre.FENAME; 
+					}else{
+						pTag.innerText = pre.TDNAME;
+					}
+					pTag.style.margin="0";
+					pTag.style.cursor="pointer";
+					pTag.classList.add("p-2");
+					pTag.addEventListener('click',function(){
+						searchbox.value=pTag.innerText;
+						SearchDetail()
+					})
+					previewText.appendChild(pTag);
+					}
+				}
+				</script>
         </body>
 
         </html>

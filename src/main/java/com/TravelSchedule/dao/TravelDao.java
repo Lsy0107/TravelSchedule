@@ -51,7 +51,7 @@ public interface TravelDao {
 
 	int deleteSchedule_dest(@Param("sc")Schedule sc, @Param("seloption")String seloption);
 	
-	@Select("SELECT * FROM TDEST WHERE TDCODE = #{tdcode}")
+	@Select("select * from (select td.*,nvl(lknum, '0') lknum from tdest td left join (select tdcode, count(*) as lknum  from likelist group by tdcode ) lk on td.tdcode=lk.tdcode order by lknum desc) where tdcode = #{tdcode}")
 	Tdest detailTdestDao(String tdcode);
 
 	@Select("SELECT * FROM COUNTRY")	
@@ -69,6 +69,16 @@ public interface TravelDao {
 
 	@Select("SELECT CTCODE FROM COUNTRY WHERE CTNAME = #{ctcode}")
 	String getctcodeD(String ctcode);
+
+	int updateSchedule(@Param("sc")Schedule sc, @Param("scOption")String scOption);
+
+	@Select("SELECT * FROM FESTIVAL WHERE FENAME LIKE '%'||#{searchVal}||'%'")
+	ArrayList<Festival> FestList(String searchval);
+
+	@Select("SELECT * FROM TDEST WHERE TDNAME LIKE '%'||#{searchVal}||'%'")
+	ArrayList<Tdest> TdestList(String searchval);
+
+	ArrayList<HashMap<String, String>> getPreview(@Param("searchInfo")String searchInfo, @Param("seloption")String seloption);
 
 
 }

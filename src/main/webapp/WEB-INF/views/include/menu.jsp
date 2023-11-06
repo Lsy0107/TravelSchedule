@@ -21,13 +21,15 @@
 .bk{
 	color: black;
 }
+
 .bg-wh{
 	background-color: white;
 	box-shadow: 0px 0px 10px #A2A2A2;
 }
-.font-jua{
+div, h1, h2, h3, h4, h5, h6{
 	font-family: 'Jua' !important;
 }
+
 </style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-wh font-jua">
 	<div class="container px-5">
@@ -44,11 +46,11 @@
 			<c:choose>
 					<c:when test="${sessionScope.loginId ==null }">
 						<li class="nav-item "><a class="nav-link bk"
-							href="/memberLoginForm">여행계획</a></li>
-					</c:when>
+							href="/memberLoginForm">여행달력</a></li>
+					</c:when>	
 					<c:otherwise>
 						<li class="nav-item"><a class="nav-link bk"
-							href="/selectCalendar">여행계획</a></li>
+							href="/selectCalendar">여행달력</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li class="nav-item"><a class="nav-link bk"
@@ -75,11 +77,6 @@
 								class="profile">${sessionScope.loginId }</h1>
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
-						<p>몇월 몇일 몇개 일정이 있습니다.</p>
-						<hr style="border-top:2px solid lightgray">
-						
-						
-						
 						
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>

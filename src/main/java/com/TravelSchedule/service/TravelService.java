@@ -152,6 +152,22 @@ public class TravelService {
 		 
 		return tdao.getctcodeD(ctcode);
 	}
+	public int scUpdate(Schedule sc, String scOption) {
+		System.out.println("travelService - scUpdate");
+		return tdao.updateSchedule(sc, scOption);
+	}
+	public ArrayList<Festival> FestList(String searchval) {
+		System.out.println("축제 상세 검색 서비스");
+		return tdao.FestList(searchval);
+	}
+	public ArrayList<Tdest> TdestList(String searchval) {
+		System.out.println("여행지 상세 검색 서비스");
+		return tdao.TdestList(searchval);
+	}
+	public ArrayList<HashMap<String, String>> getPreview(String searchInfo, String seloption) {
+		System.out.println(("travelService - getPreview()"));
+		return tdao.getPreview(searchInfo, seloption);
+	}
 
 	
 

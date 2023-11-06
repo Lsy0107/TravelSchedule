@@ -176,6 +176,21 @@ public class ReviewService {
 		int UpdateCdState = rdao.UpdateCdState(cdcode,mid);
 		return UpdateCdState;
 	}
+
+	public int CalendarCount(String mid) {
+		
+		return rdao.selectCalendarCount(mid);
+	}
+
+	public ArrayList<HashMap<String, String>> reList(String recode) {
+		
+		return rdao.reList(recode);
+	}
+
+	public HashMap<String, String> getreList(String recode) {
+		// TODO Auto-generated method stub
+		return rdao.getreList(recode);
+	}
 	
 
 

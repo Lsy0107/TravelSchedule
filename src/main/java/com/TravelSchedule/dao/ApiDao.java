@@ -57,5 +57,19 @@ public interface ApiDao {
 
 	@Select("SELECT * FROM REVIEW R WHERE CODELIST LIKE '%'||#{cs}||'%'")
 	Review getReDao(String cs);
+
+	ArrayList<Likelist> selectlikeList_td(@Param("mid") String mid);
+
+	Tdest selectTd(@Param("tdcode") String tdcode);
+
+	ArrayList<Likelist> selectlikeList_fe(@Param("mid") String mid);
+
+	Festival selectFe(@Param("fecode") String fecode);
+
+	ArrayList<Likelist> selectlikeList_re(@Param("mid") String mid);
+
+	Review selectReview(@Param("recode") String recode);
+
+	String selectLknum(@Param("code") String code, @Param("seloption") String seloption);
 	
 }

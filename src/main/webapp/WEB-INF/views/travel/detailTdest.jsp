@@ -27,10 +27,14 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
+.wrap>*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
 .signIn {
 	border: 1px solid black;
 	border-radius: 25px;
@@ -57,6 +61,10 @@
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
+}
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
 }
 
 #TripRecommend {
@@ -130,6 +138,7 @@ main {
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 50px;
 }
 .Img{
 	width: 1000px;	
@@ -153,12 +162,13 @@ main {
 }
 .hr{
 	width:1000px;
+    border-top: 1px solid black;
 }
 .heart{
 	padding-left: 30px;
 	cursor:pointer;
 }
-.fa-solid{
+.wrap>.fa-solid{
 	color: #ff0000;
 }
 .fa-regular{
@@ -206,7 +216,6 @@ main {
 }
 .feName{
 	font-size: 20px;
-    font-weight: bold;
     text-align: center;
     height: 30px;
     width: 200px;
@@ -238,7 +247,7 @@ a{
 	position: relative;
 	font-weight: bold;
 	bottom: 30px;
-	left: 10px;
+	left: 35px;
 }
 .feinfo{
 	width: 1000px;
@@ -270,6 +279,9 @@ a{
 	width: 1000px;
 	margin-bottom: 10px;
 }
+.lknum{
+	display:inline-block;
+}
 </style>
 
 
@@ -284,7 +296,8 @@ a{
 			<img class="card-img-top Img" src="${detailTd.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 			<p class="name"> ${detailTd.tdname }</p>
 			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${detailTd.tdcode}', 'tdest')" id="heart"></i>
-			<button class="btn btn-primary" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
+			<p class="lknum" id="lknum">${detailTd.lknum }</p>
+			<button class="btn btn-outline-success" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
 			data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 			추가하기</button>
 			<hr class="hr">
@@ -321,7 +334,7 @@ a{
 					            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
 					        </div>
 				        </a>
-			            <h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
+			            <h5 class="moreText">더보기</h5>
 			        </div>    
 		        </div>
 		        <div class="FestivalRecomm">
@@ -341,7 +354,7 @@ a{
 						            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
 						        </div>
 					        </a>
-				            <h5 class="moreText" >축제 더보기</h5>
+				            <h5 class="moreText" >더보기</h5>
 				        </div>
 			        </div>
 	            </div>
@@ -360,7 +373,7 @@ a{
                             <div class="modal-body" id="selectCalendar">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
                                     id="selectClear">선택</button>
                             </div>
                         </div>
@@ -414,14 +427,17 @@ a{
 	        		type: "post",
 	        		data: { mid: "${sessionScope.loginId}", code : code, "seloption" : seloption},
 	        		aysnc: false,
-	        		success: function(result){
+	        		success: function(res){
 					console.log('클릭');
+					let lknum = document.querySelector('#lknum');
 					let heart = document.querySelector('#heart');
 					const cl = document.querySelector('#heart').classList;
 					if(cl.contains("fa-regular") ){
 					heart.classList.replace('fa-regular', 'fa-solid');
+					lknum.innerText = res;
 					} else{
 					heart.classList.replace('fa-solid', 'fa-regular');
+					lknum.innerText = res;
 					}
 	        			
 	        		}

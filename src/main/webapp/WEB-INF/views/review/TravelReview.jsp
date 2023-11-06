@@ -14,20 +14,20 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="resources/css/styles.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
         <style>
-            .Cal {
-                border: 1px solid;
-                margin-top: 225px;
-                width: 70%;
-                margin-left: auto;
-                margin-right: auto;
+            .Cal {                
+                margin-top: 125px;
+                width: 30%;
                 height: 580px;
                 overflow: scroll;
                 overflow-x: hidden;
-                background-color: white;
-                border-radius: 15px;
                 z-index: 1;
                 overflow-y: hidden;
+                display: inline-block;
+                margin-left: 600px;
             }
 
             .InnerCal {
@@ -36,7 +36,6 @@
             }
 
             .Ctitle {
-                padding: 20px;
                 display: flex;
             }
 
@@ -46,15 +45,26 @@
             }
 
             .cdname {
-                font-weight: bold;
-                font-size: 20px;
+                font-size: 16px;
+                width: 70%;
+                text-overflow: ellipsis;
+			    height: 20px;
+    			overflow: hidden;
+    			margin-left: 10px;
+				font-family: 'Noto Sans KR', sans-serif;
+                
             }
 
-            .reviewBtn {}
+            .reviewBtn {
+            	height: 30px;
+            	font-family: 'Noto Sans KR', sans-serif;
+            	padding-bottom: 25px;
+            }
 
             .WriteBtn {
                 animation-duration: 3s;
                 animation-name: BtnMove;
+                margin-left: auto;
             }
 
             @keyframes BtnMove {
@@ -85,65 +95,124 @@
                 bottom: 0px;
                 z-index: 0;
             }
+            .select {
+            	width: 250px;
+            	height: 100px;           
+            	display: inline-block;
+            	margin-top: 125px;            	
+            	margin-left: 10px;
+            	background-color: whitesmoke;    
+            	position: relative;
+    			bottom: -70px;        	
+            }
+            .select>p{
+            	margin-left: 10px;
+            }
+            .Area{
+           		display: flex;
+           		height: 600px;
+            }
+            .ModifyBtn{
+            	margin-left: auto;
+            }
+            .DeleteBtn{
+            	margin-left: 5px;
+            }
+            .hr{
+            	border: 1px solid black;
+            	opacity: 0.8;
+            }
+            .topic{
+            	font-family: 'Noto Sans KR', sans-serif;
+            	display: inline;
+            	position: relative;
+  				bottom: -5px;
+            }
+            .topicArea{
+            	height: 30px;
+            }
+            .book{
+            	margin-left: 15px;
+            }
+            .hr2{
+            	border-top: 1px solid black;
+            }
+            .select>p{            	
+            	cursor: pointer;
+            }            
+            .count{
+            	margin-left: 5px;
+            }
+            .wrap>*{
+            	font-family: 'Noto Sans KR', sans-serif; 
+            }
         </style>
     </head>
 
-    <body class="d-flex flex-column h-100" style="background-color: #bfe9e1">
+    <body class="d-flex flex-column h-100">
 
         <!-- Navigation-->
         <%@ include file="/WEB-INF/views/include/menu.jsp" %>
             <!-- contant 시작 -->
-
-            <div class="Cal">
-                <div class="InnerCal">
-                    <c:forEach items="${Cal}" var="cl" varStatus="Cl">
-                        <div class="Ctitle" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            onclick="PrintSchedule('${cl.cdcode}')">
-                            <p class="cdname">${cl.cdname}</p>
-
-                            <c:choose>
-                                <c:when test="${cl.cdstate == 'N'}">
-                                    <button class="WriteBtn reviewBtn btn btn-outline-primary"
-                                        onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">리뷰
-                                        작성</button>
-                                </c:when>
-                                <c:when test="${cl.cdstate == 'R'}">
-                                    <button class="reviewBtn btn btn-outline-success"
-                                        onclick="location.href='ReviewFix?cdcode=${cl.cdcode}'">리뷰
-                                        수정</button>
-                                    <button class="reviewBtn btn btn-outline-danger"
-                                        onclick="return DeleteReview('${cl.cdcode}')">리뷰 삭제</button>
-                                </c:when>
-                            </c:choose>
-                        </div>
-                    </c:forEach>
-                </div>
-
-            </div>
-
-            <div class="BottomDiv"></div>
-
-            </div>
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">${sessionScope.loginId}님의
-                                상세계획표</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" id="selectCalendar">
-                            <div class="tdArea">여행지 부분</div>
-                            <hr>
-                            <div class="feArea">축제 부분</div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
+            <div class="wrap">
+				<div class="Area">
+		            <div class="Cal">	            
+		                <div class="InnerCal">
+		                	<div class="topicArea">
+			                	<i class="fa-solid fa-book fa-2xl book"></i>
+			                	<h2 class="topic">리뷰</h1>
+		                	</div>
+		                	<hr class="hr">
+		                	<p class="count">총 ${count }건</p>
+		                	<hr class="hr2">
+		                    <c:forEach items="${Cal}" var="cl" varStatus="Cl">
+		                        <div class="Ctitle" data-bs-toggle="modal" data-bs-target="#exampleModal"
+		                            onclick="PrintSchedule('${cl.cdcode}')">
+		                            <p class="cdname">${cl.cdname}</p>
+		
+		                            <c:choose>
+		                                <c:when test="${cl.cdstate == 'N'}">
+		                                    <button class="WriteBtn reviewBtn btn btn-outline-primary"
+		                                        onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">작성</button>
+		                                </c:when>
+		                                <c:when test="${cl.cdstate == 'R'}">
+		                                    <button class="ModifyBtn reviewBtn btn btn-outline-success"
+		                                        onclick="location.href='ReviewFix?cdcode=${cl.cdcode}'">수정</button>
+		                                    <button class="DeleteBtn reviewBtn btn btn-outline-danger"
+		                                        onclick="return DeleteReview('${cl.cdcode}')">삭제</button>
+		                                </c:when>
+		                            </c:choose>
+		                        </div>
+		                    </c:forEach>
+		                </div>
+		
+		            </div>
+		            <div class="select">
+		            	<p style="margin-top:20px;" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">좋아요</p>
+		            	<p style="${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
+		            </div>
+				</div>
+	            
+	
+	            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+	                aria-hidden="true">
+	                <div class="modal-dialog">
+	                    <div class="modal-content">
+	                        <div class="modal-header">
+	                            <h5 class="modal-title" id="exampleModalLabel">${sessionScope.loginId}님의
+	                                상세계획표</h5>
+	                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                        </div>
+	                        <div class="modal-body" id="selectCalendar">
+	                            <div class="tdArea">여행지 부분</div>
+	                            <hr>
+	                            <div class="feArea">축제 부분</div>
+	                        </div>
+	
+	                    </div>
+	                </div>
+	            </div>
+			</div>
             <!-- contant 종료 -->
 
             <!-- Footer-->
