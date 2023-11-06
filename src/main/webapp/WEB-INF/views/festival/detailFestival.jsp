@@ -86,6 +86,10 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
 #TitleBar {
 	position: relative;
@@ -131,6 +135,7 @@ main {
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 50px;
 }
 
 .Img {
@@ -159,6 +164,7 @@ main {
 
 .hr {
 	width: 1000px;
+	border-top: 1px solid black;
 }
 
 .heart {
@@ -166,7 +172,7 @@ main {
 	cursor: pointer;
 }
 
-.fa-solid {
+.wrap>.fa-solid {
 	color: #ff0000;
 }
 
@@ -311,7 +317,7 @@ a {
 			<p class="date">${festival.opendate}~ ${festival.enddate }</p>
 			<i class="fa-regular fa-heart fa-xl heart"
 				onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
-			<button class="btn btn-primary"
+			<button class="btn btn-outline-success"
 				onclick="selectCdcode('${festival.fecode}','festival')"
 				data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 				추가하기</button>
@@ -397,7 +403,7 @@ a {
 					</div>
 					<div class="modal-body" id="selectCalendar"></div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn btn-outline-success"
 							data-bs-dismiss="modal" id="selectClear">선택</button>
 					</div>
 				</div>

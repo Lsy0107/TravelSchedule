@@ -31,6 +31,10 @@
                     padding: 0px;
                     position: relative;
                 }
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
                 ol>li:hover {
                     background-color: lightgrey;
@@ -535,7 +539,7 @@
                             <div class="modal-body" id="selectCalendar">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
                                     id="selectClear">선택</button>
                             </div>
                         </div>
@@ -686,7 +690,7 @@
 
                             let TdestBtn = document.createElement('button');
                             TdestBtn.classList.add('btn');
-                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.classList.add('btn-outline-success');
                             TdestBtn.innerText = '계획에 추가하기';
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');

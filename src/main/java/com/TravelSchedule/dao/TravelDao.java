@@ -70,6 +70,8 @@ public interface TravelDao {
 	@Select("SELECT CTCODE FROM COUNTRY WHERE CTNAME = #{ctcode}")
 	String getctcodeD(String ctcode);
 
+	int updateSchedule(@Param("sc")Schedule sc, @Param("scOption")String scOption);
+
 	@Select("SELECT * FROM FESTIVAL WHERE FENAME LIKE '%'||#{searchVal}||'%'")
 	ArrayList<Festival> FestList(String searchval);
 

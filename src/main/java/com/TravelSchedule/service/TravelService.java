@@ -152,6 +152,10 @@ public class TravelService {
 		 
 		return tdao.getctcodeD(ctcode);
 	}
+	public int scUpdate(Schedule sc, String scOption) {
+		System.out.println("travelService - scUpdate");
+		return tdao.updateSchedule(sc, scOption);
+	}
 	public ArrayList<Festival> FestList(String searchval) {
 		System.out.println("축제 상세 검색 서비스");
 		return tdao.FestList(searchval);

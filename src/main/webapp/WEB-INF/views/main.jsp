@@ -34,6 +34,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
+.bg-wh{
+
+}
 .zoom:hover {
 	transform: scale(1.02222222222);
 	transition: .5s; /* 부드럽게 */
@@ -163,7 +166,6 @@ background-color: black;
 from {background:none;}
 to{background-color:white;}
 }
-
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
 .navbar-brand, .nav-link{
 color:black;}
@@ -193,16 +195,28 @@ color:black;}
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
-		<!-- container 시작 -->
-		<div class="p-4 bg">
-			<div class="container">
-				
-				
-			</div><!-- container 끝 -->
+			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/resources/img/seoul-cityscape-at-twilight-in-south-korea.jpg"style="height: 100vh;width: 100vw;" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/resources/img/gyeongbokgung-palace-with-cherry-blossom-in-spring-south-korea.jpg"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/resources/img/gyeongbokgung-palace-at-night-in-seoul-korea.jpg"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
 			
-		</div>
-		<!-- 
-		 -->
 		<div class="p-4" style="background-color: #E8F5FF;">
 			<div class="container">
 				<div class="row marquee">
@@ -218,8 +232,9 @@ color:black;}
 									<div class="card-body">
 										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${td.tdcode}','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -237,8 +252,9 @@ color:black;}
 									<div class="card-body">
 										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${td.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${td.tdcode}','tdest')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -264,7 +280,7 @@ color:black;}
 					</div>
 					<div class="modal-body" id="selectCalendar"></div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn btn-outline-success"
 							data-bs-dismiss="modal" id="selectClear">선택</button>
 					</div>
 				</div>
@@ -416,8 +432,9 @@ color:black;}
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
+										<p class="card-text position-absolute bottom-0"style="right:20px;">추천수:${fe.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${fe.fecode}','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -437,8 +454,9 @@ color:black;}
 										<p class="card-text">${fe.feaddress }</p>
 										<p class="card-text">${fe.opendate.split(' ')[0] }~
 											${fe.enddate.split(' ')[0] }</p>
+											<p class="card-text position-absolute bottom-0" style="right:20px;">추천수:${fe.lknum }</p>
 										<button
-											class="btn btn-primary position-absolute bottom-0 start-0"
+											class="btn btn-outline-success position-absolute bottom-0 start-0"
 											style="margin: 10px"
 											onclick="selectCdcode('${fe.fecode}','festival')"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">계획에

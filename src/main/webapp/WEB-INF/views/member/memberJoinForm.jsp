@@ -15,12 +15,16 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="resources/css/styles.css" rel="stylesheet" />
 
-        <style type="text/css">
-            .button_container {
-                position: relative;
-                bottom: -30px;
-                width: 100%;
-            }
+<style type="text/css">
+.button_container {
+    position: relative;
+    bottom: -30px;
+    width: 100%;
+}
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
 
             .btn1 {
                 width: 60%;

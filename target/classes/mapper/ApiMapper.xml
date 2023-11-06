@@ -24,12 +24,12 @@
   </select>
   <select id="selectTdest" resultType="tdest">
   <![CDATA[
-  select * from tdest where rownum <= 10
+  select * from (select td.*,nvl(lknum, '0') lknum from tdest td left join (select tdcode, count(*) as lknum  from likelist group by tdcode ) lk on td.tdcode=lk.tdcode order by lknum desc) where rownum <= 10
   ]]>
   </select>
   <select id="selectFestival" resultType="festival">
   <![CDATA[
-  select * from festival where rownum <= 10 and enddate >= sysdate
+  select * from (select fe.*, nvl(lknum, '0') lknum from festival fe left join (select fecode, count(*) as lknum  from likelist group by fecode) lk on fe.fecode=lk.fecode where enddate >= sysdate order by lknum desc) where rownum <= 10
   ]]>
   </select>
   <select id="selectFecode">
@@ -88,4 +88,22 @@
   <if test="seloption == 'tdest'"> tdcode = #{lk.tdcode}</if>
   <if test="seloption == 'review'"> recode = #{lk.recode}</if>
   </delete>
+  <select id="selectlikeList_td">
+  select * from likelist where mid = #{mid} and not tdcode is null
+  </select>
+  <select id="selectTd">
+  select * from tdest where tdcode = #{tdcode}
+  </select>
+  <select id="selectlikeList_fe">
+  select * from likelist where mid = #{mid} and not fecode is null
+  </select>
+  <select id="selectFe">
+  select * from festival where fecode = #{fecode}
+  </select>
+  <select id="selectlikeList_re">
+  select * from likelist where mid = #{mid} and not recode is null
+  </select>
+  <select id="selectReview">
+  select * from review where recode = #{recode}
+  </select>
   </mapper>

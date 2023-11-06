@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
+import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
@@ -193,5 +194,72 @@ public class HomeController {
 				
 		return result;
 		
+	}
+	
+	@RequestMapping(value="/TravelLike")
+	public ModelAndView TravelReview(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("여행 즐겨찾기 페이지 이동");
+		ArrayList<Tdest> tdList = new ArrayList<Tdest>();
+		String mid = (String)session.getAttribute("loginId");
+		System.out.println("현재 아이디 : "+mid);
+		
+		ArrayList<Likelist> likeList = apisvc.likeList_td(mid);		
+		for(int i = 0; i < likeList.size(); i++) {
+			String tdcode = likeList.get(i).getTdcode();
+			Tdest tdest = apisvc.getTdest(tdcode);
+			tdList.add(tdest);
+		}
+		String result = "font-weight: bold; text-decoration-line: underline;";
+		mav.addObject("css1", result);
+		String select = "border-left: thick solid red;";
+		mav.addObject("sel", select);
+		mav.addObject("td", tdList);
+		mav.setViewName("review/TravelLike");
+		return mav;
+	}
+	@RequestMapping(value="/FestivalLike")
+	public ModelAndView FestivalLike(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("축제 즐겨찾기 페이지 이동");
+		ArrayList<Festival> feList = new ArrayList<Festival>();
+		String mid = (String)session.getAttribute("loginId");
+		System.out.println("현재 아이디 : "+mid);
+		
+		ArrayList<Likelist> likeList = apisvc.likeList_fe(mid);		
+		for(int i = 0; i < likeList.size(); i++) {
+			String fecode = likeList.get(i).getFecode();
+			Festival festival = apisvc.getFe(fecode);
+			feList.add(festival);
+		}
+		String result = "font-weight: bold; text-decoration-line: underline;";
+		mav.addObject("css2", result);
+		String select = "border-left: thick solid red;";
+		mav.addObject("sel", select);
+		mav.addObject("fe", feList);
+		mav.setViewName("review/TravelLike");
+		return mav;
+	}
+	@RequestMapping(value="/ReviewLike")
+	public ModelAndView ReviewLike(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("리뷰 즐겨찾기 페이지 이동");
+		ArrayList<Review> reList = new ArrayList<Review>();
+		String mid = (String)session.getAttribute("loginId");
+		System.out.println("현재 아이디 : "+mid);
+		
+		ArrayList<Likelist> likeList = apisvc.likeList_re(mid);		
+		for(int i = 0; i < likeList.size(); i++) {
+			String recode = likeList.get(i).getRecode();
+			Review review = apisvc.getReview(recode);
+			reList.add(review);
+		}		
+		String result = "font-weight: bold; text-decoration-line: underline;";
+		mav.addObject("css3", result);
+		String select = "border-left: thick solid red;";
+		mav.addObject("sel", select);
+		mav.addObject("re", reList);
+		mav.setViewName("review/TravelLike");
+		return mav;
 	}
 }
