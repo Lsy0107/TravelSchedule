@@ -195,16 +195,28 @@ color:black;}
 		<!-- Navigation-->
 		<%@ include file="include/menu.jsp"%>
 		<!-- content 시작 -->
-		<!-- container 시작 -->
-		<div class="p-4 bg">
-			<div class="container">
-				
-				
-			</div><!-- container 끝 -->
+			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/resources/img/seoul-cityscape-at-twilight-in-south-korea.jpg"style="height: 100vh;width: 100vw;" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/resources/img/gyeongbokgung-palace-with-cherry-blossom-in-spring-south-korea.jpg"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/resources/img/gyeongbokgung-palace-at-night-in-seoul-korea.jpg"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
 			
-		</div>
-		<!-- 
-		 -->
 		<div class="p-4" style="background-color: #E8F5FF;">
 			<div class="container">
 				<div class="row marquee">
