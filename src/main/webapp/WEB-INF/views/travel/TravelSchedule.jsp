@@ -32,34 +32,6 @@ String strdate = simpleDate.format(date);
 <style type="text/css">
 .disnone {
 	display: none;
-	animation: fade-out 1s;
-}
-
-.dison {
-	animation: fade-on 1s;
-}
-
-.disoff {
-	animation: fade-off 1s
-}
-
-@
-keyframes fade-in {from { opacity:0;
-	
-}
-
-to {
-	opacity: 1;
-}
-
-}
-@
-keyframes fade-out {from { opacity:1;
-	
-}
-
-to {
-	opacity: 0;
 }
 
 }
@@ -121,6 +93,75 @@ to {
 div {
 	font-family: 'Jua' !important;
 }
+
+#feArea::-webkit-scrollbar {
+	width: 8px; /* 스크롤바의 너비 */
+}
+
+#feArea::-webkit-scrollbar-thumb {
+	height: 30%; /* 스크롤바의 길이 */
+	background: #217af4; /* 스크롤바의 색상 */
+	border-radius: 10px;
+}
+
+#feArea::-webkit-scrollbar-track {
+	background: rgba(33, 122, 244, .1); /*스크롤바 뒷 배경 색상*/
+}
+
+#tdArea::-webkit-scrollbar {
+	width: 8px; /* 스크롤바의 너비 */
+}
+
+#tdArea::-webkit-scrollbar-thumb {
+	height: 30%; /* 스크롤바의 길이 */
+	background: #217af4; /* 스크롤바의 색상 */
+	border-radius: 10px;
+}
+
+#tdArea::-webkit-scrollbar-track {
+	background: rgba(33, 122, 244, .1); /*스크롤바 뒷 배경 색상*/
+}
+
+.test {
+	width: 245px;
+	transition: width 1s ease;
+}
+
+.test1 {
+	width: 745px;
+	border-radius: 0;
+	background-color: red;
+}
+.fade-in-box {
+  display: inline-block;
+  background: yellow;
+  padding: 10px;
+  animation: fadein 0.3s;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+.fade-out-box {
+  display: inline-block;
+  background: yellow;
+  padding: 10px;
+  animation: fadeout 0.3s;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+}
 </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -128,7 +169,7 @@ div {
 		<!-- Navigation-->
 
 		<!-- contant 시작 -->
-		<div class="p-4 rounded-end"
+		<div class="p-4 rounded-end test"
 			style="display: flex; float: left; position: absolute; background-color: aliceblue; z-index: 3; height: -webkit-fill-available;">
 			<div class="">
 				<h5 onclick="location.href='${pageContext.request.contextPath }/'">
@@ -150,9 +191,8 @@ div {
 											<p>${sc.SCDATE }</p>
 										</div>
 
-										<div class="collapse"
-											id="${sc.TDCODE }"
-											style="text-align:end;">
+										<div class="collapse" id="${sc.TDCODE }"
+											style="text-align: end;">
 											<button class="btn btn-primary">변경하기</button>
 										</div>
 									</c:when>
@@ -164,17 +204,16 @@ div {
 											<p style="margin: 0px;">${sc.FENAME }</p>
 											<p>${sc.SCDATE }</p>
 										</div>
-										<div class="collapse"
-											id="${sc.FECODE }"
-											style="text-align:end;">
-										<button class="btn btn-primary">변경하기</button>
+										<div class="collapse" id="${sc.FECODE }"
+											style="text-align: end;">
+											<button class="btn btn-primary">변경하기</button>
 										</div>
 									</c:when>
 								</c:choose>
 
-							<hr>	
+								<hr>
 							</c:if>
-							
+
 						</c:forEach>
 					</div>
 					<div class="p-2 container-fluid" style="text-align: end;">
@@ -184,27 +223,24 @@ div {
 								<i class="fa-solid fa-floppy-disk"></i>
 							</button>
 						</c:if>
-						<button class="btn btn-info" type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#navbarToggleExternalContent"
-							aria-controls="navbarToggleExternalContent" aria-expanded="false"
-							aria-label="Toggle navigation" title="여행지 보기">
+						<button class="btn btn-info" type="button" title="여행지 보기"
+							onclick="checkDest()">
 							<i class="fa-solid fa-list"></i>
 						</button>
 					</div>
 				</nav>
 			</div>
-			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
-				style="overflow: scroll; background-color: aliceblue; margin-left: 15px;">
-				<div class="col d-flex justify-content-center"
-					style="margin-bottom: 15px;">
+			<div class="p-4 disnone " id="DestArea"
+				style="background-color: aliceblue; margin-left: 15px; overflow:hidden;">
+				<div style="margin-bottom: 15px; height:44.8px; text-align:center;">
 					<button class="w-btn-outline w-btn-pink-outline"
-						onclick="disnonefe()">여행지</button>
+						onclick="disnonefe()"style="min-width:115px;">여행지</button>
 					<button class="w-btn-outline w-btn-blue-outline"
-						onclick="disnonetd()">축제</button>
+						onclick="disnonetd()"style="min-width:115px;">축제</button>
 				</div>
 				<div>
-					<nav id="tdArea" class="" style="">
+					<nav id="tdArea" class=""
+						style="overflow-y: auto;overflow-x: hidden; height: 590px; border-radius: 10px;">
 						<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
 								<div class="travelList" style="background-color: white;">
@@ -239,7 +275,8 @@ div {
 							</c:if>
 						</c:forEach>
 					</nav>
-					<nav id="feArea" class="disnone" style="">
+					<nav id="feArea" class="disnone"
+						style="overflow-y: auto;overflow-x: hidden; height: 590px; border-radius: 15px;">
 						<c:forEach items="${ scdestList}" var="fe">
 							<c:if test="${fe.FECODE != null }">
 								<div class="travelList" style="background-color: white;">
@@ -326,7 +363,6 @@ div {
 	<script type="text/javascript">
 	
 	let lalngList = JSON.parse('${lalngList}');
-	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng( 37.56458948133976, 126.97730596902437), //지도의 중심좌표.
@@ -405,12 +441,7 @@ div {
 		let scAreaTag = document.querySelector("#scArea").childElementCount;
 		let tdAreaTag = document.querySelector("#tdArea").childElementCount;
 		let feAreaTag = document.querySelector("#feArea").childElementCount;
-		console.log(lalngList);
 		let today = new Date();
-		console.log(today.getFullYear());
-		console.log(today.getMonth());
-		console.log(today.getDate());
-		console.log(lalngList[0].scdate);
 		let scDate = lalngList[0].scdate.split(" ")[0];
 		let checkDate = false;
 		if(Number(scDate.split('/')[0]) > today.getFullYear()){
@@ -428,8 +459,7 @@ div {
 			alert('이미 지난 계획이 있습니다.');
 			return;
 		}
-		
-		if(scAreaTag == tdAreaTag + feAreaTag){
+		if(lalngList.length == tdAreaTag + feAreaTag){
 			check = confirm("계획을 확정하면 더는 수정할 수 없습니다.");			
 		}else{
 			alert("선택하지 않은 여행지가 있습니다!")
@@ -485,26 +515,47 @@ div {
 	function disnonetd(){
 		let tdArea =document.querySelector("#tdArea");
 		let feArea = document.querySelector("#feArea");
-		console.log('disnonetd')
-		console.log(tdArea.classList);
-		console.log(feArea.classList);
 		tdArea.classList.add('disnone');
 		feArea.classList.remove('disnone');
 		
 		
 	}
 	function disnonefe(){
-		console.log('disnonefe')
 		let tdArea =document.querySelector("#tdArea");
 		let feArea = document.querySelector("#feArea");
-		console.log(tdArea.classList);
-		console.log(feArea.classList);
 		tdArea.classList.remove('disnone');
 		feArea.classList.add('disnone');
 		
+		
 	}
 	</script>
-
+	<script type="text/javascript">
+		let count = true;
+	function checkDest(){
+		let asdfds = document.querySelector(".test");
+		let DestArea = document.querySelector('#DestArea');
+		if(count){
+			asdfds.classList.add("test1");
+			setTimeout(function(){
+			DestArea.classList.add('fade-in-box');
+			DestArea.classList.remove('disnone');
+				
+			setTimeout(function() {
+				DestArea.classList.remove("fade-in-box");
+					}, 900);
+			},400);
+			count = false;
+		}else{
+			DestArea.classList.add('fade-out-box');
+			asdfds.classList.remove("test1");
+			setTimeout(function() {
+			DestArea.classList.add('disnone');
+			DestArea.classList.remove("fade-out-box");
+					}, 300);
+			count = true;
+		}
+	}
+	</script>
 
 </body>
 </html>
