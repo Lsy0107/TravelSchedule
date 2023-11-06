@@ -37,7 +37,7 @@ public interface TravelDao {
 	ArrayList<Tdest> CtTdestService(String ctcode);
 
 	@Select("SELECT * FROM TDEST WHERE TDNAME LIKE '%'||#{searchVal}||'%'")
-	ArrayList<Tdest> SearchTdest(String searchVal);
+	HashMap<String, String> SearchTdest(String searchVal);
 
 	Schedule selectSchedule(@Param("sc")Schedule sc, @Param("seloption")String seloption);
 
@@ -69,6 +69,12 @@ public interface TravelDao {
 
 	@Select("SELECT CTCODE FROM COUNTRY WHERE CTNAME = #{ctcode}")
 	String getctcodeD(String ctcode);
+
+	@Select("SELECT * FROM FESTIVAL WHERE FENAME LIKE '%'||#{searchVal}||'%'")
+	ArrayList<Festival> FestList(String searchval);
+
+	@Select("SELECT * FROM TDEST WHERE TDNAME LIKE '%'||#{searchVal}||'%'")
+	ArrayList<Tdest> TdestList(String searchval);
 
 
 }
