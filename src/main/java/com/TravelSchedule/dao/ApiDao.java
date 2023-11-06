@@ -69,5 +69,7 @@ public interface ApiDao {
 	ArrayList<Likelist> selectlikeList_re(@Param("mid") String mid);
 
 	Review selectReview(@Param("recode") String recode);
+
+	String selectLknum(@Param("code") String code, @Param("seloption") String seloption);
 	
 }

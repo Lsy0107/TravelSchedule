@@ -166,7 +166,7 @@
 	                <div class="InnerCal">
 	                	<div class="topicArea">
 		                	<i class="fa-solid fa-heart fa-2xl book"></i>
-		                	<h2 class="topic">즐겨찾기</h1>
+		                	<h2 class="topic">좋아요</h1>
 	                	</div>
 	                	<hr class="hr">
 	                	<p class="td sel" style="${css1}" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">여행지</p>
@@ -198,7 +198,7 @@
 	
 	            </div>
 	            <div class="select">
-	            	<p style="margin-top:20px; ${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">즐겨찾기</p>
+	            	<p style="margin-top:20px; ${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">좋아요</p>
 	            	<p onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
 	            </div>
 			</div>                     

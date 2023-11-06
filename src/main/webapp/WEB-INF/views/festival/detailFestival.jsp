@@ -21,20 +21,25 @@
 			<!-- Core theme CSS (includes Bootstrap)-->
 			<link href="resources/css/styles.css" rel="stylesheet" />
 
-			<!-- Data AOS-->
-			<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Data AOS-->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-			<style type="text/css">
-				.signIn {
-					border: 1px solid black;
-					border-radius: 25px;
-					display: block;
-					margin-top: 20px;
-					width: 85%;
-					margin-left: auto;
-					margin-right: auto;
-				}
+<style type="text/css">
+.wrap>*{
+   	font-family: 'Noto Sans KR', sans-serif;
+}
+.signIn {
+	border: 1px solid black;
+	border-radius: 25px;
+	display: block;
+	margin-top: 20px;
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 				.signUp {
 					border: 1px solid black;
@@ -219,14 +224,13 @@
 					margin-top: 5px;
 				}
 
-				.feName {
-					font-size: 20px;
-					font-weight: bold;
-					text-align: center;
-					height: 30px;
-					width: 200px;
-					overflow: hidden;
-				}
+.feName {
+	font-size: 20px;
+	text-align: center;
+	height: 30px;
+	width: 200px;
+	overflow: hidden;
+}
 
 				a {
 					text-decoration: none;
@@ -254,12 +258,12 @@
 					display: inline-block;
 				}
 
-				.moreText {
-					position: relative;
-					font-weight: bold;
-					bottom: 30px;
-					left: 10px;
-				}
+.moreText {
+	position: relative;
+	font-weight: bold;
+	bottom: 30px;
+	left: 35px;
+}
 
 				.feinfo {
 					width: 1000px;
@@ -313,94 +317,99 @@
 				.Recommhr {
 					border-top: 1px solid black;
 				}
-			</style>
+				.lknum{
+					display:inline-block;
+				}
+</style>
 
 
 
-		</head>
-
-		<body class="d-flex flex-column h-100">
-			<main class="">
-				<!-- Navigation-->
-				<%@ include file="../include/menu.jsp" %>
-					<!-- content 시작 -->
-					<div class="wrap">
-						<img class="card-img-top Img" src="${festival.feposter }" alt="..."
-							onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-						<p class="name">${festival.fename }</p>
-						<p class="date">${festival.opendate}~ ${festival.enddate }</p>
-						<i class="fa-regular fa-heart fa-xl heart"
-							onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
-						<button class="btn btn-outline-success" onclick="selectCdcode('${festival.fecode}','festival')"
-							data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
-							추가하기</button>
-						<hr class="hr">
-						<p class="feinfo">${festival.feinfo }</p>
-						<c:if test="${festival.fetel ne null }">
-							<div class="phoneArea">
-								<img class="phoneImg"
-									src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
-								<p class="fetel">${festival.fetel }</p>
+</head>
+<body class="d-flex flex-column h-100">
+	<main class="">
+		<!-- Navigation-->
+		<%@ include file="../include/menu.jsp"%>
+		<!-- content 시작 -->
+		<div class="wrap">
+			<img class="card-img-top Img" src="${festival.feposter }" alt="..."
+				onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+			<p class="name">${festival.fename }</p>
+			<p class="date">${festival.opendate}~ ${festival.enddate }</p>
+			<i class="fa-regular fa-heart fa-xl heart"
+				onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
+				<p class="lknum" id="lknum">${festival.lknum }</p>			
+			<button class="btn btn-outline-success"
+				onclick="selectCdcode('${festival.fecode}','festival')"
+				data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+				추가하기</button>
+			<hr class="hr">
+			<p class="feinfo">${festival.feinfo }</p>
+			<c:if test="${festival.fetel ne null }">
+				<div class="phoneArea">
+					<img class="phoneImg"
+						src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
+					<p class="fetel">${festival.fetel }</p>
+				</div>
+			</c:if>
+			<c:if test="${festival.homepage ne null }">
+				<button class="homepage"
+					onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
+			</c:if>
+			<hr class="hr">
+			<div id="map" style="width: 1000px; height: 400px;"></div>
+			<p class="address">${festival.feaddress }</p>
+			<hr class="hr">
+			<div class="TdestRecommendArea">
+				<c:if test="${nearby[0] ne null }">
+					<div class="Tdest">
+						<div class="countryIdentity">
+							<span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>
+						</div>
+						<c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">
+							<div class="card feList">
+								<a
+									href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
+									<img class="card-img-top feImg" src="${fe.feposter }" alt="..."
+									onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+									<div class="feName">${fe.fename }</div>
+								</a>
 							</div>
-						</c:if>
-						<c:if test="${festival.homepage ne null }">
-							<button class="homepage" onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
-						</c:if>
-						<hr class="hr">
-						<div id="map" style="width: 1000px; height: 400px;"></div>
-						<p class="address">${festival.feaddress }</p>
-						<hr class="hr">
-						<div class="TdestRecommendArea">
-							<c:if test="${nearby[0] ne null }">
-								<div class="Tdest">
-									<div class="countryIdentity">
-										<span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>
-									</div>
-									<c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">
-										<div class="card feList">
-											<a
-												href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
-												<img class="card-img-top feImg" src="${fe.feposter }" alt="..."
-													onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-												<div class="feName">${fe.fename }</div>
-											</a>
-										</div>
-									</c:forEach>
-									<div class="moreArea">
-										<a href="/festival">
-											<div class="feList more">
-												<i class="fa-solid fa-arrow-right fa-2xl moreIn"
-													style="color: #000000;"></i>
-											</div>
-										</a>
-										<h5 class="moreText">축제 더보기</h5>
-									</div>
+						</c:forEach>
+						<div class="moreArea">
+							<a href="/festival">
+								<div class="feList more">
+									<i class="fa-solid fa-arrow-right fa-2xl moreIn"
+										style="color: #000000;"></i>
 								</div>
-							</c:if>
-							<div class="FestivalRecomm">
-								<span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
-								<div>
-									<c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">
-										<div class="card feList">
-											<a
-												href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
-												<img class="card-img-top feImg" src="${td.tdphoto }" alt="..."
-													onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-												<div class="feName">${td.tdname }</div>
-											</a>
-										</div>
-									</c:forEach>
-									<div class="moreArea">
-										<a href="/TdestSearchPage">
-											<div class="feList more">
-												<i class="fa-solid fa-arrow-right fa-2xl moreIn"
-													style="color: #000000;"></i>
-											</div>
-										</a>
-										<h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
-									</div>
-								</div>
+							</a>
+							<h5 class="moreText">더보기</h5>
+						</div>
+					</div>
+				</c:if>
+				<div class="FestivalRecomm">
+					<span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
+					<div>
+						<c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">
+							<div class="card feList">
+								<a
+									href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
+									<img class="card-img-top feImg" src="${td.tdphoto }" alt="..."
+									onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+									<div class="feName">${td.tdname }</div>
+								</a>
 							</div>
+						</c:forEach>
+						<div class="moreArea">
+							<a href="/TdestSearchPage">
+								<div class="feList more">
+									<i class="fa-solid fa-arrow-right fa-2xl moreIn"
+										style="color: #000000;"></i>
+								</div>
+							</a>
+							<h5 class="moreText">더보기</h5>
+						</div>
+					</div>
+				</div>
 
 							<div class="FestivalComment">
 								<div class="InnerComment">
@@ -448,77 +457,82 @@
 			<!-- Core theme JS-->
 			<script src="resources/js/scripts.js"></script>
 
-			<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-			<script>
-				AOS.init();
-			</script>
-			<script type="text/javascript"
-				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
-			<script type="text/javascript">
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-					mapOption = {
-						center: new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati }), // 지도의 중심좌표
-						level: 3, // 지도의 확대 레벨
-					};
-
-				var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
-				// 마커가 표시될 위치입니다 
-				var markerPosition = new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati });
-
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					position: markerPosition
-				});
-
-				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
-
-
-			</script>
-			<script type="text/javascript">
-				function clickHeart(code, seloption) {
-					console.log(code);
-					if ("${sessionScope.loginId}" == "") {
-						location.href = "${pageContext.request.contextPath}/memberLoginForm"
-					} else {
-						$.ajax({
-							url: "/clickHeart",
-							type: "post",
-							data: { mid: "${sessionScope.loginId}", code: code, "seloption": seloption },
-							aysnc: false,
-							success: function (result) {
-								console.log('클릭');
-								let heart = document.querySelector('#heart');
-								const cl = document.querySelector('#heart').classList;
-								if (cl.contains("fa-regular")) {
-									heart.classList.replace('fa-regular', 'fa-solid');
-								} else {
-									heart.classList.replace('fa-solid', 'fa-regular');
-								}
-
-							}
-						});
-
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init();
+	</script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
+	<script type="text/javascript">
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(${festival.felongti}, ${festival.felati}), // 지도의 중심좌표
+	        level: 3, // 지도의 확대 레벨
+	    };
+	
+		var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new kakao.maps.LatLng(${festival.felongti}, ${festival.felati}); 
+	
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+	
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+		
+		
+	</script>
+	<script type="text/javascript">		
+		function clickHeart(code, seloption){
+			console.log(code);
+			if ("${sessionScope.loginId}" == "") {
+	            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+	        } else{
+	        	$.ajax({
+	        		url: "/clickHeart",
+	        		type: "post",
+	        		data: { mid: "${sessionScope.loginId}", code : code, "seloption" : seloption},
+	        		aysnc: false,
+	        		success: function(res){
+					console.log('클릭');
+					let lknum = document.querySelector('#lknum');
+					let heart = document.querySelector('#heart');
+					const cl = document.querySelector('#heart').classList;
+					if(cl.contains("fa-regular") ){
+					heart.classList.replace('fa-regular', 'fa-solid');
+					lknum.innerText = res;
+					console.log(res);
+					} else{
+					heart.classList.replace('fa-solid', 'fa-regular');
+					lknum.innerText = res;
+					console.log(res);
 					}
-				}
-
-
-			</script>
-			<script type="text/javascript">
-				function selectCdcode(fecode, seloption) {
-					if ("${sessionScope.loginId}" == "") {
-						location.href = "${pageContext.request.contextPath}/memberLoginForm"
-					} else {
-						$.ajax({
-							url: "/getCdcode",
-							type: "post",
-							data: { mid: "${sessionScope.loginId}" },
-							async: false,
-							success(rs) {
-								console.log(rs.length);
-								let modalBodyTag = document.querySelector("#selectCalendar")
-								modalBodyTag.innerHTML = "";
-								if (rs.length > 0) {
+	        			
+	        		}
+	        	});
+	        	
+	        }
+		}
+		
+		
+	</script>
+	<script type="text/javascript">
+	function selectCdcode(fecode, seloption) {
+        if ("${sessionScope.loginId}" == "") {
+            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+        } else {
+            $.ajax({
+                url: "/getCdcode",
+                type: "post",
+                data: { mid: "${sessionScope.loginId}" },
+                async: false,
+                success(rs) {
+                    console.log(rs.length);
+                    let modalBodyTag = document.querySelector("#selectCalendar")
+                    modalBodyTag.innerHTML = "";
+                    if (rs.length > 0) {
 
 									let selTag = document.createElement("select")
 									for (let cd of rs) {

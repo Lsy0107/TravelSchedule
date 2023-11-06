@@ -48,7 +48,9 @@
   select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where enddate >= sysdate order by  DBMS_RANDOM.RANDOM()
   </select>
   <select id="selectFestival_detail">
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage from festival where fecode = #{code} 
+  <![CDATA[
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage, lknum from (select fe.*, nvl(lknum, '0') lknum from festival fe left join (select fecode, count(*) as lknum  from likelist group by fecode) lk on fe.fecode=lk.fecode order by lknum desc) where fecode = #{code}
+  ]]>
   </select>
   <select id="selectFestival_Nearby">
   <![CDATA[
@@ -105,5 +107,11 @@
   </select>
   <select id="selectReview">
   select * from review where recode = #{recode}
+  </select>
+  <select id="selectLknum">
+  select count(*) from likelist where
+  <if test="seloption == 'festival'">fecode = #{code}</if>
+  <if test="seloption == 'tdest'">tdcode = #{code}</if>
+  <if test="seloption == 'review'">recode = #{code}</if>
   </select>
   </mapper>
