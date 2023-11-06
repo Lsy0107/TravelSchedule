@@ -21,10 +21,6 @@
 .bk{
 	color: black;
 }
-.bg-wh{
-	background-color: white;
-	box-shadow: 0px 0px 10px #A2A2A2;
-}
 .font-jua{
 	font-family: 'Jua' !important;
 }
@@ -75,11 +71,6 @@
 								class="profile">${sessionScope.loginId }</h1>
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
-						<p>몇월 몇일 몇개 일정이 있습니다.</p>
-						<hr style="border-top:2px solid lightgray">
-						
-						
-						
 						
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
