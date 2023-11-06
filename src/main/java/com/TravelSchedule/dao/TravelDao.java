@@ -51,7 +51,7 @@ public interface TravelDao {
 
 	int deleteSchedule_dest(@Param("sc")Schedule sc, @Param("seloption")String seloption);
 	
-	@Select("SELECT * FROM TDEST WHERE TDCODE = #{tdcode}")
+	@Select("select * from (select td.*,nvl(lknum, '0') lknum from tdest td left join (select tdcode, count(*) as lknum  from likelist group by tdcode ) lk on td.tdcode=lk.tdcode order by lknum desc) where tdcode = #{tdcode}")
 	Tdest detailTdestDao(String tdcode);
 
 	@Select("SELECT * FROM COUNTRY")	

@@ -1,37 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Modern Business - Start Bootstrap Template</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<!DOCTYPE html>
+		<html lang="en">
 
-<script src="https://kit.fontawesome.com/c8056a816e.js"
-	crossorigin="anonymous"></script>
+		<head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+			<meta name="description" content="" />
+			<meta name="author" content="" />
+			<title>Modern Business - Start Bootstrap Template</title>
 
-<!-- Favicon-->
-<link href="https://fonts.googleapis.com/css?family=Jua:400"
-	rel="stylesheet">
+			<script src="https://kit.fontawesome.com/c8056a816e.js" crossorigin="anonymous"></script>
 
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="resources/css/styles.css" rel="stylesheet" />
+			<!-- Favicon-->
+			<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
+
+			<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+			<!-- Bootstrap icons-->
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+			<!-- Core theme CSS (includes Bootstrap)-->
+			<link href="resources/css/styles.css" rel="stylesheet" />
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
+.wrap>*{
+   	font-family: 'Noto Sans KR', sans-serif;
+}
 .signIn {
 	border: 1px solid black;
 	border-radius: 25px;
@@ -42,264 +41,285 @@
 	margin-right: auto;
 }
 
-.signUp {
-	border: 1px solid black;
-	border-radius: 25px;
-	display: block;
-	margin-top: 20px;
-	width: 85%;
-	margin-left: auto;
-	margin-right: auto;
-}
+				.signUp {
+					border: 1px solid black;
+					border-radius: 25px;
+					display: block;
+					margin-top: 20px;
+					width: 85%;
+					margin-left: auto;
+					margin-right: auto;
+				}
 
-.search {
-	position: relative;
-	top: 120px;
-	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
-}
+				.search {
+					position: relative;
+					top: 120px;
+					width: 50%;
+					margin-left: auto;
+					margin-right: auto;
+				}
 
-#TripRecommend {
-	background-color: #ffd045;
-	background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
-	width: 70%;
-	height: 500px;
-	margin-left: auto;
-	margin-right: auto;
-}
+				#TripRecommend {
+					background-color: #ffd045;
+					background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
+					width: 70%;
+					height: 500px;
+					margin-left: auto;
+					margin-right: auto;
+				}
 
-#WeatherInfo {
-	background-color: #ffffff;
-	background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
-	width: 70%;
-	height: 500px;
-	margin-left: auto;
-	margin-right: auto;
-}
+				#WeatherInfo {
+					background-color: #ffffff;
+					background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
+					width: 70%;
+					height: 500px;
+					margin-left: auto;
+					margin-right: auto;
+				}
 
-#FestivalRecommend {
-	background-color: #ffffff;
-	background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
-	width: 70%;
-	height: 500px;
-	margin-left: auto;
-	margin-right: auto;
-}
-.bg-wh{
-	background-color: white;
-	box-shadow: 0px 0px 10px #A2A2A2;
-}
+				#FestivalRecommend {
+					background-color: #ffffff;
+					background-image: linear-gradient(315deg, #ffffff 0%, #ff7878 74%);
+					width: 70%;
+					height: 500px;
+					margin-left: auto;
+					margin-right: auto;
+				}
 
-#TitleBar {
-	position: relative;
-	top: 64px;
-}
+				.bg-wh {
+					background-color: white;
+					box-shadow: 0px 0px 10px #A2A2A2;
+				}
 
-#MainContents {
-	position: relative;
-	top: 700px;
-}
+				#TitleBar {
+					position: relative;
+					top: 64px;
+				}
 
-footer {
-	position: relative;
-	bottom: -50px;
-	width: 100%;
-}
+				#MainContents {
+					position: relative;
+					top: 700px;
+				}
 
-main {
-	position: relative;
-	min-height: 100%;
-	padding-bottom: 2000px;
-}
+				footer {
+					position: relative;
+					bottom: -50px;
+					width: 100%;
+				}
 
-.profile {
-	width: 20%;
-	border-radius: 50px;
-}
+				main {
+					position: relative;
+					min-height: 100%;
+					padding-bottom: 2000px;
+				}
 
-.disnone {
-	display: none;
-}
+				.profile {
+					width: 20%;
+					border-radius: 50px;
+				}
 
-.weatherCity {
-	background-color: white;
-	border-radius: 10px;
-	width: 20%;
-	font-size: 12pt;
-	text-align: center;
-}
+				.disnone {
+					display: none;
+				}
 
-.wrap {
-	margin-top: 150px;
-	width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50px;
-}
+				.weatherCity {
+					background-color: white;
+					border-radius: 10px;
+					width: 20%;
+					font-size: 12pt;
+					text-align: center;
+				}
 
-.Img {
-	width: 1000px;
-}
+				.wrap {
+					margin-top: 150px;
+					width: 1000px;
+					margin-left: auto;
+					margin-right: auto;
+					margin-bottom: 50px;
+				}
 
-.name {
-	padding-left: 30px;
-	padding-top: 20px;
-	font-size: 30px;
-	font-weight: bold;
-}
+				.Img {
+					width: 1000px;
+				}
 
-.date {
-	padding-left: 30px;
-	font-weight: bold;
-}
+				.name {
+					padding-left: 30px;
+					padding-top: 20px;
+					font-size: 30px;
+					font-weight: bold;
+				}
 
-.address {
-	padding-left: 30px;
-	padding-top: 10px;
-	font-weight: bold;
-	width: 1000px;
-	font-size: 20px;
-}
+				.date {
+					padding-left: 30px;
+					font-weight: bold;
+				}
 
-.hr {
-	width: 1000px;
-	border-top: 1px solid black;
-}
+				.address {
+					padding-left: 30px;
+					padding-top: 10px;
+					font-weight: bold;
+					width: 1000px;
+					font-size: 20px;
+				}
 
-.heart {
-	padding-left: 30px;
-	cursor: pointer;
-}
+				.hr {
+					width: 1000px;
+					border-top: 1px solid black;
+				}
 
-.wrap>.fa-solid {
-	color: #ff0000;
-}
+				.heart {
+					padding-left: 30px;
+					cursor: pointer;
+				}
 
-.fa-regular {
-	color: #000000;
-}
+				.wrap>.fa-solid {
+					color: #ff0000;
+				}
 
-.TdestRecommendArea {
-	position: relative;
-	width: 1000px;
-}
+				.fa-regular {
+					color: #000000;
+				}
 
-.Tdest {
-	border: 1px solid;
-	padding: 25px;
-	border-radius: 0px 25px 0px 25px;
-	background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-	width: 1000px;
-}
+				.TdestRecommendArea {
+					position: relative;
+					width: 1000px;
+				}
 
-.FestivalRecomm {
-	border: 1px solid;
-	padding: 25px;
-	border-radius: 25px 0px 25px 0px;
-	margin-top: 5px;
-	width: 1000px;
-	background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
-}
+				.Tdest {
+					border: 1px solid;
+					padding: 25px;
+					border-radius: 0px 25px 0px 25px;
+					background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+					width: 1000px;
+				}
 
-#RecommendTitle {
-	font-size: 22px;
-	font-weight: bold;
-	color: dodgerblue;
-}
+				.FestivalRecomm {
+					border: 1px solid;
+					padding: 25px;
+					border-radius: 25px 0px 25px 0px;
+					margin-top: 5px;
+					width: 1000px;
+					background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
+				}
 
-.feImg {
-	width: 200px;
-	height: 150px;
-}
+				#RecommendTitle {
+					font-size: 22px;
+					font-weight: bold;
+					color: dodgerblue;
+				}
 
-.countryImg {
-	width: 100px;
-	height: 100px;
-}
+				.feImg {
+					width: 200px;
+					height: 150px;
+				}
 
-.feList {
-	display: inline-block;
-	cursor: pointer;
-	margin-top: 5px;
-}
+				.countryImg {
+					width: 100px;
+					height: 100px;
+				}
+
+				.feList {
+					display: inline-block;
+					cursor: pointer;
+					margin-top: 5px;
+				}
 
 .feName {
 	font-size: 20px;
-	font-weight: bold;
 	text-align: center;
 	height: 30px;
 	width: 200px;
 	overflow: hidden;
 }
 
-a {
-	text-decoration: none;
-	color: black;
-}
+				a {
+					text-decoration: none;
+					color: black;
+				}
 
-.more {
-	left: 30px;
-	background-color: white;
-	border-radius: 1000px;
-	width: 65px;
-	height: 65px;
-	position: relative;
-	bottom: 35px;
-}
+				.more {
+					left: 30px;
+					background-color: white;
+					border-radius: 1000px;
+					width: 65px;
+					height: 65px;
+					position: relative;
+					bottom: 35px;
+				}
 
-.moreIn {
-	position: relative;
-	left: 20px;
-	top: 20px;
-}
+				.moreIn {
+					position: relative;
+					left: 20px;
+					top: 20px;
+				}
 
-.moreArea {
-	width: 117px;
-	display: inline-block;
-}
+				.moreArea {
+					width: 117px;
+					display: inline-block;
+				}
 
 .moreText {
 	position: relative;
 	font-weight: bold;
 	bottom: 30px;
-	left: 10px;
+	left: 35px;
 }
 
-.feinfo {
-	width: 1000px;
-	padding-left: 30px;
-	padding-right: 30px;
-}
+				.feinfo {
+					width: 1000px;
+					padding-left: 30px;
+					padding-right: 30px;
+				}
 
-.homepage {
-	margin-left: 30px;
-	background-color: white;
-	border-radius: 20px;
-	padding: 10px;
-	border-color: gray;
-}
+				.homepage {
+					margin-left: 30px;
+					background-color: white;
+					border-radius: 20px;
+					padding: 10px;
+					border-color: gray;
+				}
 
-.fetel {
-	width: 900px;
-	padding-left: 15px;
-	padding-right: 30px;
-	font-weight: bold;
-	display: inline-block;
-	padding-top: 10px;
-}
+				.fetel {
+					width: 900px;
+					padding-left: 15px;
+					padding-right: 30px;
+					font-weight: bold;
+					display: inline-block;
+					padding-top: 10px;
+				}
 
-.phoneImg {
-	width: 50px;
-	height: 50px;
-	margin-left: 30px;
-}
+				.phoneImg {
+					width: 50px;
+					height: 50px;
+					margin-left: 30px;
+				}
 
-.phoneArea {
-	display: flex;
-	width: 1000px;
-	margin-bottom: 10px;
-}
+				.phoneArea {
+					display: flex;
+					width: 1000px;
+					margin-bottom: 10px;
+				}
+
+				.FestivalComment {
+					min-height: 700px;
+					border: none;
+					margin-top: 25px;
+				}
+
+				.InnerComment {
+					padding: 15px;
+				}
+
+				.MemberImg {
+					width: 45px;
+				}
+
+				.Recommhr {
+					border-top: 1px solid black;
+				}
+				.lknum{
+					display:inline-block;
+				}
 </style>
 
 
@@ -317,6 +337,7 @@ a {
 			<p class="date">${festival.opendate}~ ${festival.enddate }</p>
 			<i class="fa-regular fa-heart fa-xl heart"
 				onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
+				<p class="lknum" id="lknum">${festival.lknum }</p>			
 			<button class="btn btn-outline-success"
 				onclick="selectCdcode('${festival.fecode}','festival')"
 				data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -361,7 +382,7 @@ a {
 										style="color: #000000;"></i>
 								</div>
 							</a>
-							<h5 class="moreText">축제 더보기</h5>
+							<h5 class="moreText">더보기</h5>
 						</div>
 					</div>
 				</c:if>
@@ -385,41 +406,56 @@ a {
 										style="color: #000000;"></i>
 								</div>
 							</a>
-							<h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
+							<h5 class="moreText">더보기</h5>
 						</div>
 					</div>
 				</div>
 
-			</div>
-		</div>
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
+							<div class="FestivalComment">
+								<div class="InnerComment">
+									<c:forEach items="${ReList}" var="re">
+										<div>
+											<div>
+												<img class="MemberImg" src="/resources/memberProfile/${re.MPROFILE}"
+													alt="">
+												<span>${re.MID}</span>
+											</div>
+											<div>
+												<span>${re.RETITLE}</span>
+											</div>
+											<hr class="Recommhr">
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="modal-body" id="selectCalendar"></div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-success"
-							data-bs-dismiss="modal" id="selectClear">선택</button>
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body" id="selectCalendar"></div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+										id="selectClear">선택</button>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<!-- content 종료 -->
-		<!-- Footer-->
-		<%@ include file="../include/footer.jsp"%>
-	</main>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="resources/js/scripts.js"></script>
+					<!-- content 종료 -->
+					<!-- Footer-->
+					<%@ include file="../include/footer.jsp" %>
+			</main>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+			<!-- Bootstrap core JS-->
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+			<!-- Core theme JS-->
+			<script src="resources/js/scripts.js"></script>
 
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script>
@@ -459,14 +495,19 @@ a {
 	        		type: "post",
 	        		data: { mid: "${sessionScope.loginId}", code : code, "seloption" : seloption},
 	        		aysnc: false,
-	        		success: function(result){
+	        		success: function(res){
 					console.log('클릭');
+					let lknum = document.querySelector('#lknum');
 					let heart = document.querySelector('#heart');
 					const cl = document.querySelector('#heart').classList;
 					if(cl.contains("fa-regular") ){
 					heart.classList.replace('fa-regular', 'fa-solid');
+					lknum.innerText = res;
+					console.log(res);
 					} else{
 					heart.classList.replace('fa-solid', 'fa-regular');
+					lknum.innerText = res;
+					console.log(res);
 					}
 	        			
 	        		}
@@ -493,51 +534,52 @@ a {
                     modalBodyTag.innerHTML = "";
                     if (rs.length > 0) {
 
-                        let selTag = document.createElement("select")
-                        for (let cd of rs) {
-                            let optionTag = document.createElement("option")
-                            optionTag.innerText = cd.cdname;
-                            optionTag.setAttribute("value", cd.cdcode)
-                            selTag.appendChild(optionTag);
-                        }
-                        modalBodyTag.appendChild(selTag);
-                        let btnTag = document.querySelector("#selectClear");
-                        btnTag.addEventListener("click", function () {
-                            selectDest(fecode, selTag.value, seloption)
-                        })
-                    }
-                    else {
-                        modalBodyTag.innerText = "달력을 추가 해주세요";
-                    }
-                }
-            })
-        }
-    }
-	function selectDest(fecode, cdcode, seloption) {
-        console.log(fecode + "  " + cdcode);
-        $.ajax({
-            url: "/registSelectDest",
-            type: "post",
-            data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption" : seloption },
-            async: false,
-            success(rs) {
-                alert('행선지 선택 완료');
-                location.href = "/detailFestival?code="+fecode;
-            }
-        })
-    }
-	
-	</script>
-	<script type="text/javascript">
-	let heart = document.querySelector('#heart');
-	const cl = document.querySelector('#heart').classList;
-	let Y = 'Y';
-	let N = 'N';
-	if(${like} == 'Y'){
-		heart.classList.replace('fa-regular', 'fa-solid');
-	}
-	</script>
+									let selTag = document.createElement("select")
+									for (let cd of rs) {
+										let optionTag = document.createElement("option")
+										optionTag.innerText = cd.cdname;
+										optionTag.setAttribute("value", cd.cdcode)
+										selTag.appendChild(optionTag);
+									}
+									modalBodyTag.appendChild(selTag);
+									let btnTag = document.querySelector("#selectClear");
+									btnTag.addEventListener("click", function () {
+										selectDest(fecode, selTag.value, seloption)
+									})
+								}
+								else {
+									modalBodyTag.innerText = "달력을 추가 해주세요";
+								}
+							}
+						})
+					}
+				}
+				function selectDest(fecode, cdcode, seloption) {
+					console.log(fecode + "  " + cdcode);
+					$.ajax({
+						url: "/registSelectDest",
+						type: "post",
+						data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption": seloption },
+						async: false,
+						success(rs) {
+							alert('행선지 선택 완료');
+							location.href = "/detailFestival?code=" + fecode;
+						}
+					})
+				}
+
+			</script>
+			<script type="text/javascript">
+				let heart = document.querySelector('#heart');
+				const cl = document.querySelector('#heart').classList;
+				let Y = 'Y';
+				let N = 'N';
+				if (${ like } == 'Y') {
+					heart.classList.replace('fa-regular', 'fa-solid');
+				}
+			</script>
 
 
-</body>
-</html>
+		</body>
+
+		</html>
