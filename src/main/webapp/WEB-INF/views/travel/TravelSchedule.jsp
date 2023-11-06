@@ -29,37 +29,10 @@ String strdate = simpleDate.format(date);
 <!-- ajax -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
 <style type="text/css">
 .disnone {
 	display: none;
-	animation: fade-out 1s;
-}
-
-.dison {
-	animation: fade-on 1s;
-}
-
-.disoff {
-	animation: fade-off 1s
-}
-
-@
-keyframes fade-in {from { opacity:0;
-	
-}
-
-to {
-	opacity: 1;
-}
-
-}
-@
-keyframes fade-out {from { opacity:1;
-	
-}
-
-to {
-	opacity: 0;
 }
 
 }
@@ -74,7 +47,6 @@ to {
 	width: 405px;
 	border-radius: 10px;
 }
-
 .btn-pmc {
 	border-radius: 25px;
 	height: 40px;
@@ -121,6 +93,75 @@ to {
 div {
 	font-family: 'Jua' !important;
 }
+
+#feArea::-webkit-scrollbar {
+	width: 8px; /* 스크롤바의 너비 */
+}
+
+#feArea::-webkit-scrollbar-thumb {
+	height: 30%; /* 스크롤바의 길이 */
+	background: #217af4; /* 스크롤바의 색상 */
+	border-radius: 10px;
+}
+
+#feArea::-webkit-scrollbar-track {
+	background: rgba(33, 122, 244, .1); /*스크롤바 뒷 배경 색상*/
+}
+
+#tdArea::-webkit-scrollbar {
+	width: 8px; /* 스크롤바의 너비 */
+}
+
+#tdArea::-webkit-scrollbar-thumb {
+	height: 30%; /* 스크롤바의 길이 */
+	background: #217af4; /* 스크롤바의 색상 */
+	border-radius: 10px;
+}
+
+#tdArea::-webkit-scrollbar-track {
+	background: rgba(33, 122, 244, .1); /*스크롤바 뒷 배경 색상*/
+}
+
+.test {
+	width: 245px;
+	transition: width 1s ease;
+}
+
+.test1 {
+	width: 745px;
+	border-radius: 0;
+	background-color: red;
+}
+.fade-in-box {
+  display: inline-block;
+  background: yellow;
+  padding: 10px;
+  animation: fadein 0.3s;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+.fade-out-box {
+  display: inline-block;
+  background: yellow;
+  padding: 10px;
+  animation: fadeout 0.3s;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+}
 </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -128,7 +169,7 @@ div {
 		<!-- Navigation-->
 
 		<!-- contant 시작 -->
-		<div class="p-4 rounded-end"
+		<div class="p-4 rounded-end test"
 			style="display: flex; float: left; position: absolute; background-color: aliceblue; z-index: 3; height: -webkit-fill-available;">
 			<div class="">
 				<h5 onclick="location.href='${pageContext.request.contextPath }/'">
@@ -152,8 +193,9 @@ div {
 
 										<div class="collapse"
 											id="${sc.TDCODE }"
-											style="text-align:end;">
-											<button class="btn btn-primary">변경하기</button>
+											style="text-align:end;"
+											data-bs-toggle="modal" data-bs-target="#changeModal">
+											<button class="btn btn-primary" onclick="scheduleUpdate('${sc.MID}', '${sc.CDCODE}', '${sc.TDCODE}', '${sc.FECODE}', 'td')">변경하기</button>
 										</div>
 									</c:when>
 									<c:when test="${sc.FECODE != null }">
@@ -164,17 +206,19 @@ div {
 											<p style="margin: 0px;">${sc.FENAME }</p>
 											<p>${sc.SCDATE }</p>
 										</div>
+
 										<div class="collapse"
 											id="${sc.FECODE }"
-											style="text-align:end;">
-										<button class="btn btn-primary">변경하기</button>
+											style="text-align:end;"
+											data-bs-toggle="modal" data-bs-target="#changeModal">
+										<button class="btn btn-primary" onclick="scheduleUpdate('${sc.MID}', '${sc.CDCODE}', '${sc.TDCODE}', '${sc.FECODE}', 'fe')">변경하기</button>
 										</div>
 									</c:when>
 								</c:choose>
 
-							<hr>	
+								<hr>
 							</c:if>
-							
+
 						</c:forEach>
 					</div>
 					<div class="p-2 container-fluid" style="text-align: end;">
@@ -184,27 +228,23 @@ div {
 								<i class="fa-solid fa-floppy-disk"></i>
 							</button>
 						</c:if>
-						<button class="btn btn-info" type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#navbarToggleExternalContent"
-							aria-controls="navbarToggleExternalContent" aria-expanded="false"
-							aria-label="Toggle navigation" title="여행지 보기">
+						<button class="btn btn-info" type="button" title="여행지 보기"
+							onclick="checkDest()">
 							<i class="fa-solid fa-list"></i>
 						</button>
 					</div>
 				</nav>
 			</div>
-			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
-				style="overflow: scroll; background-color: aliceblue; margin-left: 15px;">
+			<div class="p-4 asd disnone" id="DestArea"
+				style="overflow: hidden; background-color: aliceblue; margin-left: 15px;">
 				<div class="col d-flex justify-content-center"
 					style="margin-bottom: 15px;">
-					<button class="w-btn-outline w-btn-pink-outline"
-						onclick="disnonefe()">여행지</button>
-					<button class="w-btn-outline w-btn-blue-outline"
-						onclick="disnonetd()">축제</button>
+					<button class="w-btn-outline w-btn-pink-outline" onclick="disnonefe()">여행지</button>
+					<button class="w-btn-outline w-btn-blue-outline" onclick="disnonetd()">축제</button>
 				</div>
 				<div>
-					<nav id="tdArea" class="" style="">
+					<nav id="tdArea" class=""
+						style="overflow-y: auto;overflow-x: hidden; height: 590px; border-radius: 10px;">
 						<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
 								<div class="travelList" style="background-color: white;">
@@ -239,7 +279,8 @@ div {
 							</c:if>
 						</c:forEach>
 					</nav>
-					<nav id="feArea" class="disnone" style="">
+					<nav id="feArea" class="disnone"
+						style="overflow-y: auto;overflow-x: hidden; height: 590px; border-radius: 15px;">
 						<c:forEach items="${ scdestList}" var="fe">
 							<c:if test="${fe.FECODE != null }">
 								<div class="travelList" style="background-color: white;">
@@ -279,7 +320,7 @@ div {
 
 		</div>
 		<div id="map" class="col border border-dark"
-			style="height: 963px; margin-left: 243px;"></div>
+			style="height: 100vh; margin-left: 243px;"></div>
 
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -309,6 +350,35 @@ div {
 				</div>
 			</div>
 		</div>
+		
+		<div class="modal fade" id="changeModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">날짜 수정하기</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="scheduleUpdate">
+						<p id="destName"></p>
+						<input type="date" id="sDate" min="<%=strdate%>"> <select
+							id="sHH">
+							<c:forEach begin="0" end="23" var="i">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select> : <select id="sMM">
+							<option value="00">0</option>
+							<option value="30">30</option>
+						</select>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							data-bs-dismiss="modal" id="upDateSc">수정</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- contant 종료 -->
 	</main>
 	<!-- Footer
@@ -320,13 +390,12 @@ div {
 	<script src="resources/js/scripts.js"></script>
 	<!-- kakao map api -->
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=963b2e12b6b2948f660fa6eab737705a"></script>
 	<script src="https://kit.fontawesome.com/c8056a816e.js"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 	
 	let lalngList = JSON.parse('${lalngList}');
-	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng( 37.56458948133976, 126.97730596902437), //지도의 중심좌표.
@@ -405,12 +474,7 @@ div {
 		let scAreaTag = document.querySelector("#scArea").childElementCount;
 		let tdAreaTag = document.querySelector("#tdArea").childElementCount;
 		let feAreaTag = document.querySelector("#feArea").childElementCount;
-		console.log(lalngList);
 		let today = new Date();
-		console.log(today.getFullYear());
-		console.log(today.getMonth());
-		console.log(today.getDate());
-		console.log(lalngList[0].scdate);
 		let scDate = lalngList[0].scdate.split(" ")[0];
 		let checkDate = false;
 		if(Number(scDate.split('/')[0]) > today.getFullYear()){
@@ -428,8 +492,7 @@ div {
 			alert('이미 지난 계획이 있습니다.');
 			return;
 		}
-		
-		if(scAreaTag == tdAreaTag + feAreaTag){
+		if(lalngList.length == tdAreaTag + feAreaTag){
 			check = confirm("계획을 확정하면 더는 수정할 수 없습니다.");			
 		}else{
 			alert("선택하지 않은 여행지가 있습니다!")
@@ -453,7 +516,7 @@ div {
 					alert("계획을 1개 이상 추가해주세요");
 					break;
 				}
-			}
+			}	
 		})
 		}
 	}
@@ -485,26 +548,89 @@ div {
 	function disnonetd(){
 		let tdArea =document.querySelector("#tdArea");
 		let feArea = document.querySelector("#feArea");
-		console.log('disnonetd')
-		console.log(tdArea.classList);
-		console.log(feArea.classList);
 		tdArea.classList.add('disnone');
 		feArea.classList.remove('disnone');
 		
 		
 	}
 	function disnonefe(){
-		console.log('disnonefe')
 		let tdArea =document.querySelector("#tdArea");
 		let feArea = document.querySelector("#feArea");
-		console.log(tdArea.classList);
-		console.log(feArea.classList);
 		tdArea.classList.remove('disnone');
 		feArea.classList.add('disnone');
 		
+		
 	}
 	</script>
-
+	<script type="text/javascript">
+		let count = true;
+	function checkDest(){
+		let asdfds = document.querySelector(".test");
+		let DestArea = document.querySelector('#DestArea');
+		if(count){
+			asdfds.classList.add("test1");
+			setTimeout(function(){
+			DestArea.classList.add('fade-in-box');
+			DestArea.classList.remove('disnone');
+				
+			setTimeout(function() {
+				DestArea.classList.remove("fade-in-box");
+					}, 900);
+			},400);
+			count = false;
+		}else{
+			DestArea.classList.add('fade-out-box');
+			asdfds.classList.remove("test1");
+			setTimeout(function() {
+			DestArea.classList.add('disnone');
+			DestArea.classList.remove("fade-out-box");
+					}, 300);
+			count = true;
+		}
+	}
+	</script>
+	
+	<script type="text/javascript">
+		function scheduleUpdate(mid, cdcode, tdcode, fecode, scOption) {
+			console.log(mid, cdcode, tdcode, fecode, scOption);
+			
+			let updateBtn = document.querySelector("#upDateSc");
+			updateBtn.addEventListener("click", function(){
+				let scdate = document.querySelector("#sDate").value;
+				console.log(scdate);
+				if(scdate == ""){
+					alert("날짜를 선택해주세요");
+				}else{
+				let schour = document.querySelector("#sHH").value
+				if(schour.length == 1){
+					schour = "0"+schour;
+				}
+				scdate = scdate + " " + schour;
+				let scmin = document.querySelector("#sMM").value;
+				scdate = scdate + ":" + scmin;
+				
+				console.log(scdate, mid, cdcode, tdcode,  fecode, scOption);
+				
+				let dataoption = {};
+				if(scOption == 'td'){
+					dataoption = {"mid":mid, "cdcode":cdcode, "tdcode":tdcode, "scdate":scdate, "scOption":scOption}
+				}else{
+					dataoption = {"mid":mid, "cdcode":cdcode, "fecode":fecode, "scdate":scdate, "scOption":scOption}
+				}
+				$.ajax({
+					url:"/scheduleUpdate",
+					type:"post",
+					data: dataoption,
+					success:function(rs){
+						location.reload();
+						}	
+					})
+			
+				}	
+			})
+		}
+	</script>
+	
 
 </body>
 </html>

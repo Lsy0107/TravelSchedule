@@ -230,7 +230,6 @@ main {
 
 .feName {
 	font-size: 20px;
-	font-weight: bold;
 	text-align: center;
 	height: 30px;
 	width: 200px;

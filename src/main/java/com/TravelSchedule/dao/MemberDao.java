@@ -1,7 +1,8 @@
 package com.TravelSchedule.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.multipart.MultipartFile;
+import org.apache.ibatis.annotations.Select;
 
 import com.TravelSchedule.dto.Member;
 
@@ -18,5 +19,17 @@ public interface MemberDao {
 	int memberUpdate(Member mem);
 
 	int passwordUpdate(@Param("mid")String mid, @Param("mpw")String mpw);
+
+	@Select("SELECT * FROM MEMBERS WHERE MID = #{id}")
+	Member selectKakaoMemberInfo(String id);
+
+	@Insert("INSERT INTO MEMBERS(MID, MPW, MNICKNAME, MPROFILE, MSTATE) VALUES( #{mid}, 'kakaoAccount', #{mnickname}, #{mprofile}, 'YK')")
+	int regist_Kakao(Member member);
+
+	@Select("SELECT * FROM MEMBERS WHERE MID = #{mid}")
+	Member CheckNaverLogin(String mid);
+
+	@Insert("INSERT INTO MEMBERS(MID, MPW, MNICKNAME, MPROFILE, MSTATE) VALUES(#{mid}, 'naverAccount', #{mnickname}, #{mprofile}, 'NA')")
+	int registMemberInfo_Naver(Member member);
 
 }

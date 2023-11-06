@@ -16,8 +16,9 @@ import com.TravelSchedule.dto.Member;
 @Service
 public class MemberService {
 
-	@Autowired MemberDao mdao;
-	
+	@Autowired
+	MemberDao mdao;
+
 	public int memberJoin(Member mem) {
 		System.out.println("MemberService - memberJoin");
 		return mdao.insertMember(mem);
@@ -26,16 +27,16 @@ public class MemberService {
 	public Member setMprofile(Member meminfo, HttpSession session) {
 		MultipartFile mprofiledata = meminfo.getMprofiledata();
 		String mprofile = "";
-		String savePath="";
-		//첨부파일이 있을 경우 파일 이름과 경로를 설정 
+		String savePath = "";
+		// 첨부파일이 있을 경우 파일 이름과 경로를 설정
 		UUID uuid = UUID.randomUUID();
 		savePath = session.getServletContext().getRealPath("/resources/memberProfile");
 		System.out.println(savePath);
-		
-		if(!mprofiledata.isEmpty()) {
+
+		if (!mprofiledata.isEmpty()) {
 			System.out.println("첨부파일 O");
-			mprofile = uuid+"_"+mprofiledata.getOriginalFilename();
-			File newFile = new File(savePath, mprofile);//File("경로", "파일이름")
+			mprofile = uuid + "_" + mprofiledata.getOriginalFilename();
+			File newFile = new File(savePath, mprofile);// File("경로", "파일이름")
 			try {
 				mprofiledata.transferTo(newFile);
 			} catch (IllegalStateException e) {
@@ -45,12 +46,11 @@ public class MemberService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		}else {
+
+		} else {
 			mprofile = "default.jpg";
 		}
-		
-		
+
 		meminfo.setMprofiledata(mprofiledata);
 		meminfo.setMprofile(mprofile);
 		return meminfo;
@@ -69,48 +69,69 @@ public class MemberService {
 
 	public Member getMemberInfo(String loginId) {
 		System.out.println("MemberService - getMemberInfo");
-		
+
 		Member member = mdao.selectMemberInfo(loginId);
-		
+
 		return member;
 	}
 
 	public int memberInfo(Member mem, HttpSession session) {
 		System.out.println("MemberService - memberInfo");
-		
+
 		MultipartFile mfile = mem.getMprofiledata();
 		String mprofile = "";
 		String savePath = session.getServletContext().getRealPath("/resources/memberProfile");
-		
-		if(!mfile.isEmpty()) { 
+
+		if (!mfile.isEmpty()) {
 			UUID uuid = UUID.randomUUID();
 			String code = uuid.toString();
 			System.out.println("code : " + code);
 			mprofile = code + "_" + mfile.getOriginalFilename();
-			
+
 			System.out.println("savePath" + savePath);
 			File newFile = new File(savePath, mprofile);
-				try {
-					mfile.transferTo(newFile);
+			try {
+				mfile.transferTo(newFile);
 
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
+
 		System.out.println("프로필 : " + mprofile);
 		mem.setMprofile(mprofile);
 		System.out.println(mem);
-		
+
 		int result = mdao.memberUpdate(mem);
-		
+
 		return result;
 	}
 
 	public int newPassword(String mid, String mpw) {
 		System.out.println("MemberService - newPassword");
-		
+
 		return mdao.passwordUpdate(mid, mpw);
+	}
+
+	public Member LoginMemberInfo_kakao(String id) {
+		System.out.println("LoginMemberInfo_kakao() 호출");
+
+		return mdao.selectKakaoMemberInfo(id);
+	}
+
+	public int registMember_kakao(Member member) {
+		System.out.println("registMember_Kakao() 호출");
+		return mdao.regist_Kakao(member);
+	}
+
+	public Member CheckNaverLog(String mid) {
+		System.out.println("CheckNaverLog() 호출");
+		return mdao.CheckNaverLogin(mid);
+	}
+
+	public int registMember_Naver(Member member) {
+		
+		return mdao.registMemberInfo_Naver(member);
 	}
 
 }

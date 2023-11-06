@@ -16,6 +16,9 @@
             <!-- Core theme CSS (includes Bootstrap)-->
             <link href="resources/css/styles.css" rel="stylesheet" />
 
+            <!-- Data AOS-->
+            <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
             <style>
                 .pagination {
                     position: relative;
@@ -26,7 +29,7 @@
                     list-style: none;
                     display: flex;
                     padding: 0px;
-                    position: absolute;
+                    position: relative;
                 }
 .bg-wh{
 	background-color: white;
@@ -44,23 +47,30 @@
 
                 ol>li {
                     padding: 3px;
+                    border: 1px solid blue;
+                    margin: 3px;
+                    text-align: center;
+                    min-width: 57px;
+                    min-height: 45px;
                 }
 
                 ol>li>a {
                     padding: 10px;
                     max-width: 50px;
+                    position: relative;
+                    top: 21%;
                 }
 
                 i#leftCur {
-                    position: absolute;
+                    position: relative;
                     top: 15px;
-                    left: -20px;
+                    right: 0px;
                 }
 
                 i#rightCur {
-                    position: absolute;
+                    position: relative;
                     top: 15px;
-                    left: 200px;
+                    left: 0px;
                 }
 
                 div#map {
@@ -86,9 +96,9 @@
                     margin-left: auto;
                     margin-right: auto;
                     max-height: 628px;
-                    
+
                     width: 100%;
-                    
+
                 }
 
                 .SearchArea {
@@ -342,8 +352,86 @@
                     overflow: hidden;
                     white-space: nowrap;
                 }
-                html,body{
+
+                html,
+                body {
                     height: 100%;
+                }
+
+                .SearchTag {
+                    position: relative;
+                    top: 170px;
+                    text-align: right;
+                    width: 43%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                #SearchIcon {
+                    font-size: 40px;
+                    color: #224d68;
+                    cursor: pointer;
+                }
+
+                .SearchBox {
+                    border: 1px solid;
+                    background: white;
+                    width: 60%;
+                    position: relative;
+                    top: 120px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: none;
+                    height: 200px;
+                    border-radius: 20px;
+
+                }
+
+                .SearchInput {
+                    width: 75%;
+                    height: 42px;
+                    padding: 8px;
+                    border: none;
+                }
+
+                .SearchCate {
+                    height: 40px;
+                    width: 100px;
+                    padding: 8px;
+                    outline: none;
+                    border: none;
+                }
+
+                .SearchBtn2 {
+                    width: 43px;
+                    height: 43px;
+                    border: none;
+                    background: white;
+                    outline: none;
+                }
+
+                .SearchD {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 75%;
+                    margin-top: 15px;
+
+                }
+
+                #CloseIcon {
+                    position: absolute;
+                    top: -8px;
+                    right: -7px;
+                    width: 40px;
+                    height: 40px;
+                    border: none;
+                    padding: 0px;
+                    background: none;
+                }
+
+                #Close {
+                    font-size: 40px;
                 }
             </style>
         </head>
@@ -377,6 +465,24 @@
                         <button class="SearchBtn btn btn-primary" onclick="SearchClick()">검색<i style="padding: 5px;"
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
+                    <div class="SearchTag">
+                        <i id="SearchIcon" class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="SearchBox">
+                        <div class="SearchD">
+                            <select name="cateVal" class="SearchCate" required="required"
+                                onchange="selectCategory(this)">
+                                <option value="">카테고리</option>
+                                <option value="축제">축제</option>
+                                <option value="여행지">여행지</option>
+                            </select>
+                            <input class="SearchInput" type="text" placeholder="검색어를 입력해주세요.">
+                            <button class="SearchBtn2" onclick="SearchDetail()"><i id=""
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                        <button id="CloseIcon"><i id="Close" class="fa-solid fa-circle-xmark"
+                                style="color: #000000;"></i></button>
+                    </div>
 
                 </div>
 
@@ -403,18 +509,22 @@
                                 </div>
 
                             </div>
+
+                            <div class="row">
+                                <div class="pagination">
+                                    <i id="leftCur" class="fa-solid fa-arrow-left"></i>
+                                    <ol id="numbers">
+
+                                    </ol>
+                                    <i id="rightCur" class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+
                         </div>
-                        
-                    </div>
-                    <div class="pagination">
-                        <i id="leftCur" class="fa-solid fa-arrow-left"></i>
-                        <ol id="numbers">
-    
-                        </ol>
-                        <i id="rightCur" class="fa-solid fa-arrow-right"></i>
+
                     </div>
                 </div>
-                
+
 
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -449,6 +559,12 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
                 <!-- Core theme JS-->
                 <script src="resources/js/scripts.js"></script>
+
+                <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <script>
+                    AOS.init();
+                </script>
+
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
                 <script src="https://kit.fontawesome.com/148f0d76e9.js" crossorigin="anonymous"></script>
                 <script>
@@ -457,7 +573,7 @@
                         console.log('페이지 로드');
                         let selectCity = document.querySelector(".SelCity");
                         selectCity.innerText = "";
-                        
+
                     })
                 </script>
 
@@ -523,11 +639,11 @@
                                     console.log('전송 성공');
                                     console.log(e);
                                     currentCate = SelCate;
-                                    
+
                                     PrintFest(e);
                                 }
                             });
-                        }else if(SelCate == ''){
+                        } else if (SelCate == '') {
                             alert('카테고리 선택은 필수입니다!!');
                             return false;
                         }
@@ -590,8 +706,8 @@
 
                             TdestAreaDiv.appendChild(DestDiv);
 
-                        }  
-                        Paging();                      
+                        }
+                        Paging();
                     }
 
 
@@ -651,125 +767,125 @@
 
                             TdestAreaDiv.appendChild(DestDiv);
 
-                        }    
+                        }
                         Paging();
                     }
                 </script>
                 <script>
-            function Paging() {
-                const rowsPerPage = 30; //페이지당 출력할 수
-                console.log(currentCate);
-                let rows=null;
-                
-                    rows = document.querySelectorAll('.containDest');
-                
-                
-                const rowsCount = rows.length;
-                //console.log(rows);
+                    function Paging() {
+                        const rowsPerPage = 30; //페이지당 출력할 수
+                        console.log(currentCate);
+                        let rows = null;
 
-                const pageCount = Math.ceil(rowsCount / rowsPerPage);
-                console.log(pageCount);
-                const numbers = document.querySelector('#numbers');
+                        rows = document.querySelectorAll('.containDest');
 
-                const prevPageBtn = document.querySelector('.fa-arrow-left');
-                const nextPageBtn = document.querySelector('.fa-arrow-right');
 
-                let pageActiveIdx = 0; //현재 페이지 그룹 번호
-                let currentPageNum = 0;
-                let maxPageNum = 10; //페이지 그룹 최대 개수
+                        const rowsCount = rows.length;
+                        //console.log(rows);
 
-                //페이지 넘버 생성 파트
-                numbers.innerHTML = "";
-                numbers.setAttribute("id", "numbers");
-                for (let i = 1; i <= pageCount; i++) {
-                    numbers.innerHTML += '<li><a href="">' + i + '</a></li>';
-                }
-                const numberBtn = numbers.querySelectorAll('li');
-                console.log(numberBtn);
+                        const pageCount = Math.ceil(rowsCount / rowsPerPage);
+                        console.log(pageCount);
+                        const numbers = document.querySelector('#numbers');
 
-                for (nb of numberBtn) {
-                    nb.style.display = 'none';
-                }
+                        const prevPageBtn = document.querySelector('.fa-arrow-left');
+                        const nextPageBtn = document.querySelector('.fa-arrow-right');
 
-                numberBtn.forEach((item, idx) => {
-                    item.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        //    console.log(idx);
-                        displayRow(idx);
-                    });
-                });
+                        let pageActiveIdx = 0; //현재 페이지 그룹 번호
+                        let currentPageNum = 0;
+                        let maxPageNum = 10; //페이지 그룹 최대 개수
 
-                function displayRow(idx) {
+                        //페이지 넘버 생성 파트
+                        numbers.innerHTML = "";
+                        numbers.setAttribute("id", "numbers");
+                        for (let i = 1; i <= pageCount; i++) {
+                            numbers.innerHTML += '<li><a href="">' + i + '</a></li>';
+                        }
+                        const numberBtn = numbers.querySelectorAll('li');
+                        console.log(numberBtn);
 
-                    let start = idx * rowsPerPage;
-                    let end = start + rowsPerPage;
+                        for (nb of numberBtn) {
+                            nb.style.display = 'none';
+                        }
 
-                    let rowsArray = [...rows];
-                    //console.log(rowsArray);
+                        numberBtn.forEach((item, idx) => {
+                            item.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                //    console.log(idx);
+                                displayRow(idx);
+                            });
+                        });
 
-                    for (row of rowsArray) {
-                        row.style.display = 'none';
+                        function displayRow(idx) {
+
+                            let start = idx * rowsPerPage;
+                            let end = start + rowsPerPage;
+
+                            let rowsArray = [...rows];
+                            //console.log(rowsArray);
+
+                            for (row of rowsArray) {
+                                row.style.display = 'none';
+                            }
+
+                            let newRows = rowsArray.slice(start, end);
+                            for (nr of newRows) {
+                                nr.style.display = '';
+                            }
+                            for (nb of numberBtn) {
+                                nb.classList.remove('active');
+                            }
+                            numberBtn[idx].classList.add('active');
+                        }
+                        displayRow(0);
+
+                        //페이지네이션 그룹 표시
+                        function displayPage(num) {
+                            //페이지 네이션번호 감추기
+                            for (nb of numberBtn) {
+                                nb.style.display = 'none';
+                            }
+                            let totalPageCount = Math.ceil(pageCount / maxPageNum);
+
+                            let pageArr = [...numberBtn]
+                            let start = num * maxPageNum;
+                            let end = start + maxPageNum;
+                            let pageListArr = pageArr.slice(start, end);
+
+                            for (let item of pageListArr) {
+                                item.style.display = 'block';
+                            }
+                            if (pageActiveIdx == 0) {
+                                prevPageBtn.style.display = 'none';
+                            } else {
+                                prevPageBtn.style.display = 'block';
+                            }
+                            if (pageActiveIdx == totalPageCount - 1) {
+                                nextPageBtn.style.display = 'none';
+                            } else {
+                                nextPageBtn.style.display = 'block';
+                            }
+                        }
+                        displayPage(0);
+
+                        nextPageBtn.addEventListener('click', (e) => {
+                            let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
+                            displayRow(nextPageNum);
+                            ++pageActiveIdx;
+                            displayPage(pageActiveIdx);
+                        });
+
+                        prevPageBtn.addEventListener('click', (e) => {
+                            let nextPageNum = pageActiveIdx * maxPageNum - maxPageNum;
+                            displayRow(nextPageNum);
+                            --pageActiveIdx;
+                            displayPage(pageActiveIdx);
+                        });
+
                     }
-
-                    let newRows = rowsArray.slice(start, end);
-                    for (nr of newRows) {
-                        nr.style.display = '';
-                    }
-                    for (nb of numberBtn) {
-                        nb.classList.remove('active');
-                    }
-                    numberBtn[idx].classList.add('active');
-                }
-                displayRow(0);
-
-                //페이지네이션 그룹 표시
-                function displayPage(num) {
-                    //페이지 네이션번호 감추기
-                    for (nb of numberBtn) {
-                        nb.style.display = 'none';
-                    }
-                    let totalPageCount = Math.ceil(pageCount / maxPageNum);
-
-                    let pageArr = [...numberBtn]
-                    let start = num * maxPageNum;
-                    let end = start + maxPageNum;
-                    let pageListArr = pageArr.slice(start, end);
-
-                    for (let item of pageListArr) {
-                        item.style.display = 'block';
-                    }
-                    if (pageActiveIdx == 0) {
-                        prevPageBtn.style.display = 'none';
-                    } else {
-                        prevPageBtn.style.display = 'block';
-                    }
-                    if (pageActiveIdx == totalPageCount - 1) {
-                        nextPageBtn.style.display = 'none';
-                    } else {
-                        nextPageBtn.style.display = 'block';
-                    }
-                }
-                displayPage(0);
-
-                nextPageBtn.addEventListener('click', (e) => {
-                    let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
-                    displayRow(nextPageNum);
-                    ++pageActiveIdx;
-                    displayPage(pageActiveIdx);
-                });
-
-                prevPageBtn.addEventListener('click', (e) => {
-                    let nextPageNum = pageActiveIdx * maxPageNum - maxPageNum;
-                    displayRow(nextPageNum);
-                    --pageActiveIdx;
-                    displayPage(pageActiveIdx);
-                });
-
-            }
                 </script>
                 <script>
 
-                    
+
                     function DetailPageMoveDest(tdcode) {
                         console.log(tdcode);
                         location.href = 'detailTdest?tdcode=' + tdcode;
@@ -875,7 +991,7 @@
                         $.ajax({
                             url: "/registSelectDest",
                             type: "post",
-                            data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption" : seloption },
+                            data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption": seloption },
                             async: false,
                             success(rs) {
                                 alert('행선지 선택 완료');
@@ -901,6 +1017,183 @@
                         $('html,body').animate({ scrollTop: 0 }, 300);
                     });
 
+                </script>
+
+                <script>
+                    $(function () {
+                        $("#SearchIcon").on("click", function () {
+                            $(".SearchBox").fadeIn();
+
+                        });
+                    });
+
+                    $(function () {
+                        $("#CloseIcon").on("click", function () {
+                            $(".SearchBox").fadeOut();
+
+                        });
+                    });
+                </script>
+
+                <script>
+                    function SearchDetail() {
+                        let cateTag = document.querySelector('.SearchCate').value;
+                        let inputTag = document.querySelector('.SearchInput').value;
+                        currentCate = cateTag;
+
+                        if (currentCate == '축제') {
+                            $.ajax({
+                                type: 'get',
+                                url: 'SearchServiceFe',
+                                data: {
+                                    'searchval': inputTag,
+                                    'searchcate': cateTag
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function (e) {
+                                    FestDetailSearch(e);
+                                }
+
+                            });
+                        }
+                        else if (currentCate == '여행지') {
+                            $.ajax({
+                                type: 'get',
+                                url: 'SearchServiceTd',
+                                data: {
+                                    'searchval': inputTag,
+                                    'searchcate': cateTag
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function (e) {
+                                    DestDetailSearch(e);
+                                }
+                            });
+                        }
+
+                    }
+
+                    function FestDetailSearch(Fest) {
+                        let TdestAreaDiv = document.querySelector('div.TdestArea');
+                        TdestAreaDiv.innerHTML = "";
+                        let FestList = [];
+                        FestList = Fest;
+                        for (let Fe of FestList) {
+                            let DestDiv = document.createElement('div');
+                            //        DestDiv.classList.add('col-lg-4');
+                            //      DestDiv.classList.add('col-md-6');
+                            DestDiv.classList.add('containDest');
+                            DestDiv.classList.add('col-lg-4');
+                            DestDiv.classList.add('col-md-6')
+
+
+                            let TdestImgDiv = document.createElement('div');
+                            //           TdestImgDiv.classList.add('card-mb-4');
+                            TdestImgDiv.classList.add('photo');
+                            TdestImgDiv.addEventListener('click', function (e) {
+                                DetailPageMoveFest(Fe.fecode);
+                            });
+
+                            let TdestImg = document.createElement('img');
+                            TdestImg.classList.add('tdImg');
+                            TdestImg.classList.add('card-img-top');
+                            TdestImg.setAttribute('src', Fe.feposter);
+
+                            TdestImgDiv.appendChild(TdestImg);
+                            DestDiv.appendChild(TdestImgDiv);
+
+                            let TdestTitleDiv = document.createElement('div');
+                            TdestTitleDiv.classList.add('caard-body');
+
+                            let TdestTitle = document.createElement('h3');
+                            TdestTitle.classList.add('card-title');
+                            TdestTitle.classList.add('h4');
+                            TdestTitle.classList.add('hTag');
+                            TdestTitle.innerText = Fe.fename;
+
+                            let TdestBtn = document.createElement('button');
+                            TdestBtn.classList.add('btn');
+                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.innerText = '계획에 추가하기';
+                            TdestBtn.setAttribute('data-bs-toggle', 'modal');
+                            TdestBtn.setAttribute('data-bs-target', '#exampleModal');
+                            TdestBtn.addEventListener('click', function () {
+                                FestselectCdcode(Fe.fecode, 'festival');
+                            });
+                            TdestTitleDiv.appendChild(TdestTitle);
+
+
+                            TdestTitleDiv.appendChild(TdestBtn);
+
+                            DestDiv.appendChild(TdestTitleDiv);
+
+                            TdestAreaDiv.appendChild(DestDiv);
+
+                        }
+                        Paging();
+                    }
+
+                    function DestDetailSearch(Tdest) {
+                        let TdestAreaDiv = document.querySelector('div.TdestArea');
+                        TdestAreaDiv.innerHTML = "";
+                        let TdestList = [];
+                        TdestList = Tdest;
+                        for (let Td of TdestList) {
+                            let DestDiv = document.createElement('div');
+                            //        DestDiv.classList.add('col-lg-4');
+                            //      DestDiv.classList.add('col-md-6');
+                            DestDiv.classList.add('containDest');
+                            DestDiv.classList.add('col-lg-4');
+                            DestDiv.classList.add('col-md-6');
+
+
+                            let TdestImgDiv = document.createElement('div');
+                            //           TdestImgDiv.classList.add('card-mb-4');
+                            TdestImgDiv.classList.add('photo');
+                            TdestImgDiv.addEventListener('click', function (e) {
+                                DetailPageMoveDest(Td.tdcode);
+                            });
+
+                            let TdestImg = document.createElement('img');
+                            TdestImg.classList.add('tdImg');
+                            TdestImg.classList.add('card-img-top');
+                            TdestImg.setAttribute('src', Td.tdphoto);
+
+                            TdestImgDiv.appendChild(TdestImg);
+                            DestDiv.appendChild(TdestImgDiv);
+
+                            let TdestTitleDiv = document.createElement('div');
+                            TdestTitleDiv.classList.add('caard-body');
+
+                            let TdestTitle = document.createElement('h3');
+                            TdestTitle.classList.add('card-title');
+                            TdestTitle.classList.add('h4');
+                            TdestTitle.classList.add('hTag');
+                            TdestTitle.innerText = Td.tdname;
+
+                            let TdestBtn = document.createElement('button');
+                            TdestBtn.classList.add('btn');
+                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.innerText = '계획에 추가하기';
+                            TdestBtn.setAttribute('data-bs-toggle', 'modal');
+                            TdestBtn.setAttribute('data-bs-target', '#exampleModal');
+                            TdestBtn.addEventListener('click', function () {
+                                DestselectCdcode(Td.tdcode, 'tdest');
+                            });
+                            TdestTitleDiv.appendChild(TdestTitle);
+
+
+                            TdestTitleDiv.appendChild(TdestBtn);
+
+                            DestDiv.appendChild(TdestTitleDiv);
+
+                            TdestAreaDiv.appendChild(DestDiv);
+
+                        }
+                        Paging();
+                    }
                 </script>
 
         </body>

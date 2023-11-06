@@ -81,11 +81,11 @@ public class TravelService {
 		return CtTdestService;
 	}
 
-	public ArrayList<Tdest> SearchTdestList(String searchVal) {
+	public HashMap<String, String> SearchTdestList(String searchVal) {
 		System.out.println("SERVICE - 검색 결과 요청");
 		
-		ArrayList<Tdest> SearchTdest = tdao.SearchTdest(searchVal);
-		return SearchTdest;
+		HashMap<String, String> SearchResult = tdao.SearchTdest(searchVal);
+		return SearchResult;
 	}
 
 	public Schedule getSchedule(Schedule sc, String seloption) {
@@ -151,6 +151,18 @@ public class TravelService {
 	public String getctcode(String ctcode) {
 		 
 		return tdao.getctcodeD(ctcode);
+	}
+	public int scUpdate(Schedule sc, String scOption) {
+		System.out.println("travelService - scUpdate");
+		return tdao.updateSchedule(sc, scOption);
+	}
+	public ArrayList<Festival> FestList(String searchval) {
+		System.out.println("축제 상세 검색 서비스");
+		return tdao.FestList(searchval);
+	}
+	public ArrayList<Tdest> TdestList(String searchval) {
+		System.out.println("여행지 상세 검색 서비스");
+		return tdao.TdestList(searchval);
 	}
 
 	
