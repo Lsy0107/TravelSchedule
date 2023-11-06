@@ -469,7 +469,7 @@
                             'nickname': naver_id_login.getProfileData('nickname'),
                             'name': naver_id_login.getProfileData('name'),
                             'id': naver_id_login.getProfileData('id'),
-                            'profile': naver_id_login.getProfileData('id'),
+                            'profile': naver_id_login.getProfileData('profile_image'),
                         },
                         
                         
@@ -498,13 +498,13 @@
                         url : 'MemberJoin_Naver',
                         data : {
                             'mid' : naver_id_login.getProfileData('id'),
-                            'mprofile' : naver_id_login.getProfileData('id'),
+                            'mprofile' : naver_id_login.getProfileData('profile_image'),
                             'mnickname' : naver_id_login.getProfileData('name')
                         },
                         
                         
                         success : function(result){
-                            alert('카카오 계정으로 회원가입 되었습니다.');
+                            alert('네이버 계정으로 회원가입 되었습니다.');
                             location.href = "/memberJoinForm"
                         }
                     })

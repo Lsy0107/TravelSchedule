@@ -49,7 +49,7 @@
   </select>
   <select id="selectFestival_detail">
   <![CDATA[
-  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage, lknum from (select fe.*, nvl(lknum, '0') lknum from festival fe left join (select fecode, count(*) as lknum  from likelist group by fecode) lk on fe.fecode=lk.fecode where enddate >= sysdate order by lknum desc) where fecode = #{code}
+  select fecode, ctcode, fename, feaddress, feposter, TO_CHAR(opendate, 'YYYY.MM.DD') as opendate, TO_CHAR(enddate, 'YYYY.MM.DD') as enddate, feinfo, felati, felongti, fetel, homepage, lknum from (select fe.*, nvl(lknum, '0') lknum from festival fe left join (select fecode, count(*) as lknum  from likelist group by fecode) lk on fe.fecode=lk.fecode order by lknum desc) where fecode = #{code}
   ]]>
   </select>
   <select id="selectFestival_Nearby">
