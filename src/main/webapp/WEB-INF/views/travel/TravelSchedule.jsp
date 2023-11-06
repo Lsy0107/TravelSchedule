@@ -390,7 +390,7 @@ div {
 	<script src="resources/js/scripts.js"></script>
 	<!-- kakao map api -->
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23bdfe79ede96bc585d6800ad13f132f"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=963b2e12b6b2948f660fa6eab737705a"></script>
 	<script src="https://kit.fontawesome.com/c8056a816e.js"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">

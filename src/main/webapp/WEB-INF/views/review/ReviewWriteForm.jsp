@@ -21,10 +21,11 @@
                     margin-left: auto;
                     margin-right: auto;
                     margin-top: 115px;
+                    margin-bottom: 50px;
                     background-color: white;
                     padding: 20px;
                     border-radius: 25px;
-                    box-shadow: grey 10px 10px;
+                    box-shadow: 0px 0px 12px #A2A2A2;
                 }
 
                 .disnone {
@@ -32,8 +33,9 @@
                 }
 
                 .imgDiv {
-                    overflow-x: scroll;
+                    
                     max-width: 100%;
+                    margin-bottom: 10px;
                 }
 
                 .tImg {
@@ -45,9 +47,9 @@
                 }
 
                 .img {
-                    width: 300px;
-                    height: 300px;
-                    padding: 20px;
+                    width: 24vh;
+                    height: 18vh;
+                    border-radius: 10px;
                 }
 
                 .ReTextArea {
@@ -62,6 +64,7 @@
                     height: 60px;
                     padding: 10px;
                     border-radius: 10px;
+                    margin-bottom: 10px;
                 }
 
                 body {
@@ -72,6 +75,7 @@
                     border: 1px solid;
                     padding: 9px;
                     border-radius: 11px;
+                    margin-bottom: 10px;
                 }
 
                 .Disn {
@@ -82,7 +86,23 @@
                     width: 150px;
                     height: 150px;
                 }
-                
+                ck-img{
+                	border: 3px solid blue;
+                }
+                .section::-webkit-scrollbar {
+				  height: 10px;
+				}
+				
+				.section::-webkit-scrollbar-track {
+				  background-color: gray;
+				  border-radius: 100px;
+				}
+				
+				.section::-webkit-scrollbar-thumb {
+				  border-radius: 100px;
+				  background-color: black;
+				  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+				}
             </style>
         </head>
 
@@ -102,16 +122,16 @@
                                         href="javascript:chageDisplay('weather')">축제</a></li>
                             </ul>
                         </div>
-                        <div class="imgDiv">
-                            <div class="tdest" id="meminfoTag">
+                        <div class="imgDiv ">
+                            <div class="tdest section" id="meminfoTag" style="overflow-x: auto;">
                                 <div class="tImg">
                                     <c:forEach var="td" items="${Td}">                                       
                                         <input type="checkbox" name="TF" id="${td.TDCODE}" value="${td.TDCODE}">
-                                        <label for="${td.TDCODE}"><img class="img" src="${td.TDPHOTO}" alt=""></label>
+                                        <label style="padding: 10px;" for="${td.TDCODE}"><img onclick="checkImg(this)" name="TF" id="${td.TDCODE}" value="${td.TDCODE}" class="img" src="${td.TDPHOTO}" alt=""></label>
                                     </c:forEach>
-                                </div>
+                                </div>	
                             </div>
-                            <div class="fest disnone" id="weatherTag">
+                            <div class="fest disnone" id="weatherTag" style="overflow-x: auto;">
                                 <div class="fImg">
                                     <c:forEach var="fe" items="${Fe}">
                                         <input type="checkbox" name="TF" id="${fe.FECODE}" value="${fe.FECODE}"> 
@@ -121,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ReContents">
+                    <div style="margin-bottom: 5px;" class="ReContents">
                         <textarea class="ReTextArea" name="contents"></textarea>
                     </div>
                     <div class="ReFile">
@@ -135,7 +155,7 @@
                     </div>
 
                     <div class="FormBtn">
-                        <button class="btn btn-outline-success" onclick="return ReviewSubmitCheck()">고다훈</button>
+                        <button class="btn btn-outline-success" onclick="return ReviewSubmitCheck()" style="width: 100%;">등록</button>
                     </div>
                 </div>
 
@@ -214,7 +234,9 @@
                                         //$("#img").attr("src", );
                                         imgTag.setAttribute("src",e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
                                         imgTag.setAttribute("data-file",f.name);
-                                        imgTag.classList.add('img');
+                                        imgTag.classList.add('img');	
+                                        
+                                        imgTag.classList.add('a');
                                         console.log(imgTag)
                                         //imgDiv.appendChild(imgTag);
                                         imgDiv.appendChild(imgTag);

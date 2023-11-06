@@ -141,12 +141,7 @@ div#passArea i{
 		<%@ include file="/WEB-INF/views/include/menu.jsp"%>
 		<!-- content 시작 -->
 		<div class="loginContents">
-			<div id="wrap">
-                <ul style="display: block;">
-                    <li style="display: inline-block; margin-top: 15px;"><button class="PrimaryLogin btn btn-outline-dark">기본 로그인</button></li>
-                    <li style="display: inline-block;"><button class="OnceLogin btn btn-outline-dark">일회용 로그인</button></li>
-                </ul>
-            </div>
+			
             <hr>
             <div class="loginArea">
                 <h2 class="Title">로그인</h2>
@@ -160,10 +155,8 @@ div#passArea i{
                         <input type="submit" class="btn btnArea btn-outline-secondary" value="로그인">
                     </form>
                 </div>
-                <p style="position: relative; left: 24%; bottom: -80px;">
+                <p class="d-flex justify-content-center" style="position: relative; bottom: -80px;">
                     <a href="/memberJoinForm">회원가입</a>
-                    <a href="">아이디 찾기</a>
-                    <a href="">비밀번호 찾기</a>
                 </p>
             </div>
 		</div>
