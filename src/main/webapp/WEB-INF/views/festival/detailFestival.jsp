@@ -28,10 +28,14 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
+.wrap>*{
+   	font-family: 'Noto Sans KR', sans-serif;
+}
 .signIn {
 	border: 1px solid black;
 	border-radius: 25px;
@@ -263,7 +267,7 @@ a {
 	position: relative;
 	font-weight: bold;
 	bottom: 30px;
-	left: 10px;
+	left: 35px;
 }
 
 .feinfo {
@@ -300,6 +304,9 @@ a {
 	width: 1000px;
 	margin-bottom: 10px;
 }
+.lknum{
+	display:inline-block;
+}
 </style>
 
 
@@ -317,6 +324,7 @@ a {
 			<p class="date">${festival.opendate}~ ${festival.enddate }</p>
 			<i class="fa-regular fa-heart fa-xl heart"
 				onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
+				<p class="lknum" id="lknum">${festival.lknum }</p>			
 			<button class="btn btn-outline-success"
 				onclick="selectCdcode('${festival.fecode}','festival')"
 				data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
@@ -361,7 +369,7 @@ a {
 										style="color: #000000;"></i>
 								</div>
 							</a>
-							<h5 class="moreText">축제 더보기</h5>
+							<h5 class="moreText">더보기</h5>
 						</div>
 					</div>
 				</c:if>
@@ -385,7 +393,7 @@ a {
 										style="color: #000000;"></i>
 								</div>
 							</a>
-							<h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
+							<h5 class="moreText">더보기</h5>
 						</div>
 					</div>
 				</div>
@@ -459,14 +467,19 @@ a {
 	        		type: "post",
 	        		data: { mid: "${sessionScope.loginId}", code : code, "seloption" : seloption},
 	        		aysnc: false,
-	        		success: function(result){
+	        		success: function(res){
 					console.log('클릭');
+					let lknum = document.querySelector('#lknum');
 					let heart = document.querySelector('#heart');
 					const cl = document.querySelector('#heart').classList;
 					if(cl.contains("fa-regular") ){
 					heart.classList.replace('fa-regular', 'fa-solid');
+					lknum.innerText = res;
+					console.log(res);
 					} else{
 					heart.classList.replace('fa-solid', 'fa-regular');
+					lknum.innerText = res;
+					console.log(res);
 					}
 	        			
 	        		}

@@ -202,9 +202,11 @@ public class HomeController {
 		} else {
 			int insert = apisvc.insertLk(lk, seloption);
 		}
+		String lknum = apisvc.selectLk(code, seloption);
+		System.out.println(lknum);
 		
 				
-		return result;
+		return lknum;
 		
 	}
 	

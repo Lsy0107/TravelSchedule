@@ -144,7 +144,7 @@
             	margin-left: 5px;
             }
             .wrap>*{
-            	font-family: 'Noto Sans KR', sans-serif;
+            	font-family: 'Noto Sans KR', sans-serif; 
             }
         </style>
     </head>
@@ -188,7 +188,7 @@
 		
 		            </div>
 		            <div class="select">
-		            	<p style="margin-top:20px;" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">즐겨찾기</p>
+		            	<p style="margin-top:20px;" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">좋아요</p>
 		            	<p style="${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
 		            </div>
 				</div>
