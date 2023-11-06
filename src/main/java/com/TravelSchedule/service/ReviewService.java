@@ -181,6 +181,16 @@ public class ReviewService {
 		
 		return rdao.selectCalendarCount(mid);
 	}
+
+	public ArrayList<HashMap<String, String>> reList(String recode) {
+		
+		return rdao.reList(recode);
+	}
+
+	public HashMap<String, String> getreList(String recode) {
+		// TODO Auto-generated method stub
+		return rdao.getreList(recode);
+	}
 	
 
 

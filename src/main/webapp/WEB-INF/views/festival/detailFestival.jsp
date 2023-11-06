@@ -313,6 +313,9 @@
 				.Recommhr {
 					border-top: 1px solid black;
 				}
+				.TitleDiv{
+					margin-top: 10px;
+				}
 			</style>
 
 
@@ -411,8 +414,9 @@
 													alt="">
 												<span>${re.MID}</span>
 											</div>
-											<div>
+											<div class="TitleDiv">
 												<span>${re.RETITLE}</span>
+												<a class="d-flex justify-content-end" href="/detailReview?recode=${re.RECODE}">리뷰 자세히보기</a>
 											</div>
 											<hr class="Recommhr">
 										</div>

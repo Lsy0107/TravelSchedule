@@ -79,5 +79,11 @@ public interface ReviewDao {
 	@Select("SELECT COUNT(*) FROM CALENDAR WHERE MID = #{mid} AND NOT CDSTATE = 'Y'")
 	int selectCalendarCount(@Param("mid") String mid);
 
+	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
+	ArrayList<HashMap<String, String>> reList(String recode);
+
+	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
+	HashMap<String, String> getreList(String recode);
+
 
 }
