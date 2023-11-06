@@ -157,18 +157,6 @@ public class HomeController {
 		return new Gson().toJson(TdestList);
 	}
 	
-	@RequestMapping(value="/SearchService")
-	public @ResponseBody ModelAndView SearchService(String searchVal) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("검색한 변수"+searchVal);
-		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
-		ArrayList<Country> CountryList = tsvc.CountryList();
-		mav.addObject("CountryList",CountryList);
-		mav.addObject("TdestList",TdestList);
-		mav.setViewName("/travel/TdestSearch");
-		
-		return mav;
-	}
 	
 	@RequestMapping(value="/SearchService_fe")
 	public @ResponseBody ModelAndView SearchService_fe(String searchVal) {
