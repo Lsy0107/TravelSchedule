@@ -235,8 +235,8 @@ div {
 					</div>
 				</nav>
 			</div>
-			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
-				style="overflow: scroll; background-color: aliceblue; margin-left: 15px;">
+			<div class="p-4 asd disnone" id="DestArea"
+				style="overflow: hidden; background-color: aliceblue; margin-left: 15px;">
 				<div class="col d-flex justify-content-center"
 					style="margin-bottom: 15px;">
 					<button class="w-btn-outline w-btn-pink-outline" onclick="disnonefe()">여행지</button>
@@ -320,7 +320,7 @@ div {
 
 		</div>
 		<div id="map" class="col border border-dark"
-			style="height: 963px; margin-left: 243px;"></div>
+			style="height: 100vh; margin-left: 243px;"></div>
 
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
