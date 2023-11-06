@@ -21,9 +21,15 @@
 .bk{
 	color: black;
 }
-.font-jua{
+
+.bg-wh{
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
+div, h1, h2, h3, h4, h5, h6{
 	font-family: 'Jua' !important;
 }
+
 </style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-wh font-jua">
 	<div class="container px-5">
@@ -41,7 +47,7 @@
 					<c:when test="${sessionScope.loginId ==null }">
 						<li class="nav-item "><a class="nav-link bk"
 							href="/memberLoginForm">여행달력</a></li>
-					</c:when>
+					</c:when>	
 					<c:otherwise>
 						<li class="nav-item"><a class="nav-link bk"
 							href="/selectCalendar">여행달력</a></li>
@@ -61,13 +67,13 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle " id="navbarDropdownPortfolio"
 					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false" style="padding:0px; padding-left:7.5px;"><img style="width:38px;"src="/resources/memberProfile/${sessionScope.loginProfile}" onerror="this.src='${pageContext.request.contextPath}/resources/memberProfile/default2.jpg'"
+					aria-expanded="false" style="padding:0px; padding-left:7.5px;"><img style="width:38px;"src="/resources/memberProfile/${sessionScope.loginProfile}"
 								class="profile"></a>
 					<div class="dropdown-menu dropdown-menu-end w3-card-4 p-3"
 						style="width: 300px; border: none;"
 						aria-labelledby="navbarDropdownPortfolio">
 						<h1 style="text-align: justify;">
-							<img src="/resources/memberProfile/${sessionScope.loginProfile}" onerror="this.src='${pageContext.request.contextPath}/resources/memberProfile/default2.jpg'"
+							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
 								class="profile">${sessionScope.loginId }</h1>
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>

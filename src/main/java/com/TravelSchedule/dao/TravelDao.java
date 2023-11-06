@@ -70,5 +70,7 @@ public interface TravelDao {
 	@Select("SELECT CTCODE FROM COUNTRY WHERE CTNAME = #{ctcode}")
 	String getctcodeD(String ctcode);
 
+	int updateSchedule(@Param("sc")Schedule sc, @Param("scOption")String scOption);
+
 
 }

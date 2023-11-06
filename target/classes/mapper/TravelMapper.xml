@@ -115,4 +115,11 @@
 			select * from festival where ctcode = #{ctcode}
 		</if>
 	</select>
+	
+	<update id="updateSchedule">
+		UPDATE schedule set scdate = to_date(#{sc.scdate}, 'YYYY-MM-DDHH24:MI') where mid = #{sc.mid} AND cdcode = #{sc.cdcode} AND
+		<if test="scOption == 'fe'">fecode = #{sc.fecode}</if>
+		<if test="scOption == 'td'">tdcode = #{sc.tdcode}</if>
+	</update>
+	
 </mapper>

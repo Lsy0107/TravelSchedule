@@ -249,4 +249,13 @@ public class TravelController {
 			
 		return new Gson().toJson(FestSearch);
 	}
+	
+	@RequestMapping(value = "/scheduleUpdate")
+	public @ResponseBody String scheduleUpdate(Schedule sc, String scOption) {
+		System.out.println("스케쥴 수정");
+		System.out.println(sc);
+		int rs = tsvc.scUpdate(sc, scOption);
+		return null;
+	}
+	
 }

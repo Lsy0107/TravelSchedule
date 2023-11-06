@@ -29,6 +29,7 @@ String strdate = simpleDate.format(date);
 <!-- ajax -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
 <style type="text/css">
 .disnone {
 	display: none;
@@ -46,7 +47,6 @@ String strdate = simpleDate.format(date);
 	width: 405px;
 	border-radius: 10px;
 }
-
 .btn-pmc {
 	border-radius: 25px;
 	height: 40px;
@@ -191,9 +191,11 @@ div {
 											<p>${sc.SCDATE }</p>
 										</div>
 
-										<div class="collapse" id="${sc.TDCODE }"
-											style="text-align: end;">
-											<button class="btn btn-primary">변경하기</button>
+										<div class="collapse"
+											id="${sc.TDCODE }"
+											style="text-align:end;"
+											data-bs-toggle="modal" data-bs-target="#changeModal">
+											<button class="btn btn-primary" onclick="scheduleUpdate('${sc.MID}', '${sc.CDCODE}', '${sc.TDCODE}', '${sc.FECODE}', 'td')">변경하기</button>
 										</div>
 									</c:when>
 									<c:when test="${sc.FECODE != null }">
@@ -204,9 +206,12 @@ div {
 											<p style="margin: 0px;">${sc.FENAME }</p>
 											<p>${sc.SCDATE }</p>
 										</div>
-										<div class="collapse" id="${sc.FECODE }"
-											style="text-align: end;">
-											<button class="btn btn-primary">변경하기</button>
+
+										<div class="collapse"
+											id="${sc.FECODE }"
+											style="text-align:end;"
+											data-bs-toggle="modal" data-bs-target="#changeModal">
+										<button class="btn btn-primary" onclick="scheduleUpdate('${sc.MID}', '${sc.CDCODE}', '${sc.TDCODE}', '${sc.FECODE}', 'fe')">변경하기</button>
 										</div>
 									</c:when>
 								</c:choose>
@@ -230,13 +235,12 @@ div {
 					</div>
 				</nav>
 			</div>
-			<div class="p-4 disnone " id="DestArea"
-				style="background-color: aliceblue; margin-left: 15px; overflow:hidden;">
-				<div style="margin-bottom: 15px; height:44.8px; text-align:center;">
-					<button class="w-btn-outline w-btn-pink-outline"
-						onclick="disnonefe()"style="min-width:115px;">여행지</button>
-					<button class="w-btn-outline w-btn-blue-outline"
-						onclick="disnonetd()"style="min-width:115px;">축제</button>
+			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
+				style="overflow: scroll; background-color: aliceblue; margin-left: 15px;">
+				<div class="col d-flex justify-content-center"
+					style="margin-bottom: 15px;">
+					<button class="w-btn-outline w-btn-pink-outline" onclick="disnonefe()">여행지</button>
+					<button class="w-btn-outline w-btn-blue-outline" onclick="disnonetd()">축제</button>
 				</div>
 				<div>
 					<nav id="tdArea" class=""
@@ -342,6 +346,35 @@ div {
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
 							data-bs-dismiss="modal" id="selectClear">선택</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="changeModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">날짜 수정하기</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="scheduleUpdate">
+						<p id="destName"></p>
+						<input type="date" id="sDate" min="<%=strdate%>"> <select
+							id="sHH">
+							<c:forEach begin="0" end="23" var="i">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select> : <select id="sMM">
+							<option value="00">0</option>
+							<option value="30">30</option>
+						</select>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							data-bs-dismiss="modal" id="upDateSc">수정</button>
 					</div>
 				</div>
 			</div>
@@ -483,7 +516,7 @@ div {
 					alert("계획을 1개 이상 추가해주세요");
 					break;
 				}
-			}
+			}	
 		})
 		}
 	}
@@ -556,6 +589,48 @@ div {
 		}
 	}
 	</script>
+	
+	<script type="text/javascript">
+		function scheduleUpdate(mid, cdcode, tdcode, fecode, scOption) {
+			console.log(mid, cdcode, tdcode, fecode, scOption);
+			
+			let updateBtn = document.querySelector("#upDateSc");
+			updateBtn.addEventListener("click", function(){
+				let scdate = document.querySelector("#sDate").value;
+				console.log(scdate);
+				if(scdate == ""){
+					alert("날짜를 선택해주세요");
+				}else{
+				let schour = document.querySelector("#sHH").value
+				if(schour.length == 1){
+					schour = "0"+schour;
+				}
+				scdate = scdate + " " + schour;
+				let scmin = document.querySelector("#sMM").value;
+				scdate = scdate + ":" + scmin;
+				
+				console.log(scdate, mid, cdcode, tdcode,  fecode, scOption);
+				
+				let dataoption = {};
+				if(scOption == 'td'){
+					dataoption = {"mid":mid, "cdcode":cdcode, "tdcode":tdcode, "scdate":scdate, "scOption":scOption}
+				}else{
+					dataoption = {"mid":mid, "cdcode":cdcode, "fecode":fecode, "scdate":scdate, "scOption":scOption}
+				}
+				$.ajax({
+					url:"/scheduleUpdate",
+					type:"post",
+					data: dataoption,
+					success:function(rs){
+						location.reload();
+						}	
+					})
+			
+				}	
+			})
+		}
+	</script>
+	
 
 </body>
 </html>
