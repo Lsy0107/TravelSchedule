@@ -29,6 +29,16 @@ public class TravelController {
 
 	@Autowired
 	ApiService apisvc;
+	
+	@RequestMapping(value="/sreachPreview",produces="application/json;charset=UTF-8")
+	public @ResponseBody String sreachPreview(String searchInfo, String seloption) {
+		System.out.println("검색어 미리보기");
+		System.out.println(seloption);
+		ArrayList<HashMap<String, String>> previewList = tsvc.getPreview(searchInfo, seloption);
+		System.out.println(previewList);
+		return new Gson().toJson(previewList);
+	}
+	
 	@RequestMapping(value="/removeDest")
 	public @ResponseBody String removeDest(Schedule sc, String seloption){
 		System.out.println("캘린더 개획 삭제");
