@@ -617,5 +617,10 @@ public class ApiService {
 		return apiDao.selectReview(recode);
 	}
 
+	public String selectLk(String code, String seloption) {
+		
+		return apiDao.selectLknum(code, seloption);
+	}
+
 
 }

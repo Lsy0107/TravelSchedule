@@ -164,6 +164,10 @@ public class TravelService {
 		System.out.println("여행지 상세 검색 서비스");
 		return tdao.TdestList(searchval);
 	}
+	public ArrayList<HashMap<String, String>> getPreview(String searchInfo, String seloption) {
+		System.out.println(("travelService - getPreview()"));
+		return tdao.getPreview(searchInfo, seloption);
+	}
 
 	
 

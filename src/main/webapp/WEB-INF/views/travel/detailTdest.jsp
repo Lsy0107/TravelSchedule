@@ -27,10 +27,14 @@
 
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style type="text/css">
+.wrap>*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
 .signIn {
 	border: 1px solid black;
 	border-radius: 25px;
@@ -212,7 +216,6 @@ main {
 }
 .feName{
 	font-size: 20px;
-    font-weight: bold;
     text-align: center;
     height: 30px;
     width: 200px;
@@ -244,7 +247,7 @@ a{
 	position: relative;
 	font-weight: bold;
 	bottom: 30px;
-	left: 10px;
+	left: 35px;
 }
 .feinfo{
 	width: 1000px;
@@ -276,6 +279,9 @@ a{
 	width: 1000px;
 	margin-bottom: 10px;
 }
+.lknum{
+	display:inline-block;
+}
 </style>
 
 
@@ -290,6 +296,7 @@ a{
 			<img class="card-img-top Img" src="${detailTd.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 			<p class="name"> ${detailTd.tdname }</p>
 			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${detailTd.tdcode}', 'tdest')" id="heart"></i>
+			<p class="lknum" id="lknum">${detailTd.lknum }</p>
 			<button class="btn btn-outline-success" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
 			data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 			추가하기</button>
@@ -327,7 +334,7 @@ a{
 					            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
 					        </div>
 				        </a>
-			            <h5 class="moreText" style="font-size: 1.1rem;">여행지 더보기</h5>
+			            <h5 class="moreText">더보기</h5>
 			        </div>    
 		        </div>
 		        <div class="FestivalRecomm">
@@ -347,7 +354,7 @@ a{
 						            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
 						        </div>
 					        </a>
-				            <h5 class="moreText" >축제 더보기</h5>
+				            <h5 class="moreText" >더보기</h5>
 				        </div>
 			        </div>
 	            </div>
@@ -420,14 +427,17 @@ a{
 	        		type: "post",
 	        		data: { mid: "${sessionScope.loginId}", code : code, "seloption" : seloption},
 	        		aysnc: false,
-	        		success: function(result){
+	        		success: function(res){
 					console.log('클릭');
+					let lknum = document.querySelector('#lknum');
 					let heart = document.querySelector('#heart');
 					const cl = document.querySelector('#heart').classList;
 					if(cl.contains("fa-regular") ){
 					heart.classList.replace('fa-regular', 'fa-solid');
+					lknum.innerText = res;
 					} else{
 					heart.classList.replace('fa-solid', 'fa-regular');
+					lknum.innerText = res;
 					}
 	        			
 	        		}
@@ -438,41 +448,47 @@ a{
 		
 	</script>
 	<script type="text/javascript">
-	 function selectCdcode(tdcode, seloption) {
-         if ("${sessionScope.loginId}" == "") {
-             location.href = "${pageContext.request.contextPath}/memberLoginForm"
-         } else {
-             $.ajax({
-                 url: "/getCdcode",
-                 type: "post",
-                 data: { mid: "${sessionScope.loginId}" },
-                 async: false,
-                 success(rs) {
-                     console.log(rs.length);
-                     let modalBodyTag = document.querySelector("#selectCalendar")
-                     modalBodyTag.innerHTML = "";
-                     if (rs.length > 0) {
-
-                         let selTag = document.createElement("select")
-                         for (let cd of rs) {
-                             let optionTag = document.createElement("option")
-                             optionTag.innerText = cd.cdname;
-                             optionTag.setAttribute("value", cd.cdcode)
-                             selTag.appendChild(optionTag);
-                         }
-                         modalBodyTag.appendChild(selTag);
-                         let btnTag = document.querySelector("#selectClear");
-                         btnTag.addEventListener("click", function () {
-                             selectDest(tdcode, selTag.value, seloption)
-                         })
-                     }
-                     else {
-                         modalBodyTag.innerText = "달력을 추가 해주세요";
-                     }
-                 }
-             })
-         }
-     }
+	function selectCdcode(code, seloption) {
+		if ("${sessionScope.loginId}" == "") {
+			location.href = "${pageContext.request.contextPath}/memberLoginForm"
+		} else {
+			$.ajax({
+				url:"/getCdcode",
+				type:"post",
+				data:{mid:"${sessionScope.loginId}"},
+				async:false,
+				success(rs){
+					let modalBodyTag = document.querySelector("#selectCalendar")
+					modalBodyTag.innerHTML = "";
+					if(rs.length > 0){
+						let checkinfo = false;
+						let selTag = document.createElement("select")
+						for(let cd of rs){
+							if(cd.cdstate == 'Y'){
+							let optionTag = document.createElement("option")
+							optionTag.innerText = cd.cdname;
+							optionTag.setAttribute("value", cd.cdcode)
+							selTag.appendChild(optionTag);
+							checkinfo = true;
+							}
+						}
+						if(checkinfo){
+						modalBodyTag.appendChild(selTag);
+						let btnTag = document.querySelector("#selectClear");
+						btnTag.addEventListener("click", function(){
+							selectDest(code, selTag.value, seloption)
+						})
+						}else{
+							modalBodyTag.innerText="계획 가능한 달력이 없습니다.";
+						}
+					}
+					else{
+						modalBodyTag.innerText="달력을 추가 해주세요";
+					}
+				}				
+				})
+		}
+	}
      function selectDest(tdcode, cdcode, seloption) {
          console.log(tdcode + "  " + cdcode);
          $.ajax({

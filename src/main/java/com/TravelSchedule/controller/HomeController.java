@@ -118,6 +118,7 @@ public class HomeController {
 		mav.addObject("Re",ReList);
 		
 		Festival festival = apisvc.detailFestival(code);
+		System.out.println(festival);
 		String ctcode = festival.getCtcode();
 		String fecode = festival.getFecode();
 		ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
@@ -128,6 +129,7 @@ public class HomeController {
 		mav.addObject("festival", festival);
 		mav.addObject("nearby", Nearby);
 		mav.addObject("tdest", tdest);
+		mav.addObject("ReList",ReList);
 		mav.setViewName("festival/detailFestival");
 		return mav;
 	}
@@ -190,9 +192,11 @@ public class HomeController {
 		} else {
 			int insert = apisvc.insertLk(lk, seloption);
 		}
+		String lknum = apisvc.selectLk(code, seloption);
+		System.out.println(lknum);
 		
 				
-		return result;
+		return lknum;
 		
 	}
 	

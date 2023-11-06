@@ -384,8 +384,7 @@ div {
 	<!-- Footer
 	-->
 	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="resources/js/scripts.js"></script>
 	<!-- kakao map api -->
@@ -398,8 +397,8 @@ div {
 	let lalngList = JSON.parse('${lalngList}');
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng( 37.56458948133976, 126.97730596902437), //지도의 중심좌표.
-		level: 10 //지도의 레벨(확대, 축소 정도)
+		center: new kakao.maps.LatLng( lalngList[0].lati, lalngList[0].longti), //지도의 중심좌표.
+		level: 12 //지도의 레벨(확대, 축소 정도)
 	};
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
