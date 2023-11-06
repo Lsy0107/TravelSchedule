@@ -39,6 +39,7 @@ public class MemberController {
 		}else {
 			session.setAttribute("loginId", rs.getMid());
 			session.setAttribute("loginProfile", rs.getMprofile());
+			session.setAttribute("loginNickname", rs.getMnickname());
 			mav.setViewName("redirect:/");
 		}
 		return mav;

@@ -74,7 +74,7 @@ div, h1, h2, h3, h4, h5, h6{
 						aria-labelledby="navbarDropdownPortfolio">
 						<h1 style="text-align: justify;">
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
-								class="profile">${sessionScope.loginId }</h1>
+								class="profile">${sessionScope.loginNickname }</h1>
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
 						

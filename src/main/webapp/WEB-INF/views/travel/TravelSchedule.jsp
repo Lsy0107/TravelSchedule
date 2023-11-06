@@ -178,7 +178,7 @@ div {
 				<nav class=""
 					style="border: 1px solid #A2A2A2; border-radius: 10px; background-color: white; box-shadow: 0 0 8px #A2A2A2">
 					<div id="scArea" class="p-3	"
-						style="min-height: 590px; width: 200px; display: flow; text-overflow: ellipsis;">
+						style="min-height: 80vh; width: 200px; display: flow; text-overflow: ellipsis;">
 						<c:forEach var="sc" items="${scdestList }">
 							<c:if test="${sc.SCDATE != null}">
 								<c:choose>
