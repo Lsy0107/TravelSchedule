@@ -157,11 +157,20 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/SearchService")
-	public @ResponseBody ModelAndView SearchService(String searchVal) {
+	public @ResponseBody ModelAndView SearchService(String searchval,String searchcate) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("검색한 변수"+searchVal);
+		System.out.println("검색한 변수"+searchval);
+		System.out.println("검색한 변수"+searchcate);
+		
+		if(searchcate.equals("축제")) {
+			
+		}
+		else if(searchcate.equals("여행지")) {
+			
+		}
+		/*
 		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
-		ArrayList<Country> CountryList = tsvc.CountryList();
+		ArrayList<Country> CountryList = tsvc.CountryList();*/
 		mav.addObject("CountryList",CountryList);
 		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");

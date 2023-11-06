@@ -81,11 +81,11 @@ public class TravelService {
 		return CtTdestService;
 	}
 
-	public ArrayList<Tdest> SearchTdestList(String searchVal) {
+	public HashMap<String, String> SearchTdestList(String searchVal) {
 		System.out.println("SERVICE - 검색 결과 요청");
 		
-		ArrayList<Tdest> SearchTdest = tdao.SearchTdest(searchVal);
-		return SearchTdest;
+		HashMap<String, String> SearchResult = tdao.SearchTdest(searchVal);
+		return SearchResult;
 	}
 
 	public Schedule getSchedule(Schedule sc, String seloption) {
