@@ -235,8 +235,8 @@ div {
 					</div>
 				</nav>
 			</div>
-			<div class="collapse p-4 asd dison" id="navbarToggleExternalContent"
-				style="overflow: scroll; background-color: aliceblue; margin-left: 15px;">
+			<div class="p-4 asd disnone" id="DestArea"
+				style="overflow: hidden; background-color: aliceblue; margin-left: 15px;">
 				<div class="col d-flex justify-content-center"
 					style="margin-bottom: 15px;">
 					<button class="w-btn-outline w-btn-pink-outline" onclick="disnonefe()">여행지</button>
