@@ -168,6 +168,9 @@ div#passArea i{
             </div>
 		</div>
 		<!-- content 종료 -->
+		
+		
+		
 	</main>
 	<!-- Footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
@@ -198,5 +201,10 @@ div#passArea i{
 });
         
     </script>
+    
+    <script type="text/javascript">
+    	
+    </script>
+    
 </body>
 </html>
