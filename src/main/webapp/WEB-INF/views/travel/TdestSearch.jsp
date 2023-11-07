@@ -470,18 +470,20 @@
                     </div>
                     <div class="SearchBox">
                         <div class="SearchD">
-                            <select name="cateVal" class="SearchCate" required="required"
+                            <select name="cateVal" id="selectCategory" class="SearchCate" required="required"
                                 onchange="selectCategory(this)">
                                 <option value="">카테고리</option>
                                 <option value="축제">축제</option>
                                 <option value="여행지">여행지</option>
                             </select>
-                            <input class="SearchInput" type="text" placeholder="검색어를 입력해주세요.">
+                            <input class="SearchInput" onkeyup="previewInput(this)" type="text" placeholder="검색어를 입력해주세요.">
                             <button class="SearchBtn2" onclick="SearchDetail()"><i id=""
                                     class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         <button id="CloseIcon"><i id="Close" class="fa-solid fa-circle-xmark"
                                 style="color: #000000;"></i></button>
+                    <div id="previewtext" style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius:10px;">
+                    </div>
                     </div>
 
                 </div>
@@ -570,7 +572,6 @@
                 <script>
 
                     $(document).ready(function () {
-                        console.log('페이지 로드');
                         let selectCity = document.querySelector(".SelCity");
                         selectCity.innerText = "";
 
@@ -579,7 +580,6 @@
 
                 <script>
                     function selectCity(selOp) {
-                        console.log(selOp.value);
                         if (selOp.value == '지역') {
                             $('#SelCity').css('color', 'black');
                         }
@@ -588,7 +588,6 @@
                         }
                     }
                     function selectCategory(selOp) {
-                        console.log(selOp);
                         if (selOp.value == '') {
                             $('#SelCate').css('color', 'black');
                         }
@@ -675,7 +674,7 @@
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Td.tdphoto);
-
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
@@ -736,7 +735,7 @@
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Fe.feposter);
-
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
@@ -774,7 +773,6 @@
                 <script>
                     function Paging() {
                         const rowsPerPage = 30; //페이지당 출력할 수
-                        console.log(currentCate);
                         let rows = null;
 
                         rows = document.querySelectorAll('.containDest');
@@ -784,7 +782,6 @@
                         //console.log(rows);
 
                         const pageCount = Math.ceil(rowsCount / rowsPerPage);
-                        console.log(pageCount);
                         const numbers = document.querySelector('#numbers');
 
                         const prevPageBtn = document.querySelector('.fa-arrow-left');
@@ -801,7 +798,6 @@
                             numbers.innerHTML += '<li><a href="">' + i + '</a></li>';
                         }
                         const numberBtn = numbers.querySelectorAll('li');
-                        console.log(numberBtn);
 
                         for (nb of numberBtn) {
                             nb.style.display = 'none';
@@ -898,38 +894,44 @@
                     }
                     function DestselectCdcode(tdcode, seloption) {
                         if ("${sessionScope.loginId}" == "") {
-                            location.href = "${pageContext.request.contextPath}/memberLoginForm"
-                        } else {
-                            $.ajax({
-                                url: "/getCdcode",
-                                type: "post",
-                                data: { mid: "${sessionScope.loginId}" },
-                                async: false,
-                                success(rs) {
-                                    console.log(rs.length);
-                                    let modalBodyTag = document.querySelector("#selectCalendar")
-                                    modalBodyTag.innerHTML = "";
-                                    if (rs.length > 0) {
-
-                                        let selTag = document.createElement("select")
-                                        for (let cd of rs) {
-                                            let optionTag = document.createElement("option")
-                                            optionTag.innerText = cd.cdname;
-                                            optionTag.setAttribute("value", cd.cdcode)
-                                            selTag.appendChild(optionTag);
-                                        }
-                                        modalBodyTag.appendChild(selTag);
-                                        let btnTag = document.querySelector("#selectClear");
-                                        btnTag.addEventListener("click", function () {
-                                            selectDest(tdcode, selTag.value, seloption)
-                                        })
-                                    }
-                                    else {
-                                        modalBodyTag.innerText = "달력을 추가 해주세요";
-                                    }
-                                }
-                            })
-                        }
+            				location.href = "${pageContext.request.contextPath}/memberLoginForm"
+            			} else {
+            				$.ajax({
+            					url:"/getCdcode",
+            					type:"post",
+            					data:{mid:"${sessionScope.loginId}"},
+            					async:false,
+            					success(rs){
+            						let modalBodyTag = document.querySelector("#selectCalendar")
+            						modalBodyTag.innerHTML = "";
+            						if(rs.length > 0){
+            							let checkinfo = false;
+            							let selTag = document.createElement("select")
+            							for(let cd of rs){
+            								if(cd.cdstate == 'Y'){
+            								let optionTag = document.createElement("option")
+            								optionTag.innerText = cd.cdname;
+            								optionTag.setAttribute("value", cd.cdcode)
+            								selTag.appendChild(optionTag);
+            								checkinfo = true;
+            								}
+            							}
+            							if(checkinfo){
+            							modalBodyTag.appendChild(selTag);
+            							let btnTag = document.querySelector("#selectClear");
+            							btnTag.addEventListener("click", function(){
+            								selectDest(code, selTag.value, seloption)
+            							})
+            							}else{
+            								modalBodyTag.innerText="계획 가능한 달력이 없습니다.";
+            							}
+            						}
+            						else{
+            							modalBodyTag.innerText="달력을 추가 해주세요";
+            						}
+            					}				
+            					})
+            			}
                     }
                     function selectDest(tdcode, cdcode, seloption) {
                         console.log(tdcode + "  " + cdcode);
@@ -949,42 +951,46 @@
                             }
                         })
                     }
-
-
                     function FestselectCdcode(fecode, seloption) {
-                        if ("${sessionScope.loginId}" == "") {
-                            location.href = "${pageContext.request.contextPath}/memberLoginForm"
-                        } else {
-                            $.ajax({
-                                url: "/getCdcode",
-                                type: "post",
-                                data: { mid: "${sessionScope.loginId}" },
-                                async: false,
-                                success(rs) {
-                                    console.log(rs.length);
-                                    let modalBodyTag = document.querySelector("#selectCalendar")
-                                    modalBodyTag.innerHTML = "";
-                                    if (rs.length > 0) {
-
-                                        let selTag = document.createElement("select")
-                                        for (let cd of rs) {
-                                            let optionTag = document.createElement("option")
-                                            optionTag.innerText = cd.cdname;
-                                            optionTag.setAttribute("value", cd.cdcode)
-                                            selTag.appendChild(optionTag);
-                                        }
-                                        modalBodyTag.appendChild(selTag);
-                                        let btnTag = document.querySelector("#selectClear");
-                                        btnTag.addEventListener("click", function () {
-                                            selectFest(fecode, selTag.value, seloption)
-                                        })
-                                    }
-                                    else {
-                                        modalBodyTag.innerText = "달력을 추가 해주세요";
-                                    }
-                                }
-                            })
-                        }
+                    	if ("${sessionScope.loginId}" == "") {
+            				location.href = "${pageContext.request.contextPath}/memberLoginForm"
+            			} else {
+            				$.ajax({
+            					url:"/getCdcode",
+            					type:"post",
+            					data:{mid:"${sessionScope.loginId}"},
+            					async:false,
+            					success(rs){
+            						let modalBodyTag = document.querySelector("#selectCalendar")
+            						modalBodyTag.innerHTML = "";
+            						if(rs.length > 0){
+            							let checkinfo = false;
+            							let selTag = document.createElement("select")
+            							for(let cd of rs){
+            								if(cd.cdstate == 'Y'){
+            								let optionTag = document.createElement("option")
+            								optionTag.innerText = cd.cdname;
+            								optionTag.setAttribute("value", cd.cdcode)
+            								selTag.appendChild(optionTag);
+            								checkinfo = true;
+            								}
+            							}
+            							if(checkinfo){
+            							modalBodyTag.appendChild(selTag);
+            							let btnTag = document.querySelector("#selectClear");
+            							btnTag.addEventListener("click", function(){
+            								selectDest(code, selTag.value, seloption)
+            							})
+            							}else{
+            								modalBodyTag.innerText="계획 가능한 달력이 없습니다.";
+            							}
+            						}
+            						else{
+            							modalBodyTag.innerText="달력을 추가 해주세요";
+            						}
+            					}				
+            					})
+            			}
                     }
                     function selectFest(fecode, cdcode, seloption) {
                         console.log(fecode + "  " + cdcode);
@@ -1005,14 +1011,12 @@
                         $(window).scroll(function () {
                             if ($(this).scrollTop() > 50) {
                                 $('.Bar').fadeIn(500);
-                                console.log('생김');
                             } else {
                                 $('.Bar').fadeOut(500);
                             }
                         });
                     })
                     $('.Bar').click(function (event) {
-                        console.log('클릭!');
                         event.preventDefault();
                         $('html,body').animate({ scrollTop: 0 }, 300);
                     });
@@ -1100,6 +1104,7 @@
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Fe.feposter);
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
 
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
@@ -1160,6 +1165,7 @@
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Td.tdphoto);
+                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'")
 
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
@@ -1195,7 +1201,57 @@
                         Paging();
                     }
                 </script>
-
+				<script type="text/javascript">
+				function previewInput(obj){
+					console.log(obj);
+					let SelCateTag = document.querySelector('#selectCategory');
+					let previewText = document.querySelector('#previewtext');
+					let Data = {};
+					switch(SelCateTag.value){
+					case '':
+						previewText.innerHTML = "";
+						previewText.innerText = '카테고리를 선택해주세요!';
+						return;
+						break;
+					case '축제':
+						Data = {"searchInfo": obj.value, "seloption":'fe'};
+						break;
+					case '여행지':
+						Data = {"searchInfo": obj.value, "seloption":'td'};
+						break;
+					}
+					$.ajax({
+						url:"/sreachPreview",
+						type:"post",
+						data:Data,
+                        success: function (rs) {
+                        	printPreview(rs, previewText, SelCateTag.value, obj);
+                        }
+					})
+				}
+				//미리보기 텍스트 출력
+				function printPreview(rs, previewText, seloption, searchbox){
+					console.log(rs);
+					console.log(previewText);
+					previewText.innerHTML = '';
+					for(let pre of rs){
+					let pTag = document.createElement('p');
+					if(seloption == '축제'){
+						pTag.innerText = pre.FENAME; 
+					}else{
+						pTag.innerText = pre.TDNAME;
+					}
+					pTag.style.margin="0";
+					pTag.style.cursor="pointer";
+					pTag.classList.add("p-2");
+					pTag.addEventListener('click',function(){
+						searchbox.value=pTag.innerText;
+						SearchDetail()
+					})
+					previewText.appendChild(pTag);
+					}
+				}
+				</script>
         </body>
 
         </html>
