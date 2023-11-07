@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>TravelSchedule - main</title>
+<title>TravelSchedule - admin</title>
 
 <script src="https://kit.fontawesome.com/c8056a816e.js"
 	crossorigin="anonymous"></script>
@@ -472,7 +472,26 @@ color:black;}
 		<!-- container 종료 -->
 		<!-- content 종료 -->
 		<!-- Footer-->
-		<%@ include file="include/footer.jsp"%>
+		<footer class="bg-dark py-4 mt-auto" style="position: relative; bottom: 0px;">
+			<div class="container px-5">
+				<div
+					class="row align-items-center justify-content-between flex-column flex-sm-row">
+					<div class="col-auto">
+						<div class="small m-0 text-white">Copyright &copy; Your
+							Website 2023</div>
+					</div>
+					<div class="col-auto">
+						<a class="link-light small" href="#!">Privacy</a> 
+						<span class="text-white mx-1">&middot;</span> 
+						<a class="link-light small" href="#!">Terms</a> 
+						<span class="text-white mx-1">&middot;</span> 
+						<a class="link-light small" href="/TdestSearch">insertTDEST</a>
+						<span class="text-white mx-1">&middot;</span> 
+						<a class="link-light small" href="/joongang">joongang</a>
+					</div>
+				</div>
+			</div>
+		</footer>
 		
 	<!-- Bootstrap core JS-->
 	<script

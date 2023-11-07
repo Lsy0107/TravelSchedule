@@ -25,6 +25,8 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		session.removeAttribute("loginId");
 		session.removeAttribute("loginProfile");
+		session.removeAttribute("loginNickname");
+		session.removeAttribute("loginState");
 		mav.setViewName("redirect:/");
 		return mav;
 	}
@@ -40,6 +42,7 @@ public class MemberController {
 			session.setAttribute("loginId", rs.getMid());
 			session.setAttribute("loginProfile", rs.getMprofile());
 			session.setAttribute("loginNickname", rs.getMnickname());
+			session.setAttribute("loginState", rs.getMstate());
 			mav.setViewName("redirect:/");
 		}
 		return mav;
