@@ -94,7 +94,7 @@
             }
             .select {
             	width: 250px;
-            	height: 100px;           
+            	height: 130px;           
             	display: inline-block;
             	margin-top: 125px;            	
             	margin-left: 10px;
@@ -104,6 +104,7 @@
             }
             .select>p{
             	margin-left: 10px;
+            	cursor: pointer;
             }
             .Area{
            		display: flex;
@@ -130,10 +131,7 @@
             }
             .book{
             	margin-left: 15px;
-            }
-            .select>p{
-            	cursor: pointer;
-            }
+            }            
             .hr2{
             	border-top: 1px solid black;
             }
@@ -198,7 +196,8 @@
 	
 	            </div>
 	            <div class="select">
-	            	<p style="margin-top:20px; ${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">좋아요</p>
+	            	<p style="margin-top:20px;" onclick="location.href='${pageContext.request.contextPath }/myInfo'">내정보</p>
+	            	<p style="${sel}" onclick="location.href='${pageContext.request.contextPath }/TravelLike'">좋아요</p>
 	            	<p onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
 	            </div>
 			</div>                     

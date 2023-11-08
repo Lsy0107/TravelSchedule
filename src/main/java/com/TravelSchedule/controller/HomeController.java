@@ -127,12 +127,14 @@ public class HomeController {
 		ArrayList<Festival> Nearby = apisvc.festival_Nearby(ctcode, fecode);
 		String country = apisvc.getCountry_this(ctcode);
 		ArrayList<Tdest> tdest = tsvc.TdestSearch();
+		String date = apisvc.getDate(code);
 		System.out.println(Nearby);
 		mav.addObject("country",country);
 		mav.addObject("festival", festival);
 		mav.addObject("nearby", Nearby);
 		mav.addObject("tdest", tdest);
 		mav.addObject("ReList",ReList);
+		mav.addObject("date", date);
 		mav.setViewName("travel/detailFestival");
 		return mav;
 	}

@@ -265,7 +265,7 @@
 					position: relative;
 					font-weight: bold;
 					bottom: 30px;
-					left: 35px;
+					left: 40px;
 				}
 
 				.feinfo {
@@ -286,8 +286,7 @@
 					width: 900px;
 					padding-left: 15px;
 					padding-right: 30px;
-					font-weight: bold;
-					display: inline-block;
+									display: inline-block;
 					padding-top: 10px;
 				}
 

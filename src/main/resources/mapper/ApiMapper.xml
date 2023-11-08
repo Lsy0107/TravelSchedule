@@ -114,4 +114,7 @@
   <if test="seloption == 'tdest'">tdcode = #{code}</if>
   <if test="seloption == 'review'">recode = #{code}</if>
   </select>
+  <select id="selectDate">
+  select * from festival where fecode = #{code} and enddate >= sysdate
+  </select>
   </mapper>
