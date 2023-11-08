@@ -895,7 +895,7 @@
                         location.href = 'detailFestival?code=' + fecode;
 
                     }
-                    function DestselectCdcode(tdcode, seloption) {
+                    function DestselectCdcode(code, seloption) {
                         if ("${sessionScope.loginId}" == "") {
             				location.href = "${pageContext.request.contextPath}/memberLoginForm"
             			} else {
@@ -954,7 +954,7 @@
                             }
                         })
                     }
-                    function FestselectCdcode(fecode, seloption) {
+                    function FestselectCdcode(code, seloption) {
                     	if ("${sessionScope.loginId}" == "") {
             				location.href = "${pageContext.request.contextPath}/memberLoginForm"
             			} else {
@@ -982,7 +982,7 @@
             							modalBodyTag.appendChild(selTag);
             							let btnTag = document.querySelector("#selectClear");
             							btnTag.addEventListener("click", function(){
-            								selectDest(code, selTag.value, seloption)
+            								selectFest(code, selTag.value, seloption)
             							})
             							}else{
             								modalBodyTag.innerText="계획 가능한 달력이 없습니다.";

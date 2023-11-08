@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.crawling.newsCrawlingService;
-import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.News;
-import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Review;
+import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
+import com.TravelSchedule.service.ReviewService;
 import com.TravelSchedule.service.TravelService;
 import com.google.gson.Gson;
 
@@ -37,6 +37,9 @@ public class HomeController {
 	
 	@Autowired
 	TravelService tsvc;
+	
+	@Autowired
+	ReviewService rsvc;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
@@ -130,7 +133,7 @@ public class HomeController {
 		mav.addObject("nearby", Nearby);
 		mav.addObject("tdest", tdest);
 		mav.addObject("ReList",ReList);
-		mav.setViewName("festival/detailFestival");
+		mav.setViewName("travel/detailFestival");
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
@@ -159,40 +162,6 @@ public class HomeController {
 		return new Gson().toJson(TdestList);
 	}
 	
-	@RequestMapping(value="/SearchService")
-	public @ResponseBody ModelAndView SearchService(String searchval,String searchcate) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("검색한 변수"+searchval);
-		System.out.println("검색한 변수"+searchcate);
-		
-		if(searchcate.equals("축제")) {
-			
-		}
-		else if(searchcate.equals("여행지")) {
-			
-		}
-		/*
-		ArrayList<Tdest> TdestList = tsvc.SearchTdestList(searchVal);
-		ArrayList<Country> CountryList = tsvc.CountryList();*/
-		mav.addObject("CountryList",CountryList);
-		mav.addObject("TdestList",TdestList);
-		mav.setViewName("/travel/TdestSearch");
-		
-		return mav;
-	}
-	
-	@RequestMapping(value="/SearchService_fe")
-	public @ResponseBody ModelAndView SearchService_fe(String searchVal) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("검색한 변수"+searchVal);
-		ArrayList<Festival> FestivalList = apisvc.SearchFestivalList(searchVal);
-		ArrayList<Country> CountryList = tsvc.CountryList();
-		mav.addObject("country",CountryList);
-		mav.addObject("festival",FestivalList);
-		mav.setViewName("/festival/Festival");
-		
-		return mav;
-	}
 	
 	@RequestMapping(value="/clickHeart")
 	public @ResponseBody String clickHeart(String mid, String code, String seloption, Likelist lk) {
@@ -205,13 +174,16 @@ public class HomeController {
 		} else if(seloption.equals("tdest")) {
 			lk.setTdcode(code);
 		} else {
-			//lk.setRecode(code);
+			lk.setRecode(code);
 		}
 		String result = apisvc.getLikelist(lk, seloption); // "Y","N"
+		System.out.println(result);
 		if(result.equals("Y")) {
 			int delete = apisvc.deleteLk(lk, seloption);
+			
 		} else {
 			int insert = apisvc.insertLk(lk, seloption);
+			
 		}
 		String lknum = apisvc.selectLk(code, seloption);
 		System.out.println(lknum);

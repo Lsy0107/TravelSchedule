@@ -7,16 +7,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
+import com.TravelSchedule.service.ApiService;
 import com.TravelSchedule.service.ReviewService;
 import com.google.gson.Gson;
 
@@ -25,6 +26,8 @@ public class ReviewController {
 
 	@Autowired
 	ReviewService rsvc;
+	@Autowired
+	ApiService apisvc;
 
 	@RequestMapping(value = "/TravelReview")
 	public ModelAndView TravelReview(HttpSession session) {
@@ -139,7 +142,7 @@ public class ReviewController {
 		String mid = (String) session.getAttribute("loginId");
 
 		HashMap<String, String> getReview = rsvc.getReview(mid, cdcode);
-
+		System.out.println("오류찾기 : " + getReview);
 //		System.out.println(getReview);
 		String getName = (String) getReview.get("CODELIST"); // codeList의 값 분류
 		System.out.println("키값 : " + getName);
@@ -203,46 +206,64 @@ public class ReviewController {
 	}
 
 	@RequestMapping(value = "detailReview")
-	public ModelAndView detailReview(String recode) {
+	public ModelAndView detailReview(String recode, HttpSession session) {
 		System.out.println("리뷰 상세보기 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		System.out.println("받아온 recode : " + recode);
 		HashMap<String, String> getreList = rsvc.getreList(recode);
-		
-		ArrayList<HashMap<String, String>> TdList = new ArrayList<>();
-		ArrayList<HashMap<String, String>> FeList = new ArrayList<>();
-		ArrayList<String> PhotoList = new ArrayList<>();
-		
-		ArrayList<HashMap<String, String>> reList = rsvc.reList(recode);
-		for (HashMap<String, String> re : reList) {
-			String codeList = (String) re.get("CODELIST");
-			String[] codeSplit = codeList.split("/");
-			for (String cs : codeSplit) { // cs => codeList를 /로 나눈 코드들
-				System.out.println(cs);
-				if (cs.contains("FE")) {
-					FeList.add(re);
-				}
-				else if(cs.contains("TD")) {
-					TdList.add(re);
-				}
-			}
-			String getRephoto = (String) re.get("REPHOTO");
-			System.out.println("사진들 : " + getRephoto);
 
-			String[] photoes = getRephoto.split("/");
-			for (String p : photoes) {
-				PhotoList.add(p);
+		ArrayList<Tdest> TdList = new ArrayList<>();
+		ArrayList<Festival> FeList = new ArrayList<>();
+		ArrayList<String> PhotoList = new ArrayList<>();
+
+		HashMap<String, String> reList = rsvc.reList(recode);
+		String id = reList.get("MID");
+
+		String codeList = (String) reList.get("CODELIST");
+		String[] codeSplit = codeList.split("/");
+		for (String cs : codeSplit) { // cs => codeList를 /로 나눈 코드들
+			System.out.println(cs);
+			if (cs.contains("FE")) {
+				Festival Fe = rsvc.getFe(cs);
+				FeList.add(Fe);
+			} else if (cs.contains("TD")) {
+				Tdest Td = rsvc.getTd(cs);
+				TdList.add(Td);
 			}
-			System.out.println("사진 분류 : " + PhotoList);
 		}
+		String getRephoto = (String) reList.get("REPHOTO");
+		System.out.println("사진들 : " + getRephoto);
+
+		String[] photoes = getRephoto.split("/");
+		for (String p : photoes) {
+			PhotoList.add(p);
+		}
+		System.out.println("사진 분류 : " + PhotoList);
+
 		System.out.println(reList);
-		
-		mav.addObject("Re",getreList);
+		String CurrentLogId = (String) session.getAttribute("loginId");
+		if (!(id.equals(CurrentLogId))) {
+			int IncreaseRehit = rsvc.IncreaseRehit(recode);
+		}
+
+		if (session.getAttribute("loginId") != null) {
+			Likelist lk = new Likelist();
+			lk.setRecode(recode);
+			lk.setMid((String) session.getAttribute("loginId"));
+			System.out.println("오류ㅠ제발 : " + lk.getRecode());
+			String seloption = "review";
+			// System.out.println(codeName);
+			System.out.println(lk);
+			String Like = apisvc.getLikelist(lk, seloption);
+			mav.addObject("like", Like);
+		}
+		System.out.println(getreList);
+		mav.addObject("Re", getreList);
 		mav.addObject("Ph", PhotoList);
-		mav.addObject("TdList",TdList);
-		mav.addObject("FeList",FeList);
-		mav.addObject("reList",reList);
-		
+		mav.addObject("TdList", TdList);
+		mav.addObject("FeList", FeList);
+		mav.addObject("reList", reList);
+		System.out.println("TdList:" + TdList);
 		mav.setViewName("review/DetailReview");
 		return mav;
 	}

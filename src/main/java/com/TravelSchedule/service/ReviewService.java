@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.TravelSchedule.dao.ReviewDao;
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
@@ -182,7 +183,7 @@ public class ReviewService {
 		return rdao.selectCalendarCount(mid);
 	}
 
-	public ArrayList<HashMap<String, String>> reList(String recode) {
+	public HashMap<String, String> reList(String recode) {
 		
 		return rdao.reList(recode);
 	}
@@ -190,6 +191,31 @@ public class ReviewService {
 	public HashMap<String, String> getreList(String recode) {
 		// TODO Auto-generated method stub
 		return rdao.getreList(recode);
+	}
+
+	public int IncreaseRehit(String recode) {
+		
+		return rdao.IncreaseRehit(recode);
+	}
+
+	public int insertLike(String code, String mid) {
+		// TODO Auto-generated method stub
+		return rdao.insertLike(code,mid);
+	}
+
+	public int deleteLike(String code, String mid) {
+		// TODO Auto-generated method stub
+		return rdao.deleteLike(code,mid);
+	}
+
+	public Festival getFe(String cs) {
+		// TODO Auto-generated method stub
+		return rdao.getFe(cs);
+	}
+
+	public Tdest getTd(String cs) {
+		// TODO Auto-generated method stub
+		return rdao.getTd(cs);
 	}
 	
 

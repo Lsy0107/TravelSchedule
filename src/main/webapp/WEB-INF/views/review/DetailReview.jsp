@@ -3,6 +3,7 @@
     <html lang="en">
 
     <head>
+        <script src="https://kit.fontawesome.com/c8056a816e.js" crossorigin="anonymous"></script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -75,6 +76,29 @@
             .fImg {
                 display: flex;
             }
+
+            .id,
+            .hit,
+            .like {
+                width: 16%;
+                text-align: center;
+                border-right: 1px solid #ababab;
+            }
+
+            .ReInfo {
+                display: flex;
+            }
+
+            .LikeArea>.fa-solid {
+                color: #60b7d1;
+            }
+            .LikeArea{
+                display: flex;
+            }
+
+            .fa-regular {
+                color: #000000;
+            }
         </style>
     </head>
 
@@ -85,11 +109,22 @@
             <div class="wrap">
                 <input type="text" class="Recode Disn">
                 <div class="ReTitle">
-                    <input type="text" class="Title" name="title" placeholder="제목" value="${Re.RETITLE}" readonly>
+                    <span class="Title" name="title" placeholder="제목">${Re.RETITLE}</span>
                 </div>
-                
+                <div class="ReInfo">
+                    <div class="id">${Re.MID}</div>
+                    <div class="hit">조회수 : ${Re.REHIT}</div>
+                    <div class="like">추천 : ${Re.LKNUM}</div>
+                </div>
+                <div class="ReDate">
+                    <span>${Re.REDATE}</span>
+                </div>
                 <div class="ReContents">
                     <textarea class="ReTextArea" name="contents" readonly>${Re.RECOMMENT}</textarea>
+                </div>
+                <div class="LikeArea">
+                    <i class="fa-regular fa-thumbs-up" id="like" onclick="IncreaseLike('${Re.RECODE}','review')"></i>
+                    <p class="lknum" id="lknum">${Re.LKNUM }</p>
                 </div>
                 <div class="RePhotoArr">
                     <c:forEach var="ph" items="${Ph}" varStatus="status">
@@ -98,6 +133,16 @@
                 </div>
 
                 
+                
+            </div>
+            <div class="wrap">
+                <p>다녀온 여행지</p>
+                <c:forEach items="${TdList}" var="td">
+                    <p>${td.tdname}</p>    
+                </c:forEach>
+                <c:forEach items="${FeList}" var="fe">
+                    <p>${fe.fename}</p>    
+                </c:forEach>
             </div>
 
             <!-- Footer-->
@@ -133,6 +178,56 @@
                                 }
                                 break;
                         }
+                    }
+                </script>
+
+                <script>
+                    function IncreaseLike(recode, seloption) {
+                        console.log(recode);
+                        if ("${sessionScope.loginId}" == "") {
+                            alert('로그인후 이용 가능합니다.');
+                            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+                        } else {
+                            $.ajax({
+                                url: "/clickHeart",
+                                type: "post",
+                                data: {
+                                    'mid': "${sessionScope.loginId}",
+                                    'code': recode,
+                                    "seloption": seloption
+                                },
+                                aysnc: false,
+                                success: function (res) {
+                                    console.log('클릭');
+                                    let lknum = document.querySelector('.lknum');
+                                    let likeDiv = document.querySelector('.like');
+                                    let like = document.querySelector('#like');
+                                    const cl = document.querySelector('#like').classList;
+                                    if (cl.contains("fa-regular")) {
+                                        like.classList.replace('fa-regular', 'fa-solid');
+                                        lknum.innerText = res;
+                                        likeDiv.innerText = '추천 수 : '+res;
+                                        console.log(res);
+                                    } else {
+                                        like.classList.replace('fa-solid', 'fa-regular');
+                                        lknum.innerText = res;
+                                        likeDiv.innerText = '추천 수 : '+res;
+                                        console.log(res);
+                                    }
+
+                                }
+                            });
+
+                        }
+                    }
+                </script>
+                <script>
+                    let like = document.querySelector('#like');
+                    const cl = document.querySelector('#like').classList;
+                    let Y = 'Y';
+                    let N = 'N';
+                    if (${ like } == 'Y') {
+                        like.classList.replace('fa-regular', 'fa-solid');
                     }
                 </script>
     </body>

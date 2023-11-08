@@ -54,7 +54,7 @@ public interface ReviewDao {
 
 	@Select("SELECT *\r\n"
 			+ "FROM CALENDAR C, REVIEW R\r\n"
-			+ "WHERE C.CDCODE = R.CDCODE AND C.CDCODE = #{cdcode} AND C.MID = #{mid}")
+			+ "WHERE C.CDCODE = R.CDCODE AND C.MID = #{mid} AND R.MID = #{mid} AND C.CDCODE = #{cdcode}")
 	HashMap<String, String> getReviewDao(@Param("mid")String mid, @Param("cdcode")String cdcode);
 
 	@Select("SELECT *\r\n"
@@ -80,10 +80,26 @@ public interface ReviewDao {
 	int selectCalendarCount(@Param("mid") String mid);
 
 	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
-	ArrayList<HashMap<String, String>> reList(String recode);
+	HashMap<String, String> reList(String recode);
 
-	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
+	@Select("select * from (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where recode = #{recode}")
 	HashMap<String, String> getreList(String recode);
+
+	@Update("UPDATE REVIEW SET REHIT = REHIT + 1 WHERE RECODE = #{recode}")
+	int IncreaseRehit(String recode);
+
+	@Update("UPDATE REVIEW SET RELIKE = RELIKE + 1 WHERE RECODE = #{code} AND MID = #{mid}")
+	int insertLike(@Param("code")String code, @Param("mid")String mid);
+
+	@Update("UPDATE REVIEW SET RELIKE = RELIKE - 1 WHERE RECODE = #{code} AND MID = #{mid}")
+	int deleteLike(String code, String mid);
+
+	@Select("SELECT * FROM FESTIVAL WHERE FECODE = #{cs}")
+	Festival getFe(String cs);
+
+	@Select("SELECT * FROM TDEST WHERE TDCODE = #{cs}")
+	Tdest getTd(String cs);
+
 
 
 }
