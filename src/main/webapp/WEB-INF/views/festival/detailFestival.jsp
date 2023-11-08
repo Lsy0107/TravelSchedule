@@ -262,7 +262,7 @@
 	position: relative;
 	font-weight: bold;
 	bottom: 30px;
-	left: 35px;
+	left: 40px;
 }
 
 				.feinfo {
@@ -283,7 +283,6 @@
 					width: 900px;
 					padding-left: 15px;
 					padding-right: 30px;
-					font-weight: bold;
 					display: inline-block;
 					padding-top: 10px;
 				}
@@ -320,6 +319,9 @@
 				.lknum{
 					display:inline-block;
 				}
+				.btn-outline-danger{
+					cursor: default;
+				}
 </style>
 
 
@@ -337,11 +339,16 @@
 			<p class="date">${festival.opendate}~ ${festival.enddate }</p>
 			<i class="fa-regular fa-heart fa-xl heart"
 				onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
-				<p class="lknum" id="lknum">${festival.lknum }</p>			
+				<p class="lknum" id="lknum">${festival.lknum }</p>
+			<c:if test="${date eq 'N' }">			
+			<button class="btn btn-outline-danger">종료된 축제</button>
+			</c:if>				
+			<c:if test="${date eq 'Y' }">			
 			<button class="btn btn-outline-success"
 				onclick="selectCdcode('${festival.fecode}','festival')"
 				data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 				추가하기</button>
+			</c:if>
 			<hr class="hr">
 			<p class="feinfo">${festival.feinfo }</p>
 			<c:if test="${festival.fetel ne null }">

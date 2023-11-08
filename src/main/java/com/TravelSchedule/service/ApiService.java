@@ -622,5 +622,14 @@ public class ApiService {
 		return apiDao.selectLknum(code, seloption);
 	}
 
+	public String getDate(String code) {
+		String date = apiDao.selectDate(code);
+		if(date == null) {
+			return "N";
+		} else {
+			return "Y";
+		}
+	}
+
 
 }

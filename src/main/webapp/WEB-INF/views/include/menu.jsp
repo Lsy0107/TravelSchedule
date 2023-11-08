@@ -12,8 +12,9 @@
 	top: 0px;
 }
 .profile {
-	width: 20%;
+	width: 38px;
 	border-radius: 50px;
+	height: 38px;
 }
 .info:hover{
 	cursor:pointer;
@@ -76,10 +77,8 @@ div, h1, h2, h3, h4, h5, h6{
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
 								class="profile">${sessionScope.loginId }</h1>
 						<hr style="border-top:2px solid lightgray">
-						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
-						
-						<hr style="border-top:2px solid lightgray">
-						<p class="info" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
+						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>마이페이지</p>
+												
 						<hr style="border-top:2px solid lightgray">
 						<p class="info"onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
 					</div>

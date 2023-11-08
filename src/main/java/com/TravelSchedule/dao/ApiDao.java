@@ -71,5 +71,7 @@ public interface ApiDao {
 	Review selectReview(@Param("recode") String recode);
 
 	String selectLknum(@Param("code") String code, @Param("seloption") String seloption);
+
+	String selectDate(@Param("code") String code);
 	
 }
