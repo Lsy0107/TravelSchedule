@@ -67,14 +67,37 @@ div, h1, h2, h3, h4, h5, h6{
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle " id="navbarDropdownPortfolio"
 					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false" style="padding:0px; padding-left:7.5px;"><img style="width:38px;"src="/resources/memberProfile/${sessionScope.loginProfile}"
-								class="profile"></a>
+					aria-expanded="false" style="padding:0px; padding-left:7.5px;">
+					<c:if test="${sessionScope.loginState == 'NY'}">
+					<img style="width:38px;"src="/resources/memberProfile/${sessionScope.loginProfile}"
+								class="profile">
+					</c:if>
+					<c:if test="${sessionScope.loginState == 'YK'}">
+					<img style="width:38px;"src="${sessionScope.loginProfile}"
+								class="profile">
+					</c:if>
+					<c:if test="${sessionScope.loginState == 'NA'}">
+					<img style="width:38px;"src="${sessionScope.loginProfile}"
+								class="profile">
+					</c:if>
+					</a>
 					<div class="dropdown-menu dropdown-menu-end w3-card-4 p-3"
 						style="width: 300px; border: none;"
 						aria-labelledby="navbarDropdownPortfolio">
 						<h1 style="text-align: justify;">
+							<c:if test="${sessionScope.loginState == 'NY'}">
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
-								class="profile">${sessionScope.loginId }</h1>
+								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+							</c:if>
+							<c:if test="${sessionScope.loginState == 'YK'}">
+								<img src="${sessionScope.loginProfile}"
+								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+							</c:if>
+							<c:if test="${sessionScope.loginState == 'NA'}">
+								<img style="width:38px;"src="${sessionScope.loginProfile}"
+								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+							</c:if>
+						</h1>
 						<hr style="border-top:2px solid lightgray">
 						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>내정보</p>
 						
