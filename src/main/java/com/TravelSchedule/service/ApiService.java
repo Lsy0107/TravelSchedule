@@ -557,6 +557,7 @@ public class ApiService {
 	public String getLikelist(Likelist lk, String seloption) {
 		System.out.println("ApiService - getLikelist()");
 		Likelist result = apiDao.selectLK(lk, seloption);
+		System.out.println(result);
 		if(result == null) {
 			return "N";
 		} else {

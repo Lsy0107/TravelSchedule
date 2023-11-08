@@ -61,11 +61,6 @@
 					margin-right: auto;
 				}
 
-				.bg-wh {
-					background-color: white;
-					box-shadow: 0px 0px 10px #A2A2A2;
-				}
-
 				#TripRecommend {
 					background-color: #ffd045;
 					background-image: linear-gradient(315deg, #ffd045 0%, #d14545 74%);
@@ -93,6 +88,11 @@
 					margin-right: auto;
 				}
 
+				.bg-wh {
+					background-color: white;
+					box-shadow: 0px 0px 10px #A2A2A2;
+				}
+
 				#TitleBar {
 					position: relative;
 					top: 64px;
@@ -107,7 +107,6 @@
 					position: relative;
 					bottom: -50px;
 					width: 100%;
-
 				}
 
 				main {
@@ -265,7 +264,7 @@
 					position: relative;
 					font-weight: bold;
 					bottom: 30px;
-					left: 40px;
+					left: 35px;
 				}
 
 				.feinfo {
@@ -286,7 +285,8 @@
 					width: 900px;
 					padding-left: 15px;
 					padding-right: 30px;
-									display: inline-block;
+					font-weight: bold;
+					display: inline-block;
 					padding-top: 10px;
 				}
 
@@ -300,10 +300,6 @@
 					display: flex;
 					width: 1000px;
 					margin-bottom: 10px;
-				}
-
-				.lknum {
-					display: inline-block;
 				}
 
 				.FestivalComment {
@@ -335,6 +331,7 @@
 
 
 
+
 		</head>
 
 		<body class="d-flex flex-column h-100">
@@ -343,65 +340,69 @@
 				<%@ include file="../include/menu.jsp" %>
 					<!-- content 시작 -->
 					<div class="wrap">
-						<img class="card-img-top Img" src="${detailTd.tdphoto }" alt="..."
+						<img class="card-img-top Img" src="${festival.feposter }" alt="..."
 							onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-						<p class="name"> ${detailTd.tdname }</p>
-						<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${detailTd.tdcode}', 'tdest')"
-							id="heart"></i>
-						<p class="lknum" id="lknum">${detailTd.lknum }</p>
-						<button class="btn btn-outline-success" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
+						<p class="name">${festival.fename }</p>
+						<p class="date">${festival.opendate}~ ${festival.enddate }</p>
+						<i class="fa-regular fa-heart fa-xl heart"
+							onclick="clickHeart('${festival.fecode}', 'festival')" id="heart"></i>
+						<p class="lknum" id="lknum">${festival.lknum }</p>
+						<button class="btn btn-outline-success" onclick="selectCdcode('${festival.fecode}','festival')"
 							data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
 							추가하기</button>
 						<hr class="hr">
-						<p class="feinfo">${detailTd.tdinfo }</p>
-						<c:if test="${detailTd.tdtel ne null }">
+						<p class="feinfo">${festival.feinfo }</p>
+						<c:if test="${festival.fetel ne null }">
 							<div class="phoneArea">
 								<img class="phoneImg"
 									src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
-								<p class="fetel">${detailTd.tdtel }</p>
+								<p class="fetel">${festival.fetel }</p>
 							</div>
 						</c:if>
-						<c:if test="${detailTd.homepage ne null }">
-							<button class="homepage" onclick="location.href='${detailTd.homepage }';">공식 홈페이지</button>
+						<c:if test="${festival.homepage ne null }">
+							<button class="homepage" onclick="location.href='${festival.homepage }';">공식 홈페이지</button>
 						</c:if>
 						<hr class="hr">
-						<div id="map" style="width:1000px;height:400px;"></div>
-						<p class="address">${detailTd.tdaddress }</p>
+						<div id="map" style="width: 1000px; height: 400px;"></div>
+						<p class="address">${festival.feaddress }</p>
 						<hr class="hr">
 						<div class="TdestRecommendArea">
-							<div class="Tdest">
-								<div class="countryIdentity">
-									<span id="RecommendTitle">${country }에 이런 여행지는 어떠세요?</span>
-								</div>
-								<c:forEach items="${nearby }" var="td" begin="0" end="3" step="1">
-									<div class="card feList">
-										<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode}">
-											<img class="card-img-top feImg" src="${td.tdphoto }" alt="..."
-												onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
-											<div class="feName">${td.tdname }</div>
-										</a>
+							<c:if test="${nearby[0] ne null }">
+								<div class="Tdest">
+									<div class="countryIdentity">
+										<span id="RecommendTitle">${country }에 이런 축제는 어떠세요?</span>
 									</div>
-								</c:forEach>
-								<div class="moreArea">
-									<a href="/TdestSearchPage">
-										<div class="feList more">
-											<i class="fa-solid fa-arrow-right fa-2xl moreIn"
-												style="color: #000000;"></i>
-										</div>
-									</a>
-									<h5 class="moreText">더보기</h5>
-								</div>
-							</div>
-							<div class="FestivalRecomm">
-								<span id="RecommendTitle">축제를 즐기고 싶으신가요?</span>
-								<div>
-									<c:forEach items="${festival }" var="fe" begin="0" end="3" step="1">
+									<c:forEach items="${nearby }" var="fe" begin="0" end="3" step="1">
 										<div class="card feList">
 											<a
 												href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
 												<img class="card-img-top feImg" src="${fe.feposter }" alt="..."
 													onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
 												<div class="feName">${fe.fename }</div>
+											</a>
+										</div>
+									</c:forEach>
+									<div class="moreArea">
+										<a href="/festival">
+											<div class="feList more">
+												<i class="fa-solid fa-arrow-right fa-2xl moreIn"
+													style="color: #000000;"></i>
+											</div>
+										</a>
+										<h5 class="moreText">더보기</h5>
+									</div>
+								</div>
+							</c:if>
+							<div class="FestivalRecomm">
+								<span id="RecommendTitle">여행지를 즐기고 싶으신가요?</span>
+								<div>
+									<c:forEach items="${tdest }" var="td" begin="0" end="3" step="1">
+										<div class="card feList">
+											<a
+												href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode }">
+												<img class="card-img-top feImg" src="${td.tdphoto }" alt="..."
+													onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+												<div class="feName">${td.tdname }</div>
 											</a>
 										</div>
 									</c:forEach>
@@ -414,30 +415,29 @@
 										</a>
 										<h5 class="moreText">더보기</h5>
 									</div>
-
 								</div>
 							</div>
-							<div class="FestivalComment">
-								<div class="InnerComment">
-									<c:forEach items="${Re}" var="re">
+
+						</div>
+						<div class="FestivalComment">
+							<div class="InnerComment">
+								<c:forEach items="${ReList}" var="re">
+									<div>
 										<div>
-											<div>
-												<img class="MemberImg"
-													src="/resources/memberProfile/${re.MPROFILE}" alt="">
-												<span>${re.MID}</span>
-												<span>추천 수 : ${re.REHIT}</span>
-											</div>
-											<div class="TitleDiv">
-												<span>${re.RETITLE}</span>
-												<a class="d-flex justify-content-end"
-													href="/detailReview?recode=${re.RECODE}">리뷰 자세히보기</a>
-											</div>
-											<hr class="Recommhr">
+											<img class="MemberImg" src="/resources/memberProfile/${re.MPROFILE}"
+												alt="">
+											<span>${re.MID}</span>
+											<span>추천 수 : ${re.REHIT}</span>
 										</div>
-									</c:forEach>
-								</div>
+										<div class="TitleDiv">
+											<span>${re.RETITLE}</span>
+											<a class="d-flex justify-content-end"
+												href="/detailReview?recode=${re.RECODE}">리뷰 자세히보기</a>
+										</div>
+										<hr class="Recommhr">
+									</div>
+								</c:forEach>
 							</div>
-
 						</div>
 					</div>
 					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -449,8 +449,7 @@
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
-								<div class="modal-body" id="selectCalendar">
-								</div>
+								<div class="modal-body" id="selectCalendar"></div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
 										id="selectClear">선택</button>
@@ -477,13 +476,13 @@
 			<script type="text/javascript">
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					mapOption = {
-						center: new kakao.maps.LatLng(${ detailTd.tdlongti }, ${ detailTd.tdlati }), // 지도의 중심좌표
+						center: new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati }), // 지도의 중심좌표
 						level: 3, // 지도의 확대 레벨
 					};
 
 				var map = new kakao.maps.Map(mapContainer, mapOption); //지도 생성 및 객체 리턴
 				// 마커가 표시될 위치입니다 
-				var markerPosition = new kakao.maps.LatLng(${ detailTd.tdlongti }, ${ detailTd.tdlati });
+				var markerPosition = new kakao.maps.LatLng(${ festival.felongti }, ${ festival.felati });
 
 				// 마커를 생성합니다
 				var marker = new kakao.maps.Marker({
@@ -514,9 +513,11 @@
 								if (cl.contains("fa-regular")) {
 									heart.classList.replace('fa-regular', 'fa-solid');
 									lknum.innerText = res;
+									console.log(res);
 								} else {
 									heart.classList.replace('fa-solid', 'fa-regular');
 									lknum.innerText = res;
+									console.log(res);
 								}
 
 							}
@@ -525,9 +526,10 @@
 					}
 				}
 
+
 			</script>
 			<script type="text/javascript">
-				function selectCdcode(code, seloption) {
+				function selectCdcode(fecode, seloption) {
 					if ("${sessionScope.loginId}" == "") {
 						location.href = "${pageContext.request.contextPath}/memberLoginForm"
 					} else {
@@ -568,19 +570,20 @@
 						})
 					}
 				}
-				function selectDest(tdcode, cdcode, seloption) {
-					console.log(tdcode + "  " + cdcode);
+				function selectDest(fecode, cdcode, seloption) {
+					console.log(fecode + "  " + cdcode);
 					$.ajax({
 						url: "/registSelectDest",
 						type: "post",
-						data: { mid: "${sessionScope.loginId}", tdcode: tdcode, cdcode: cdcode, "seloption": seloption },
+						data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption": seloption },
 						async: false,
 						success(rs) {
 							alert('행선지 선택 완료');
-							location.href = "/detailTdest?tdcode=" + tdcode;
+							location.href = "/detailFestival?code=" + fecode;
 						}
 					})
 				}
+
 			</script>
 			<script type="text/javascript">
 				let heart = document.querySelector('#heart');
