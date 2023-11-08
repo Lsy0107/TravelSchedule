@@ -223,6 +223,28 @@ public class TravelController {
 		ArrayList<Tdest> Nearby = tsvc.tdest_Nearby(ctcode, tdcode);
 		String country = apisvc.getCountry_this(ctcode);
 		ArrayList<Festival> festival = apisvc.getFestival_db();
+		
+		//System.out.println("키값 : "+codeList);
+		
+		ArrayList<HashMap<String,String>> ReList = new ArrayList<>();
+		
+		ArrayList<HashMap<String,String>> reList = apisvc.reList();
+		for(HashMap<String, String> re : reList) {
+			String codeList = (String)re.get("CODELIST");
+			String[] codeSplit = codeList.split("/");
+			for(String cs : codeSplit) { //cs => codeList를 /로 나눈 코드들
+				System.out.println(cs);
+				if(cs.contains(tdcode)) {
+					ReList.add(re);
+				}			
+			}
+			
+		}
+		
+		
+		
+		System.out.println("리뷰리스트"+ReList);
+		mav.addObject("Re",ReList);
 		mav.addObject("country",country);
 		mav.addObject("detailTd",detailTdest);
 		mav.addObject("nearby", Nearby);		

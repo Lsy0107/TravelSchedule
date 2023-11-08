@@ -15,6 +15,9 @@ public class Review {
 	private String restate;
 	private String cdcode;
 	private String codelist;
+	private String redate;
+	private String relike;
+	private String lknum;
 	
 	private MultipartFile[] profiledata;
 }
