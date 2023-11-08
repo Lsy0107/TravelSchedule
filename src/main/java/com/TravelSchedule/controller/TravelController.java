@@ -135,10 +135,12 @@ public class TravelController {
 				lalng.put("lati", sctd.get("TDLONGTI"));
 				lalng.put("longti", sctd.get("TDLATI"));
 				lalng.put("name", sctd.get("TDNAME"));
+				lalng.put("code", sctd.get("TDCODE"));
 			} else {
 				lalng.put("lati", sctd.get("FELONGTI"));
 				lalng.put("longti", sctd.get("FELATI"));
 				lalng.put("name", sctd.get("FENAME"));
+				lalng.put("code", sctd.get("FECODE"));
 			}
 			lalng.put("scdate", sctd.get("SCDATE"));
 			lalngList.add(lalng);
