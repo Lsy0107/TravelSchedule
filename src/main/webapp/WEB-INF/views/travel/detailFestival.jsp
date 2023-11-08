@@ -306,6 +306,8 @@
 					min-height: 700px;
 					border: none;
 					margin-top: 25px;
+					overflow: scroll;
+					overflow-x: hidden;
 				}
 
 				.InnerComment {

@@ -309,6 +309,8 @@
 				.FestivalComment {
 					min-height: 700px;
 					border: none;
+					overflow: scroll;
+					overflow-x: hidden;
 					margin-top: 25px;
 				}
 

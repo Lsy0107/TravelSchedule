@@ -85,6 +85,10 @@
                 border-right: 1px solid #ababab;
             }
 
+            #like {
+                font-size: 40px;
+            }
+
             .ReInfo {
                 display: flex;
             }
@@ -92,8 +96,21 @@
             .LikeArea>.fa-solid {
                 color: #60b7d1;
             }
-            .LikeArea{
+
+            .LikeArea {
                 display: flex;
+                margin-left: auto;
+                
+                width: max-content;
+                margin-right: auto;
+                padding: 15px;
+            }
+
+            #lknum {
+                margin-top: auto;
+                margin-bottom: auto;
+                font-size: 25px;
+                margin-left: 10px;
             }
 
             .fa-regular {
@@ -132,16 +149,16 @@
                     </c:forEach>
                 </div>
 
-                
-                
+
+
             </div>
             <div class="wrap">
                 <p>다녀온 여행지</p>
                 <c:forEach items="${TdList}" var="td">
-                    <p>${td.tdname}</p>    
+                    <p>${td.tdname}</p>
                 </c:forEach>
                 <c:forEach items="${FeList}" var="fe">
-                    <p>${fe.fename}</p>    
+                    <p>${fe.fename}</p>
                 </c:forEach>
             </div>
 
@@ -206,12 +223,12 @@
                                     if (cl.contains("fa-regular")) {
                                         like.classList.replace('fa-regular', 'fa-solid');
                                         lknum.innerText = res;
-                                        likeDiv.innerText = '추천 수 : '+res;
+                                        likeDiv.innerText = '추천 수 : ' + res;
                                         console.log(res);
                                     } else {
                                         like.classList.replace('fa-solid', 'fa-regular');
                                         lknum.innerText = res;
-                                        likeDiv.innerText = '추천 수 : '+res;
+                                        likeDiv.innerText = '추천 수 : ' + res;
                                         console.log(res);
                                     }
 
