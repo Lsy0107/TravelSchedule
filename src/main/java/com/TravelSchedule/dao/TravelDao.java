@@ -78,5 +78,7 @@ public interface TravelDao {
 	@Select("SELECT * FROM TDEST WHERE TDNAME LIKE '%'||#{searchVal}||'%'")
 	ArrayList<Tdest> TdestList(String searchval);
 
+	ArrayList<HashMap<String, String>> getPreview(@Param("searchInfo")String searchInfo, @Param("seloption")String seloption);
+
 
 }

@@ -383,7 +383,7 @@
 							</div>
 						</c:forEach>
 						<div class="moreArea">
-							<a href="/festival">
+							<a href="/TdestSearchPage?category=축제&ctcode=${country }">
 								<div class="feList more">
 									<i class="fa-solid fa-arrow-right fa-2xl moreIn"
 										style="color: #000000;"></i>
@@ -407,7 +407,7 @@
 							</div>
 						</c:forEach>
 						<div class="moreArea">
-							<a href="/TdestSearchPage">
+							<a href="/TdestSearchPage?category=여행지&ctcode=지역">
 								<div class="feList more">
 									<i class="fa-solid fa-arrow-right fa-2xl moreIn"
 										style="color: #000000;"></i>
@@ -527,39 +527,45 @@
 	</script>
 	<script type="text/javascript">
 	function selectCdcode(fecode, seloption) {
-        if ("${sessionScope.loginId}" == "") {
-            location.href = "${pageContext.request.contextPath}/memberLoginForm"
-        } else {
-            $.ajax({
-                url: "/getCdcode",
-                type: "post",
-                data: { mid: "${sessionScope.loginId}" },
-                async: false,
-                success(rs) {
-                    console.log(rs.length);
-                    let modalBodyTag = document.querySelector("#selectCalendar")
-                    modalBodyTag.innerHTML = "";
-                    if (rs.length > 0) {
-
-									let selTag = document.createElement("select")
-									for (let cd of rs) {
-										let optionTag = document.createElement("option")
-										optionTag.innerText = cd.cdname;
-										optionTag.setAttribute("value", cd.cdcode)
-										selTag.appendChild(optionTag);
-									}
-									modalBodyTag.appendChild(selTag);
-									let btnTag = document.querySelector("#selectClear");
-									btnTag.addEventListener("click", function () {
-										selectDest(fecode, selTag.value, seloption)
-									})
-								}
-								else {
-									modalBodyTag.innerText = "달력을 추가 해주세요";
-								}
+		if ("${sessionScope.loginId}" == "") {
+			location.href = "${pageContext.request.contextPath}/memberLoginForm"
+		} else {
+			$.ajax({
+				url:"/getCdcode",
+				type:"post",
+				data:{mid:"${sessionScope.loginId}"},
+				async:false,
+				success(rs){
+					let modalBodyTag = document.querySelector("#selectCalendar")
+					modalBodyTag.innerHTML = "";
+					if(rs.length > 0){
+						let checkinfo = false;
+						let selTag = document.createElement("select")
+						for(let cd of rs){
+							if(cd.cdstate == 'Y'){
+							let optionTag = document.createElement("option")
+							optionTag.innerText = cd.cdname;
+							optionTag.setAttribute("value", cd.cdcode)
+							selTag.appendChild(optionTag);
+							checkinfo = true;
 							}
+						}
+						if(checkinfo){
+						modalBodyTag.appendChild(selTag);
+						let btnTag = document.querySelector("#selectClear");
+						btnTag.addEventListener("click", function(){
+							selectDest(code, selTag.value, seloption)
 						})
+						}else{
+							modalBodyTag.innerText="계획 가능한 달력이 없습니다.";
+						}
 					}
+					else{
+						modalBodyTag.innerText="달력을 추가 해주세요";
+					}
+				}				
+				})
+		}
 				}
 				function selectDest(fecode, cdcode, seloption) {
 					console.log(fecode + "  " + cdcode);

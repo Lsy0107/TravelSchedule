@@ -38,6 +38,9 @@ public class HomeController {
 	@Autowired
 	TravelService tsvc;
 	
+	@Autowired
+	TravelController tctl;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
 		System.out.println("메인페이지 이동 요청");
@@ -136,14 +139,20 @@ public class HomeController {
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
-	public ModelAndView TdestSearchPage() throws Exception {
+	public ModelAndView TdestSearchPage(String category, String ctcode) throws Exception {
 		System.out.println("여행지 검색 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		//ArrayList<Tdest> TdestList = apisvc.getTdestList();
 //		ArrayList<Tdest> TdestList = tsvc.TdestSearch();
 		ArrayList<Country> CountryList = tsvc.CountryList();
 		
+		System.out.println(category);
+		System.out.println(ctcode);
+		
 		mav.addObject("CountryList",CountryList);
+		mav.addObject("category", category);
+		mav.addObject("ctcode", ctcode);
+		
 //		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");
 		return mav;
@@ -268,4 +277,5 @@ public class HomeController {
 		mav.setViewName("review/TravelLike");
 		return mav;
 	}
+	
 }

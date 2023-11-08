@@ -247,8 +247,8 @@ color:black;}
 									style="width: 18rem; margin: 17px 9px 20px 7px; height: 370px; border: none;"
 									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
 									<a href="/detailTdest?tdcode=${td.tdcode }"><img
-										src="${td.tdphoto }" class="card-img-top" alt="..."
-										width="286px" height="191px" loading="lazy" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'"></a>
+										src="${td.tdphoto }" class="card-img-top" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'"alt="..."
+										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
 										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${td.tdname }</h5>
 										<p class="card-text">${td.tdaddress }</p>
@@ -425,8 +425,8 @@ color:black;}
 									style="width: 18rem; margin: 17px 9px 20px 7px; height: 420px; border: none;"
 									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
 									<a href="/detailFestival?code=${fe.fecode }"><img
-										src="${fe.feposter }" class="card-img-top" alt="..."
-										width="286px" height="191px" loading="lazy" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'"></a>
+										src="${fe.feposter }"onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" class="card-img-top" alt="..."
+										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
 										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
@@ -447,8 +447,8 @@ color:black;}
 									style="width: 18rem; margin: 17px 9px 20px 7px; height: 420px; border: none;"
 									onmouseenter="addW3(this)" onmouseleave="removeW3(this)">
 									<a href="/detailFestival?code=${fe.fecode }"><img
-										src="${fe.feposter }" class="card-img-top" alt="..."
-										width="286px" height="191px" loading="lazy" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'"></a>
+										src="${fe.feposter }"onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" class="card-img-top" alt="..."
+										width="286px" height="191px" loading="lazy"></a>
 									<div class="card-body">
 										<h5 class="card-title"style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fe.fename }</h5>
 										<p class="card-text">${fe.feaddress }</p>
