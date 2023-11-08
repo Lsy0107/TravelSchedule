@@ -335,6 +335,111 @@
 
 
 
+<<<<<<< HEAD
+</head>
+<body class="d-flex flex-column h-100">
+	<main class="">
+		<!-- Navigation-->
+		<%@ include file="../include/menu.jsp"%>
+		<!-- content 시작 -->	
+		<div class="wrap">			
+			<img class="card-img-top Img" src="${detailTd.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />
+			<p class="name"> ${detailTd.tdname }</p>
+			<i class="fa-regular fa-heart fa-xl heart" onclick="clickHeart('${detailTd.tdcode}', 'tdest')" id="heart"></i>
+			<p class="lknum" id="lknum">${detailTd.lknum }</p>
+			<button class="btn btn-outline-success" onclick="selectCdcode('${detailTd.tdcode}','tdest')"
+			data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
+			추가하기</button>
+			<hr class="hr">
+			<p class="feinfo">${detailTd.tdinfo }</p>
+			<c:if test="${detailTd.tdtel ne null }">
+					<div class="phoneArea">
+						<img class="phoneImg" src="${pageContext.request.contextPath}/resources/detail/phone-icon-file.png">
+						<p class="fetel">${detailTd.tdtel }</p>
+					</div>
+			</c:if>
+			<c:if test="${detailTd.homepage ne null }">
+				<button class="homepage" onclick="location.href='${detailTd.homepage }';">공식 홈페이지</button>
+			</c:if>
+			<hr class="hr">
+			<div id="map" style="width:1000px;height:400px;"></div>
+			<p class="address">${detailTd.tdaddress }</p>
+			<hr class="hr">
+ 			<div class="TdestRecommendArea">
+	            <div class="Tdest">
+	            	<div class="countryIdentity">
+			            <span id="RecommendTitle">${country }에 이런 여행지는 어떠세요?</span>			            
+		            </div>
+		            <c:forEach items="${nearby }" var="td" begin="0" end="3" step="1">																
+						<div class="card feList" >
+							<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode}">
+					            <img class="card-img-top feImg" src="${td.tdphoto }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
+								<div class="feName">${td.tdname }</div>
+							</a>
+						</div>
+					</c:forEach>
+					<div class="moreArea">
+						<a href="/TdestSearchPage?category=여행지&ctcode=${country }">
+							<div class="feList more">
+					            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
+					        </div>
+				        </a>
+			            <h5 class="moreText">더보기</h5>
+			        </div>    
+		        </div>
+		        <div class="FestivalRecomm">
+		            <span id="RecommendTitle">축제를 즐기고 싶으신가요?</span>
+			            <div>
+			            <c:forEach items="${festival }" var="fe" begin="0" end="3" step="1">																
+							<div class="card feList" >
+								<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode }">
+						            <img class="card-img-top feImg" src="${fe.feposter }" alt="..." onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" />			                            			                            				
+									<div class="feName">${fe.fename }</div>
+								</a>
+							</div>
+						</c:forEach>
+						<div class="moreArea">
+							<a href="/TdestSearchPage?category=축제&ctcode=지역">
+								<div class="feList more">
+						            <i class="fa-solid fa-arrow-right fa-2xl moreIn" style="color: #000000;"></i>
+						        </div>
+					        </a>
+				            <h5 class="moreText" >더보기</h5>
+				        </div>
+			        </div>
+	            </div>
+	            
+            </div>			
+		</div>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="selectCalendar">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+                                    id="selectClear">선택</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		<!-- content 종료 -->
+		<!-- Footer-->
+		<%@ include file="../include/footer.jsp"%>
+	</main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="resources/js/scripts.js"></script>
+=======
 		</head>
 
 		<body class="d-flex flex-column h-100">
@@ -383,7 +488,7 @@
 									</div>
 								</c:forEach>
 								<div class="moreArea">
-									<a href="/TdestSearchPage">
+									<a href="/TdestSearchPage?category=여행지&ctcode=${country }">
 										<div class="feList more">
 											<i class="fa-solid fa-arrow-right fa-2xl moreIn"
 												style="color: #000000;"></i>
@@ -406,7 +511,7 @@
 										</div>
 									</c:forEach>
 									<div class="moreArea">
-										<a href="/TdestSearchPage">
+										<a href="/TdestSearchPage?category=축제&ctcode=지역">
 											<div class="feList more">
 												<i class="fa-solid fa-arrow-right fa-2xl moreIn"
 													style="color: #000000;"></i>
@@ -518,6 +623,7 @@
 									heart.classList.replace('fa-solid', 'fa-regular');
 									lknum.innerText = res;
 								}
+>>>>>>> 280120a61cec59176184518119d2b26cc553d438
 
 							}
 						});

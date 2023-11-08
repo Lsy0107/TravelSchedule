@@ -383,7 +383,7 @@
 										</div>
 									</c:forEach>
 									<div class="moreArea">
-										<a href="/festival">
+										<a href="/TdestSearchPage?category=축제&ctcode=${country }">
 											<div class="feList more">
 												<i class="fa-solid fa-arrow-right fa-2xl moreIn"
 													style="color: #000000;"></i>
@@ -407,7 +407,7 @@
 										</div>
 									</c:forEach>
 									<div class="moreArea">
-										<a href="/TdestSearchPage">
+										<a href="/TdestSearchPage?category=여행지&ctcode=지역">
 											<div class="feList more">
 												<i class="fa-solid fa-arrow-right fa-2xl moreIn"
 													style="color: #000000;"></i>

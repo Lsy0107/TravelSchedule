@@ -108,11 +108,11 @@
 	<select id="FestSearchList" resultType="Festival">
 		<if test="ctcode == null">
 		<![CDATA[
-			select * from festival where ROWNUM <=30 order by DBMS_RANDOM.RANDOM()
+			select * from festival where ROWNUM <=30 and enddate >= sysdate order by DBMS_RANDOM.RANDOM()
 		]]>
 		</if>
 		<if test="ctcode != null">
-			select * from festival where ctcode = #{ctcode}
+			select * from festival where ctcode = #{ctcode} and enddate >= sysdate
 		</if>
 	</select>
 	

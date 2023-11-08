@@ -1255,6 +1255,13 @@
 					}
 				}
 				</script>
+				<script type="text/javascript">
+					if(${category != null}){
+						document.querySelector("#SelCate").value = '${category}';
+						document.querySelector("#SelCity").value = '${ctcode}';
+						SearchClick();						
+					}
+				</script>
         </body>
 
         </html>
