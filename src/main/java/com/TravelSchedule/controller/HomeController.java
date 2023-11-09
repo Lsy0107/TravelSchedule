@@ -17,6 +17,7 @@ import com.TravelSchedule.crawling.newsCrawlingService;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
+import com.TravelSchedule.dto.Member;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
@@ -268,6 +269,25 @@ public class HomeController {
 		mav.addObject("sel", select);
 		mav.addObject("re", reList);
 		mav.setViewName("review/TravelLike");
+		return mav;
+	}
+	@RequestMapping(value="/adminMain")
+	public ModelAndView adminMain() {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("관리자페이지 이동");
+		
+		mav.setViewName("/admin/adminMain");
+		return mav;
+	}
+	@RequestMapping(value="/adminReview")
+	public ModelAndView adminReview(Review review) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("리뷰관리페이지 이동");
+		
+		ArrayList<Review> rList = rsvc.getReviewList(review);
+		mav.addObject("rList", rList);
+		
+		mav.setViewName("/admin/adminReview");
 		return mav;
 	}
 	

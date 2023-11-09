@@ -267,5 +267,25 @@ public class ReviewController {
 		mav.setViewName("review/DetailReview");
 		return mav;
 	}
+	@RequestMapping(value = "/reviewDelete")
+	public @ResponseBody String reviewDelete(String mid, String recode) {
+		System.out.println("리뷰삭제");
+		System.out.println("삭제할 리뷰 코드, mid : " + recode +", "+ mid);
+		int rs = rsvc.reLikeListDel(mid, recode);
+		System.out.println(rs);
+		if(rs > 0) {
+			System.out.println("likeList 삭제");
+			int re = rsvc.reviewDel(mid, recode);
+			if(0 < re) {
+				System.out.println("리뷰삭제성공");
+				return "Y";
+			}else {
+				System.out.println("리뷰삭제실패");
+				return "N";
+			}
+		}
+		return "N";
+
+	}
 
 }

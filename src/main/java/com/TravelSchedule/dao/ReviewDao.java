@@ -102,6 +102,14 @@ public interface ReviewDao {
 	
 	@Select("SELECT * FROM REVIEW WHERE MID = #{mid}")
 	ArrayList<Review> selectReview(String mid);
+	
+	@Select("SELECT * FROM REVIEW")
+	ArrayList<Review> selReviewList(Review review);
+	
+	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND RECODE = #{recode}")
+	int deleteReview(@Param("mid")String mid, @Param("recode")String recode);
+	@Delete("DELETE FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
+	int deleteLikeList(@Param("mid")String mid, @Param("recode")String recode);
 
 
 

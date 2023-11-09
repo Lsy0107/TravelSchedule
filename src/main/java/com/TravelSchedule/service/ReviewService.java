@@ -222,6 +222,21 @@ public class ReviewService {
 		
 		return rdao.selectReview(mid);
 	}
+
+	public ArrayList<Review> getReviewList(Review review) {
+		
+		return rdao.selReviewList(review);
+	}
+
+	public int reviewDel(String mid ,String recode) {
+		
+		return rdao.deleteReview(mid, recode);
+	}
+
+	public int reLikeListDel(String mid, String recode) {
+		
+		return rdao.deleteLikeList(mid, recode);
+	}
 	
 
 
