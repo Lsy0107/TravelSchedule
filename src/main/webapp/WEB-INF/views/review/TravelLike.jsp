@@ -188,9 +188,11 @@
 	                        </a>
 	                    </c:forEach>
 	                    <c:forEach items="${re}" var="re">
-	                        <div class="Ctitle" >	                            
-	                            <p class="cdname">${re.retitle}</p>		                           
-	                        </div>
+	                    	<a href="${pageContext.request.contextPath }/detailReview?recode=${re.recode}">
+		                        <div class="Ctitle" >	                            
+		                            <p class="cdname">${re.retitle}</p>		       	                                                
+		                        </div>
+	                        </a>
 	                    </c:forEach>
 	                </div>
 	
