@@ -63,17 +63,14 @@
                     width: 100%;
                     height: 60px;
                     padding: 10px;
-<<<<<<< HEAD
                     border-radius: 10px;
                     margin-bottom: 10px;
-=======
                     border: none;
 				    border-bottom: 1px solid;
 				    margin-bottom: 10px;
                 }
                 input:focus {
                 	outline: none;
->>>>>>> eea10ca6c9aaca48af1e368d7231b0a17164f74b
                 }
 
                 body {
