@@ -1,447 +1,441 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!DOCTYPE html>
-        <html lang="en">
-
-        <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-            <meta name="description" content="" />
-            <meta name="author" content="" />
-            <title>Modern Business - Start Bootstrap Template</title>
-            <!-- Favicon-->
-            <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-            <!-- Bootstrap icons-->
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-            <!-- Core theme CSS (includes Bootstrap)-->
-            <link href="resources/css/styles.css" rel="stylesheet" />
-
-            <!-- Data AOS-->
-            <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-            <style>
-                .pagination {
-                    position: relative;
-                }
-
-                ol {
-                    list-style: none;
-                    display: flex;
-                    padding: 0px;
-                    position: relative;
-                }
-				.bg-wh{
-					background-color: white;
-					box-shadow: 0px 0px 10px #A2A2A2;
-				}
-
-                ol>li:hover {
-                    background-color: lightgrey;
-                    cursor: pointer;
-                }
-
-                .active {
-                    background-color: rgb(105, 107, 109);
-                }
-
-                ol>li {
-                    padding: 3px;
-                    border: 1px solid blue;
-                    margin: 3px;
-                    text-align: center;
-                    min-width: 57px;
-                    min-height: 45px;
-                }
-
-                ol>li>a {
-                    padding: 10px;
-                    max-width: 50px;
-                    position: relative;
-                    top: 21%;
-                }
-
-                i#leftCur {
-                    position: relative;
-                    top: -7px;
-                    right: 0px;
-                }
-
-                i#rightCur {
-                    position: relative;
-                    top: -7px;
-                    left: 0px;
-                }
-
-                div#map {
-                    width: 100%;
-                    position: relative;
-                    top: 77px;
-                    height: 685px;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .TdListArea {
-                    position: relative;
-                    display: block;
-                    top: 150px;
-                    border: 1px solid;
-                    width: 75%;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .TdListIn {
-                    margin-left: auto;
-                    margin-right: auto;
-                    max-height: 628px;
-
-                    width: 100%;
-
-                }
-
-                .SearchArea {
-                    border-bottom: 1px solid;
-                }
-
-                .SArea {
-                    margin-top: 20px;
-                    margin-bottom: 20px;
-                    margin-left: auto;
-                    margin-right: auto;
-                    width: 308px;
-                }
-
-                .Search {
-                    width: 250px;
-                    border-radius: 10px;
-                    padding: 5px;
-                }
-
-                #btnRoadmap {
-                    display: block;
-                    width: 144px;
-                    text-align: center;
-
-                }
-
-                #btnSkyview {
-                    display: block;
-                    width: 144px;
-                    text-align: center;
-                    margin-top: 10px;
-                }
-
-                #SelectMapType {
-                    position: relative;
-                    bottom: 557px;
-                    left: 15px;
-                    z-index: 4;
-                }
-
-                .selected,
-                .unselected {
-                    border: 1px solid;
-                    padding: 10px;
-                    border-radius: 4px;
-                    font-size: 15px;
-                    cursor: pointer;
-                }
-
-                .selected {
-                    color: #1D9AF2;
-                    background-color: #292D3E;
-                    border: 1px solid #1D9AF2;
-                    border-radius: 4px;
-                    padding: 10px;
-                    cursor: pointer;
-
-                    font-size: 15px;
-                    box-shadow: 0 0 4px #999;
-                    background-position: center;
-                    transition: background-color 0.8s;
-                }
-
-                .selected:hover {
-                    background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-                    color: white;
-                }
-
-                .selected:active {
-                    background-color: #292d3e;
-                    background-size: 100%;
-                    transition: background-color 0s;
-                }
-
-
-
-                .TdestRecommendArea {
-                    position: relative;
-                    top: 80px;
-                    display: flex;
-                }
-
-                .JejuIslandTdest {
-                    border: 1px solid;
-                    padding: 25px;
-                    border-radius: 0px 25px 0px 25px;
-                    margin-left: auto;
-                    margin-right: 50px;
-                    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-                    cursor: pointer;
-                }
-
-                .FestivalRecomm {
-                    border: 1px solid;
-                    padding: 25px;
-                    border-radius: 25px 0px 25px 0px;
-                    margin-left: 50px;
-                    margin-right: auto;
-                }
-
-                #RecommendTitle {
-                    font-size: 22px;
-                    font-weight: bold;
-                }
-
-                .JejuIslandTdest>img {
-                    width: 75px;
-                    height: 75px;
-                }
-
-                .photo {
-                    cursor: pointer;
-                }
-
-                div.containDest,
-                div.containFest {
-                    padding: 9px;
-                    display: flex;
-					margin-bottom: 20px;
-                }
-
-                .Bar {
-                    border: 1px solid;
-                    top: 860px;
-                    position: sticky;
-                    padding: 0px;
-                }
-
-                .StickyBar {
-                    position: fixed;
-                    bottom: 80px;
-                    right: 40px;
-                    z-index: 12;
-                    width: 5%;
-                }
-
-                main {
-                    position: relative;
-                    padding-bottom: 2000px;
-                }
-
-                footer {
-                    position: relative;
-                }
-
-                .content_wrap {
-                    width: 75%;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .map_wrap {
-                    width: 100%;
-
-
-                }
-
-                .Tdest_wrap {
-                    width: 100%;
-                    position: relative;
-                    top: 77px;
-                }
-
-                .ctList {
-                    display: inline-block;
-                    margin: 7px;
-                }
-
-                .hashTag {}
-
-                .tdImg {
-                    width: 150px;
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-right: 10px;
-                }
-
-                .TitleWrap {
-                    width: 100%;
-                    height: 550px;
-                    background: linear-gradient(45deg, #a2d0ae, lightcyan, peachpuff);
-                }
-
-                .CtBtn {
-                    width: 100%;
-                    height: 200px;
-                    padding: 8px;
-                }
-
-                #SelCity {
-                    width: 210px;
-                    height: 50px;
-                    padding: 15px;
-                    border-radius: 10px;
-                    border: 1px solid;
-                    font-weight: bold;
-                    outline: none;
-                }
-
-                #SelCate {
-                    width: 210px;
-                    height: 50px;
-                    padding: 15px;
-                    border-radius: 10px;
-                    border: 1px solid;
-                    font-weight: bold;
-                    outline: none;
-                }
-
-                option {
-                    font-weight: bold;
-                    color: black;
-                }
-
-                .SelOpDiv {
-                    text-align: center;
-                    position: relative;
-                    top: 140px;
-                }
-
-                .SearchBtn {
-                    width: 120px;
-                    height: 50px;
-                    border-radius: 15px;
-
-                    border: none;
-                }
-
-                .TitleSpan {
-                    width: 100%;
-                    display: block;
-                    text-align: center;
-                    font-size: 70px;
-                    position: relative;
-                    top: 100px;
-                    font-family: fantasy;
-                    color: black;
-                    text-shadow: 7px 10px 6px gray;
-                }
-
-                .ResetBtn {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 10px;
-                }
-
-                .Selection {
-                    border: 1px solid blue;
-                }
-
-                .hTag {
-                    overflow: hidden;
-                    white-space: nowrap;
-                    max-width: calc(240px);
-				    white-space: nowrap;
-				    text-overflow: ellipsis;
-				    display: block;
-                }
-
-                html,
-                body {
-                    height: 100%;
-                }
-
-                .SearchTag {
-                    position: relative;
-                    top: 170px;
-                    text-align: right;
-                    width: 43%;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                #SearchIcon {
-                    font-size: 40px;
-                    color: #224d68;
-                    cursor: pointer;
-                }
-
-                .SearchBox {
-                    border: 1px solid;
-                    background: white;
-                    width: 60%;
-                    position: relative;
-                    top: 120px;
-                    margin-left: auto;
-                    margin-right: auto;
-                    display: none;
-                    height: 200px;
-                    border-radius: 20px;
-
-                }
-
-                .SearchInput {
-                    width: 75%;
-                    height: 42px;
-                    padding: 8px;
-                    border: none;
-                }
-
-                .SearchCate {
-                    height: 40px;
-                    width: 100px;
-                    padding: 8px;
-                    outline: none;
-                    border: none;
-                }
-
-                .SearchBtn2 {
-                    width: 43px;
-                    height: 43px;
-                    border: none;
-                    background: white;
-                    outline: none;
-                }
-
-                .SearchD {
-                    display: block;
-                    margin-left: auto;
-                    margin-right: auto;
-                    width: 75%;
-                    margin-top: 15px;
-
-                }
-
-                #CloseIcon {
-                    position: absolute;
-                    top: -8px;
-                    right: -7px;
-                    width: 40px;
-                    height: 40px;
-                    border: none;
-                    padding: 0px;
-                    background: none;
-                }
-
-                #Close {
-                    font-size: 40px;
-                }
-            </style>
-        </head>
-
-        <body class="">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Modern Business - Start Bootstrap Template</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="resources/css/styles.css" rel="stylesheet" />
+
+<!-- Data AOS-->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+.pagination {
+	position: relative;
+}
+
+ol {
+	list-style: none;
+	display: flex;
+	padding: 0px;
+	position: relative;
+}
+
+.bg-wh {
+	background-color: white;
+	box-shadow: 0px 0px 10px #A2A2A2;
+}
+
+ol>li:hover {
+	background-color: lightgrey;
+	cursor: pointer;
+}
+
+.active {
+	background-color: rgb(105, 107, 109);
+}
+
+ol>li {
+	padding: 3px;
+	border: 1px solid blue;
+	margin: 3px;
+	text-align: center;
+	min-width: 57px;
+	min-height: 45px;
+}
+
+ol>li>a {
+	padding: 10px;
+	max-width: 50px;
+	position: relative;
+	top: 21%;
+}
+
+i#leftCur {
+	position: relative;
+	top: -7px;
+	right: 0px;
+}
+
+i#rightCur {
+	position: relative;
+	top: -7px;
+	left: 0px;
+}
+
+div#map {
+	width: 100%;
+	position: relative;
+	top: 77px;
+	height: 685px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.TdListArea {
+	position: relative;
+	display: block;
+	top: 150px;
+	border: 1px solid;
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.TdListIn {
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 628px;
+	width: 100%;
+}
+
+.SearchArea {
+	border-bottom: 1px solid;
+}
+
+.SArea {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 308px;
+}
+
+.Search {
+	width: 250px;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+#btnRoadmap {
+	display: block;
+	width: 144px;
+	text-align: center;
+}
+
+#btnSkyview {
+	display: block;
+	width: 144px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+#SelectMapType {
+	position: relative;
+	bottom: 557px;
+	left: 15px;
+	z-index: 4;
+}
+
+.selected, .unselected {
+	border: 1px solid;
+	padding: 10px;
+	border-radius: 4px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.selected {
+	color: #1D9AF2;
+	background-color: #292D3E;
+	border: 1px solid #1D9AF2;
+	border-radius: 4px;
+	padding: 10px;
+	cursor: pointer;
+	font-size: 15px;
+	box-shadow: 0 0 4px #999;
+	background-position: center;
+	transition: background-color 0.8s;
+}
+
+.selected:hover {
+	background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
+		center/15000%;
+	color: white;
+}
+
+.selected:active {
+	background-color: #292d3e;
+	background-size: 100%;
+	transition: background-color 0s;
+}
+
+.TdestRecommendArea {
+	position: relative;
+	top: 80px;
+	display: flex;
+}
+
+.JejuIslandTdest {
+	border: 1px solid;
+	padding: 25px;
+	border-radius: 0px 25px 0px 25px;
+	margin-left: auto;
+	margin-right: 50px;
+	background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+	cursor: pointer;
+}
+
+.FestivalRecomm {
+	border: 1px solid;
+	padding: 25px;
+	border-radius: 25px 0px 25px 0px;
+	margin-left: 50px;
+	margin-right: auto;
+}
+
+#RecommendTitle {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.JejuIslandTdest>img {
+	width: 75px;
+	height: 75px;
+}
+
+.photo {
+	cursor: pointer;
+}
+
+div.containDest, div.containFest {
+	padding: 9px;
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.Bar {
+	border: 1px solid;
+	top: 860px;
+	position: sticky;
+	padding: 0px;
+}
+
+.StickyBar {
+	position: fixed;
+	bottom: 80px;
+	right: 40px;
+	z-index: 12;
+	width: 5%;
+}
+
+main {
+	position: relative;
+	padding-bottom: 2000px;
+}
+
+footer {
+	position: relative;
+}
+
+.content_wrap {
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.map_wrap {
+	width: 100%;
+}
+
+.Tdest_wrap {
+	width: 100%;
+	position: relative;
+	top: 77px;
+}
+
+.ctList {
+	display: inline-block;
+	margin: 7px;
+}
+
+.hashTag {
+	
+}
+
+.tdImg {
+	width: 150px;
+	height: 150px;
+	border-radius: 15px;
+	margin-right: 10px;
+}
+
+.TitleWrap {
+	width: 100%;
+	height: 550px;
+	background: linear-gradient(45deg, #a2d0ae, lightcyan, peachpuff);
+}
+
+.CtBtn {
+	width: 100%;
+	height: 200px;
+	padding: 8px;
+}
+
+#SelCity {
+	width: 210px;
+	height: 50px;
+	padding: 15px;
+	border-radius: 10px;
+	border: 1px solid;
+	font-weight: bold;
+	outline: none;
+}
+
+#SelCate {
+	width: 210px;
+	height: 50px;
+	padding: 15px;
+	border-radius: 10px;
+	border: 1px solid;
+	font-weight: bold;
+	outline: none;
+}
+
+option {
+	font-weight: bold;
+	color: black;
+}
+
+.SelOpDiv {
+	text-align: center;
+	position: relative;
+	top: 140px;
+}
+
+.SearchBtn {
+	width: 120px;
+	height: 50px;
+	border-radius: 15px;
+	border: none;
+}
+
+.TitleSpan {
+	width: 100%;
+	display: block;
+	text-align: center;
+	font-size: 70px;
+	position: relative;
+	top: 100px;
+	font-family: fantasy;
+	color: black;
+	text-shadow: 7px 10px 6px gray;
+}
+
+.ResetBtn {
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+}
+
+.Selection {
+	border: 1px solid blue;
+}
+
+.hTag {
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: calc(240px);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+}
+
+html, body {
+	height: 100%;
+}
+
+.SearchTag {
+	position: relative;
+	top: 170px;
+	text-align: right;
+	width: 43%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#SearchIcon {
+	font-size: 40px;
+	color: #224d68;
+	cursor: pointer;
+}
+
+.SearchBox {
+	border: 1px solid;
+	background: white;
+	width: 60%;
+	position: relative;
+	top: 120px;
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+	height: 200px;
+	border-radius: 20px;
+}
+
+.SearchInput {
+	width: 75%;
+	height: 42px;
+	padding: 8px;
+	border: none;
+}
+
+.SearchCate {
+	height: 40px;
+	width: 100px;
+	padding: 8px;
+	outline: none;
+	border: none;
+}
+
+.SearchBtn2 {
+	width: 43px;
+	height: 43px;
+	border: none;
+	background: white;
+	outline: none;
+}
+
+.SearchD {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
+	margin-top: 15px;
+}
+
+#CloseIcon {
+	position: absolute;
+	top: -8px;
+	right: -7px;
+	width: 40px;
+	height: 40px;
+	border: none;
+	padding: 0px;
+	background: none;
+}
+
+#Close {
+	font-size: 40px;
+}
+</style>
+</head>
+
+<body class="">
             <!-- Navigation-->
             <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                 <div class="StickyBar">
@@ -574,9 +568,11 @@
                     AOS.init();
                 </script>
 
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-                <script src="https://kit.fontawesome.com/148f0d76e9.js" crossorigin="anonymous"></script>
-                <script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/148f0d76e9.js"
+		crossorigin="anonymous"></script>
+	<script>
 
                     $(document).ready(function () {
                         let selectCity = document.querySelector(".SelCity");
@@ -585,7 +581,7 @@
                     })
                 </script>
 
-                <script>
+	<script>
                     function selectCity(selOp) {
                         if (selOp.value == '지역') {
                             $('#SelCity').css('color', 'black');
@@ -604,7 +600,7 @@
                     }
 
                 </script>
-                <script>
+	<script>
                     let currentCity = null;
                     let currentCate = null;
                     function SearchClick() {
@@ -778,7 +774,7 @@
                         Paging();
                     }
                 </script>
-                <script>
+	<script>
                     function Paging() {
                         const rowsPerPage = 30; //페이지당 출력할 수
                         let rows = null;
@@ -887,7 +883,7 @@
 
                     }
                 </script>
-                <script>
+	<script>
 
 
                     function DetailPageMoveDest(tdcode) {
@@ -900,7 +896,7 @@
                         location.href = 'detailFestival?code=' + fecode;
 
                     }
-                    function DestselectCdcode(tdcode, seloption) {
+                    function DestselectCdcode(code, seloption) {
                         if ("${sessionScope.loginId}" == "") {
             				location.href = "${pageContext.request.contextPath}/memberLoginForm"
             			} else {
@@ -959,7 +955,7 @@
                             }
                         })
                     }
-                    function FestselectCdcode(fecode, seloption) {
+                    function FestselectCdcode(code, seloption) {
                     	if ("${sessionScope.loginId}" == "") {
             				location.href = "${pageContext.request.contextPath}/memberLoginForm"
             			} else {
@@ -987,7 +983,7 @@
             							modalBodyTag.appendChild(selTag);
             							let btnTag = document.querySelector("#selectClear");
             							btnTag.addEventListener("click", function(){
-            								selectDest(code, selTag.value, seloption)
+            								selectFest(code, selTag.value, seloption)
             							})
             							}else{
             								modalBodyTag.innerText="계획 가능한 달력이 없습니다.";
@@ -1014,7 +1010,7 @@
                         })
                     }
                 </script>
-                <script>
+	<script>
                     $(document).ready(function () {
                         $(window).scroll(function () {
                             if ($(this).scrollTop() > 50) {
@@ -1031,7 +1027,7 @@
 
                 </script>
 
-                <script>
+	<script>
                     $(function () {
                         $("#SearchIcon").on("click", function () {
                             $(".SearchBox").fadeIn();
@@ -1047,7 +1043,7 @@
                     });
                 </script>
 
-                <script>
+	<script>
                     function SearchDetail() {
                         let cateTag = document.querySelector('.SearchCate').value;
                         let inputTag = document.querySelector('.SearchInput').value;
@@ -1211,7 +1207,7 @@
                         Paging();
                     }
                 </script>
-				<script type="text/javascript">
+	<script type="text/javascript">
 				function previewInput(obj){
 					console.log(obj);
 					let SelCateTag = document.querySelector('#selectCategory');
@@ -1262,6 +1258,13 @@
 					}
 				}
 				</script>
-        </body>
+	<script type="text/javascript">
+					if(${category != null}){
+						document.querySelector("#SelCate").value = '${category}';
+						document.querySelector("#SelCity").value = '${ctcode}';
+						SearchClick();						
+					}
+				</script>
+</body>
 
-        </html>
+</html>

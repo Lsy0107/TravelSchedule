@@ -36,7 +36,30 @@
 	background-color: white;
 	box-shadow: 0px 0px 10px #A2A2A2;
 }
-			
+.wrap{
+	width: 30%;
+	margin-bottom: 50px;
+	margin-top: 125px;
+	display: inline-block;
+	margin-left: 600px;
+}
+.select {
+            	width: 250px;
+            	height: 130px;           
+            	display: inline-block;
+            	margin-top: 125px;            	
+            	margin-left: 15px;
+            	background-color: whitesmoke;    
+            	position: relative;
+            	bottom: -70px;     	
+            }
+            .select>p{
+            	margin-left: 10px;
+            	cursor: pointer;
+            }		
+            .Area{
+            	display:flex;
+            }
         </style>
         
     </head>
@@ -44,22 +67,22 @@
         <main class="flex-shrink-0">
             <!-- Navigation-->
             <%@ include file="/WEB-INF/views/include/menu.jsp" %>
-            <!-- contant 시작 -->
-            <div class="row" style="margin-top:90px;"></div>
-			 <div class="w3-content w3-container w3-margin-top">
+            <!-- contant 시작 -->           
+			<div class="Area">
+			 <div class="wrap w3-container">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
-				<h3>My Page</h3>
+				<h3>마이페이지</h3>
 			</div>
 			<div>
 				<form id="myForm" enctype="multipart/form-data" action="${pageContext.request.contextPath }/memberUpdate" method="post" >
 					<p>
 					<c:choose>
 						<c:when test="${mInfo.mprofile  == null}">
-							<img id="profileImg" src="/resources/memberProfile/default.jpg" class="img-thumbnail" alt="..." style="width: 150px;">
+							<img id="profileImg" src="/resources/memberProfile/default.jpg" class="img-thumbnail" alt="..." style="width: 150px; height: 150px;">
 						</c:when>
 						<c:otherwise>
-							<img id="profileImg" src="/resources/memberProfile/${mInfo.mprofile }" class="img-thumbnail" alt="${mInfo.mprofile }" style="width: 150px;">
+							<img id="profileImg" src="/resources/memberProfile/${mInfo.mprofile }" class="img-thumbnail" alt="${mInfo.mprofile }" style="width: 150px; height: 150px;">
 						</c:otherwise>
 					</c:choose>
 					</p>
@@ -102,7 +125,13 @@
 				</form>
 			</div>
 		</div>
-	</div>	
+	</div>
+	<div class="select">
+					<p style="margin-top:20px; border-left: thick solid red;" onclick="location.href='${pageContext.request.contextPath }/myInfo'">내정보</p>
+	            	<p onclick="location.href='${pageContext.request.contextPath }/TravelLike'">좋아요</p>
+	            	<p onclick="location.href='${pageContext.request.contextPath }/TravelReview'">리뷰</p>
+	            </div>
+	            </div>	
 		<!-- contant 종료 -->
         </main>
         <!-- Footer-->

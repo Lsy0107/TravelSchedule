@@ -178,12 +178,13 @@ div {
 				<nav class=""
 					style="border: 1px solid #A2A2A2; border-radius: 10px; background-color: white; box-shadow: 0 0 8px #A2A2A2">
 					<div id="scArea" class="p-3	"
-						style="min-height: 80vh; width: 200px; display: flow; text-overflow: ellipsis;">
+						style="height: 590px; width: 200px; display: flow; text-overflow: ellipsis; overflow-y:auto;">
 						<c:forEach var="sc" items="${scdestList }">
 							<c:if test="${sc.SCDATE != null}">
 								<c:choose>
 									<c:when test="${sc.TDCODE != null }">
-										<div style="padding: 0; margin: 0;" data-bs-toggle="collapse"
+										<div style="padding: 0; margin: 0;" id="${sc.TDCODE }div"
+											data-bs-toggle="collapse"
 											data-bs-target="#${sc.TDCODE }"
 											aria-controls="navbarToggleExternalContent"
 											aria-expanded="false" aria-label="Toggle navigation">
@@ -199,7 +200,8 @@ div {
 										</div>
 									</c:when>
 									<c:when test="${sc.FECODE != null }">
-										<div style="padding: 0; margin: 0;" data-bs-toggle="collapse"
+										<div style="padding: 0; margin: 0;" id="${sc.FECODE }div"
+											data-bs-toggle="collapse"
 											data-bs-target="#${sc.FECODE }"
 											aria-controls="navbarToggleExternalContent"
 											aria-expanded="false" aria-label="Toggle navigation">
@@ -395,18 +397,57 @@ div {
 	<script type="text/javascript">
 	
 	let lalngList = JSON.parse('${lalngList}');
+	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng( lalngList[0].lati, lalngList[0].longti), //지도의 중심좌표.
-		level: 12 //지도의 레벨(확대, 축소 정도)
+		level: 10, //지도의 레벨(확대, 축소 정도)
+		draggable: false
 	};
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-	
+	map.setZoomable(true);
 	var positions = [];
 	
 	for(let lalng of lalngList){
 		positions.push({title: lalng.name, latlng: new kakao.maps.LatLng(lalng.lati, lalng.longti)})
+		let scDiv = document.querySelector('#'+lalng.code +'div');
+		scDiv.addEventListener("click", function(){
+			moveMap(lalng);
+			});
+	}
+		let colornum = 500;
+		let color = "#" + colornum.toString(16);
+	for(let i in lalngList){
+		if(i == 0){
+			continue;
+		}
+		
+		console.log(lalngList[i-1])
+		console.log(lalngList[i]);
+			console.log(lalngList[i-1].scdate.split(' ')[0]== lalngList[i].scdate.split(' ')[0]);
+		if(lalngList[i-1].scdate.split(' ')[0]== lalngList[i].scdate.split(' ')[0]){
+		var linePath = [
+		    new kakao.maps.LatLng(lalngList[i-1].lati, lalngList[i-1].longti),
+		    new kakao.maps.LatLng(lalngList[i].lati, lalngList[i].longti),
+		];
+
+		// 지도에 표시할 선을 생성합니다
+		var polyline = new kakao.maps.Polyline({
+		    path: linePath, // 선을 구성하는 좌표배열 입니다
+		    strokeWeight: 5, // 선의 두께 입니다
+		    strokeColor: color, // 선의 색깔입니다
+		    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'solid' // 선의 스타일입니다
+		});
+
+		// 지도에 선을 표시합니다 
+		polyline.setMap(map);  
+			console.log(color);
+		}else{
+			colornum = colornum + 1000;
+			color = "#" + colornum.toString(16);
+		}
 	}
 
 	for (var i = 0; i < positions.length; i ++) {
@@ -629,7 +670,15 @@ div {
 			})
 		}
 	</script>
-	
+	<script type="text/javascript">
+	function moveMap(cs){
+		    // 이동할 위도 경도 위치를 생성합니다 
+		    var moveLatLon = new kakao.maps.LatLng(cs.lati, cs.longti);
+		    // 지도 중심을 부드럽게 이동시킵니다
+		    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+		    map.panTo(moveLatLon); 
+	}
+	</script>	
 
 </body>
 </html>
