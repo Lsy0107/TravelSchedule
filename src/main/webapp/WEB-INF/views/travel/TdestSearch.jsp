@@ -23,13 +23,10 @@
 <!-- Data AOS-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-<!-- Data AOS-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
 .pagination {
 	position: relative;
-	margin-left: 80px;
 }
 
 ol {
@@ -71,13 +68,13 @@ ol>li>a {
 
 i#leftCur {
 	position: relative;
-	top: 15px;
+	top: -7px;
 	right: 0px;
 }
 
 i#rightCur {
 	position: relative;
-	top: 15px;
+	top: -7px;
 	left: 0px;
 }
 
@@ -219,6 +216,7 @@ div#map {
 div.containDest, div.containFest {
 	padding: 9px;
 	display: flex;
+	margin-bottom: 20px;
 }
 
 .Bar {
@@ -273,6 +271,8 @@ footer {
 .tdImg {
 	width: 150px;
 	height: 150px;
+	border-radius: 15px;
+	margin-right: 10px;
 }
 
 .TitleWrap {
@@ -350,6 +350,10 @@ option {
 .hTag {
 	overflow: hidden;
 	white-space: nowrap;
+	max-width: calc(240px);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
 }
 
 html, body {
@@ -433,139 +437,135 @@ html, body {
 </head>
 
 <body class="">
-	<!-- Navigation-->
-	<%@ include file="/WEB-INF/views/include/menu.jsp"%>
-	<div class="StickyBar">
-		<button class="Bar">
-			<img class="BarImage" style="width: 100%;"
-				src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png"
-				alt="">
-		</button>
-	</div>
-	<!-- contant 시작 -->
+            <!-- Navigation-->
+            <%@ include file="/WEB-INF/views/include/menu.jsp" %>
+                <div class="StickyBar">
+                    <button class="Bar">
+                        <img class="BarImage" style="width: 60px;;"
+                            src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png" alt="">
+                    </button>
+                </div>
+                <!-- contant 시작 -->
 
-	<div class="TitleWrap">
-		<span class="TitleSpan">R.O.K Travel</span>
-		<div class="SelOpDiv">
-			<select name="ctcode" id="SelCity" onchange="selectCity(this)">
-				<option class="OptionCity" value="지역">지역</option>
-				<c:forEach items="${CountryList }" var="ct">
-					<option class="OptionCity" value="${ct.ctname}">${ct.ctname}</option>
-				</c:forEach>
-			</select> <select name="category" id="SelCate" required="required"
-				onchange="selectCategory(this)">
-				<option value="">카테고리</option>
-				<option value="여행지">여행지</option>
-				<option value="축제">축제</option>
-			</select>
-			<button class="SearchBtn btn btn-primary" onclick="SearchClick()">
-				검색<i style="padding: 5px;" class="fa-solid fa-magnifying-glass"></i>
-			</button>
-		</div>
-		<div class="SearchTag">
-			<i id="SearchIcon" class="fa-solid fa-magnifying-glass"></i>
-		</div>
-		<div class="SearchBox">
-			<div class="SearchD">
-				<select name="cateVal" id="selectCategory" class="SearchCate"
-					required="required" onchange="selectCategory(this)">
-					<option value="">카테고리</option>
-					<option value="축제">축제</option>
-					<option value="여행지">여행지</option>
-				</select> <input class="SearchInput" onkeyup="previewInput(this)" type="text"
-					placeholder="검색어를 입력해주세요.">
-				<button class="SearchBtn2" onclick="SearchDetail()">
-					<i id="" class="fa-solid fa-magnifying-glass"></i>
-				</button>
-			</div>
-			<button id="CloseIcon">
-				<i id="Close" class="fa-solid fa-circle-xmark"
-					style="color: #000000;"></i>
-			</button>
-			<div id="previewtext"
-				style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius: 10px;">
-			</div>
-		</div>
+                <div class="TitleWrap">
+                    <span class="TitleSpan">R.O.K Travel</span>
+                    <div class="SelOpDiv">
+                        <select name="ctcode" id="SelCity" onchange="selectCity(this)">
+                            <option class="OptionCity" value="지역">지역</option>
+                            <c:forEach items="${CountryList }" var="ct">
+                                <option class="OptionCity" value="${ct.ctname}">${ct.ctname}</option>
+                            </c:forEach>
+                        </select>
 
-	</div>
+                        <select name="category" id="SelCate" required="required" onchange="selectCategory(this)">
+                            <option value="">카테고리</option>
+                            <option value="여행지">여행지</option>
+                            <option value="축제">축제</option>
+                        </select>
+                        <button class="SearchBtn btn btn-primary" onclick="SearchClick()">검색<i style="padding: 5px;"
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <div class="SearchTag">
+                        <i id="SearchIcon" class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="SearchBox">
+                        <div class="SearchD">
+                            <select name="cateVal" id="selectCategory" class="SearchCate" required="required"
+                                onchange="selectCategory(this)">
+                                <option value="">카테고리</option>
+                                <option value="축제">축제</option>
+                                <option value="여행지">여행지</option>
+                            </select>
+                            <input class="SearchInput" onkeyup="previewInput(this)" type="text" placeholder="검색어를 입력해주세요.">
+                            <button class="SearchBtn2" onclick="SearchDetail()"><i id=""
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                        <button id="CloseIcon"><i id="Close" class="fa-solid fa-circle-xmark"
+                                style="color: #000000;"></i></button>
+                    <div id="previewtext" style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius:10px;">
+                    </div>
+                    </div>
 
-	<div class="content_wrap">
-		<div class="Tdest_wrap">
-			<div class="TdListIn">
-				<div id="rowid" class="row TdestArea">
+                </div>
 
-					<div class="containDest">
-						<!-- Blog post-->
-						<div class="card mb-4 photo" id="photo"
-							onclick="location.href='detailTdest?tdcode=${Ts.tdcode}'">
-							<img class="card-img-top tdImg img-thumbnail" src="${Ts.tdphoto}"
-								alt="..." />
+                <div class="content_wrap">
+                    <div class="Tdest_wrap">
+                        <div class="TdListIn">
+                            <div id="rowid" class="row TdestArea">
 
-						</div>
-						<div class="card-body">
-							<h3 id="title" class="card-title h4" title="${TdList.tdname}"
-								style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
-							<button class="btn btn-primary"
-								onclick="selectCdcode('${TdList.tdcode}','tdest')"
-								data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
-								추가하기</button>
-						</div>
-					</div>
+                                <div class="containDest">
+                                    <!-- Blog post-->
+                                    <div class="card mb-4 photo" id="photo"
+                                        onclick="location.href='detailTdest?tdcode=${Ts.tdcode}'">
+                                        <img class="card-img-top tdImg" src="${Ts.tdphoto}" alt="..." />
 
-				</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 id="title" class="card-title h4" title="${TdList.tdname}"
+                                            style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
+                                        <button class="btn btn-primary"
+                                            onclick="selectCdcode('${TdList.tdcode}','tdest')" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">계획에
+                                            추가하기</button>
+                                    </div>
+                                </div>
 
-				<div class="row">
-					<div class="pagination">
-						<i id="leftCur" class="fa-solid fa-arrow-left"></i>
-						<ol id="numbers">
+                            </div>
 
-						</ol>
-						<i id="rightCur" class="fa-solid fa-arrow-right"></i>
-					</div>
-				</div>
+                            <div class="row">
+                                <div class="pagination d-flex justify-content-center">
+                                    <i id="leftCur" class="d-flex align-items-center fa-solid fa-arrow-left fa-xl"></i>
+                                    <div class="d-flex align-items-center">
+                                    <ol id="numbers">
 
-			</div>
+                                    </ol>
+                                    </div>
+                                    <i id="rightCur" class="d-flex align-items-center fa-solid fa-arrow-right fa-xl"></i>
+                                </div>
+                            </div>
 
-		</div>
-	</div>
+                        </div>
+
+                    </div>
+                </div>
 
 
 
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="selectCalendar"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-success"
-						data-bs-dismiss="modal" id="selectClear">선택</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="selectCalendar">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+                                    id="selectClear">선택</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
 
 
 
-	<!-- contant 종료 -->
+                <!-- contant 종료 -->
 
-	<!-- Footer-->
+                <!-- Footer-->
 
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="resources/js/scripts.js"></script>
+                <!-- Bootstrap core JS-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- Core theme JS-->
+                <script src="resources/js/scripts.js"></script>
 
-	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-	<script>
+                <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <script>
                     AOS.init();
                 </script>
 
@@ -666,7 +666,6 @@ html, body {
                             DestDiv.classList.add('col-lg-4');
                             DestDiv.classList.add('col-md-6');
 
-
                             let TdestImgDiv = document.createElement('div');
                             //           TdestImgDiv.classList.add('card-mb-4');
                             TdestImgDiv.classList.add('photo');
@@ -677,13 +676,14 @@ html, body {
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Td.tdphoto);
                             TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
@@ -726,7 +726,7 @@ html, body {
                             DestDiv.classList.add('containDest');
                             DestDiv.classList.add('col-lg-4');
                             DestDiv.classList.add('col-md-6')
-
+							
 
                             let TdestImgDiv = document.createElement('div');
                             //           TdestImgDiv.classList.add('card-mb-4');
@@ -738,13 +738,14 @@ html, body {
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Fe.feposter);
                             TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
@@ -1107,6 +1108,7 @@ html, body {
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Fe.feposter);
                             TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
 
@@ -1114,7 +1116,7 @@ html, body {
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
@@ -1168,6 +1170,7 @@ html, body {
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Td.tdphoto);
                             TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'")
 
@@ -1175,7 +1178,7 @@ html, body {
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');

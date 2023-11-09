@@ -111,7 +111,7 @@ td {
 	cursor: pointer;
 }
 .calendarShadow{
-	box-shadow: 0px 0px 10px #A2A2A2;
+	box-shadow: 0px 0px 12px #A2A2A2;
 	border-radius: 10px;
 }
 .w-btn {
@@ -170,12 +170,12 @@ body, div, p, h4, a, td, span, tr, button{
 		<!-- Navigation-->
 		<%@ include file="/WEB-INF/views/include/menu.jsp"%>
 		<!-- contant 시작 -->
-		<div class="row" style="margin: 45px;"></div>
+		<div class="row" style="margin: 90px;"></div>
 		<div class="container">
-			<div class="row mb-2 calendarShadow font-jua" style="positon :relative; z-index: 2;">
+			<div class="row mb-2 calendarShadow font-jua" >
 				<div
 					class="col col-2 p-3 overflow-auto rounded-start"
-					style="min-height: 500px; border-right: 1px solid #a2a2a28f; border-radius: 10px; background-color: ivory;">
+					style="min-height: 500px; border-right: 1px solid #a2a2a28f; background-color: #fff;">
 					<div style="height:505px;">
 					<h4 style="text-align:center;margin-top:0;">캘린더</h4>
 					<c:forEach items="${cdList }" var="cd">
