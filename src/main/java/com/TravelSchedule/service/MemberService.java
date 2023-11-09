@@ -32,7 +32,7 @@ public class MemberService {
 		UUID uuid = UUID.randomUUID();
 		savePath = session.getServletContext().getRealPath("/resources/memberProfile");
 		System.out.println(savePath);
-
+		
 		if (!mprofiledata.isEmpty()) {
 			System.out.println("첨부파일 O");
 			mprofile = uuid + "_" + mprofiledata.getOriginalFilename();
@@ -87,7 +87,7 @@ public class MemberService {
 			String code = uuid.toString();
 			System.out.println("code : " + code);
 			mprofile = code + "_" + mfile.getOriginalFilename();
-
+			session.setAttribute("loginProfile", mprofile);
 			System.out.println("savePath" + savePath);
 			File newFile = new File(savePath, mprofile);
 			try {
