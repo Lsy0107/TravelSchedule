@@ -25,7 +25,7 @@
                     background-color: white;
                     padding: 20px;
                     border-radius: 25px;
-                    box-shadow: 0px 0px 12px #A2A2A2;
+                    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
                 }
 
                 .disnone {
@@ -33,7 +33,7 @@
                 }
 
                 .imgDiv {
-                    
+
                     max-width: 100%;
                     margin-bottom: 10px;
                 }
@@ -75,7 +75,7 @@
                 }
 
                 body {
-                    background-color: lightgrey;
+                    background-color: white;
                 }
 
                 .ReFile {
@@ -156,6 +156,39 @@
                         border-radius: 10px;
                     }
                 }
+
+                .ID {
+                    margin: 10px;
+                }
+
+                .RePhotoArr>img {
+                    margin: 10px;
+                }
+
+                .RePhotoArr {
+                    overflow: auto;
+                    white-space: nowrap;
+                    min-height: 190px;
+                    max-height: 190px;
+                }
+                .Delete {
+                animation-name: DeleteMotion;
+                animation-fill-mode: forwards;
+                animation-duration: 0.5s;
+                animation-delay: 0s;
+                animation-direction: normal;
+            }
+
+            @keyframes DeleteMotion {
+                0% {
+                    padding: 0px;
+                }
+
+                100% {
+                    padding: 83px;
+                    display: none;
+                }
+            
             </style>
         </head>
 
@@ -174,13 +207,13 @@
                                         href="javascript:chageDisplay('weather')">축제</a></li>
                             </ul>
                         </div>
-                        <div class="imgDiv  ">
-                            <div class="tdest section section" id="meminfoTag" style="overflow-x: auto;" style="overflow-x: auto;">
+                        <div class="imgDiv">
+                            <div class="tdest section" id="meminfoTag" style="overflow-x: auto;">
                                 <div class="tImg">
                                     <c:forEach var="td" items="${Td}">
-                                        <div class="ImgDiv">
+                                        <div class="ID">
                                             <div class="CheckDiv">
-                                                <span>${td.TDNAME}</span>
+                                                <span class="d-flex">${td.TDNAME}</span>
                                                 <input style="display: none;" type="checkbox" name="TF"
                                                     id="${td.TDCODE}" value="${td.TDCODE}">
                                                 <label for="${td.TDCODE}"><img onclick="checkImg('${td.TDCODE}')"
@@ -189,21 +222,21 @@
                                             </div>
                                         </div>
                                     </c:forEach>
-                                </div>	
+                                </div>
                             </div>
                             <div class="fest disnone" id="weatherTag" style="overflow-x: auto;">
                                 <div class="fImg">
                                     <c:forEach var="fe" items="${Fe}">
-                                        <div class="ImgDiv">
+                                        <div class="ID">
                                             <div class="CheckDiv">
-                                                <span>${fe.FENAME}</span>
+                                                <span class="d-flex">${fe.FENAME}</span>
                                                 <input style="display: none;" type="checkbox" name="TF"
                                                     id="${fe.FECODE}" value="${fe.FECODE}">
                                                 <label for="${fe.FECODE}"><img onclick="checkImgFe('${fe.FECODE}')"
                                                         name="FE" value="${fe.FECODE}" class="${fe.FECODE} img"
                                                         src="${fe.FEPOSTER}" alt=""></label>
                                             </div>
-                                        </div>                                
+                                        </div>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -223,7 +256,8 @@
                     </div>
 
                     <div class="FormBtn">
-                        <button class="btn btn-outline-success" onclick="return ReviewSubmitCheck()" style="width: 100%;">등록</button>
+                        <button class="btn btn-outline-success" onclick="return ReviewSubmitCheck()"
+                            style="width: 100%;">등록</button>
                     </div>
                 </div>
 
@@ -337,6 +371,19 @@
                                     imgTag.setAttribute("src", e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
                                     imgTag.setAttribute("data-file", f.name);
                                     imgTag.classList.add('img');
+                                    imgTag.addEventListener('click', function (e) {
+                                        let confirmDel = confirm('해당 사진을 삭제 하시겠습니까?');
+
+                                        if (confirmDel == true) {
+                                            console.log(e.target);
+
+                                            e.target.classList.add('Delete');
+                                        }
+                                        else {
+                                            return false;
+                                        }
+                                    });
+                                    imgTag.style.margin = '10px';
                                     console.log(imgTag)
                                     //imgDiv.appendChild(imgTag);
                                     imgDiv.appendChild(imgTag);

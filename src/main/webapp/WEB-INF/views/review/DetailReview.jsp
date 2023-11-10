@@ -26,7 +26,7 @@
             }
 
             body {
-                background-color: lightgrey;
+                background-color: white;
             }
 
             .img {
@@ -64,7 +64,7 @@
                 background-color: white;
                 padding: 20px;
                 border-radius: 25px;
-                box-shadow: grey 10px 10px;
+                box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
             }
 
             .disnone {

@@ -22,10 +22,10 @@
             <!-- Data AOS-->
             <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-<style>
-.pagination {
-	position: relative;
-}
+            <style>
+                .pagination {
+                    position: relative;
+                }
 
                 ol {
                     list-style: none;
@@ -215,7 +215,7 @@
                 div.containFest {
                     padding: 9px;
                     display: flex;
-	margin-bottom: 20px;
+                    margin-bottom: 20px;
                 }
 
                 .Bar {
@@ -268,8 +268,8 @@
                 .tdImg {
                     width: 150px;
                     height: 150px;
-	border-radius: 15px;
-	margin-right: 10px;
+                    border-radius: 15px;
+                    margin-right: 10px;
                 }
 
                 .TitleWrap {
@@ -347,10 +347,10 @@
                 .hTag {
                     overflow: hidden;
                     white-space: nowrap;
-	max-width: calc(240px);
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	display: block;
+                    max-width: calc(240px);
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    display: block;
                 }
 
                 html,
@@ -431,10 +431,13 @@
                 #Close {
                     font-size: 40px;
                 }
+                a{
+                    text-decoration: none;
+                }
             </style>
         </head>
 
-<body class="">
+        <body class="">
             <!-- Navigation-->
             <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                 <div class="StickyBar">
@@ -474,14 +477,16 @@
                                 <option value="축제">축제</option>
                                 <option value="여행지">여행지</option>
                             </select>
-                            <input class="SearchInput" onkeyup="previewInput(this)" type="text" placeholder="검색어를 입력해주세요.">
+                            <input class="SearchInput" onkeyup="previewInput(this)" type="text"
+                                placeholder="검색어를 입력해주세요.">
                             <button class="SearchBtn2" onclick="SearchDetail()"><i id=""
                                     class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         <button id="CloseIcon"><i id="Close" class="fa-solid fa-circle-xmark"
                                 style="color: #000000;"></i></button>
-                    <div id="previewtext" style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius:10px;">
-                    </div>
+                        <div id="previewtext"
+                            style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius:10px;">
+                        </div>
                     </div>
 
                 </div>
@@ -499,12 +504,15 @@
                             </div>
 
                             <div class="row paginD" style="display: none;">
-                                <div class="pagination">
-                                    <i id="leftCur" class="fa-solid fa-arrow-left"></i>
-                                    <ol id="numbers">
+                                <div class="pagination d-flex justify-content-center">
+                                    <i id="leftCur" class="align-items-center fa-solid fa-arrow-left fa-xl"></i>
+                                    <div class="d-flex align-items-center">
+                                        <ol id="numbers">
 
-                                    </ol>
-                                    <i id="rightCur" class="fa-solid fa-arrow-right"></i>
+                                        </ol>
+                                    </div>
+                                    <i id="rightCur"
+                                        class="align-items-center fa-solid fa-arrow-right fa-xl"></i>
                                 </div>
                             </div>
 
@@ -708,7 +716,7 @@
                             DestDiv.classList.add('containDest');
                             DestDiv.classList.add('col-lg-4');
                             DestDiv.classList.add('col-md-6')
-							
+
 
                             let TdestImgDiv = document.createElement('div');
                             //           TdestImgDiv.classList.add('card-mb-4');
@@ -772,8 +780,8 @@
                         const pageCount = Math.ceil(rowsCount / rowsPerPage);
                         const numbers = document.querySelector('#numbers');
 
-                        const prevPageBtn = document.querySelector('.fa-arrow-left');
-                        const nextPageBtn = document.querySelector('.fa-arrow-right');
+                        const prevPageBtn = document.querySelector('#leftCur');
+                        const nextPageBtn = document.querySelector('#rightCur');
 
                         let pageActiveIdx = 0; //현재 페이지 그룹 번호
                         let currentPageNum = 0;
@@ -839,13 +847,17 @@
                                 item.style.display = 'block';
                             }
                             if (pageActiveIdx == 0) {
+                                prevPageBtn.classList.remove('d-flex');
                                 prevPageBtn.style.display = 'none';
                             } else {
+                                prevPageBtn.classList.add('d-flex')
                                 prevPageBtn.style.display = 'block';
                             }
                             if (pageActiveIdx == totalPageCount - 1) {
+                                nextPageBtn.classList.remove('d-flex');
                                 nextPageBtn.style.display = 'none';
                             } else {
+                                nextPageBtn.classList.add('d-flex');
                                 nextPageBtn.style.display = 'block';
                             }
                         }
