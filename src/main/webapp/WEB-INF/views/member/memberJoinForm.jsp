@@ -648,6 +648,8 @@
                     if (password.value == "") {
                         alert("비밀번호를 확인해주세요")
                         return false;
+                    }else if(password.value == 'naverAccount' || password.value == 'kakaoAccount'){
+                    	alert('사용할수 없는 비밀번호입니다.')
                     }
                     if (!checkMnickname) {
                         alert("닉네임을 확인해주세요");

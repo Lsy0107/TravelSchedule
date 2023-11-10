@@ -8,7 +8,7 @@
 <meta name="viewport" ontent="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>MemberList - admin</title>
+<title>ReviewList - admin</title>
 <style>
 	
 </style>
@@ -38,13 +38,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">회원관리</h1>
+                    <h1 class="h3 mb-2 text-gray-800">리뷰관리</h1>
                     
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">회원정보</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">리뷰목록</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -52,29 +52,32 @@
                                     <thead>
                                         <tr>
                                             <th>MID</th>
-                                            <th>MPW</th>
-                                            <th>MNICKNAME</th>
-                                            <th>MPROFILE</th>
-                                            <th>MSTATE</th>
+                                            <th>RETITLE</th>
+                                            <th>RECOMMENT</th>
+                                            <th>REPHOTO</th>
+                                            <th>REHIT</th>
+                                            <th>REDATE</th>
+                                            <th>RESTATE</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                            <c:forEach items="${ mList}" var="mem">
+                            <c:forEach items="${ rList}" var="re">
                                         <tr>
-                                            <td>${mem.mid}</td>
-                                            <td>${mem.mpw}</td>
-                                            <td>${mem.mnickname}</td>
-                                            <td>${mem.mprofile}</td>
-                                            <td class="dropdown no-arrow">${mem.mstate}
-			                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            <td>${re.mid}</td>
+                                            <td>${re.retitle}</td>
+                                            <td>${re.recomment}</td>
+                                            <td>${re.rephoto}</td>
+                                            <td>${re.rehit}</td>
+                                            <td>${re.redate}</td>
+                                            <td class="dropdown no-arrow">${re.restate}
+                                            	<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
 			                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 			                                     </a>
 			                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
 			                                         aria-labelledby="dropdownMenuLink">
-			                                         <div class="dropdown-header">MEMBER STATE</div>
-			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNN('${mem.mid}')">회원정지</a>
-			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNY('${mem.mid}')">정지해제</a>
+			                                         <div class="dropdown-header">REVIEW STATE</div>
+			                                         <a class="dropdown-item" style="width: 120px;" onclick="reviewDel('${re.mid}', '${re.recode}')">리뷰삭제</a>
 			                                     </div>
                                             </td>
                                         </tr>
@@ -135,41 +138,22 @@
 
 </body>
 <script type="text/javascript">
-	function mstateNN(mid) {
-		console.log(mid);
+	function reviewDel(mid, recode) {
+		console.log(recode+', '+mid);
 		$.ajax({
-			url:"/mstateNN",
+			url:"/reviewDelete",
 			type:"post",
-			data: {'mid' : mid},
+			data: {'mid' : mid, 'recode' : recode},
 			aync:false,
 			success:function(rs){
 				if(rs == "Y"){
 					location.reload();
 				}
 				if(rs == "N"){
-					alert("회원정지 실패.");
-				}
-			}
-		})
-	}
-	function mstateNY(mid) {
-		console.log(mid);
-		$.ajax({
-			url:"/mstateNY",
-			type:"post",
-			data: {'mid' : mid},
-			aync:false,
-			success:function(rs){
-				if(rs == "Y"){
-					location.reload();
-				}
-				if(rs == "N"){
-					alert("회원해제정지 실패.");
+					alert("리뷰삭제 실패");
 				}
 			}
 		})
 	}
 </script>
-
-
 </html>

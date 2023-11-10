@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.TravelSchedule.dto.Member;
 
@@ -35,6 +36,11 @@ public interface MemberDao {
 	int registMemberInfo_Naver(Member member);
 
 	ArrayList<Member> selectMemberList(Member member);
+	
+	@Update("UPDATE MEMBERS SET MSTATE = 'NN' WHERE mid = #{mid}")
+	int updateMstateNN(String mid);
+	@Update("UPDATE MEMBERS SET MSTATE = 'NY' WHERE mid = #{mid}")
+	int updateMstateNY(String mid);
 	
 
 }
