@@ -178,7 +178,7 @@ div {
 				<nav class=""
 					style="border: 1px solid #A2A2A2; border-radius: 10px; background-color: white; box-shadow: 0 0 8px #A2A2A2">
 					<div id="scArea" class="p-3	"
-						style="height: 590px; width: 200px; display: flow; text-overflow: ellipsis; overflow-y:auto;">
+						style="height: 85vh; width: 200px; display: flow; text-overflow: ellipsis; overflow-y:auto;">
 						<c:forEach var="sc" items="${scdestList }">
 							<c:if test="${sc.SCDATE != null}">
 								<c:choose>
@@ -246,7 +246,7 @@ div {
 				</div>
 				<div>
 					<nav id="tdArea" class=""
-						style="overflow-y: auto;overflow-x: hidden; height: 590px; border-radius: 10px;">
+						style="overflow-y: auto;overflow-x: hidden; height: 85vh; border-radius: 10px;">
 						<c:forEach items="${ scdestList}" var="td">
 							<c:if test="${td.TDCODE != null }">
 								<div class="travelList" style="background-color: white;">
@@ -282,7 +282,7 @@ div {
 						</c:forEach>
 					</nav>
 					<nav id="feArea" class="disnone"
-						style="overflow-y: auto;overflow-x: hidden; height: 590px; border-radius: 15px;">
+						style="overflow-y: auto;overflow-x: hidden; height:85vh; border-radius: 15px;">
 						<c:forEach items="${ scdestList}" var="fe">
 							<c:if test="${fe.FECODE != null }">
 								<div class="travelList" style="background-color: white;">
@@ -404,13 +404,14 @@ div {
 		level: 10, //지도의 레벨(확대, 축소 정도)
 		draggable: false
 	};
-
+	
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	map.setZoomable(true);
 	var positions = [];
-	
+	var bounds = new kakao.maps.LatLngBounds(); 
 	for(let lalng of lalngList){
 		positions.push({title: lalng.name, latlng: new kakao.maps.LatLng(lalng.lati, lalng.longti)})
+		bounds.extend(new kakao.maps.LatLng(lalng.lati, lalng.longti));
 		let scDiv = document.querySelector('#'+lalng.code +'div');
 		scDiv.addEventListener("click", function(){
 			moveMap(lalng);
@@ -459,6 +460,7 @@ div {
 	        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 	    });
 	}
+	map.setBounds(bounds);
 	</script>
 	<script type="text/javascript">
 		function selectDest(mid, cdcode, destcode, seloption){

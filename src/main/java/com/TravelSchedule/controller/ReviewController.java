@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
+import com.TravelSchedule.dto.Member;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
@@ -281,6 +282,32 @@ public class ReviewController {
 		System.out.println("TdList:" + TdList);
 		mav.setViewName("review/DetailReview");
 		return mav;
+	}
+	@RequestMapping(value = "/reviewDelete")
+	public @ResponseBody String reviewDelete(Review review) {
+		System.out.println("리뷰삭제");
+		System.out.println("삭제할 리뷰 코드, mid : " + review);
+		
+		Review result = rsvc.likeListSel(review);
+		
+		System.out.println(result);
+		if(result != null) {
+			int rs = rsvc.reLikeListDel(review);
+			if(rs < 0) {
+				System.out.println("likelist 삭제 실패");
+				return "N";
+			}
+		}
+		System.out.println("likeList 삭제");
+		int re = rsvc.reviewDel(review);
+		if(0 < re) {
+			System.out.println("리뷰삭제성공");
+			return "Y";
+		}else {
+			System.out.println("리뷰삭제실패");
+			return "N";
+		}
+
 	}
 
 }

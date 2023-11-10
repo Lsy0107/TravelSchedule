@@ -35,7 +35,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/memberLogin")
-	public ModelAndView memberLogin(Member mem, HttpSession session) {
+	public ModelAndView memberLogin(Member mem, HttpSession session, RedirectAttributes ra) {
 		System.out.println("로그인 요청");
 		ModelAndView mav = new ModelAndView();
 		Member rs = msvc.memberLogin(mem);
@@ -49,8 +49,11 @@ public class MemberController {
 			session.setAttribute("loginNickname", rs.getMnickname());
 			session.setAttribute("loginState", rs.getMstate());
 			mav.setViewName("/admin/adminMain");
-		}
-		else if (rs == null) {
+		}else if(mstate.equals("NN")) {
+			System.out.println("이용이 정지된 계정입니다.");
+			ra.addFlashAttribute("msg", "이용이 정지된 계정입니다. 관리자에게 문의해주세요!");
+			mav.setViewName("redirect:/memberLoginForm");
+		}else if (rs == null) {
 			mav.setViewName("redirect:memberLoginForm");
 		} else {
 			session.setAttribute("loginId", rs.getMid());
@@ -207,12 +210,39 @@ public class MemberController {
 		System.out.println("회원관리페이지 이동");
 		ModelAndView mav = new ModelAndView();
 
-		//Member mList = msvc.getMemberList(member);
 		ArrayList<Member> mList = msvc.getMemberList(member);
-		System.out.println(mList);
+		
 		mav.addObject("mList", mList);
 		mav.setViewName("/admin/memberList");
 
 		return mav;
+	}
+	@RequestMapping(value = "/mstateNN")
+	public @ResponseBody String mstateNN(String mid) {
+		System.out.println("회원정지");
+		System.out.println("정지할 회원아이디 : " + mid);
+		int memberState = msvc.memState(mid);
+		if(0 < memberState) {
+			System.out.println("정지성공");
+			return "Y";
+		}else {
+			System.out.println("정지실패");
+			return "N";
+		}
+
+	}
+	@RequestMapping(value = "/mstateNY")
+	public @ResponseBody String mstateNY(String mid) {
+		System.out.println("회원정지해제");
+		System.out.println("정지해제할 회원아이디 : " + mid);
+		int memberStateY = msvc.memStateY(mid);
+		if(0 < memberStateY) {
+			System.out.println("정지해제성공");
+			return "Y";
+		}else {
+			System.out.println("정지해제실패");
+			return "N";
+		}
+
 	}
 }
