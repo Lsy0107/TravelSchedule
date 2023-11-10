@@ -76,7 +76,7 @@ public interface ReviewDao {
 	@Update("UPDATE CALENDAR SET CDSTATE = 'N' WHERE MID = #{mid} AND CDCODE = #{cdcode}")
 	int UpdateCdState(@Param("cdcode")String cdcode, @Param("mid")String mid);
 
-	@Select("SELECT COUNT(*) FROM CALENDAR WHERE MID = #{mid} AND NOT CDSTATE = 'Y'")
+	@Select("SELECT COUNT(*) FROM REVIEW WHERE MID = #{mid} AND RESTATE = 'Y'")
 	int selectCalendarCount(@Param("mid") String mid);
 
 	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
@@ -99,6 +99,9 @@ public interface ReviewDao {
 
 	@Select("SELECT * FROM TDEST WHERE TDCODE = #{cs}")
 	Tdest getTd(String cs);
+	
+	@Select("SELECT * FROM REVIEW WHERE MID = #{mid}")
+	ArrayList<Review> selectReview(String mid);
 
 
 

@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Modern Business - Start Bootstrap Template</title>
+<title>TravelSchedule - main</title>
 
 <script src="https://kit.fontawesome.com/c8056a816e.js"
 	crossorigin="anonymous"></script>

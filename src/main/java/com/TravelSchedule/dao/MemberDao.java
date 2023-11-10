@@ -1,5 +1,7 @@
 package com.TravelSchedule.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -31,5 +33,8 @@ public interface MemberDao {
 
 	@Insert("INSERT INTO MEMBERS(MID, MPW, MNICKNAME, MPROFILE, MSTATE) VALUES(#{mid}, 'naverAccount', #{mnickname}, #{mprofile}, 'NA')")
 	int registMemberInfo_Naver(Member member);
+
+	ArrayList<Member> selectMemberList(Member member);
+	
 
 }

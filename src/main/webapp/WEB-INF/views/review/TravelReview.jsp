@@ -18,6 +18,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
         <style>
+        	.wrap>*{
+            	font-family: 'Noto Sans KR', sans-serif !important;
+            }
             .Cal {                
                 margin-top: 125px;
                 width: 30%;
@@ -143,8 +146,9 @@
             .count{
             	margin-left: 5px;
             }
-            .wrap>*{
-            	font-family: 'Noto Sans KR', sans-serif; 
+            
+            .nameDiv{
+            	width: 400px;
             }
         </style>
     </head>
@@ -165,23 +169,13 @@
 		                	<hr class="hr">
 		                	<p class="count">총 ${count }건</p>
 		                	<hr class="hr2">
-		                    <c:forEach items="${Cal}" var="cl" varStatus="Cl">
-		                        <div class="Ctitle" data-bs-toggle="modal" data-bs-target="#exampleModal"
-		                            onclick="PrintSchedule('${cl.cdcode}')">
-		                            <p class="cdname">${cl.cdname}</p>
-		
-		                            <c:choose>
-		                                <c:when test="${cl.cdstate == 'N'}">
-		                                    <button class="WriteBtn reviewBtn btn btn-outline-primary"
-		                                        onclick="location.href='ReviewWriteForm?cdcode=${cl.cdcode}'">작성</button>
-		                                </c:when>
-		                                <c:when test="${cl.cdstate == 'R'}">
+		                    <c:forEach items="${review}" var="re" varStatus="Cl">
+		                        <div class="Ctitle" >
+		                            <div class="nameDiv" onclick="location.href='${pageContext.request.contextPath }/detailReview?recode=${re.recode}'"><p class="cdname">${re.retitle}</p></div>
 		                                    <button class="ModifyBtn reviewBtn btn btn-outline-success"
-		                                        onclick="location.href='ReviewFix?cdcode=${cl.cdcode}'">수정</button>
+		                                        onclick="location.href='ReviewFix?cdcode=${re.cdcode}'">수정</button>
 		                                    <button class="DeleteBtn reviewBtn btn btn-outline-danger"
-		                                        onclick="return DeleteReview('${cl.cdcode}')">삭제</button>
-		                                </c:when>
-		                            </c:choose>
+		                                        onclick="return DeleteReview('${re.cdcode}')">삭제</button>
 		                        </div>
 		                    </c:forEach>
 		                </div>

@@ -21,10 +21,11 @@
                     margin-left: auto;
                     margin-right: auto;
                     margin-top: 115px;
+                    margin-bottom: 50px;
                     background-color: white;
                     padding: 20px;
                     border-radius: 25px;
-                    box-shadow: grey 10px 10px;
+                    box-shadow: 0px 0px 12px #A2A2A2;
                 }
 
                 .disnone {
@@ -32,8 +33,9 @@
                 }
 
                 .imgDiv {
-                    overflow-x: scroll;
+                    
                     max-width: 100%;
+                    margin-bottom: 10px;
                 }
 
                 .tImg {
@@ -61,6 +63,8 @@
                     width: 100%;
                     height: 60px;
                     padding: 10px;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
                     border: none;
                     border-bottom: 1px solid;
                     margin-bottom: 10px;
@@ -78,6 +82,7 @@
                     border: 1px solid;
                     padding: 9px;
                     border-radius: 11px;
+                    margin-bottom: 10px;
                 }
 
                 .Disn {
@@ -169,8 +174,8 @@
                                         href="javascript:chageDisplay('weather')">축제</a></li>
                             </ul>
                         </div>
-                        <div class="imgDiv ">
-                            <div class="tdest section" id="meminfoTag" style="overflow-x: auto;">
+                        <div class="imgDiv  ">
+                            <div class="tdest section section" id="meminfoTag" style="overflow-x: auto;" style="overflow-x: auto;">
                                 <div class="tImg">
                                     <c:forEach var="td" items="${Td}">
                                         <div class="ImgDiv">
@@ -184,7 +189,7 @@
                                             </div>
                                         </div>
                                     </c:forEach>
-                                </div>
+                                </div>	
                             </div>
                             <div class="fest disnone" id="weatherTag" style="overflow-x: auto;">
                                 <div class="fImg">
@@ -204,7 +209,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ReContents">
+                    <div style="margin-bottom: 5px;" class="ReContents">
                         <textarea class="ReTextArea" name="contents"></textarea>
                     </div>
                     <div class="ReFile">
@@ -218,7 +223,7 @@
                     </div>
 
                     <div class="FormBtn">
-                        <button class="btn btn-outline-success" onclick="return ReviewSubmitCheck()">고다훈</button>
+                        <button class="btn btn-outline-success" onclick="return ReviewSubmitCheck()" style="width: 100%;">등록</button>
                     </div>
                 </div>
 

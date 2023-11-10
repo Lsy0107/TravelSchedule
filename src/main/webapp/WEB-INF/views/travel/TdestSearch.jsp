@@ -22,11 +22,10 @@
             <!-- Data AOS-->
             <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-            <style>
-                .pagination {
-                    position: relative;
-                    margin-left: 80px;
-                }
+<style>
+.pagination {
+	position: relative;
+}
 
                 ol {
                     list-style: none;
@@ -67,13 +66,13 @@
 
                 i#leftCur {
                     position: relative;
-                    top: 15px;
+                    top: -7px;
                     right: 0px;
                 }
 
                 i#rightCur {
                     position: relative;
-                    top: 15px;
+                    top: -7px;
                     left: 0px;
                 }
 
@@ -216,6 +215,7 @@
                 div.containFest {
                     padding: 9px;
                     display: flex;
+	margin-bottom: 20px;
                 }
 
                 .Bar {
@@ -268,6 +268,8 @@
                 .tdImg {
                     width: 150px;
                     height: 150px;
+	border-radius: 15px;
+	margin-right: 10px;
                 }
 
                 .TitleWrap {
@@ -345,6 +347,10 @@
                 .hTag {
                     overflow: hidden;
                     white-space: nowrap;
+	max-width: calc(240px);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
                 }
 
                 html,
@@ -428,12 +434,12 @@
             </style>
         </head>
 
-        <body class="">
+<body class="">
             <!-- Navigation-->
             <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                 <div class="StickyBar">
                     <button class="Bar">
-                        <img class="BarImage" style="width: 100%;"
+                        <img class="BarImage" style="width: 60px;;"
                             src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png" alt="">
                     </button>
                 </div>
@@ -447,15 +453,15 @@
                             <c:forEach items="${CountryList }" var="ct">
                                 <option class="OptionCity" value="${ct.ctname}">${ct.ctname}</option>
                             </c:forEach>
-                        </select> <select name="category" id="SelCate" required="required"
-                            onchange="selectCategory(this)">
+                        </select>
+
+                        <select name="category" id="SelCate" required="required" onchange="selectCategory(this)">
                             <option value="">카테고리</option>
                             <option value="여행지">여행지</option>
                             <option value="축제">축제</option>
                         </select>
-                        <button class="SearchBtn btn btn-primary" onclick="SearchClick()">
-                            검색<i style="padding: 5px;" class="fa-solid fa-magnifying-glass"></i>
-                        </button>
+                        <button class="SearchBtn btn btn-primary" onclick="SearchClick()">검색<i style="padding: 5px;"
+                                class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="SearchTag">
                         <i id="SearchIcon" class="fa-solid fa-magnifying-glass"></i>
@@ -467,18 +473,15 @@
                                 <option value="">카테고리</option>
                                 <option value="축제">축제</option>
                                 <option value="여행지">여행지</option>
-                            </select> <input class="SearchInput" onkeyup="previewInput(this)" type="text"
-                                placeholder="검색어를 입력해주세요.">
-                            <button class="SearchBtn2" onclick="SearchDetail()">
-                                <i id="" class="fa-solid fa-magnifying-glass"></i>
-                            </button>
+                            </select>
+                            <input class="SearchInput" onkeyup="previewInput(this)" type="text" placeholder="검색어를 입력해주세요.">
+                            <button class="SearchBtn2" onclick="SearchDetail()"><i id=""
+                                    class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
-                        <button id="CloseIcon">
-                            <i id="Close" class="fa-solid fa-circle-xmark" style="color: #000000;"></i>
-                        </button>
-                        <div id="previewtext"
-                            style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius: 10px;">
-                        </div>
+                        <button id="CloseIcon"><i id="Close" class="fa-solid fa-circle-xmark"
+                                style="color: #000000;"></i></button>
+                    <div id="previewtext" style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius:10px;">
+                    </div>
                     </div>
 
                 </div>
@@ -521,7 +524,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" id="selectCalendar"></div>
+                            <div class="modal-body" id="selectCalendar">
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
                                     id="selectClear">선택</button>
@@ -644,7 +648,6 @@
                             DestDiv.classList.add('col-lg-4');
                             DestDiv.classList.add('col-md-6');
 
-
                             let TdestImgDiv = document.createElement('div');
                             //           TdestImgDiv.classList.add('card-mb-4');
                             TdestImgDiv.classList.add('photo');
@@ -655,13 +658,14 @@
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Td.tdphoto);
                             TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
@@ -704,7 +708,7 @@
                             DestDiv.classList.add('containDest');
                             DestDiv.classList.add('col-lg-4');
                             DestDiv.classList.add('col-md-6')
-
+							
 
                             let TdestImgDiv = document.createElement('div');
                             //           TdestImgDiv.classList.add('card-mb-4');
@@ -716,13 +720,14 @@
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Fe.feposter);
                             TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
@@ -1086,6 +1091,7 @@
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Fe.feposter);
                             TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
 
@@ -1093,7 +1099,7 @@
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');
@@ -1147,6 +1153,7 @@
                             let TdestImg = document.createElement('img');
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
+                            //TdestImg.classList.add('img-thumbnail');
                             TdestImg.setAttribute('src', Td.tdphoto);
                             TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'")
 
@@ -1154,7 +1161,7 @@
                             DestDiv.appendChild(TdestImgDiv);
 
                             let TdestTitleDiv = document.createElement('div');
-                            TdestTitleDiv.classList.add('caard-body');
+                            TdestTitleDiv.classList.add('card-body');
 
                             let TdestTitle = document.createElement('h3');
                             TdestTitle.classList.add('card-title');

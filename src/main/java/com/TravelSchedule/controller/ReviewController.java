@@ -37,7 +37,7 @@ public class ReviewController {
 		String mid = (String) session.getAttribute("loginId");
 		System.out.println("현재 아이디 : " + mid);
 
-		ArrayList<Calendar> CalendarList = rsvc.CalendarList(mid);
+		ArrayList<Review> review = rsvc.getMyReview(mid);
 		int count = rsvc.CalendarCount(mid);
 //		Review ReviewList = rsvc.ReviewList(mid);
 //		System.out.println(ReviewList);
@@ -45,7 +45,7 @@ public class ReviewController {
 		mav.addObject("count", count);
 		String select = "border-left: thick solid red;";
 		mav.addObject("sel", select);
-		mav.addObject("Cal", CalendarList);
+		mav.addObject("review", review);
 		mav.setViewName("review/TravelReview");
 		return mav;
 	}

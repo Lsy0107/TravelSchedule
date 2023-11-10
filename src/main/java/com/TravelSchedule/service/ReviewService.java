@@ -218,6 +218,11 @@ public class ReviewService {
 		// TODO Auto-generated method stub
 		return rdao.getTd(cs);
 	}
+
+	public ArrayList<Review> getMyReview(String mid) {
+		
+		return rdao.selectReview(mid);
+	}
 	
 
 
