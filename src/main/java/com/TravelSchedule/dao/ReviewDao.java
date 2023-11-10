@@ -103,6 +103,9 @@ public interface ReviewDao {
 	@Select("SELECT * FROM REVIEW WHERE MID = #{mid}")
 	ArrayList<Review> selectReview(String mid);
 
+	@Select("SELECT  recode, mid, retitle, rehit, CASE WHEN to_char(redate, 'YYYY/MM/DD') >= to_char(sysdate, 'YYYY/MM/DD') THEN to_char(redate, 'hh24:mm') ELSE to_char(redate, 'MM-DD') END as REDATE, relike FROM REVIEW where restate = 'Y' order by redate desc")
+	ArrayList<Review> selectAllReview();
+
 
 
 }

@@ -222,6 +222,11 @@ public class ReviewService {
 		
 		return rdao.selectReview(mid);
 	}
+
+	public ArrayList<Review> getAllReview() {
+
+		return rdao.selectAllReview();
+	}
 	
 
 

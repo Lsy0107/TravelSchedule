@@ -267,5 +267,16 @@ public class ReviewController {
 		mav.setViewName("review/DetailReview");
 		return mav;
 	}
+	
+	@RequestMapping(value="/ReviewList")
+	public ModelAndView ReviewList() {
+		System.out.println("리뷰리스트 페이지 이동");
+		ModelAndView mav = new ModelAndView();
+		ArrayList<Review> reviewList = rsvc.getAllReview();
+		
+		mav.addObject("reviewList", reviewList);
+		mav.setViewName("review/ReviewList");
+		return mav;
+	}
 
 }

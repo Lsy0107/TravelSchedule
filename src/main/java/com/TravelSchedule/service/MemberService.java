@@ -2,6 +2,7 @@ package com.TravelSchedule.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -133,5 +134,12 @@ public class MemberService {
 		
 		return mdao.registMemberInfo_Naver(member);
 	}
+
+	public ArrayList<Member> getMemberList(Member member) {
+		System.out.println("getMemberList() - 호출");
+		
+		return mdao.selectMemberList(member);
+	}
+	
 
 }

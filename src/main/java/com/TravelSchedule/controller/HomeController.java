@@ -45,19 +45,19 @@ public class HomeController {
 	ReviewService rsvc;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Model model) {
+	public ModelAndView home(Model model, HttpSession session) {
 		System.out.println("메인페이지 이동 요청");
 		ModelAndView mav = new ModelAndView();
 		ArrayList<Festival> feList = apisvc.getFeList();
 		ArrayList<News> newsList = nsvc.getNewsList();
 		ArrayList<Tdest> tdList = apisvc.getTdList();
 		ArrayList<Schedule> scList = tsvc.getScList();
-		
+
 		mav.addObject("feList", feList);
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);
 		mav.addObject("scList", scList);
-		
+
 		mav.setViewName("/main");
 		return mav;
 	}
@@ -271,4 +271,5 @@ public class HomeController {
 		return mav;
 	}
 	
+
 }

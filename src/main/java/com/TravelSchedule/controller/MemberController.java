@@ -1,5 +1,7 @@
 package com.TravelSchedule.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Member;
 import com.TravelSchedule.service.MemberService;
 
@@ -25,6 +28,8 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		session.removeAttribute("loginId");
 		session.removeAttribute("loginProfile");
+		session.removeAttribute("loginNickname");
+		session.removeAttribute("loginState");
 		mav.setViewName("redirect:/");
 		return mav;
 	}
@@ -34,7 +39,18 @@ public class MemberController {
 		System.out.println("로그인 요청");
 		ModelAndView mav = new ModelAndView();
 		Member rs = msvc.memberLogin(mem);
-		if (rs == null) {
+		session.setAttribute("loginState", rs.getMstate());
+		String mstate = (String) session.getAttribute("loginState");
+		System.out.println(mstate);
+		if(mstate.equals("AD")) {
+			System.out.println("관리자로그인");
+			session.setAttribute("loginId", rs.getMid());
+			session.setAttribute("loginProfile", rs.getMprofile());
+			session.setAttribute("loginNickname", rs.getMnickname());
+			session.setAttribute("loginState", rs.getMstate());
+			mav.setViewName("/admin/adminMain");
+		}
+		else if (rs == null) {
 			mav.setViewName("redirect:memberLoginForm");
 		} else {
 			session.setAttribute("loginId", rs.getMid());
@@ -185,5 +201,18 @@ public class MemberController {
 		int result = msvc.registMember_Naver(member);
 		
 		return result+"";
+	}
+	@RequestMapping(value = "/memberList")
+	public ModelAndView memberList(Member member) {
+		System.out.println("회원관리페이지 이동");
+		ModelAndView mav = new ModelAndView();
+
+		//Member mList = msvc.getMemberList(member);
+		ArrayList<Member> mList = msvc.getMemberList(member);
+		System.out.println(mList);
+		mav.addObject("mList", mList);
+		mav.setViewName("/admin/memberList");
+
+		return mav;
 	}
 }
