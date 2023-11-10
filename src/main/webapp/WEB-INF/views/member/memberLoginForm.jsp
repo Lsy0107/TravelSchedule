@@ -406,6 +406,13 @@
                 });
 
             </script>
+            
+			<script type="text/javascript">
+				let msg = '${msg }'
+				if(msg.length > 0){
+					alert(msg);
+				}
+			</script>
     </body>
 
     </html>

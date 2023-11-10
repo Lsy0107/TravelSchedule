@@ -150,7 +150,7 @@
 					location.reload();
 				}
 				if(rs == "N"){
-					alert("리뷰삭제 실패.");
+					alert("리뷰삭제 실패");
 				}
 			}
 		})

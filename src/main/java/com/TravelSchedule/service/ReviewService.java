@@ -228,14 +228,19 @@ public class ReviewService {
 		return rdao.selReviewList(review);
 	}
 
-	public int reviewDel(String mid ,String recode) {
+	public int reviewDel(Review review) {
 		
-		return rdao.deleteReview(mid, recode);
+		return rdao.deleteReview(review);
 	}
 
-	public int reLikeListDel(String mid, String recode) {
+	public int reLikeListDel(Review review) {
 		
-		return rdao.deleteLikeList(mid, recode);
+		return rdao.deleteLikeList(review);
+	}
+
+	public Review likeListSel(Review review) {
+		
+		return rdao.selectLikeList(review);
 	}
 	
 

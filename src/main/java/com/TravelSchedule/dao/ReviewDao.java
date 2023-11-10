@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
@@ -106,10 +107,13 @@ public interface ReviewDao {
 	@Select("SELECT * FROM REVIEW")
 	ArrayList<Review> selReviewList(Review review);
 	
+	
 	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND RECODE = #{recode}")
-	int deleteReview(@Param("mid")String mid, @Param("recode")String recode);
+	int deleteReview(Review review);
 	@Delete("DELETE FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
-	int deleteLikeList(@Param("mid")String mid, @Param("recode")String recode);
+	int deleteLikeList(Review review);
+	@Select("select * FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
+	Review selectLikeList(Review review);
 
 
 

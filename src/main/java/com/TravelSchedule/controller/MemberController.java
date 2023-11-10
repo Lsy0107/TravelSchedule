@@ -35,7 +35,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/memberLogin")
-	public ModelAndView memberLogin(Member mem, HttpSession session) {
+	public ModelAndView memberLogin(Member mem, HttpSession session, RedirectAttributes ra) {
 		System.out.println("로그인 요청");
 		ModelAndView mav = new ModelAndView();
 		Member rs = msvc.memberLogin(mem);
@@ -49,8 +49,11 @@ public class MemberController {
 			session.setAttribute("loginNickname", rs.getMnickname());
 			session.setAttribute("loginState", rs.getMstate());
 			mav.setViewName("/admin/adminMain");
-		}
-		else if (rs == null) {
+		}else if(mstate.equals("NN")) {
+			System.out.println("이용이 정지된 계정입니다.");
+			ra.addFlashAttribute("msg", "이용이 정지된 계정입니다. 관리자에게 문의해주세요!");
+			mav.setViewName("redirect:/memberLoginForm");
+		}else if (rs == null) {
 			mav.setViewName("redirect:memberLoginForm");
 		} else {
 			session.setAttribute("loginId", rs.getMid());
