@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
@@ -102,6 +103,17 @@ public interface ReviewDao {
 	
 	@Select("SELECT * FROM REVIEW WHERE MID = #{mid}")
 	ArrayList<Review> selectReview(String mid);
+	
+	@Select("SELECT * FROM REVIEW")
+	ArrayList<Review> selReviewList(Review review);
+	
+	
+	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND RECODE = #{recode}")
+	int deleteReview(Review review);
+	@Delete("DELETE FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
+	int deleteLikeList(Review review);
+	@Select("select * FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
+	Review selectLikeList(Review review);
 
 	@Select("SELECT  recode, mid, retitle, rehit, lknum, CASE WHEN to_char(redate, 'YYYY/MM/DD') >= to_char(sysdate, 'YYYY/MM/DD') THEN to_char(redate, 'hh24:mm') ELSE to_char(redate, 'MM-DD') END as REDATE, relike FROM (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where restate = 'Y' order by redate desc")
 	ArrayList<Review> selectAllReview();

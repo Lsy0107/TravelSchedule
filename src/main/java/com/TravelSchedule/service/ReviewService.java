@@ -233,6 +233,25 @@ public class ReviewService {
 		
 		return rdao.selectBestReview();
 	}
+	public ArrayList<Review> getReviewList(Review review) {
+		
+		return rdao.selReviewList(review);
+	}
+
+	public int reviewDel(Review review) {
+		
+		return rdao.deleteReview(review);
+	}
+
+	public int reLikeListDel(Review review) {
+		
+		return rdao.deleteLikeList(review);
+	}
+
+	public Review likeListSel(Review review) {
+		
+		return rdao.selectLikeList(review);
+	}
 	
 
 

@@ -38,7 +38,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/admin/adminMain2.jsp">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/adminMain">
                 <div class="sidebar-brand-icon rotate-n-15">
                     
                 </div>
@@ -94,6 +94,12 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>회원관리</span></a>
             </li>
+            
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath }/adminReview">
+                    <i class="fa-solid fa-comment"></i>
+                    <span>리뷰관리</span></a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -125,8 +131,6 @@
 <script src="${pageContext.request.contextPath }/resources/SBAdmin/js/demo/datatables-demo.js"></script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="resources/js/scripts.js"></script>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 

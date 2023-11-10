@@ -140,6 +140,16 @@ public class MemberService {
 		
 		return mdao.selectMemberList(member);
 	}
+
+	public int memState(String mid) {
+		System.out.println("memStateN - (호출)");
+		return mdao.updateMstateNN(mid);
+	}
+
+	public int memStateY(String mid) {
+		System.out.println("memStateY - (호출)");
+		return mdao.updateMstateNY(mid);
+	}
 	
 
 }

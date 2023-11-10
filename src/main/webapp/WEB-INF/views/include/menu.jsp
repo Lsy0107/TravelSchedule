@@ -87,6 +87,10 @@ div, h1, h2, h3, h4, h5, h6{
 						style="width: 300px; border: none;"
 						aria-labelledby="navbarDropdownPortfolio">
 						<h1 style="text-align: justify;">
+							<c:if test="${sessionScope.loginState == 'AD'}">
+							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
+								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+							</c:if>
 							<c:if test="${sessionScope.loginState == 'NY'}">
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
 								class="profile">${sessionScope.loginNickname }
@@ -100,11 +104,15 @@ div, h1, h2, h3, h4, h5, h6{
 								class="profile">${sessionScope.loginNickname }
 							</c:if>
 						</h1>
-						<hr style="border-top:2px solid lightgray">
-						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>마이페이지</p>
-												
-						<hr style="border-top:2px solid lightgray">
-						<p class="info"onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
+						<c:if test="${sessionScope.loginState == 'AD' }">
+							<hr style="border-top:2px solid lightgray">
+							<p class="info" onclick='location.href="${pageContext.request.contextPath }/adminMain"'>관리자페이지</p>
+						</c:if>
+							<hr style="border-top:2px solid lightgray">
+							<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>마이페이지</p>
+													
+							<hr style="border-top:2px solid lightgray">
+							<p class="info"onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
 					</div>
 				</li>
 					</c:otherwise>

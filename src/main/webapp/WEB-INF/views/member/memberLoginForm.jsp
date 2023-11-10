@@ -196,7 +196,7 @@
                     <div class="loginArea">
                         <h2 class="Title">로그인</h2>
                         <div>
-                            <form action="/memberLogin">
+                            <form action="/memberLogin" type="post">
                                 <input type="text" id="id" name="mid" placeholder="아이디">
                                 <div id="passArea">
                                     <input type="password" id="password" name="mpw" placeholder="비밀번호">
@@ -418,6 +418,13 @@
                 });
 
             </script>
+            
+			<script type="text/javascript">
+				let msg = '${msg }'
+				if(msg.length > 0){
+					alert(msg);
+				}
+			</script>
     </body>
 
     </html>
