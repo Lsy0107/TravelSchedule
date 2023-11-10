@@ -189,9 +189,9 @@
 			                	<h2 class="topic">여행지리뷰</h1>
 		                	</div>
 		                	<hr class="hr">
-		                	<p class="fe sel" style="font-weight: bold; text-decoration-line: underline;" onclick="location.href='${pageContext.request.contextPath}/ReviewList'">최신순</p>
+		                	<p class="fe sel" style="${css1}" onclick="location.href='${pageContext.request.contextPath}/ReviewList'">최신순</p>
 							<p class="line">|</p>
-							<p class="re sel" onclick="location.href='${pageContext.request.contextPath }/ReviewLike'">인기순</p>
+							<p class="re sel" style="${css2}" onclick="location.href='${pageContext.request.contextPath }/ReviewBest'">인기순</p>
    							<hr class="hr">
    							<table class="table">
 	   							<thead>
@@ -210,7 +210,7 @@
 				                			<th>${re.mid }</th>
 				                			<th>${re.redate }</th>
 				                			<th>${re.rehit }</th>
-				                			<th>${re.relike }</th>
+				                			<th>${re.lknum }</th>
 				                		</tr>
 				                	</c:forEach>   								
 	   							</tbody>
