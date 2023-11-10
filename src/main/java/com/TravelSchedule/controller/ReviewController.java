@@ -144,13 +144,13 @@ public class ReviewController {
 		HashMap<String, String> getReview = rsvc.getReview(mid, cdcode);
 		System.out.println("오류찾기 : " + getReview);
 //		System.out.println(getReview);
-		
+
 		ArrayList<HashMap<String, String>> getTdInfo = rsvc.getTdInfo(cdcode, mid);
 		ArrayList<HashMap<String, String>> getFeInfo = rsvc.getFeInfo(cdcode, mid);
 		ArrayList<String> PhotoList = new ArrayList<>();
-		
+
 		System.out.println(getReview.containsKey("REPHOTO"));
-		if(getReview.containsKey("REPHOTO")) {
+		if (getReview.containsKey("REPHOTO")) {
 			String getRephoto = (String) getReview.get("REPHOTO");
 			System.out.println("사진들 : " + getRephoto);
 
@@ -160,7 +160,7 @@ public class ReviewController {
 			}
 			mav.addObject("Ph", PhotoList);
 		}
-		
+
 		System.out.println("사진 분류 : " + PhotoList);
 
 		mav.addObject("Td", getTdInfo);
@@ -171,38 +171,39 @@ public class ReviewController {
 	}
 
 	@RequestMapping(value = "UpdateReview")
-	public @ResponseBody ModelAndView UpdateReview(Review review, String rephoto, String title, String contents, String recode,String codeList, HttpSession session) {
+	public @ResponseBody ModelAndView UpdateReview(Review review, String rephoto, String title, String contents,
+			String recode, String codeList, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("리뷰 수정 컨트롤러 호출");
 		System.out.println("받아온 데이터 : " + title + "|" + contents + "|" + recode + "|" + codeList + "|" + rephoto);
-		System.out.println("받아온 rephoto : "+rephoto);
+		System.out.println("받아온 rephoto : " + rephoto);
 		String mid = (String) session.getAttribute("loginId");
 		Review photo = rsvc.getPhoto(review, session);
-		
+
 		review.setMid(mid);
 		review.setRecomment(contents);
 		review.setRetitle(title);
 		review.setRecode(recode);
 		review.setCodelist(codeList);
-		
+
 		String Rephoto = review.getRephoto();
 		String totalPhoto;
-		if(Rephoto.length()>0) {
-			totalPhoto = Rephoto + rephoto;			
-		}else {
+		if (Rephoto.length() > 0) {
+			totalPhoto = Rephoto + rephoto;
+		} else {
 			totalPhoto = rephoto;
 		}
-		System.out.println("리뷰사진 : "+totalPhoto);
+		System.out.println("리뷰사진 : " + totalPhoto);
 		review.setRephoto(totalPhoto);
 		int UpdateReview = rsvc.UpdateReview(review);
-		if(UpdateReview>0) {
+		if (UpdateReview > 0) {
 			mav.setViewName("redirect:/");
 			System.out.println("수정성공");
-		}else {
+		} else {
 			mav.setViewName("redirect:/");
 			System.out.println("수정 실패");
 		}
-		
+
 		return mav;
 	}
 
@@ -241,12 +242,14 @@ public class ReviewController {
 				TdList.add(Td);
 			}
 		}
-		String getRephoto = (String) reList.get("REPHOTO");
-		System.out.println("사진들 : " + getRephoto);
+		if (reList.containsKey("REPHOTO")) {
+			String getRephoto = (String) reList.get("REPHOTO");
+			System.out.println("사진들 : " + getRephoto);
 
-		String[] photoes = getRephoto.split("/");
-		for (String p : photoes) {
-			PhotoList.add(p);
+			String[] photoes = getRephoto.split("/");
+			for (String p : photoes) {
+				PhotoList.add(p);
+			}
 		}
 		System.out.println("사진 분류 : " + PhotoList);
 
@@ -255,6 +258,8 @@ public class ReviewController {
 		if (!(id.equals(CurrentLogId))) {
 			int IncreaseRehit = rsvc.IncreaseRehit(recode);
 		}
+
+		HashMap<String, String> ReviewList = rsvc.getreList(recode);
 
 		if (session.getAttribute("loginId") != null) {
 			Likelist lk = new Likelist();
@@ -267,8 +272,8 @@ public class ReviewController {
 			String Like = apisvc.getLikelist(lk, seloption);
 			mav.addObject("like", Like);
 		}
-		System.out.println(getreList);
-		mav.addObject("Re", getreList);
+		System.out.println(ReviewList);
+		mav.addObject("Re", ReviewList);
 		mav.addObject("Ph", PhotoList);
 		mav.addObject("TdList", TdList);
 		mav.addObject("FeList", FeList);

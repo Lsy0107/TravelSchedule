@@ -25,7 +25,7 @@
             }
 
             body {
-                background-color: lightgrey;
+                background-color: white;
             }
 
             .img {
@@ -56,7 +56,7 @@
                 background-color: white;
                 padding: 20px;
                 border-radius: 25px;
-                box-shadow: grey 10px 10px;
+                box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
             }
 
             .disnone {
@@ -168,6 +168,21 @@
                     display: none;
                 }
             }
+
+            .CheckDiv {
+                margin: 10px;
+            }
+
+            .RePhotoArr>img {
+                margin: 10px;
+            }
+
+            .RePhotoArr {
+                overflow: auto;
+                white-space: nowrap;
+                min-height: 190px;
+                max-height: 190px;
+            }
         </style>
     </head>
 
@@ -195,7 +210,7 @@
                                 <c:forEach var="td" items="${Td}">
                                     <div class="ImgDiv">
                                         <div class="CheckDiv">
-                                            <span>${td.tdname}</span>
+                                            <span class="d-flex">${td.TDNAME}</span>
                                             <input style="display: none;" type="checkbox" name="TF" id="${td.TDCODE}"
                                                 value="${td.TDCODE}">
                                             <label for="${td.TDCODE}"><img onclick="checkImg('${td.TDCODE}')" name="TF"
@@ -211,7 +226,7 @@
                                 <c:forEach var="fe" items="${Fe}">
                                     <div class="ImgDiv">
                                         <div class="CheckDiv">
-                                            <span>${fe.fename}</span>
+                                            <span class="d-flex">${fe.FENAME}</span>
                                             <input style="display: none;" type="checkbox" name="TF" id="${fe.FECODE}"
                                                 value="${fe.FECODE}">
                                             <label for="${fe.FECODE}"><img onclick="checkImgFe('${fe.FECODE}')"
@@ -236,7 +251,8 @@
                 </div>
                 <div class="RePhotoArr">
                     <c:forEach var="ph" items="${Ph}" varStatus="status">
-                        <img class="rephot img" value="${ph}" onclick="return DeleteImg(this)" src="/resources/ReviewPhoto/${ph}" alt="">
+                        <img class="rephot img" value="${ph}" onclick="return DeleteImg(this)"
+                            src="/resources/ReviewPhoto/${ph}" alt="">
                     </c:forEach>
                 </div>
 
@@ -291,7 +307,7 @@
 
                         if (confirmDel == true) {
                             console.log(e);
-                            
+
                             e.classList.add('Delete');
                         }
                         else {
@@ -335,7 +351,20 @@
                                 //$("#img").attr("src", );
                                 imgTag.setAttribute("src", e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
                                 imgTag.setAttribute("data-file", f.name);
+                                imgTag.setAttribute('value', e);
                                 imgTag.classList.add('img');
+                                imgTag.addEventListener('click', function (e) {
+                                    let confirmDel = confirm('해당 사진을 삭제 하시겠습니까?');
+
+                                    if (confirmDel == true) {
+                                        console.log(e.target);
+
+                                        e.target.classList.add('Delete');
+                                    }
+                                    else {
+                                        return false;
+                                    }
+                                });
                                 console.log(imgTag)
                                 //imgDiv.appendChild(imgTag);
                                 imgDiv.appendChild(imgTag);
@@ -389,17 +418,17 @@
 
                             let reviewphoto = [];
 
-                            for(let photo of rephoto){
+                            for (let photo of rephoto) {
                                 console.log(photo);
                                 if (!(photo.classList.contains('Delete'))) {
                                     console.log(!(photo.classList.contains('Delete')));
                                     let phVal = photo.getAttribute('value');
                                     console.log(phVal);
-                                    reviewphoto += phVal+"/";
-                                }                                
+                                    reviewphoto += phVal + "/";
+                                }
                             }
                             console.log(reviewphoto);
-                           
+
 
                             if (title == "" || contents == "") {
                                 alert("제목과 내용을 입력해주세요.");
@@ -424,7 +453,7 @@
 
                                     console.log(codeList);
                                 }
-                                
+
                                 UpdateReview(title, contents, recode, codeList, reviewphoto);
                             }
 
@@ -468,19 +497,19 @@
                         inputCodeList.setAttribute('name', 'codeList')
                         inputCodeList.classList.add('Disn');
 
-                        if(rephoto == null){
+                        if (rephoto == null) {
                             foEl.appendChild(inputTtitle);
                             foEl.appendChild(inputContents);
                             foEl.appendChild(inputCodeList);
                             foEl.appendChild(inputRecode);
 
                         }
-                        else{
+                        else {
                             let inputPhotoList = document.createElement('input');
                             inputPhotoList.setAttribute('value', rephoto);
                             inputPhotoList.setAttribute('name', 'rephoto');
                             inputPhotoList.classList.add('Disn');
-                            
+
                             foEl.appendChild(inputTtitle);
                             foEl.appendChild(inputContents);
                             foEl.appendChild(inputCodeList);
@@ -496,7 +525,7 @@
                 </script>
 
                 <script>
-                    
+
                 </script>
     </body>
 
