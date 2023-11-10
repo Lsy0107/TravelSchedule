@@ -45,9 +45,9 @@
                 }
 
                 .img {
-                    width: 300px;
-                    height: 300px;
-                    padding: 20px;
+                    width: 24vh;
+                    height: 18vh;
+                    border-radius: 10px;
                 }
 
                 .ReTextArea {
@@ -62,11 +62,12 @@
                     height: 60px;
                     padding: 10px;
                     border: none;
-				    border-bottom: 1px solid;
-				    margin-bottom: 10px;
+                    border-bottom: 1px solid;
+                    margin-bottom: 10px;
                 }
+
                 input:focus {
-                	outline: none;
+                    outline: none;
                 }
 
                 body {
@@ -87,16 +88,78 @@
                     width: 150px;
                     height: 150px;
                 }
-                
+
+                ck-img {
+                    border: 3px solid blue;
+                }
+
+                .section::-webkit-scrollbar {
+                    height: 10px;
+                }
+
+                .section::-webkit-scrollbar-track {
+                    background-color: gray;
+                    border-radius: 100px;
+                }
+
+                .section::-webkit-scrollbar-thumb {
+                    border-radius: 100px;
+                    background-color: black;
+                    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+                }
+
+                .Active {
+                    animation-name: blur;
+                    animation-fill-mode: forwards;
+                    animation-duration: 0.5s;
+                    animation-delay: 0s;
+                    animation-direction: normal;
+                }
+
+                .InActive {
+                    animation-name: blurRe;
+                    animation-fill-mode: forwards;
+                    animation-duration: 0.5s;
+                    animation-delay: 0s;
+                    animation-direction: normal;
+                }
+
+                @keyframes blur {
+                    0% {
+                        opacity: 1;
+                        padding: 0px;
+                        border-radius: 10px;
+                    }
+
+                    100% {
+                        opacity: 0.4;
+                        padding: 20px;
+                        border-radius: 10px;
+                    }
+                }
+
+                @keyframes blurRe {
+                    0% {
+                        opacity: 0.4;
+                        padding: 20px;
+                        border-radius: 10px;
+                    }
+
+                    100% {
+                        opacity: 1;
+                        padding: 0px;
+                        border-radius: 10px;
+                    }
+                }
             </style>
         </head>
 
         <body class="d-flex flex-column h-100">
-            <%@ include file="/WEB-INF/views/include/menu.jsp" %>				
+            <%@ include file="/WEB-INF/views/include/menu.jsp" %>
                 <div class="wrap">
                     <div class="ReTitle">
                         <input type="text" class="Title" name="title" placeholder="제목">
-                    </div>    
+                    </div>
                     <div class="ReSelImg">
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs">
@@ -106,20 +169,36 @@
                                         href="javascript:chageDisplay('weather')">축제</a></li>
                             </ul>
                         </div>
-                        <div class="imgDiv">
-                            <div class="tdest" id="meminfoTag">
+                        <div class="imgDiv ">
+                            <div class="tdest section" id="meminfoTag" style="overflow-x: auto;">
                                 <div class="tImg">
-                                    <c:forEach var="td" items="${Td}">                                       
-                                        <input type="checkbox" name="TF" id="${td.TDCODE}" value="${td.TDCODE}">
-                                        <label for="${td.TDCODE}"><img class="img" src="${td.TDPHOTO}" alt=""></label>
+                                    <c:forEach var="td" items="${Td}">
+                                        <div class="ImgDiv">
+                                            <div class="CheckDiv">
+                                                <span>${td.TDNAME}</span>
+                                                <input style="display: none;" type="checkbox" name="TF"
+                                                    id="${td.TDCODE}" value="${td.TDCODE}">
+                                                <label for="${td.TDCODE}"><img onclick="checkImg('${td.TDCODE}')"
+                                                        name="TF" value="${td.TDCODE}" class="${td.TDCODE} img"
+                                                        src="${td.TDPHOTO}" alt=""></label>
+                                            </div>
+                                        </div>
                                     </c:forEach>
                                 </div>
                             </div>
-                            <div class="fest disnone" id="weatherTag">
+                            <div class="fest disnone" id="weatherTag" style="overflow-x: auto;">
                                 <div class="fImg">
                                     <c:forEach var="fe" items="${Fe}">
-                                        <input type="checkbox" name="TF" id="${fe.FECODE}" value="${fe.FECODE}"> 
-                                        <label for="${fe.FECODE}"><img class="img" src="${fe.FEPOSTER}" alt=""></label>
+                                        <div class="ImgDiv">
+                                            <div class="CheckDiv">
+                                                <span>${fe.FENAME}</span>
+                                                <input style="display: none;" type="checkbox" name="TF"
+                                                    id="${fe.FECODE}" value="${fe.FECODE}">
+                                                <label for="${fe.FECODE}"><img onclick="checkImgFe('${fe.FECODE}')"
+                                                        name="FE" value="${fe.FECODE}" class="${fe.FECODE} img"
+                                                        src="${fe.FEPOSTER}" alt=""></label>
+                                            </div>
+                                        </div>                                
                                     </c:forEach>
                                 </div>
                             </div>
@@ -155,6 +234,40 @@
                     <!-- Core theme JS-->
                     <script src="resources/js/scripts.js"></script>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+                    <script>
+                        function checkImg(e) {
+                            console.log(e);
+                            let checkImgDiv = document.querySelector('.' + e);
+                            let checkLabel = document.getElementById(e);
+                            console.log(document.querySelector('#' + e).checked)
+                            if (!$('input:checkbox[id=' + e + ']').is(':checked')) {
+                                checkImgDiv.classList.remove('InActive');
+                                checkImgDiv.classList.add('Active');
+                            }
+
+                            else {
+                                checkImgDiv.classList.remove('Active');
+                                checkImgDiv.classList.add('InActive');
+                            }
+
+                        }
+                        function checkImgFe(e) {
+                            console.log(e);
+                            let checkImgDiv = document.querySelector('.' + e);
+                            let checkLabel = document.getElementById(e);
+                            console.log(document.querySelector('#' + e).checked)
+                            if (!$('input:checkbox[id=' + e + ']').is(':checked')) {
+                                checkImgDiv.classList.remove('InActive');
+                                checkImgDiv.classList.add('Active');
+                            }
+
+                            else {
+                                checkImgDiv.classList.remove('Active');
+                                checkImgDiv.classList.add('InActive');
+                            }
+                        }
+                    </script>
 
                     <script type="text/javascript">
 
@@ -196,9 +309,9 @@
                             var files = e.target.files;
                             var filesArr = Array.prototype.slice.call(files);
 
-                           // console.log('filesArr : '+filesArr)
-                           var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
-                           let imgDiv = document.querySelector('.RePhotoArr');
+                            // console.log('filesArr : '+filesArr)
+                            var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+                            let imgDiv = document.querySelector('.RePhotoArr');
                             filesArr.forEach(function (f) {
                                 if (!f.type.match(reg)) {
                                     alert("이미지 확장자만 선택 가능합니다.");
@@ -207,22 +320,22 @@
 
 
                                 set_file.push(f);
-                                
+
                                 var reader = new FileReader();
                                 reader.onload = function (e) {
                                     console.log('이거')
-                                    
-                                    
-                                        let imgTag = document.createElement('img');
-                                        //imgTag.setAttribute('id',"img");
-                                        //$("#img").attr("src", );
-                                        imgTag.setAttribute("src",e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
-                                        imgTag.setAttribute("data-file",f.name);
-                                        imgTag.classList.add('img');
-                                        console.log(imgTag)
-                                        //imgDiv.appendChild(imgTag);
-                                        imgDiv.appendChild(imgTag);
-                                    
+
+
+                                    let imgTag = document.createElement('img');
+                                    //imgTag.setAttribute('id',"img");
+                                    //$("#img").attr("src", );
+                                    imgTag.setAttribute("src", e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
+                                    imgTag.setAttribute("data-file", f.name);
+                                    imgTag.classList.add('img');
+                                    console.log(imgTag)
+                                    //imgDiv.appendChild(imgTag);
+                                    imgDiv.appendChild(imgTag);
+
                                 }
                                 reader.readAsDataURL(f);
                             });
@@ -294,7 +407,7 @@
                             foEl.appendChild(inputTtitle);
                             foEl.appendChild(inputContents);
                             foEl.appendChild(inputCodeList);
-                            
+
 
                             foEl.submit();
 

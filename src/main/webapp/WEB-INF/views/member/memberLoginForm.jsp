@@ -153,6 +153,18 @@
                 background: none;
             }
 
+            .KakaoBtn {
+                position: relative;
+                left: 190px;
+                top: 20px;
+            }
+
+            .NaverBtn {
+                position: relative;
+                top: 20px;
+                left: 209px;
+            }
+
             .kakaoImg,
             .naverImg {
                 width: 43px;
@@ -349,8 +361,8 @@
                             'id': naver_id_login.getProfileData('id'),
                             'profile': naver_id_login.getProfileData('profile_image'),
                         },
-                        
-                        
+
+
                         success: function (res) {
                             console.log(res);
                             if (res == 'Y') {
@@ -369,19 +381,19 @@
                     });
                 }
 
-                function Join_Naver(response){
+                function Join_Naver(response) {
                     console.log(response);
                     $.ajax({
-                        type : 'get',
-                        url : 'MemberJoin_Naver',
-                        data : {
-                            'mid' : naver_id_login.getProfileData('id'),
-                            'mprofile' : naver_id_login.getProfileData('profile_image'),
-                            'mnickname' : naver_id_login.getProfileData('name')
+                        type: 'get',
+                        url: 'MemberJoin_Naver',
+                        data: {
+                            'mid': naver_id_login.getProfileData('id'),
+                            'mprofile': naver_id_login.getProfileData('profile_image'),
+                            'mnickname': naver_id_login.getProfileData('name')
                         },
-                        
-                        
-                        success : function(result){
+
+
+                        success: function (result) {
                             alert('네이버 계정으로 회원가입 되었습니다.');
                             location.href = "/memberJoinForm"
                         }

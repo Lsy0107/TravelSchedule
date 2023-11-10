@@ -1,579 +1,557 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Modern Business - Start Bootstrap Template</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="resources/css/styles.css" rel="stylesheet" />
-
-<!-- Data AOS-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-<!-- Data AOS-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-<style>
-.pagination {
-	position: relative;
-	margin-left: 80px;
-}
-
-ol {
-	list-style: none;
-	display: flex;
-	padding: 0px;
-	position: relative;
-}
-
-.bg-wh {
-	background-color: white;
-	box-shadow: 0px 0px 10px #A2A2A2;
-}
-
-ol>li:hover {
-	background-color: lightgrey;
-	cursor: pointer;
-}
-
-.active {
-	background-color: rgb(105, 107, 109);
-}
-
-ol>li {
-	padding: 3px;
-	border: 1px solid blue;
-	margin: 3px;
-	text-align: center;
-	min-width: 57px;
-	min-height: 45px;
-}
-
-ol>li>a {
-	padding: 10px;
-	max-width: 50px;
-	position: relative;
-	top: 21%;
-}
-
-i#leftCur {
-	position: relative;
-	top: 15px;
-	right: 0px;
-}
-
-i#rightCur {
-	position: relative;
-	top: 15px;
-	left: 0px;
-}
-
-div#map {
-	width: 100%;
-	position: relative;
-	top: 77px;
-	height: 685px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.TdListArea {
-	position: relative;
-	display: block;
-	top: 150px;
-	border: 1px solid;
-	width: 75%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.TdListIn {
-	margin-left: auto;
-	margin-right: auto;
-	max-height: 628px;
-	width: 100%;
-}
-
-.SearchArea {
-	border-bottom: 1px solid;
-}
-
-.SArea {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 308px;
-}
-
-.Search {
-	width: 250px;
-	border-radius: 10px;
-	padding: 5px;
-}
-
-#btnRoadmap {
-	display: block;
-	width: 144px;
-	text-align: center;
-}
-
-#btnSkyview {
-	display: block;
-	width: 144px;
-	text-align: center;
-	margin-top: 10px;
-}
-
-#SelectMapType {
-	position: relative;
-	bottom: 557px;
-	left: 15px;
-	z-index: 4;
-}
-
-.selected, .unselected {
-	border: 1px solid;
-	padding: 10px;
-	border-radius: 4px;
-	font-size: 15px;
-	cursor: pointer;
-}
-
-.selected {
-	color: #1D9AF2;
-	background-color: #292D3E;
-	border: 1px solid #1D9AF2;
-	border-radius: 4px;
-	padding: 10px;
-	cursor: pointer;
-	font-size: 15px;
-	box-shadow: 0 0 4px #999;
-	background-position: center;
-	transition: background-color 0.8s;
-}
-
-.selected:hover {
-	background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
-		center/15000%;
-	color: white;
-}
-
-.selected:active {
-	background-color: #292d3e;
-	background-size: 100%;
-	transition: background-color 0s;
-}
-
-.TdestRecommendArea {
-	position: relative;
-	top: 80px;
-	display: flex;
-}
-
-.JejuIslandTdest {
-	border: 1px solid;
-	padding: 25px;
-	border-radius: 0px 25px 0px 25px;
-	margin-left: auto;
-	margin-right: 50px;
-	background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-	cursor: pointer;
-}
-
-.FestivalRecomm {
-	border: 1px solid;
-	padding: 25px;
-	border-radius: 25px 0px 25px 0px;
-	margin-left: 50px;
-	margin-right: auto;
-}
-
-#RecommendTitle {
-	font-size: 22px;
-	font-weight: bold;
-}
-
-.JejuIslandTdest>img {
-	width: 75px;
-	height: 75px;
-}
-
-.photo {
-	cursor: pointer;
-}
-
-div.containDest, div.containFest {
-	padding: 9px;
-	display: flex;
-}
-
-.Bar {
-	border: 1px solid;
-	top: 860px;
-	position: sticky;
-	padding: 0px;
-}
-
-.StickyBar {
-	position: fixed;
-	bottom: 80px;
-	right: 40px;
-	z-index: 12;
-	width: 5%;
-}
-
-main {
-	position: relative;
-	padding-bottom: 2000px;
-}
-
-footer {
-	position: relative;
-}
-
-.content_wrap {
-	width: 75%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.map_wrap {
-	width: 100%;
-}
-
-.Tdest_wrap {
-	width: 100%;
-	position: relative;
-	top: 77px;
-}
-
-.ctList {
-	display: inline-block;
-	margin: 7px;
-}
-
-.hashTag {
-	
-}
-
-.tdImg {
-	width: 150px;
-	height: 150px;
-}
-
-.TitleWrap {
-	width: 100%;
-	height: 550px;
-	background: linear-gradient(45deg, #a2d0ae, lightcyan, peachpuff);
-}
-
-.CtBtn {
-	width: 100%;
-	height: 200px;
-	padding: 8px;
-}
-
-#SelCity {
-	width: 210px;
-	height: 50px;
-	padding: 15px;
-	border-radius: 10px;
-	border: 1px solid;
-	font-weight: bold;
-	outline: none;
-}
-
-#SelCate {
-	width: 210px;
-	height: 50px;
-	padding: 15px;
-	border-radius: 10px;
-	border: 1px solid;
-	font-weight: bold;
-	outline: none;
-}
-
-option {
-	font-weight: bold;
-	color: black;
-}
-
-.SelOpDiv {
-	text-align: center;
-	position: relative;
-	top: 140px;
-}
-
-.SearchBtn {
-	width: 120px;
-	height: 50px;
-	border-radius: 15px;
-	border: none;
-}
-
-.TitleSpan {
-	width: 100%;
-	display: block;
-	text-align: center;
-	font-size: 70px;
-	position: relative;
-	top: 100px;
-	font-family: fantasy;
-	color: black;
-	text-shadow: 7px 10px 6px gray;
-}
-
-.ResetBtn {
-	width: 50px;
-	height: 50px;
-	border-radius: 10px;
-}
-
-.Selection {
-	border: 1px solid blue;
-}
-
-.hTag {
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-html, body {
-	height: 100%;
-}
-
-.SearchTag {
-	position: relative;
-	top: 170px;
-	text-align: right;
-	width: 43%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#SearchIcon {
-	font-size: 40px;
-	color: #224d68;
-	cursor: pointer;
-}
-
-.SearchBox {
-	border: 1px solid;
-	background: white;
-	width: 60%;
-	position: relative;
-	top: 120px;
-	margin-left: auto;
-	margin-right: auto;
-	display: none;
-	height: 200px;
-	border-radius: 20px;
-}
-
-.SearchInput {
-	width: 75%;
-	height: 42px;
-	padding: 8px;
-	border: none;
-}
-
-.SearchCate {
-	height: 40px;
-	width: 100px;
-	padding: 8px;
-	outline: none;
-	border: none;
-}
-
-.SearchBtn2 {
-	width: 43px;
-	height: 43px;
-	border: none;
-	background: white;
-	outline: none;
-}
-
-.SearchD {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 75%;
-	margin-top: 15px;
-}
-
-#CloseIcon {
-	position: absolute;
-	top: -8px;
-	right: -7px;
-	width: 40px;
-	height: 40px;
-	border: none;
-	padding: 0px;
-	background: none;
-}
-
-#Close {
-	font-size: 40px;
-}
-</style>
-</head>
-
-<body class="">
-	<!-- Navigation-->
-	<%@ include file="/WEB-INF/views/include/menu.jsp"%>
-	<div class="StickyBar">
-		<button class="Bar">
-			<img class="BarImage" style="width: 100%;"
-				src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png"
-				alt="">
-		</button>
-	</div>
-	<!-- contant 시작 -->
-
-	<div class="TitleWrap">
-		<span class="TitleSpan">R.O.K Travel</span>
-		<div class="SelOpDiv">
-			<select name="ctcode" id="SelCity" onchange="selectCity(this)">
-				<option class="OptionCity" value="지역">지역</option>
-				<c:forEach items="${CountryList }" var="ct">
-					<option class="OptionCity" value="${ct.ctname}">${ct.ctname}</option>
-				</c:forEach>
-			</select> <select name="category" id="SelCate" required="required"
-				onchange="selectCategory(this)">
-				<option value="">카테고리</option>
-				<option value="여행지">여행지</option>
-				<option value="축제">축제</option>
-			</select>
-			<button class="SearchBtn btn btn-primary" onclick="SearchClick()">
-				검색<i style="padding: 5px;" class="fa-solid fa-magnifying-glass"></i>
-			</button>
-		</div>
-		<div class="SearchTag">
-			<i id="SearchIcon" class="fa-solid fa-magnifying-glass"></i>
-		</div>
-		<div class="SearchBox">
-			<div class="SearchD">
-				<select name="cateVal" id="selectCategory" class="SearchCate"
-					required="required" onchange="selectCategory(this)">
-					<option value="">카테고리</option>
-					<option value="축제">축제</option>
-					<option value="여행지">여행지</option>
-				</select> <input class="SearchInput" onkeyup="previewInput(this)" type="text"
-					placeholder="검색어를 입력해주세요.">
-				<button class="SearchBtn2" onclick="SearchDetail()">
-					<i id="" class="fa-solid fa-magnifying-glass"></i>
-				</button>
-			</div>
-			<button id="CloseIcon">
-				<i id="Close" class="fa-solid fa-circle-xmark"
-					style="color: #000000;"></i>
-			</button>
-			<div id="previewtext"
-				style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius: 10px;">
-			</div>
-		</div>
-
-	</div>
-
-	<div class="content_wrap">
-		<div class="Tdest_wrap">
-			<div class="TdListIn">
-				<div id="rowid" class="row TdestArea">
-
-					<div class="containDest">
-						<!-- Blog post-->
-						<div class="card mb-4 photo" id="photo"
-							onclick="location.href='detailTdest?tdcode=${Ts.tdcode}'">
-							<img class="card-img-top tdImg img-thumbnail" src="${Ts.tdphoto}"
-								alt="..." />
-
-						</div>
-						<div class="card-body">
-							<h3 id="title" class="card-title h4" title="${TdList.tdname}"
-								style="overflow: hidden; white-space: nowrap;">${TdList.tdname}</h3>
-							<button class="btn btn-primary"
-								onclick="selectCdcode('${TdList.tdcode}','tdest')"
-								data-bs-toggle="modal" data-bs-target="#exampleModal">계획에
-								추가하기</button>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="row">
-					<div class="pagination">
-						<i id="leftCur" class="fa-solid fa-arrow-left"></i>
-						<ol id="numbers">
-
-						</ol>
-						<i id="rightCur" class="fa-solid fa-arrow-right"></i>
-					</div>
-				</div>
-
-			</div>
-
-		</div>
-	</div>
-
-
-
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="selectCalendar"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-success"
-						data-bs-dismiss="modal" id="selectClear">선택</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-	<!-- contant 종료 -->
-
-	<!-- Footer-->
-
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="resources/js/scripts.js"></script>
-
-	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-	<script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="" />
+            <meta name="author" content="" />
+            <title>Modern Business - Start Bootstrap Template</title>
+            <!-- Favicon-->
+            <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+            <!-- Bootstrap icons-->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+            <!-- Core theme CSS (includes Bootstrap)-->
+            <link href="resources/css/styles.css" rel="stylesheet" />
+
+            <!-- Data AOS-->
+            <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+            <!-- Data AOS-->
+            <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+            <style>
+                .pagination {
+                    position: relative;
+                    margin-left: 80px;
+                }
+
+                ol {
+                    list-style: none;
+                    display: flex;
+                    padding: 0px;
+                    position: relative;
+                }
+
+                .bg-wh {
+                    background-color: white;
+                    box-shadow: 0px 0px 10px #A2A2A2;
+                }
+
+                ol>li:hover {
+                    background-color: lightgrey;
+                    cursor: pointer;
+                }
+
+                .active {
+                    background-color: rgb(105, 107, 109);
+                }
+
+                ol>li {
+                    padding: 3px;
+                    border: 1px solid blue;
+                    margin: 3px;
+                    text-align: center;
+                    min-width: 57px;
+                    min-height: 45px;
+                }
+
+                ol>li>a {
+                    padding: 10px;
+                    max-width: 50px;
+                    position: relative;
+                    top: 21%;
+                }
+
+                i#leftCur {
+                    position: relative;
+                    top: 15px;
+                    right: 0px;
+                }
+
+                i#rightCur {
+                    position: relative;
+                    top: 15px;
+                    left: 0px;
+                }
+
+                div#map {
+                    width: 100%;
+                    position: relative;
+                    top: 77px;
+                    height: 685px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .TdListArea {
+                    position: relative;
+                    display: block;
+                    top: 150px;
+                    border: 1px solid;
+                    width: 75%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .TdListIn {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-height: 628px;
+                    width: 100%;
+                }
+
+                .SearchArea {
+                    border-bottom: 1px solid;
+                }
+
+                .SArea {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 308px;
+                }
+
+                .Search {
+                    width: 250px;
+                    border-radius: 10px;
+                    padding: 5px;
+                }
+
+                #btnRoadmap {
+                    display: block;
+                    width: 144px;
+                    text-align: center;
+                }
+
+                #btnSkyview {
+                    display: block;
+                    width: 144px;
+                    text-align: center;
+                    margin-top: 10px;
+                }
+
+                #SelectMapType {
+                    position: relative;
+                    bottom: 557px;
+                    left: 15px;
+                    z-index: 4;
+                }
+
+                .selected,
+                .unselected {
+                    border: 1px solid;
+                    padding: 10px;
+                    border-radius: 4px;
+                    font-size: 15px;
+                    cursor: pointer;
+                }
+
+                .selected {
+                    color: #1D9AF2;
+                    background-color: #292D3E;
+                    border: 1px solid #1D9AF2;
+                    border-radius: 4px;
+                    padding: 10px;
+                    cursor: pointer;
+                    font-size: 15px;
+                    box-shadow: 0 0 4px #999;
+                    background-position: center;
+                    transition: background-color 0.8s;
+                }
+
+                .selected:hover {
+                    background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+                    color: white;
+                }
+
+                .selected:active {
+                    background-color: #292d3e;
+                    background-size: 100%;
+                    transition: background-color 0s;
+                }
+
+                .TdestRecommendArea {
+                    position: relative;
+                    top: 80px;
+                    display: flex;
+                }
+
+                .JejuIslandTdest {
+                    border: 1px solid;
+                    padding: 25px;
+                    border-radius: 0px 25px 0px 25px;
+                    margin-left: auto;
+                    margin-right: 50px;
+                    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+                    cursor: pointer;
+                }
+
+                .FestivalRecomm {
+                    border: 1px solid;
+                    padding: 25px;
+                    border-radius: 25px 0px 25px 0px;
+                    margin-left: 50px;
+                    margin-right: auto;
+                }
+
+                #RecommendTitle {
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+
+                .JejuIslandTdest>img {
+                    width: 75px;
+                    height: 75px;
+                }
+
+                .photo {
+                    cursor: pointer;
+                }
+
+                div.containDest,
+                div.containFest {
+                    padding: 9px;
+                    display: flex;
+                }
+
+                .Bar {
+                    border: 1px solid;
+                    top: 860px;
+                    position: sticky;
+                    padding: 0px;
+                }
+
+                .StickyBar {
+                    position: fixed;
+                    bottom: 80px;
+                    right: 40px;
+                    z-index: 12;
+                    width: 5%;
+                }
+
+                main {
+                    position: relative;
+                    padding-bottom: 2000px;
+                }
+
+                footer {
+                    position: relative;
+                }
+
+                .content_wrap {
+                    width: 75%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .map_wrap {
+                    width: 100%;
+                }
+
+                .Tdest_wrap {
+                    width: 100%;
+                    position: relative;
+                    top: 77px;
+                }
+
+                .ctList {
+                    display: inline-block;
+                    margin: 7px;
+                }
+
+                .hashTag {}
+
+                .tdImg {
+                    width: 150px;
+                    height: 150px;
+                }
+
+                .TitleWrap {
+                    width: 100%;
+                    height: 550px;
+                    background: linear-gradient(45deg, #a2d0ae, lightcyan, peachpuff);
+                }
+
+                .CtBtn {
+                    width: 100%;
+                    height: 200px;
+                    padding: 8px;
+                }
+
+                #SelCity {
+                    width: 210px;
+                    height: 50px;
+                    padding: 15px;
+                    border-radius: 10px;
+                    border: 1px solid;
+                    font-weight: bold;
+                    outline: none;
+                }
+
+                #SelCate {
+                    width: 210px;
+                    height: 50px;
+                    padding: 15px;
+                    border-radius: 10px;
+                    border: 1px solid;
+                    font-weight: bold;
+                    outline: none;
+                }
+
+                option {
+                    font-weight: bold;
+                    color: black;
+                }
+
+                .SelOpDiv {
+                    text-align: center;
+                    position: relative;
+                    top: 140px;
+                }
+
+                .SearchBtn {
+                    width: 120px;
+                    height: 50px;
+                    border-radius: 15px;
+                    border: none;
+                }
+
+                .TitleSpan {
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                    font-size: 70px;
+                    position: relative;
+                    top: 100px;
+                    font-family: fantasy;
+                    color: black;
+                    text-shadow: 7px 10px 6px gray;
+                }
+
+                .ResetBtn {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 10px;
+                }
+
+                .Selection {
+                    border: 1px solid blue;
+                }
+
+                .hTag {
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+
+                html,
+                body {
+                    height: 100%;
+                }
+
+                .SearchTag {
+                    position: relative;
+                    top: 170px;
+                    text-align: right;
+                    width: 43%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                #SearchIcon {
+                    font-size: 40px;
+                    color: #224d68;
+                    cursor: pointer;
+                }
+
+                .SearchBox {
+                    border: 1px solid;
+                    background: white;
+                    width: 60%;
+                    position: relative;
+                    top: 120px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: none;
+                    height: 200px;
+                    border-radius: 20px;
+                }
+
+                .SearchInput {
+                    width: 75%;
+                    height: 42px;
+                    padding: 8px;
+                    border: none;
+                }
+
+                .SearchCate {
+                    height: 40px;
+                    width: 100px;
+                    padding: 8px;
+                    outline: none;
+                    border: none;
+                }
+
+                .SearchBtn2 {
+                    width: 43px;
+                    height: 43px;
+                    border: none;
+                    background: white;
+                    outline: none;
+                }
+
+                .SearchD {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 75%;
+                    margin-top: 15px;
+                }
+
+                #CloseIcon {
+                    position: absolute;
+                    top: -8px;
+                    right: -7px;
+                    width: 40px;
+                    height: 40px;
+                    border: none;
+                    padding: 0px;
+                    background: none;
+                }
+
+                #Close {
+                    font-size: 40px;
+                }
+            </style>
+        </head>
+
+        <body class="">
+            <!-- Navigation-->
+            <%@ include file="/WEB-INF/views/include/menu.jsp" %>
+                <div class="StickyBar">
+                    <button class="Bar">
+                        <img class="BarImage" style="width: 100%;"
+                            src="${pageContext.request.contextPath}/resources/tdest/Top방향키.png" alt="">
+                    </button>
+                </div>
+                <!-- contant 시작 -->
+
+                <div class="TitleWrap">
+                    <span class="TitleSpan">R.O.K Travel</span>
+                    <div class="SelOpDiv">
+                        <select name="ctcode" id="SelCity" onchange="selectCity(this)">
+                            <option class="OptionCity" value="지역">지역</option>
+                            <c:forEach items="${CountryList }" var="ct">
+                                <option class="OptionCity" value="${ct.ctname}">${ct.ctname}</option>
+                            </c:forEach>
+                        </select> <select name="category" id="SelCate" required="required"
+                            onchange="selectCategory(this)">
+                            <option value="">카테고리</option>
+                            <option value="여행지">여행지</option>
+                            <option value="축제">축제</option>
+                        </select>
+                        <button class="SearchBtn btn btn-primary" onclick="SearchClick()">
+                            검색<i style="padding: 5px;" class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <div class="SearchTag">
+                        <i id="SearchIcon" class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="SearchBox">
+                        <div class="SearchD">
+                            <select name="cateVal" id="selectCategory" class="SearchCate" required="required"
+                                onchange="selectCategory(this)">
+                                <option value="">카테고리</option>
+                                <option value="축제">축제</option>
+                                <option value="여행지">여행지</option>
+                            </select> <input class="SearchInput" onkeyup="previewInput(this)" type="text"
+                                placeholder="검색어를 입력해주세요.">
+                            <button class="SearchBtn2" onclick="SearchDetail()">
+                                <i id="" class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                        <button id="CloseIcon">
+                            <i id="Close" class="fa-solid fa-circle-xmark" style="color: #000000;"></i>
+                        </button>
+                        <div id="previewtext"
+                            style="margin: 0px 30px 0px 30px; overflow-y: auto; height: 125px; border-radius: 10px;">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="content_wrap">
+                    <div class="Tdest_wrap">
+                        <div class="TdListIn">
+                            <div id="rowid" class="row TdestArea">
+
+                                <div class="containDest">
+                                    <!-- Blog post-->
+
+                                </div>
+
+                            </div>
+
+                            <div class="row paginD" style="display: none;">
+                                <div class="pagination">
+                                    <i id="leftCur" class="fa-solid fa-arrow-left"></i>
+                                    <ol id="numbers">
+
+                                    </ol>
+                                    <i id="rightCur" class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">캘린더 선택</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="selectCalendar"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+                                    id="selectClear">선택</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- contant 종료 -->
+
+                <!-- Footer-->
+
+                <!-- Bootstrap core JS-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- Core theme JS-->
+                <script src="resources/js/scripts.js"></script>
+
+                <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <script>
                     AOS.init();
                 </script>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/148f0d76e9.js"
-		crossorigin="anonymous"></script>
-	<script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+                <script src="https://kit.fontawesome.com/148f0d76e9.js" crossorigin="anonymous"></script>
+                <script>
 
                     $(document).ready(function () {
                         let selectCity = document.querySelector(".SelCity");
@@ -582,7 +560,7 @@ html, body {
                     })
                 </script>
 
-	<script>
+                <script>
                     function selectCity(selOp) {
                         if (selOp.value == '지역') {
                             $('#SelCity').css('color', 'black');
@@ -601,7 +579,7 @@ html, body {
                     }
 
                 </script>
-	<script>
+                <script>
                     let currentCity = null;
                     let currentCate = null;
                     function SearchClick() {
@@ -678,7 +656,7 @@ html, body {
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Td.tdphoto);
-                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
+                            TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
@@ -739,7 +717,7 @@ html, body {
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Fe.feposter);
-                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
+                            TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
 
@@ -774,8 +752,9 @@ html, body {
                         Paging();
                     }
                 </script>
-	<script>
+                <script>
                     function Paging() {
+                        let paingDiv = document.querySelector('.paginD').style.display = 'block';
                         const rowsPerPage = 30; //페이지당 출력할 수
                         let rows = null;
 
@@ -883,7 +862,7 @@ html, body {
 
                     }
                 </script>
-	<script>
+                <script>
 
 
                     function DetailPageMoveDest(tdcode) {
@@ -898,44 +877,44 @@ html, body {
                     }
                     function DestselectCdcode(code, seloption) {
                         if ("${sessionScope.loginId}" == "") {
-            				location.href = "${pageContext.request.contextPath}/memberLoginForm"
-            			} else {
-            				$.ajax({
-            					url:"/getCdcode",
-            					type:"post",
-            					data:{mid:"${sessionScope.loginId}"},
-            					async:false,
-            					success(rs){
-            						let modalBodyTag = document.querySelector("#selectCalendar")
-            						modalBodyTag.innerHTML = "";
-            						if(rs.length > 0){
-            							let checkinfo = false;
-            							let selTag = document.createElement("select")
-            							for(let cd of rs){
-            								if(cd.cdstate == 'Y'){
-            								let optionTag = document.createElement("option")
-            								optionTag.innerText = cd.cdname;
-            								optionTag.setAttribute("value", cd.cdcode)
-            								selTag.appendChild(optionTag);
-            								checkinfo = true;
-            								}
-            							}
-            							if(checkinfo){
-            							modalBodyTag.appendChild(selTag);
-            							let btnTag = document.querySelector("#selectClear");
-            							btnTag.addEventListener("click", function(){
-            								selectDest(code, selTag.value, seloption)
-            							})
-            							}else{
-            								modalBodyTag.innerText="계획 가능한 달력이 없습니다.";
-            							}
-            						}
-            						else{
-            							modalBodyTag.innerText="달력을 추가 해주세요";
-            						}
-            					}				
-            					})
-            			}
+                            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+                        } else {
+                            $.ajax({
+                                url: "/getCdcode",
+                                type: "post",
+                                data: { mid: "${sessionScope.loginId}" },
+                                async: false,
+                                success(rs) {
+                                    let modalBodyTag = document.querySelector("#selectCalendar")
+                                    modalBodyTag.innerHTML = "";
+                                    if (rs.length > 0) {
+                                        let checkinfo = false;
+                                        let selTag = document.createElement("select")
+                                        for (let cd of rs) {
+                                            if (cd.cdstate == 'Y') {
+                                                let optionTag = document.createElement("option")
+                                                optionTag.innerText = cd.cdname;
+                                                optionTag.setAttribute("value", cd.cdcode)
+                                                selTag.appendChild(optionTag);
+                                                checkinfo = true;
+                                            }
+                                        }
+                                        if (checkinfo) {
+                                            modalBodyTag.appendChild(selTag);
+                                            let btnTag = document.querySelector("#selectClear");
+                                            btnTag.addEventListener("click", function () {
+                                                selectDest(code, selTag.value, seloption)
+                                            })
+                                        } else {
+                                            modalBodyTag.innerText = "계획 가능한 달력이 없습니다.";
+                                        }
+                                    }
+                                    else {
+                                        modalBodyTag.innerText = "달력을 추가 해주세요";
+                                    }
+                                }
+                            })
+                        }
                     }
                     function selectDest(tdcode, cdcode, seloption) {
                         console.log(tdcode + "  " + cdcode);
@@ -956,45 +935,45 @@ html, body {
                         })
                     }
                     function FestselectCdcode(code, seloption) {
-                    	if ("${sessionScope.loginId}" == "") {
-            				location.href = "${pageContext.request.contextPath}/memberLoginForm"
-            			} else {
-            				$.ajax({
-            					url:"/getCdcode",
-            					type:"post",
-            					data:{mid:"${sessionScope.loginId}"},
-            					async:false,
-            					success(rs){
-            						let modalBodyTag = document.querySelector("#selectCalendar")
-            						modalBodyTag.innerHTML = "";
-            						if(rs.length > 0){
-            							let checkinfo = false;
-            							let selTag = document.createElement("select")
-            							for(let cd of rs){
-            								if(cd.cdstate == 'Y'){
-            								let optionTag = document.createElement("option")
-            								optionTag.innerText = cd.cdname;
-            								optionTag.setAttribute("value", cd.cdcode)
-            								selTag.appendChild(optionTag);
-            								checkinfo = true;
-            								}
-            							}
-            							if(checkinfo){
-            							modalBodyTag.appendChild(selTag);
-            							let btnTag = document.querySelector("#selectClear");
-            							btnTag.addEventListener("click", function(){
-            								selectFest(code, selTag.value, seloption)
-            							})
-            							}else{
-            								modalBodyTag.innerText="계획 가능한 달력이 없습니다.";
-            							}
-            						}
-            						else{
-            							modalBodyTag.innerText="달력을 추가 해주세요";
-            						}
-            					}				
-            					})
-            			}
+                        if ("${sessionScope.loginId}" == "") {
+                            location.href = "${pageContext.request.contextPath}/memberLoginForm"
+                        } else {
+                            $.ajax({
+                                url: "/getCdcode",
+                                type: "post",
+                                data: { mid: "${sessionScope.loginId}" },
+                                async: false,
+                                success(rs) {
+                                    let modalBodyTag = document.querySelector("#selectCalendar")
+                                    modalBodyTag.innerHTML = "";
+                                    if (rs.length > 0) {
+                                        let checkinfo = false;
+                                        let selTag = document.createElement("select")
+                                        for (let cd of rs) {
+                                            if (cd.cdstate == 'Y') {
+                                                let optionTag = document.createElement("option")
+                                                optionTag.innerText = cd.cdname;
+                                                optionTag.setAttribute("value", cd.cdcode)
+                                                selTag.appendChild(optionTag);
+                                                checkinfo = true;
+                                            }
+                                        }
+                                        if (checkinfo) {
+                                            modalBodyTag.appendChild(selTag);
+                                            let btnTag = document.querySelector("#selectClear");
+                                            btnTag.addEventListener("click", function () {
+                                                selectFest(code, selTag.value, seloption)
+                                            })
+                                        } else {
+                                            modalBodyTag.innerText = "계획 가능한 달력이 없습니다.";
+                                        }
+                                    }
+                                    else {
+                                        modalBodyTag.innerText = "달력을 추가 해주세요";
+                                    }
+                                }
+                            })
+                        }
                     }
                     function selectFest(fecode, cdcode, seloption) {
                         console.log(fecode + "  " + cdcode);
@@ -1010,7 +989,7 @@ html, body {
                         })
                     }
                 </script>
-	<script>
+                <script>
                     $(document).ready(function () {
                         $(window).scroll(function () {
                             if ($(this).scrollTop() > 50) {
@@ -1027,7 +1006,7 @@ html, body {
 
                 </script>
 
-	<script>
+                <script>
                     $(function () {
                         $("#SearchIcon").on("click", function () {
                             $(".SearchBox").fadeIn();
@@ -1043,7 +1022,7 @@ html, body {
                     });
                 </script>
 
-	<script>
+                <script>
                     function SearchDetail() {
                         let cateTag = document.querySelector('.SearchCate').value;
                         let inputTag = document.querySelector('.SearchInput').value;
@@ -1108,7 +1087,7 @@ html, body {
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Fe.feposter);
-                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
+                            TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'");
 
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
@@ -1169,7 +1148,7 @@ html, body {
                             TdestImg.classList.add('tdImg');
                             TdestImg.classList.add('card-img-top');
                             TdestImg.setAttribute('src', Td.tdphoto);
-                            TdestImg.setAttribute('onerror',"this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'")
+                            TdestImg.setAttribute('onerror', "this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'")
 
                             TdestImgDiv.appendChild(TdestImg);
                             DestDiv.appendChild(TdestImgDiv);
@@ -1205,64 +1184,64 @@ html, body {
                         Paging();
                     }
                 </script>
-	<script type="text/javascript">
-				function previewInput(obj){
-					console.log(obj);
-					let SelCateTag = document.querySelector('#selectCategory');
-					let previewText = document.querySelector('#previewtext');
-					let Data = {};
-					switch(SelCateTag.value){
-					case '':
-						previewText.innerHTML = "";
-						previewText.innerText = '카테고리를 선택해주세요!';
-						return;
-						break;
-					case '축제':
-						Data = {"searchInfo": obj.value, "seloption":'fe'};
-						break;
-					case '여행지':
-						Data = {"searchInfo": obj.value, "seloption":'td'};
-						break;
-					}
-					$.ajax({
-						url:"/sreachPreview",
-						type:"post",
-						data:Data,
-                        success: function (rs) {
-                        	printPreview(rs, previewText, SelCateTag.value, obj);
+                <script type="text/javascript">
+                    function previewInput(obj) {
+                        console.log(obj);
+                        let SelCateTag = document.querySelector('#selectCategory');
+                        let previewText = document.querySelector('#previewtext');
+                        let Data = {};
+                        switch (SelCateTag.value) {
+                            case '':
+                                previewText.innerHTML = "";
+                                previewText.innerText = '카테고리를 선택해주세요!';
+                                return;
+                                break;
+                            case '축제':
+                                Data = { "searchInfo": obj.value, "seloption": 'fe' };
+                                break;
+                            case '여행지':
+                                Data = { "searchInfo": obj.value, "seloption": 'td' };
+                                break;
                         }
-					})
-				}
-				//미리보기 텍스트 출력
-				function printPreview(rs, previewText, seloption, searchbox){
-					console.log(rs);
-					console.log(previewText);
-					previewText.innerHTML = '';
-					for(let pre of rs){
-					let pTag = document.createElement('p');
-					if(seloption == '축제'){
-						pTag.innerText = pre.FENAME; 
-					}else{
-						pTag.innerText = pre.TDNAME;
-					}
-					pTag.style.margin="0";
-					pTag.style.cursor="pointer";
-					pTag.classList.add("p-2");
-					pTag.addEventListener('click',function(){
-						searchbox.value=pTag.innerText;
-						SearchDetail()
-					})
-					previewText.appendChild(pTag);
-					}
-				}
-				</script>
-	<script type="text/javascript">
-					if(${category != null}){
-						document.querySelector("#SelCate").value = '${category}';
-						document.querySelector("#SelCity").value = '${ctcode}';
-						SearchClick();						
-					}
-				</script>
-</body>
+                        $.ajax({
+                            url: "/sreachPreview",
+                            type: "post",
+                            data: Data,
+                            success: function (rs) {
+                                printPreview(rs, previewText, SelCateTag.value, obj);
+                            }
+                        })
+                    }
+                    //미리보기 텍스트 출력
+                    function printPreview(rs, previewText, seloption, searchbox) {
+                        console.log(rs);
+                        console.log(previewText);
+                        previewText.innerHTML = '';
+                        for (let pre of rs) {
+                            let pTag = document.createElement('p');
+                            if (seloption == '축제') {
+                                pTag.innerText = pre.FENAME;
+                            } else {
+                                pTag.innerText = pre.TDNAME;
+                            }
+                            pTag.style.margin = "0";
+                            pTag.style.cursor = "pointer";
+                            pTag.classList.add("p-2");
+                            pTag.addEventListener('click', function () {
+                                searchbox.value = pTag.innerText;
+                                SearchDetail()
+                            })
+                            previewText.appendChild(pTag);
+                        }
+                    }
+                </script>
+                <script type="text/javascript">
+                    if (${ category != null }) {
+                        document.querySelector("#SelCate").value = '${category}';
+                        document.querySelector("#SelCity").value = '${ctcode}';
+                        SearchClick();
+                    }
+                </script>
+        </body>
 
-</html>
+        </html>

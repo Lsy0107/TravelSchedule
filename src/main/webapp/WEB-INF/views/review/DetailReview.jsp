@@ -42,11 +42,17 @@
                 border-radius: 10px;
             }
 
+            .ReTitle {
+                text-align: center;
+                margin-bottom: 4px;
+            }
+
             .Title {
                 width: 100%;
                 height: 60px;
                 padding: 10px;
                 border-radius: 10px;
+                font-size: 25px;
             }
 
             .wrap {
@@ -54,6 +60,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: 115px;
+                margin-bottom: 50px;
                 background-color: white;
                 padding: 20px;
                 border-radius: 25px;
@@ -77,12 +84,26 @@
                 display: flex;
             }
 
-            .id,
-            .hit,
-            .like {
-                width: 16%;
+
+            .hit {
+                max-width: 16%;
+                min-width: 16%;
                 text-align: center;
                 border-right: 1px solid #ababab;
+            }
+
+            .id {
+                width: 100%;
+                font-size: 19px;
+            }
+            .ReWriter{
+                text-align: center;
+            }
+
+            .like {
+                max-width: 16%;
+                min-width: 16%;
+                text-align: center;
             }
 
             #like {
@@ -100,7 +121,7 @@
             .LikeArea {
                 display: flex;
                 margin-left: auto;
-                
+
                 width: max-content;
                 margin-right: auto;
                 padding: 15px;
@@ -116,6 +137,45 @@
             .fa-regular {
                 color: #000000;
             }
+
+            .InfoWrap {
+                background: white;
+                max-width: 17%;
+                min-width: 17%;
+                border: 1px solid;
+                border-radius: 15px;
+                padding: 8px;
+                position: absolute;
+                right: 26px;
+                top: 120px;
+            }
+
+            .InfoHr {
+                border: 1px solid black;
+                margin: 3px;
+            }
+
+            .InfoTitle {
+                margin: 0px;
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .pTag {
+                margin: 5px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            .ReDate {
+                text-align: right;
+                width: 95%;
+            }
+
+            #Rdate {
+                font-size: 20px;
+            }
         </style>
     </head>
 
@@ -128,13 +188,15 @@
                 <div class="ReTitle">
                     <span class="Title" name="title" placeholder="제목">${Re.RETITLE}</span>
                 </div>
-                <div class="ReInfo">
-                    <div class="id">${Re.MID}</div>
+                <div class="ReWriter">
+                    <div class="id">작성자 : ${Re.MID}</div>
+                </div>
+                <div class="ReInfo d-flex justify-content-end">
                     <div class="hit">조회수 : ${Re.REHIT}</div>
                     <div class="like">추천 : ${Re.LKNUM}</div>
                 </div>
                 <div class="ReDate">
-                    <span>${Re.REDATE}</span>
+                    <span id="Rdate">${Re.REDATE}</span>
                 </div>
                 <div class="ReContents">
                     <textarea class="ReTextArea" name="contents" readonly>${Re.RECOMMENT}</textarea>
@@ -152,13 +214,14 @@
 
 
             </div>
-            <div class="wrap">
-                <p>다녀온 여행지</p>
+            <div class="InfoWrap">
+                <p class="InfoTitle">다녀온 여행지</p>
+                <hr class="InfoHr">
                 <c:forEach items="${TdList}" var="td">
-                    <p>${td.tdname}</p>
+                    <p class="pTag">${td.tdname}</p>
                 </c:forEach>
                 <c:forEach items="${FeList}" var="fe">
-                    <p>${fe.fename}</p>
+                    <p class="pTag">${fe.fename}</p>
                 </c:forEach>
             </div>
 

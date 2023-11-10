@@ -42,7 +42,7 @@ public interface ReviewDao {
 	@Select("SELECT NVL(MAX(RECODE),'RE00000') FROM REVIEW")
 	String maxcode();
 
-	@Insert("INSERT INTO REVIEW(RECODE,MID,RECOMMENT,RETITLE,REPHOTO,REHIT,RESTATE,CDCODE,CODELIST,REDATE) VALUES(#{recode},#{mid},#{recomment},#{retitle},#{rephoto},0,'Y',#{cdcode},#{codelist},TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI'))")
+	@Insert("INSERT INTO REVIEW(RECODE,MID,RECOMMENT,RETITLE,REPHOTO,REHIT,RESTATE,CDCODE,CODELIST,REDATE,RELIKE) VALUES(#{recode},#{mid},#{recomment},#{retitle},#{rephoto},0,'Y',#{cdcode},#{codelist},SYSDATE,0)")
 	int ReviewInsertDao(Review review);
 
 
@@ -67,8 +67,8 @@ public interface ReviewDao {
 			+ "WHERE F.FECODE = S.FECODE AND F.FECODE = #{s} AND CDCODE = #{cdcode} AND MID = #{mid} AND SCDATE IS NOT NULL")
 	Festival FeInfoDao(@Param("s")String s,@Param("cdcode")String cdcode, @Param("mid")String mid);
 
-	@Update("UPDATE REVIEW SET RETITLE = #{title}, RECOMMENT = #{contents} WHERE RECODE = #{recode} AND MID = #{mid}")
-	int UpdateReviewDao(@Param("title")String title, @Param("contents")String contents, @Param("recode")String recode, @Param("mid")String mid);
+	@Update("UPDATE REVIEW SET RETITLE = #{retitle}, RECOMMENT = #{recomment}, CODELIST = #{codelist}, REPHOTO = #{rephoto} WHERE RECODE = #{recode} AND MID = #{mid}")
+	int UpdateReviewDao(Review review);
 
 	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND CDCODE = #{cdcode}")
 	int DeleteReview(@Param("cdcode")String cdcode, @Param("mid")String mid);
