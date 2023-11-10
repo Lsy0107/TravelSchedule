@@ -107,10 +107,11 @@ public class HomeController {
 		
 		ArrayList<HashMap<String,String>> reList = apisvc.reList();
 		for(HashMap<String, String> re : reList) {
+			System.out.println(re);
 			String codeList = (String)re.get("CODELIST");
 			String[] codeSplit = codeList.split("/");
 			for(String cs : codeSplit) { //cs => codeList를 /로 나눈 코드들
-				System.out.println(cs);
+				//System.out.println(cs);
 				if(cs.contains(code)) {
 					ReList.add(re);
 				}			
