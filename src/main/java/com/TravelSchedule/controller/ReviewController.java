@@ -145,56 +145,66 @@ public class ReviewController {
 		HashMap<String, String> getReview = rsvc.getReview(mid, cdcode);
 		System.out.println("오류찾기 : " + getReview);
 //		System.out.println(getReview);
-		String getName = (String) getReview.get("CODELIST"); // codeList의 값 분류
-		System.out.println("키값 : " + getName);
-
-		String getRephoto = (String) getReview.get("REPHOTO");
-		System.out.println("사진들 : " + getRephoto);
-
-		ArrayList<Tdest> TdList = new ArrayList<>();
-		ArrayList<Festival> FeList = new ArrayList<>();
-
-		String[] codes = getName.split("/");
-		for (String s : codes) {
-			System.out.println("코드 분류 : " + s);
-
-//			System.out.println(s.contains("TD"));
-
-			if (s.contains("TD") == true) { // 여행지코드 축제코드중 여행지 코드에 포함된 TD가 있을경우 boolean true
-				Tdest TdInfo = rsvc.TdInfo(s, cdcode, mid);
-//				System.out.println(TdInfo);
-				TdList.add(TdInfo);
-			} else {
-				Festival FeInfo = rsvc.FeInfo(s, cdcode, mid);
-//				System.out.println(FeInfo);
-				FeList.add(FeInfo);
-			}
-
-		}
+		
+		ArrayList<HashMap<String, String>> getTdInfo = rsvc.getTdInfo(cdcode, mid);
+		ArrayList<HashMap<String, String>> getFeInfo = rsvc.getFeInfo(cdcode, mid);
 		ArrayList<String> PhotoList = new ArrayList<>();
-		String[] photoes = getRephoto.split("/");
-		for (String p : photoes) {
-			PhotoList.add(p);
+		
+		System.out.println(getReview.containsKey("REPHOTO"));
+		if(getReview.containsKey("REPHOTO")) {
+			String getRephoto = (String) getReview.get("REPHOTO");
+			System.out.println("사진들 : " + getRephoto);
+
+			String[] photoes = getRephoto.split("/");
+			for (String p : photoes) {
+				PhotoList.add(p);
+			}
+			mav.addObject("Ph", PhotoList);
 		}
-		System.out.println(TdList);
+		
 		System.out.println("사진 분류 : " + PhotoList);
 
-		mav.addObject("Ph", PhotoList);
-		mav.addObject("Td", TdList);
-		mav.addObject("Fe", FeList);
+		mav.addObject("Td", getTdInfo);
+		mav.addObject("Fe", getFeInfo);
 		mav.addObject("getRe", getReview);
 		mav.setViewName("review/ReviewFix");
 		return mav;
 	}
 
 	@RequestMapping(value = "UpdateReview")
-	public @ResponseBody String UpdateReview(String title, String contents, String recode, HttpSession session) {
+	public @ResponseBody ModelAndView UpdateReview(Review review, String rephoto, String title, String contents, String recode,String codeList, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
 		System.out.println("리뷰 수정 컨트롤러 호출");
-		System.out.println("받아온 데이터 : " + title + "|" + contents + "|" + recode);
+		System.out.println("받아온 데이터 : " + title + "|" + contents + "|" + recode + "|" + codeList + "|" + rephoto);
+		System.out.println("받아온 rephoto : "+rephoto);
 		String mid = (String) session.getAttribute("loginId");
-		int UpdateReview = rsvc.UpdateReview(title, contents, recode, mid);
-
-		return new Gson().toJson(UpdateReview);
+		Review photo = rsvc.getPhoto(review, session);
+		
+		review.setMid(mid);
+		review.setRecomment(contents);
+		review.setRetitle(title);
+		review.setRecode(recode);
+		review.setCodelist(codeList);
+		
+		String Rephoto = review.getRephoto();
+		String totalPhoto;
+		if(Rephoto.length()>0) {
+			totalPhoto = Rephoto + rephoto;			
+		}else {
+			totalPhoto = rephoto;
+		}
+		System.out.println("리뷰사진 : "+totalPhoto);
+		review.setRephoto(totalPhoto);
+		int UpdateReview = rsvc.UpdateReview(review);
+		if(UpdateReview>0) {
+			mav.setViewName("redirect:/");
+			System.out.println("수정성공");
+		}else {
+			mav.setViewName("redirect:/");
+			System.out.println("수정 실패");
+		}
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "DeleteReview")

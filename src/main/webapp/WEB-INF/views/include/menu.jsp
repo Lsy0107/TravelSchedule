@@ -92,15 +92,15 @@ div, h1, h2, h3, h4, h5, h6{
 							</c:if>
 							<c:if test="${sessionScope.loginState == 'NY'}">
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
-								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+								class="profile">${sessionScope.loginNickname }
 							</c:if>
 							<c:if test="${sessionScope.loginState == 'YK'}">
 								<img src="${sessionScope.loginProfile}"
-								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+								class="profile">${sessionScope.loginNickname }
 							</c:if>
 							<c:if test="${sessionScope.loginState == 'NA'}">
 								<img style="width:38px;"src="${sessionScope.loginProfile}"
-								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+								class="profile">${sessionScope.loginNickname }
 							</c:if>
 						</h1>
 						<c:if test="${sessionScope.loginState == 'AD' }">
