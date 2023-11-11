@@ -146,9 +146,15 @@ public class MemberService {
 		return mdao.updateMstateNN(mid);
 	}
 
-	public int memStateY(String mid) {
+	public int memStateY(String mid, String mpw) {
 		System.out.println("memStateY - (호출)");
-		return mdao.updateMstateNY(mid);
+		if(mpw.equals("kakaoAccount")) {
+			return mdao.updateMstateYK(mid);
+		}else if(mpw.equals("naverAccount")) {
+			return mdao.updateMstateNA(mid);
+		}else {
+			return mdao.updateMstateNY(mid);			
+		}
 	}
 	
 

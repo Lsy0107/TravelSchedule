@@ -74,7 +74,7 @@
 			                                         aria-labelledby="dropdownMenuLink">
 			                                         <div class="dropdown-header">MEMBER STATE</div>
 			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNN('${mem.mid}')">회원정지</a>
-			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNY('${mem.mid}')">정지해제</a>
+			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNY('${mem.mid}','${mem.mpw }')">정지해제</a>
 			                                     </div>
                                             </td>
                                         </tr>
@@ -152,12 +152,12 @@
 			}
 		})
 	}
-	function mstateNY(mid) {
+	function mstateNY(mid, mpw) {
 		console.log(mid);
 		$.ajax({
 			url:"/mstateNY",
 			type:"post",
-			data: {'mid' : mid},
+			data: {'mid' : mid, 'mpw':mpw},
 			aync:false,
 			success:function(rs){
 				if(rs == "Y"){
