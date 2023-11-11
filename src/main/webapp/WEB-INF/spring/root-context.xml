@@ -13,11 +13,11 @@
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
 		<property name="url"
-			value="jdbc:oracle:thin:@//121.65.47.74:5561/xe" />
+			value="jdbc:oracle:thin:@//localhost:1521/xe" />
 			
 			<!-- 192.168.0.95 : TRAVELSCHEDULE : 1111-->
-		<property name="username" value="TRAVELSCHEDULE" />
-		<property name="password" value="1111" />
+		<property name="username" value="TVSC" />
+		<property name="password" value="1234" />
 	</bean>
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
