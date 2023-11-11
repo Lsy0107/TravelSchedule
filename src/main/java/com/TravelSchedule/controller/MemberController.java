@@ -1,5 +1,7 @@
 package com.TravelSchedule.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Member;
 import com.TravelSchedule.service.MemberService;
 
@@ -25,16 +28,32 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		session.removeAttribute("loginId");
 		session.removeAttribute("loginProfile");
+		session.removeAttribute("loginNickname");
+		session.removeAttribute("loginState");
 		mav.setViewName("redirect:/");
 		return mav;
 	}
 
 	@RequestMapping(value = "/memberLogin")
-	public ModelAndView memberLogin(Member mem, HttpSession session) {
+	public ModelAndView memberLogin(Member mem, HttpSession session, RedirectAttributes ra) {
 		System.out.println("로그인 요청");
 		ModelAndView mav = new ModelAndView();
 		Member rs = msvc.memberLogin(mem);
-		if (rs == null) {
+		session.setAttribute("loginState", rs.getMstate());
+		String mstate = (String) session.getAttribute("loginState");
+		System.out.println(mstate);
+		if(mstate.equals("AD")) {
+			System.out.println("관리자로그인");
+			session.setAttribute("loginId", rs.getMid());
+			session.setAttribute("loginProfile", rs.getMprofile());
+			session.setAttribute("loginNickname", rs.getMnickname());
+			session.setAttribute("loginState", rs.getMstate());
+			mav.setViewName("/admin/adminMain");
+		}else if(mstate.equals("NN")) {
+			System.out.println("이용이 정지된 계정입니다.");
+			ra.addFlashAttribute("msg", "이용이 정지된 계정입니다. 관리자에게 문의해주세요!");
+			mav.setViewName("redirect:/memberLoginForm");
+		}else if (rs == null) {
 			mav.setViewName("redirect:memberLoginForm");
 		} else {
 			session.setAttribute("loginId", rs.getMid());
@@ -185,5 +204,45 @@ public class MemberController {
 		int result = msvc.registMember_Naver(member);
 		
 		return result+"";
+	}
+	@RequestMapping(value = "/memberList")
+	public ModelAndView memberList(Member member) {
+		System.out.println("회원관리페이지 이동");
+		ModelAndView mav = new ModelAndView();
+
+		ArrayList<Member> mList = msvc.getMemberList(member);
+		
+		mav.addObject("mList", mList);
+		mav.setViewName("/admin/memberList");
+
+		return mav;
+	}
+	@RequestMapping(value = "/mstateNN")
+	public @ResponseBody String mstateNN(String mid) {
+		System.out.println("회원정지");
+		System.out.println("정지할 회원아이디 : " + mid);
+		int memberState = msvc.memState(mid);
+		if(0 < memberState) {
+			System.out.println("정지성공");
+			return "Y";
+		}else {
+			System.out.println("정지실패");
+			return "N";
+		}
+
+	}
+	@RequestMapping(value = "/mstateNY")
+	public @ResponseBody String mstateNY(String mid) {
+		System.out.println("회원정지해제");
+		System.out.println("정지해제할 회원아이디 : " + mid);
+		int memberStateY = msvc.memStateY(mid);
+		if(0 < memberStateY) {
+			System.out.println("정지해제성공");
+			return "Y";
+		}else {
+			System.out.println("정지해제실패");
+			return "N";
+		}
+
 	}
 }

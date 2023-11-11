@@ -25,13 +25,13 @@
             }
 
             body {
-                background-color: lightgrey;
+                background-color: white;
             }
 
             .img {
-                width: 300px;
-                height: 300px;
-                padding: 20px;
+                width: 24vh;
+                height: 18vh;
+                border-radius: 10px;
             }
 
             .ReTextArea {
@@ -56,7 +56,7 @@
                 background-color: white;
                 padding: 20px;
                 border-radius: 25px;
-                box-shadow: grey 10px 10px;
+                box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
             }
 
             .disnone {
@@ -74,6 +74,114 @@
 
             .fImg {
                 display: flex;
+            }
+
+            #img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .ReFile {
+                border: 1px solid;
+                padding: 9px;
+                border-radius: 11px;
+            }
+
+            ck-img {
+                border: 3px solid blue;
+            }
+
+            .section::-webkit-scrollbar {
+                height: 10px;
+            }
+
+            .section::-webkit-scrollbar-track {
+                background-color: gray;
+                border-radius: 100px;
+            }
+
+            .section::-webkit-scrollbar-thumb {
+                border-radius: 100px;
+                background-color: black;
+                box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+            }
+
+            .Active {
+                animation-name: blur;
+                animation-fill-mode: forwards;
+                animation-duration: 0.5s;
+                animation-delay: 0s;
+                animation-direction: normal;
+            }
+
+            .InActive {
+                animation-name: blurRe;
+                animation-fill-mode: forwards;
+                animation-duration: 0.5s;
+                animation-delay: 0s;
+                animation-direction: normal;
+            }
+
+            @keyframes blur {
+                0% {
+                    opacity: 1;
+                    padding: 0px;
+                    border-radius: 10px;
+                }
+
+                100% {
+                    opacity: 0.4;
+                    padding: 20px;
+                    border-radius: 10px;
+                }
+            }
+
+            @keyframes blurRe {
+                0% {
+                    opacity: 0.4;
+                    padding: 20px;
+                    border-radius: 10px;
+                }
+
+                100% {
+                    opacity: 1;
+                    padding: 0px;
+                    border-radius: 10px;
+                }
+            }
+
+            .Delete {
+                animation-name: DeleteMotion;
+                animation-fill-mode: forwards;
+                animation-duration: 0.5s;
+                animation-delay: 0s;
+                animation-direction: normal;
+            }
+
+            @keyframes DeleteMotion {
+                0% {
+                    padding: 0px;
+                }
+
+                100% {
+                    padding: 83px;
+                    display: none;
+                }
+            }
+
+            .CheckDiv {
+                margin: 10px;
+            }
+
+            .RePhotoArr>img {
+                margin: 10px;
+            }
+
+            .RePhotoArr {
+                overflow: auto;
+                white-space: nowrap;
+                min-height: 190px;
+                max-height: 190px;
             }
         </style>
     </head>
@@ -100,14 +208,32 @@
                         <div class="tdest" id="meminfoTag">
                             <div class="tImg">
                                 <c:forEach var="td" items="${Td}">
-                                    <img class="img" src="${td.tdphoto}" alt="">
+                                    <div class="ImgDiv">
+                                        <div class="CheckDiv">
+                                            <span class="d-flex">${td.TDNAME}</span>
+                                            <input style="display: none;" type="checkbox" name="TF" id="${td.TDCODE}"
+                                                value="${td.TDCODE}">
+                                            <label for="${td.TDCODE}"><img onclick="checkImg('${td.TDCODE}')" name="TF"
+                                                    value="${td.TDCODE}" class="${td.TDCODE} img" src="${td.TDPHOTO}"
+                                                    alt=""></label>
+                                        </div>
+                                    </div>
                                 </c:forEach>
                             </div>
                         </div>
                         <div class="fest disnone" id="weatherTag">
                             <div class="fImg">
                                 <c:forEach var="fe" items="${Fe}">
-                                    <img class="img" src="${fe.feposter}" alt="">
+                                    <div class="ImgDiv">
+                                        <div class="CheckDiv">
+                                            <span class="d-flex">${fe.FENAME}</span>
+                                            <input style="display: none;" type="checkbox" name="TF" id="${fe.FECODE}"
+                                                value="${fe.FECODE}">
+                                            <label for="${fe.FECODE}"><img onclick="checkImgFe('${fe.FECODE}')"
+                                                    name="FE" value="${fe.FECODE}" class="${fe.FECODE} img"
+                                                    src="${fe.FEPOSTER}" alt=""></label>
+                                        </div>
+                                    </div>
                                 </c:forEach>
                             </div>
                         </div>
@@ -116,9 +242,17 @@
                 <div class="ReContents">
                     <textarea class="ReTextArea" name="contents">${getRe.RECOMMENT}</textarea>
                 </div>
+                <input type="text" class="rephoto Disn" name="rephoto" value="${getRe.REPHOTO}">
+                <div class="ReFile">
+                    <label for="file1">파일</label>
+                    <form action="UpdateReview" class="FormTag" enctype="multipart/form-data" method="post">
+                        <input type="file" id="file1" multiple name="profiledata">
+                    </form>
+                </div>
                 <div class="RePhotoArr">
                     <c:forEach var="ph" items="${Ph}" varStatus="status">
-                        <img src="/resources/ReviewPhoto/${ph}" alt="">
+                        <img class="rephot img" value="${ph}" onclick="return DeleteImg(this)"
+                            src="/resources/ReviewPhoto/${ph}" alt="">
                     </c:forEach>
                 </div>
 
@@ -135,6 +269,112 @@
                 <!-- Core theme JS-->
                 <script src="resources/js/scripts.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+                <script>
+                    function checkImg(e) {
+                        console.log(e);
+                        let checkImgDiv = document.querySelector('.' + e);
+                        let checkLabel = document.getElementById(e);
+                        console.log(document.querySelector('#' + e).checked)
+                        if (!$('input:checkbox[id=' + e + ']').is(':checked')) {
+                            checkImgDiv.classList.remove('InActive');
+                            checkImgDiv.classList.add('Active');
+                        }
+
+                        else {
+                            checkImgDiv.classList.remove('Active');
+                            checkImgDiv.classList.add('InActive');
+                        }
+
+                    }
+                    function checkImgFe(e) {
+                        console.log(e);
+                        let checkImgDiv = document.querySelector('.' + e);
+                        let checkLabel = document.getElementById(e);
+                        console.log(document.querySelector('#' + e).checked)
+                        if (!$('input:checkbox[id=' + e + ']').is(':checked')) {
+                            checkImgDiv.classList.remove('InActive');
+                            checkImgDiv.classList.add('Active');
+                        }
+
+                        else {
+                            checkImgDiv.classList.remove('Active');
+                            checkImgDiv.classList.add('InActive');
+                        }
+                    }
+                    function DeleteImg(e) {
+                        let confirmDel = confirm('해당 사진을 삭제 하시겠습니까?');
+
+                        if (confirmDel == true) {
+                            console.log(e);
+
+                            e.classList.add('Delete');
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                </script>
+
+
+                <script>
+                    //업로드한 파일 미리보기
+
+                    var set_file = [];
+
+                    $(document).ready(function () {
+                        $("#file1").on("change", handleImgFileSelect);
+                    });
+                    function handleImgFileSelect(e) {
+                        var files = e.target.files;
+                        var filesArr = Array.prototype.slice.call(files);
+
+                        // console.log('filesArr : '+filesArr)
+                        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+                        let imgDiv = document.querySelector('.RePhotoArr');
+                        filesArr.forEach(function (f) {
+                            if (!f.type.match(reg)) {
+                                alert("이미지 확장자만 선택 가능합니다.");
+                                return;
+                            }
+
+
+                            set_file.push(f);
+
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                console.log('이거')
+
+
+                                let imgTag = document.createElement('img');
+                                //imgTag.setAttribute('id',"img");
+                                //$("#img").attr("src", );
+                                imgTag.setAttribute("src", e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
+                                imgTag.setAttribute("data-file", f.name);
+                                imgTag.setAttribute('value', e);
+                                imgTag.classList.add('img');
+                                imgTag.addEventListener('click', function (e) {
+                                    let confirmDel = confirm('해당 사진을 삭제 하시겠습니까?');
+
+                                    if (confirmDel == true) {
+                                        console.log(e.target);
+
+                                        e.target.classList.add('Delete');
+                                    }
+                                    else {
+                                        return false;
+                                    }
+                                });
+                                console.log(imgTag)
+                                //imgDiv.appendChild(imgTag);
+                                imgDiv.appendChild(imgTag);
+
+                            }
+                            reader.readAsDataURL(f);
+                        });
+                    }
+                </script>
+
 
                 <script type="text/javascript">
 
@@ -164,49 +404,128 @@
                     }
                 </script>
 
+
                 <script>
                     function ReviewSave() {
                         let Rsave = confirm('지금까지의 변경을 저장하시겠습니까?');
+                        let codeList = "";
+                        if (Rsave == true) {
+                            let title = document.querySelector(".Title").value;
+                            let contents = document.querySelector(".ReTextArea").value;
+                            let recode = document.querySelector(".Recode").value;
+                            let rephoto = document.querySelectorAll(".rephot");
+                            console.log(rephoto);
 
-                        if(Rsave == true){
-                            let title = document.querySelector(".Title");
-                            let contents = document.querySelector(".ReTextArea");
-                            let Recode = document.querySelector(".Recode");
+                            let reviewphoto = [];
 
-                            let UpTitle = title.value;
-                            let UpContents = contents.value;
-                            let Re = Recode.value;
-                            console.log(UpTitle);
-                            console.log(UpContents);
-                            console.log(Re);
-
-                            $.ajax({
-                                type : 'get',
-                                url : 'UpdateReview',
-                                data : {'title' : UpTitle,
-                                        'contents' : UpContents,
-                                        'recode' : Re},
-                                dataType : 'json',
-                                async : false,
-                                success : function(r){
-                                    console.log('성공');
-                                    location.href='${pageContext.request.contextPath}/'
+                            for (let photo of rephoto) {
+                                console.log(photo);
+                                if (!(photo.classList.contains('Delete'))) {
+                                    console.log(!(photo.classList.contains('Delete')));
+                                    let phVal = photo.getAttribute('value');
+                                    console.log(phVal);
+                                    reviewphoto += phVal + "/";
                                 }
-                            })
-                        }else{
-                            return false;
+                            }
+                            console.log(reviewphoto);
+
+
+                            if (title == "" || contents == "") {
+                                alert("제목과 내용을 입력해주세요.");
+                                console.log('false');
+                                return false;
+
+                            } else {
+                                console.log('true');
+                                if (!$('input:checkbox[name=TF]').is(':checked')) {
+                                    alert('최소한 1개 이상의 여행지를 선택해주십시오.');
+                                    return false;
+                                } else {
+                                    var checkVal = $('input[name=TF]:checked'); //체크박스 체크 유무 확인
+
+
+                                    for (let ch of checkVal) {
+                                        let cVal = ch.value; //체크박스의 값 가져오기
+                                        console.log(cVal);
+
+                                        codeList += cVal + '/'; //선택한 체크박스의 값 코드를 문자열에 추가
+                                    }
+
+                                    console.log(codeList);
+                                }
+
+                                UpdateReview(title, contents, recode, codeList, reviewphoto);
+                            }
+
+
                         }
                     }
+
 
                     function ReviewCancel() {
                         let Rcancel = confirm('지금까지의 변경을 취소하고 돌아가시겠습니까?');
 
                         if (Rcancel == true) {
-                            location.href='${pageContext.request.contextPath}/TravelReview';
+                            location.href = '${pageContext.request.contextPath}/TravelReview';
                         } else {
                             return false;
                         }
                     }
+
+                    function UpdateReview(title, contents, recode, codeList, rephoto) {
+
+                        console.log(rephoto);
+                        let foEl = document.querySelector('.FormTag');
+
+                        let inputRecode = document.createElement('input');
+                        inputRecode.setAttribute('value', recode);
+                        inputRecode.setAttribute('name', 'recode');
+                        inputRecode.classList.add('Disn');
+
+                        let inputTtitle = document.createElement('input');
+                        inputTtitle.setAttribute('value', title);
+                        inputTtitle.setAttribute('name', 'title');
+                        inputTtitle.classList.add('Disn');
+
+                        let inputContents = document.createElement('input');
+                        inputContents.setAttribute('value', contents);
+                        inputContents.setAttribute('name', 'contents');
+                        inputContents.classList.add('Disn');
+
+                        let inputCodeList = document.createElement('input');
+                        inputCodeList.setAttribute('value', codeList);
+                        inputCodeList.setAttribute('name', 'codeList')
+                        inputCodeList.classList.add('Disn');
+
+                        if (rephoto == null) {
+                            foEl.appendChild(inputTtitle);
+                            foEl.appendChild(inputContents);
+                            foEl.appendChild(inputCodeList);
+                            foEl.appendChild(inputRecode);
+
+                        }
+                        else {
+                            let inputPhotoList = document.createElement('input');
+                            inputPhotoList.setAttribute('value', rephoto);
+                            inputPhotoList.setAttribute('name', 'rephoto');
+                            inputPhotoList.classList.add('Disn');
+
+                            foEl.appendChild(inputTtitle);
+                            foEl.appendChild(inputContents);
+                            foEl.appendChild(inputCodeList);
+                            foEl.appendChild(inputRecode);
+                            foEl.appendChild(inputPhotoList);
+                        }
+
+
+
+                        foEl.submit();
+                    }
+
+                </script>
+
+                <script>
+
                 </script>
     </body>
 

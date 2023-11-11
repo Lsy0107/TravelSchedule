@@ -34,7 +34,7 @@ div, h1, h2, h3, h4, h5, h6{
 </style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-wh font-jua">
 	<div class="container px-5">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }/"><i class="fa-solid fa-earth-asia"></i> 여행페이지</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath }/"><i class="fa-solid fa-shoe-prints"></i> FootPrint</a>
 		<div class="col" style="display: flex; align-items: center;"></div>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
@@ -86,24 +86,32 @@ div, h1, h2, h3, h4, h5, h6{
 						style="width: 300px; border: none;"
 						aria-labelledby="navbarDropdownPortfolio">
 						<h1 style="text-align: justify;">
-							<c:if test="${sessionScope.loginState == 'NY'}">
+							<c:if test="${sessionScope.loginState == 'AD'}">
 							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
 								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
 							</c:if>
+							<c:if test="${sessionScope.loginState == 'NY'}">
+							<img src="/resources/memberProfile/${sessionScope.loginProfile}"
+								class="profile">${sessionScope.loginNickname }
+							</c:if>
 							<c:if test="${sessionScope.loginState == 'YK'}">
 								<img src="${sessionScope.loginProfile}"
-								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+								class="profile">${sessionScope.loginNickname }
 							</c:if>
 							<c:if test="${sessionScope.loginState == 'NA'}">
 								<img style="width:38px;"src="${sessionScope.loginProfile}"
-								class="profile">${sessionScope.loginNickname }<h5>(${sessionScope.loginId })</h5>
+								class="profile">${sessionScope.loginNickname }
 							</c:if>
 						</h1>
-						<hr style="border-top:2px solid lightgray">
-						<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>마이페이지</p>
-												
-						<hr style="border-top:2px solid lightgray">
-						<p class="info"onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
+						<c:if test="${sessionScope.loginState == 'AD' }">
+							<hr style="border-top:2px solid lightgray">
+							<p class="info" onclick='location.href="${pageContext.request.contextPath }/adminMain"'>관리자페이지</p>
+						</c:if>
+							<hr style="border-top:2px solid lightgray">
+							<p class="info" onclick='location.href="${pageContext.request.contextPath }/myInfo"'>마이페이지</p>
+													
+							<hr style="border-top:2px solid lightgray">
+							<p class="info"onclick="location.href='${pageContext.request.contextPath }/memberLogout'">로그아웃</p>
 					</div>
 				</li>
 					</c:otherwise>

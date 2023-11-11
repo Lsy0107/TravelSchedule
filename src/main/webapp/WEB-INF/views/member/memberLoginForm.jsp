@@ -153,6 +153,18 @@
                 background: none;
             }
 
+            .KakaoBtn {
+                position: relative;
+                left: 190px;
+                top: 20px;
+            }
+
+            .NaverBtn {
+                position: relative;
+                top: 20px;
+                left: 209px;
+            }
+
             .kakaoImg,
             .naverImg {
                 width: 43px;
@@ -163,7 +175,6 @@
                 top: 40px;
             }
         </style>
-
 
     </head>
 
@@ -185,7 +196,7 @@
                     <div class="loginArea">
                         <h2 class="Title">로그인</h2>
                         <div>
-                            <form action="/memberLogin">
+                            <form action="/memberLogin" type="post">
                                 <input type="text" id="id" name="mid" placeholder="아이디">
                                 <div id="passArea">
                                     <input type="password" id="password" name="mpw" placeholder="비밀번호">
@@ -349,8 +360,8 @@
                             'id': naver_id_login.getProfileData('id'),
                             'profile': naver_id_login.getProfileData('profile_image'),
                         },
-                        
-                        
+
+
                         success: function (res) {
                             console.log(res);
                             if (res == 'Y') {
@@ -369,19 +380,19 @@
                     });
                 }
 
-                function Join_Naver(response){
+                function Join_Naver(response) {
                     console.log(response);
                     $.ajax({
-                        type : 'get',
-                        url : 'MemberJoin_Naver',
-                        data : {
-                            'mid' : naver_id_login.getProfileData('id'),
-                            'mprofile' : naver_id_login.getProfileData('profile_image'),
-                            'mnickname' : naver_id_login.getProfileData('name')
+                        type: 'get',
+                        url: 'MemberJoin_Naver',
+                        data: {
+                            'mid': naver_id_login.getProfileData('id'),
+                            'mprofile': naver_id_login.getProfileData('profile_image'),
+                            'mnickname': naver_id_login.getProfileData('name')
                         },
-                        
-                        
-                        success : function(result){
+
+
+                        success: function (result) {
                             alert('네이버 계정으로 회원가입 되었습니다.');
                             location.href = "/memberJoinForm"
                         }
@@ -407,6 +418,13 @@
                 });
 
             </script>
+            
+			<script type="text/javascript">
+				let msg = '${msg }'
+				if(msg.length > 0){
+					alert(msg);
+				}
+			</script>
     </body>
 
     </html>

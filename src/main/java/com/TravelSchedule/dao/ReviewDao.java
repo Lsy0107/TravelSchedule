@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Likelist;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
@@ -42,7 +43,7 @@ public interface ReviewDao {
 	@Select("SELECT NVL(MAX(RECODE),'RE00000') FROM REVIEW")
 	String maxcode();
 
-	@Insert("INSERT INTO REVIEW(RECODE,MID,RECOMMENT,RETITLE,REPHOTO,REHIT,RESTATE,CDCODE,CODELIST,REDATE) VALUES(#{recode},#{mid},#{recomment},#{retitle},#{rephoto},0,'Y',#{cdcode},#{codelist},TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI'))")
+	@Insert("INSERT INTO REVIEW(RECODE,MID,RECOMMENT,RETITLE,REPHOTO,REHIT,RESTATE,CDCODE,CODELIST,REDATE,RELIKE) VALUES(#{recode},#{mid},#{recomment},#{retitle},#{rephoto},0,'Y',#{cdcode},#{codelist},SYSDATE,0)")
 	int ReviewInsertDao(Review review);
 
 
@@ -67,8 +68,8 @@ public interface ReviewDao {
 			+ "WHERE F.FECODE = S.FECODE AND F.FECODE = #{s} AND CDCODE = #{cdcode} AND MID = #{mid} AND SCDATE IS NOT NULL")
 	Festival FeInfoDao(@Param("s")String s,@Param("cdcode")String cdcode, @Param("mid")String mid);
 
-	@Update("UPDATE REVIEW SET RETITLE = #{title}, RECOMMENT = #{contents} WHERE RECODE = #{recode} AND MID = #{mid}")
-	int UpdateReviewDao(@Param("title")String title, @Param("contents")String contents, @Param("recode")String recode, @Param("mid")String mid);
+	@Update("UPDATE REVIEW SET RETITLE = #{retitle}, RECOMMENT = #{recomment}, CODELIST = #{codelist}, REPHOTO = #{rephoto} WHERE RECODE = #{recode} AND MID = #{mid}")
+	int UpdateReviewDao(Review review);
 
 	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND CDCODE = #{cdcode}")
 	int DeleteReview(@Param("cdcode")String cdcode, @Param("mid")String mid);
@@ -76,7 +77,7 @@ public interface ReviewDao {
 	@Update("UPDATE CALENDAR SET CDSTATE = 'N' WHERE MID = #{mid} AND CDCODE = #{cdcode}")
 	int UpdateCdState(@Param("cdcode")String cdcode, @Param("mid")String mid);
 
-	@Select("SELECT COUNT(*) FROM CALENDAR WHERE MID = #{mid} AND NOT CDSTATE = 'Y'")
+	@Select("SELECT COUNT(*) FROM REVIEW WHERE MID = #{mid} AND RESTATE = 'Y'")
 	int selectCalendarCount(@Param("mid") String mid);
 
 	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
@@ -99,6 +100,20 @@ public interface ReviewDao {
 
 	@Select("SELECT * FROM TDEST WHERE TDCODE = #{cs}")
 	Tdest getTd(String cs);
+	
+	@Select("SELECT * FROM REVIEW WHERE MID = #{mid}")
+	ArrayList<Review> selectReview(String mid);
+	
+	@Select("SELECT * FROM REVIEW")
+	ArrayList<Review> selReviewList(Review review);
+	
+	
+	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND RECODE = #{recode}")
+	int deleteReview(Review review);
+	@Delete("DELETE FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
+	int deleteLikeList(Review review);
+	@Select("select * FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
+	Review selectLikeList(Review review);
 
 
 

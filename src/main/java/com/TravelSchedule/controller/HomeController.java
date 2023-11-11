@@ -17,6 +17,7 @@ import com.TravelSchedule.crawling.newsCrawlingService;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
+import com.TravelSchedule.dto.Member;
 import com.TravelSchedule.dto.News;
 import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
@@ -45,19 +46,19 @@ public class HomeController {
 	ReviewService rsvc;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Model model) {
+	public ModelAndView home(Model model, HttpSession session) {
 		System.out.println("메인페이지 이동 요청");
 		ModelAndView mav = new ModelAndView();
 		ArrayList<Festival> feList = apisvc.getFeList();
 		ArrayList<News> newsList = nsvc.getNewsList();
 		ArrayList<Tdest> tdList = apisvc.getTdList();
 		ArrayList<Schedule> scList = tsvc.getScList();
-		
+
 		mav.addObject("feList", feList);
 		mav.addObject("newList", newsList);
 		mav.addObject("tdList", tdList);
 		mav.addObject("scList", scList);
-		
+
 		mav.setViewName("/main");
 		return mav;
 	}
@@ -107,10 +108,11 @@ public class HomeController {
 		
 		ArrayList<HashMap<String,String>> reList = apisvc.reList();
 		for(HashMap<String, String> re : reList) {
+			System.out.println(re);
 			String codeList = (String)re.get("CODELIST");
 			String[] codeSplit = codeList.split("/");
 			for(String cs : codeSplit) { //cs => codeList를 /로 나눈 코드들
-				System.out.println(cs);
+				//System.out.println(cs);
 				if(cs.contains(code)) {
 					ReList.add(re);
 				}			
@@ -270,5 +272,25 @@ public class HomeController {
 		mav.setViewName("review/TravelLike");
 		return mav;
 	}
+	@RequestMapping(value="/adminMain")
+	public ModelAndView adminMain() {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("관리자페이지 이동");
+		
+		mav.setViewName("/admin/adminMain");
+		return mav;
+	}
+	@RequestMapping(value="/adminReview")
+	public ModelAndView adminReview(Review review) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("리뷰관리페이지 이동");
+		
+		ArrayList<Review> rList = rsvc.getReviewList(review);
+		mav.addObject("rList", rList);
+		
+		mav.setViewName("/admin/adminReview");
+		return mav;
+	}
 	
+
 }

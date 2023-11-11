@@ -306,6 +306,8 @@
 					min-height: 700px;
 					border: none;
 					margin-top: 25px;
+					overflow: scroll;
+					overflow-x: hidden;
 				}
 
 				.InnerComment {
@@ -427,7 +429,7 @@
 											<img class="MemberImg" src="/resources/memberProfile/${re.MPROFILE}"
 												alt="">
 											<span>${re.MID}</span>
-											<span>추천 수 : ${re.REHIT}</span>
+											<span>조회 수 : ${re.REHIT}</span>
 										</div>
 										<div class="TitleDiv">
 											<span>${re.RETITLE}</span>
