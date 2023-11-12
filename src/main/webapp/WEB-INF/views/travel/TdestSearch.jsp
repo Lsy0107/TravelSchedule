@@ -43,14 +43,20 @@
                     background-color: lightgrey;
                     cursor: pointer;
                 }
+                ol>li>a:hover{
+                    color: gray;
+                }
 
                 .active {
-                    background-color: rgb(105, 107, 109);
+                    background-color: rgb(0, 0, 0);                    
+                }
+                .active > a{
+                    color: white;
                 }
 
                 ol>li {
                     padding: 3px;
-                    border: 1px solid blue;
+                    border: 1px solid gray;
                     margin: 3px;
                     text-align: center;
                     min-width: 57px;
@@ -62,6 +68,7 @@
                     max-width: 50px;
                     position: relative;
                     top: 21%;
+                    color: gray;
                 }
 
                 i#leftCur {

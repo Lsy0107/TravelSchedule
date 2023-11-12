@@ -168,6 +168,10 @@ public class TravelService {
 		System.out.println(("travelService - getPreview()"));
 		return tdao.getPreview(searchInfo, seloption);
 	}
+	public String CountReview(String tdcode) {
+		// TODO Auto-generated method stub
+		return tdao.CountRe(tdcode);
+	}
 
 	
 
