@@ -120,7 +120,8 @@ public class HomeController {
 			
 		}
 		
-		
+		String CountReviewFe = apisvc.CountReviewFe(code);
+		mav.addObject("CR",CountReviewFe);
 		
 		System.out.println("리뷰리스트"+ReList);
 		mav.addObject("Re",ReList);

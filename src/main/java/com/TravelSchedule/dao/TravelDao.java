@@ -80,5 +80,8 @@ public interface TravelDao {
 
 	ArrayList<HashMap<String, String>> getPreview(@Param("searchInfo")String searchInfo, @Param("seloption")String seloption);
 
+	@Select("SELECT COUNT(*) FROM REVIEW WHERE CODELIST LIKE '%'||#{tdcode}||'%'")
+	String CountRe(String tdcode);
+
 
 }

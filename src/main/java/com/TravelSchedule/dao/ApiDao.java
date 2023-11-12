@@ -73,5 +73,8 @@ public interface ApiDao {
 	String selectLknum(@Param("code") String code, @Param("seloption") String seloption);
 
 	String selectDate(@Param("code") String code);
+
+	@Select("SELECT COUNT(*) FROM REVIEW WHERE CODELIST LIKE '%'||#{code}||'%'")
+	String CountReFe(String code);
 	
 }
