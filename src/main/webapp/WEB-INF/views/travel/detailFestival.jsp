@@ -331,9 +331,8 @@
 				}
 
 				.NoRe {
-					position: absolute;
-					left: 38%;
-					top: 149%;
+					position: relative;
+					left: 28%;
 					font-size: 35px
 				}
 			</style>
@@ -431,7 +430,7 @@
 						<div class="FestivalComment">
 							<div class="InnerComment">
 								<c:if test="${CR == 0}">
-									<span class="NoRe">아직 해당 여행지에 리뷰가 없습니다!</span>
+									<span class="NoRe">아직 해당 축제에 리뷰가 없습니다!</span>
 								</c:if>
 								<c:if test="${CR > 0}">
 									<c:forEach items="${ReList}" var="re">
