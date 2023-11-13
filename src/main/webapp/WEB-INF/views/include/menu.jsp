@@ -28,7 +28,7 @@
 	box-shadow: 0px 0px 10px #A2A2A2;
 }
 div, h1, h2, h3, h4, h5, h6{
-	font-family: 'Jua' !important;
+	font-family: 'Jua';
 }
 
 </style>
@@ -56,7 +56,8 @@ div, h1, h2, h3, h4, h5, h6{
 				</c:choose>
 				<li class="nav-item"><a class="nav-link bk"
 					href="/TdestSearchPage">여행지검색</a></li>
-				
+				<li class="nav-item"><a class="nav-link bk"
+					href="/ReviewList">여행지리뷰</a></li>
 				<c:choose>
 					<c:when test="${sessionScope.loginId ==null }">
 						<li class="nav-item"><a class="nav-link bk"

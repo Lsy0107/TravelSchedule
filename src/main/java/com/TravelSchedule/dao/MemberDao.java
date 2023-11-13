@@ -45,6 +45,8 @@ public interface MemberDao {
 	int updateMstateYK(String mid);
 	@Update("UPDATE MEMBERS SET MSTATE = 'NA' WHERE mid = #{mid}")
 	int updateMstateNA(String mid);
+	@Update("UPDATE MEMBERS SET MSTATE = 'AD' WHERE mid = #{mid}")
+	int updateMstateAD(String mid);
 	
 
 }
