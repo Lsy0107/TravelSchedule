@@ -110,7 +110,7 @@ public class MemberController {
 	public ModelAndView memberUpdate(Member mem, HttpSession session, RedirectAttributes ra) {
 		System.out.println("회원정보 수정 요청");
 		ModelAndView mav = new ModelAndView();
-
+		
 		int memInfo = msvc.memberInfo(mem, session);
 
 		System.out.println(memInfo);
@@ -127,14 +127,13 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/updatePw")
-	public ModelAndView updatePw(String mid, String mpw, RedirectAttributes ra) {
-		System.out.println("회원정보 수정 요청");
+	public ModelAndView updatePw(Member mem, RedirectAttributes ra) {
+		System.out.println("회원 비밀번호 수정 요청");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("수정할 아이디 : " + mid);
-		System.out.println("수정할 비밀번호 : " + mpw);
-
-		int memInfo = msvc.newPassword(mid, mpw);
-
+		System.out.println(mem);
+		
+		int memInfo = msvc.newPassword(mem);
+		
 		if (memInfo > 0) {
 			mav.setViewName("redirect:/myInfo");
 			ra.addFlashAttribute("msg", "비밀번호가 변경되었습니다.");
