@@ -108,10 +108,10 @@ public class MemberService {
 		return result;
 	}
 
-	public int newPassword(String mid, String mpw) {
+	public int newPassword(Member mem) {
 		System.out.println("MemberService - newPassword");
 
-		return mdao.passwordUpdate(mid, mpw);
+		return mdao.passwordUpdate(mem);
 	}
 
 	public Member LoginMemberInfo_kakao(String id) {

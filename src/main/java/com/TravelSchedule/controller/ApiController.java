@@ -26,15 +26,15 @@ public class ApiController {
 		ModelAndView mav = new ModelAndView();
 		
 		ArrayList<Country> country = asvc.getCountry();
-		mav.addObject("country",country);
+		//mav.addObject("country",country);
 		
-		//ArrayList<Festival> result  = asvc.getFestival();
+		ArrayList<Festival> result  = asvc.getFestival();
 		//ArrayList<Festival> result = asvc.getFestival_db(); 
 
 //		System.out.println(result);
 		//mav.addObject("festival",result);
 		
-		mav.setViewName("festival/Festival");
+		mav.setViewName("redirect:/adminMain");
 		
 		
 		
@@ -45,10 +45,10 @@ public class ApiController {
 	public ModelAndView areaBasedList1() throws Exception {
 		System.out.println("/TdestSearch 컨트롤러 호출");
 		ModelAndView mav = new ModelAndView();		
-		//ArrayList<Tdest> TdestList = asvc.getTdestList();  					
+		ArrayList<Tdest> TdestList = asvc.getTdestList();  					
 		
 		//mav.addObject("TdestList",TdestList);
-		mav.setViewName("travel/TdestSearch");
+		mav.setViewName("redirect:/adminMain");
 		
 		return mav;
 	}

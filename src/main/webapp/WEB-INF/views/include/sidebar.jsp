@@ -55,27 +55,20 @@
             <div class="sidebar-heading">
                 Content
             </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath }/joongang">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>joongang</span></a>
-            </li>
-
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Travel</span>
+                    <span>UPDATE</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">settingTravel</h6>
-                        <a class="collapse-item" href="/">Festival</a>
-                        <a class="collapse-item" href="/">???</a>
+                        <a class="collapse-item" href="/TdestSearch">Travel Update</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath }/festival">Festival Update</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath }/joongang">News Update</a>
                     </div>
                 </div>
             </li>
