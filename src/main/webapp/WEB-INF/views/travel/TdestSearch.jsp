@@ -754,7 +754,7 @@
 
                             let TdestBtn = document.createElement('button');
                             TdestBtn.classList.add('btn');
-                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.classList.add('btn-outline-success');
                             TdestBtn.innerText = '계획에 추가하기';
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
@@ -1130,7 +1130,7 @@
 
                             let TdestBtn = document.createElement('button');
                             TdestBtn.classList.add('btn');
-                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.classList.add('btn-outline-success');
                             TdestBtn.innerText = '계획에 추가하기';
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');
@@ -1192,7 +1192,7 @@
 
                             let TdestBtn = document.createElement('button');
                             TdestBtn.classList.add('btn');
-                            TdestBtn.classList.add('btn-primary');
+                            TdestBtn.classList.add('btn-outline-success');
                             TdestBtn.innerText = '계획에 추가하기';
                             TdestBtn.setAttribute('data-bs-toggle', 'modal');
                             TdestBtn.setAttribute('data-bs-target', '#exampleModal');

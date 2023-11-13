@@ -23,15 +23,11 @@
             .Cal {                
                 margin-top: 125px;
                 width: 30%;
-                height: 580px;
-                overflow: scroll;
-                overflow-x: hidden;
+                height: 580px;                
                 z-index: 1;
-                overflow-y: hidden;
                 display: inline-block;
                 margin-left: 600px;
-            }
-
+            }            
             .InnerCal {
                 height: 95%;
                 margin: 15px;
@@ -149,6 +145,25 @@
             .wrap>*{
             	font-family: 'Noto Sans KR', sans-serif;
             }
+            .TextArea{
+            	overflow: scroll;
+                overflow-x: hidden;
+                height: 500px;
+            }
+            .TextArea::-webkit-scrollbar {
+			    width: 10px;
+			  }
+			  .TextArea::-webkit-scrollbar-thumb {
+			    background-color: #2f3542;
+			    border-radius: 10px;
+			    background-clip: padding-box;
+			    border: 2px solid transparent;
+			  }
+			  .TextArea::-webkit-scrollbar-track {
+			    background-color: grey;
+			    border-radius: 10px;
+			    box-shadow: inset 0px 0px 5px white;
+			}
             
         </style>
     </head>
@@ -173,27 +188,29 @@
 	                	<p class="line">|</p>
 	                	<p class="re sel" style="${css3}" onclick="location.href='${pageContext.request.contextPath }/ReviewLike'">리뷰</p>
 	                	<hr class="hr2">
-	                    <c:forEach items="${td}" var="td">
-	                    	<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode}">
-		                        <div class="Ctitle">	                            
-		                            <p class="cdname">${td.tdname}</p>		                           
-		                        </div>
-	                        </a>
-	                    </c:forEach>
-	                    <c:forEach items="${fe}" var="fe">
-	                    	<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode}">
-		                        <div class="Ctitle" >	                            
-		                            <p class="cdname">${fe.fename}</p>		                           
-		                        </div>
-	                        </a>
-	                    </c:forEach>
-	                    <c:forEach items="${re}" var="re">
-	                    	<a href="${pageContext.request.contextPath }/detailReview?recode=${re.recode}">
-		                        <div class="Ctitle" >	                            
-		                            <p class="cdname">${re.retitle}</p>		       	                                                
-		                        </div>
-	                        </a>
-	                    </c:forEach>
+	                	<div class="TextArea">
+		                    <c:forEach items="${td}" var="td">
+		                    	<a href="${pageContext.request.contextPath }/detailTdest?tdcode=${td.tdcode}">
+			                        <div class="Ctitle">	                            
+			                            <p class="cdname">${td.tdname}</p>		                           
+			                        </div>
+		                        </a>
+		                    </c:forEach>
+		                    <c:forEach items="${fe}" var="fe">
+		                    	<a href="${pageContext.request.contextPath }/detailFestival?code=${fe.fecode}">
+			                        <div class="Ctitle" >	                            
+			                            <p class="cdname">${fe.fename}</p>		                           
+			                        </div>
+		                        </a>
+		                    </c:forEach>
+		                    <c:forEach items="${re}" var="re">
+		                    	<a href="${pageContext.request.contextPath }/detailReview?recode=${re.recode}">
+			                        <div class="Ctitle" >	                            
+			                            <p class="cdname">${re.retitle}</p>		       	                                                
+			                        </div>
+		                        </a>
+		                    </c:forEach>
+	                    </div>
 	                </div>
 	
 	            </div>
