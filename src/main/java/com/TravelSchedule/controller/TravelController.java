@@ -218,6 +218,10 @@ public class TravelController {
 		System.out.println("여행지 상세 정보 페이지이동");
 		System.out.println("TDCODE : "+tdcode);
 		Tdest detailTdest = tsvc.detailTdest(tdcode);
+		
+		String CountReview = tsvc.CountReview(tdcode);
+		mav.addObject("CR",CountReview);
+		
 		String ctcode = detailTdest.getCtcode();
 		System.out.println(detailTdest);
 		ArrayList<Tdest> Nearby = tsvc.tdest_Nearby(ctcode, tdcode);

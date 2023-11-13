@@ -18,6 +18,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Sans+KR:wght@500;800&display=swap" rel="stylesheet">
         <style>
+            #wrap>*{
+            	font-family: 'Noto Sans KR', sans-serif !important; 
+            }        
         	.Cal {                
                     margin-top: 125px;
 				    width: 50%;
@@ -144,9 +147,6 @@
             	text-decoration: none;
             	color: black;
             }
-            .wrap>*{
-            	font-family: 'Noto Sans KR', sans-serif;
-            }
             .thead{
             	font-size: 18px;
             }
@@ -172,6 +172,71 @@
             	cursor: pointer;
             	display: contents;
             }
+            #numbers{
+            	display: flex;
+            }
+            .searchArea{
+            	margin-left: auto;
+            	margin-right: auto;
+            	margin-bottom: 50px;
+            }
+            .search{
+            	width: 300px;
+    			height: 40px;
+            }
+            .searchBtn{
+            	height: 40px;
+            	margin-left:-5px;
+            	background-color: white;
+            	position: relative;
+    			top: -1px;
+    			border: 1px solid black;
+            }
+             ol>li:hover {
+                    background-color: lightgrey;
+                    cursor: pointer;
+                }
+                ol>li>a:hover{
+                    color: gray;
+                }
+
+                .active {
+                    background-color: rgb(0, 0, 0);                    
+                }
+                .active > a{
+                    color: white;
+                }
+
+                ol>li {
+                    padding: 3px;
+                    border: 1px solid gray;
+                    margin: 3px;
+                    text-align: center;
+                    min-width: 57px;
+                    min-height: 45px;
+                }
+
+                ol>li>a {
+                    padding: 10px;
+                    max-width: 50px;
+                    position: relative;
+                    top: 21%;
+                    color: gray;
+                }
+
+                i#leftCur {
+                    position: relative;
+                    top: -7px;
+                    right: 0px;
+                }
+
+                i#rightCur {
+                    position: relative;
+                    top: -7px;
+                    left: 0px;
+                }
+            
+			  
         </style>
     </head>
 
@@ -180,7 +245,7 @@
         <!-- Navigation-->
         <%@ include file="/WEB-INF/views/include/menu.jsp" %>
             <!-- contant 시작 -->
-            <div class="wrap">
+            <div class="wrap" id="wrap">
 				<div class="Area">
 		            <div class="Cal">	            
 		                <div class="InnerCal">
@@ -193,7 +258,7 @@
 							<p class="line">|</p>
 							<p class="re sel" style="${css2}" onclick="location.href='${pageContext.request.contextPath }/ReviewBest'">인기순</p>
    							<hr class="hr">
-   							<table class="table">
+   							<table class="table" style="font-family: 'Noto Sans KR', sans-serif !important;">
 	   							<thead>
 	   								<tr class="thead">
 	   									<th class="title">제목</th>
@@ -203,9 +268,9 @@
 	   									<th class="like">추천</th>
 	   								</tr>
 	   							</thead>
-	   							<tbody>
+	   							<tbody id="tbody">
 				                	<c:forEach items="${reviewList }" var="re">			                	
-				                		<tr>
+				                		<tr id="containDest">
 				                			<th><a href="${pageContext.request.contextPath }/detailReview?recode=${re.recode}"><p class="titleSon">${re.retitle }</p></a></th>
 				                			<th>${re.mid }</th>
 				                			<th>${re.redate }</th>
@@ -220,6 +285,22 @@
 	                </div>
 	            </div>
 			</div>
+			<div class="row paginD" style="display: none;">
+                <div class="pagination d-flex justify-content-center">
+                    <i id="leftCur" class="align-items-center fa-solid fa-arrow-left fa-xl"></i>
+                    <div class="d-flex align-items-center">
+                        <ol id="numbers">
+
+                        </ol>
+                    </div>
+                    <i id="rightCur"
+                        class="align-items-center fa-solid fa-arrow-right fa-xl"></i>
+                </div>
+            </div>
+            <div class="searchArea">           	
+            	<input type="text" class="search" id="search">
+            	<input type="submit" value="검색" class="searchBtn" placeholder="검색어를 입력해주세요." onclick="Search()">      
+            </div>
             <!-- contant 종료 -->
 
             <!-- Footer-->
@@ -229,10 +310,175 @@
                 <!-- Core theme JS-->
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
                 <script src="resources/js/scripts.js"></script>
-                <script>
+				<script>
+					function Paging(){
+                        let paingDiv = document.querySelector('.paginD').style.display = 'block';
+                        const rowsPerPage = 10; //페이지당 출력할 수
+                        let rows = null;
 
+                        rows = document.querySelectorAll('#containDest');
+
+
+                        const rowsCount = rows.length;
+                        //console.log(rows);
+
+                        const pageCount = Math.ceil(rowsCount / rowsPerPage);
+                        const numbers = document.querySelector('#numbers');
+
+                        const prevPageBtn = document.querySelector('#leftCur');
+                        const nextPageBtn = document.querySelector('#rightCur');
+
+                        let pageActiveIdx = 0; //현재 페이지 그룹 번호
+                        let currentPageNum = 0;
+                        let maxPageNum = 10; //페이지 그룹 최대 개수
+
+                        //페이지 넘버 생성 파트
+                        numbers.innerHTML = "";
+                        numbers.setAttribute("id", "numbers");
+                        for (let i = 1; i <= pageCount; i++) {
+                            numbers.innerHTML += '<li><a href="">' + i + '</a></li>';
+                        }
+                        const numberBtn = numbers.querySelectorAll('li');
+
+                        for (nb of numberBtn) {
+                            nb.style.display = 'none';
+                        }
+
+                        numberBtn.forEach((item, idx) => {
+                            item.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                //    console.log(idx);
+                                displayRow(idx);
+                            });
+                        });
+
+                        function displayRow(idx) {
+
+                            let start = idx * rowsPerPage;
+                            let end = start + rowsPerPage;
+
+                            let rowsArray = [...rows];
+                            //console.log(rowsArray);
+
+                            for (row of rowsArray) {
+                                row.style.display = 'none';
+                            }
+
+                            let newRows = rowsArray.slice(start, end);
+                            for (nr of newRows) {
+                                nr.style.display = '';
+                            }
+                            for (nb of numberBtn) {
+                                nb.classList.remove('active');
+                            }
+                            numberBtn[idx].classList.add('active');
+                        }
+                        displayRow(0);
+
+                        //페이지네이션 그룹 표시
+                        function displayPage(num) {
+                            //페이지 네이션번호 감추기
+                            for (nb of numberBtn) {
+                                nb.style.display = 'none';
+                            }
+                            let totalPageCount = Math.ceil(pageCount / maxPageNum);
+
+                            let pageArr = [...numberBtn]
+                            let start = num * maxPageNum;
+                            let end = start + maxPageNum;
+                            let pageListArr = pageArr.slice(start, end);
+
+                            for (let item of pageListArr) {
+                                item.style.display = 'block';
+                            }
+                            if (pageActiveIdx == 0) {
+                                prevPageBtn.classList.remove('d-flex');
+                                prevPageBtn.style.display = 'none';
+                            } else {
+                                prevPageBtn.classList.add('d-flex')
+                                prevPageBtn.style.display = 'block';
+                            }
+                            if (pageActiveIdx == totalPageCount - 1) {
+                                nextPageBtn.classList.remove('d-flex');
+                                nextPageBtn.style.display = 'none';
+                            } else {
+                                nextPageBtn.classList.add('d-flex');
+                                nextPageBtn.style.display = 'block';
+                            }
+                        }
+                        displayPage(0);
+
+                        nextPageBtn.addEventListener('click', (e) => {
+                            let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
+                            displayRow(nextPageNum);
+                            ++pageActiveIdx;
+                            displayPage(pageActiveIdx);
+                        });
+
+                        prevPageBtn.addEventListener('click', (e) => {
+                            let nextPageNum = pageActiveIdx * maxPageNum - maxPageNum;
+                            displayRow(nextPageNum);
+                            --pageActiveIdx;
+                            displayPage(pageActiveIdx);
+                        });
+					}
+                    
                 </script>
-                
+                <script type="text/javascript">
+                	function Search(){
+                		let searchVal = document.querySelector('#search').value                		
+                		$.ajax({
+                			type: "get",
+                			url: "searchReview",
+                			data: {
+                                'retitle' : searchVal
+                            },
+                            dataType: 'json',
+                            async: false,
+                            success: function (e) {
+                                printReview(e);
+                            }
+                		});
+                	}
+                	function printReview(e){                		
+                		let tbody = document.querySelector('#tbody');
+                		tbody.innerHTML = "";
+                		for(let re of e){
+                			let tr = document.createElement('tr');
+                			tr.id = 'containDest';                			
+                			
+                			let retitle = document.createElement('th');
+                			let retitle_a = document.createElement('a');
+                			retitle_a.setAttribute('href', '${pageContext.request.contextPath }/detailReview?recode='+re.recode);
+                			let retitle_p = document. createElement('p');
+                			retitle_p.innerText = re.retitle;
+                			retitle_a.appendChild(retitle_p);
+                			retitle.appendChild(retitle_a);
+                			tr.appendChild(retitle);
+                			
+                			let mid = document.createElement('th');
+                			mid.innerText = re.mid;
+                			tr.appendChild(mid);
+                			
+                			let redate = document.createElement('th');
+                			redate.innerText = re.redate;
+                			tr.appendChild(redate);
+                			
+                			let rehit = document.createElement('th');
+                			rehit.innerText = re.rehit;
+                			tr.appendChild(rehit);
+                			
+                			let lknum = document.createElement('th');
+                			lknum.innerText = re.lknum;
+                			tr.appendChild(lknum);                			
+                			
+                			tbody.appendChild(tr);
+                		}
+                	}
+                </script>
+                <script type="text/javascript">
+                	Paging();
+                </script>
     </body>
 
     </html>

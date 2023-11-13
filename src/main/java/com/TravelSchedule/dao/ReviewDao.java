@@ -121,6 +121,9 @@ public interface ReviewDao {
 	@Select("SELECT  recode, mid, retitle, rehit, lknum, CASE WHEN to_char(redate, 'YYYY/MM/DD') >= to_char(sysdate, 'YYYY/MM/DD') THEN to_char(redate, 'hh24:mm') ELSE to_char(redate, 'MM-DD') END as REDATE, relike FROM (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where restate = 'Y' order by lknum desc")
 	ArrayList<Review> selectBestReview();
 
+	@Select("SELECT  recode, mid, retitle, rehit, lknum, CASE WHEN to_char(redate, 'YYYY/MM/DD') >= to_char(sysdate, 'YYYY/MM/DD') THEN to_char(redate, 'hh24:mm') ELSE to_char(redate, 'MM-DD') END as REDATE, relike FROM (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where restate = 'Y' and retitle like '%'||#{retitle}||'%' order by lknum desc")
+	ArrayList<Review> selectSearchReview(String retitle);
+
 
 
 }

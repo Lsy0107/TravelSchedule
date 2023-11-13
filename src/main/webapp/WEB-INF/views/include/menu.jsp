@@ -28,7 +28,7 @@
 	box-shadow: 0px 0px 10px #A2A2A2;
 }
 div, h1, h2, h3, h4, h5, h6{
-	font-family: 'Jua' !important;
+	font-family: 'Jua';
 }
 
 </style>

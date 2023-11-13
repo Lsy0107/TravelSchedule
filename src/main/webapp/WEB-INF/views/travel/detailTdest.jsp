@@ -286,7 +286,7 @@
 					width: 900px;
 					padding-left: 15px;
 					padding-right: 30px;
-									display: inline-block;
+					display: inline-block;
 					padding-top: 10px;
 				}
 
@@ -332,6 +332,13 @@
 
 				.lknum {
 					display: inline-block;
+				}
+
+				.NoRe {
+					position: absolute;
+					left: 27%;
+					top: 70%;
+					font-size: 35px
 				}
 			</style>
 
@@ -421,22 +428,27 @@
 							</div>
 							<div class="FestivalComment">
 								<div class="InnerComment">
-									<c:forEach items="${Re}" var="re">
-										<div>
+									<c:if test="${CR == 0}">
+										<span class="NoRe">아직 해당 여행지에 리뷰가 없습니다!</span>
+									</c:if>
+									<c:if test="${CR > 0}">
+										<c:forEach items="${Re}" var="re">
 											<div>
-												<img class="MemberImg"
-													src="/resources/memberProfile/${re.MPROFILE}" alt="">
-												<span>${re.MID}</span>
-												<span>추천 수 : ${re.REHIT}</span>
+												<div>
+													<img class="MemberImg" src="/resources/memberProfile/${re.MPROFILE}"
+														alt="">
+													<span>${re.MID}</span>
+													<span>추천 수 : ${re.REHIT}</span>
+												</div>
+												<div class="TitleDiv">
+													<span>${re.RETITLE}</span>
+													<a class="d-flex justify-content-end"
+														href="/detailReview?recode=${re.RECODE}">리뷰 자세히보기</a>
+												</div>
+												<hr class="Recommhr">
 											</div>
-											<div class="TitleDiv">
-												<span>${re.RETITLE}</span>
-												<a class="d-flex justify-content-end"
-													href="/detailReview?recode=${re.RECODE}">리뷰 자세히보기</a>
-											</div>
-											<hr class="Recommhr">
-										</div>
-									</c:forEach>
+										</c:forEach>
+									</c:if>
 								</div>
 							</div>
 

@@ -337,5 +337,17 @@ public class ReviewController {
 		}
 
 	}
-
+	
+	@RequestMapping(value="/searchReview")
+	public @ResponseBody String searchReview(String retitle) {
+		System.out.println("검색 리뷰");
+		System.out.println(retitle);
+		ArrayList<Review> review = rsvc.searchReview(retitle);
+		System.out.println(review);
+		
+		return new Gson().toJson(review);
+		
+	}
 }
+
+

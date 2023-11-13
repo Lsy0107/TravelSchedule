@@ -252,6 +252,11 @@ public class ReviewService {
 		
 		return rdao.selectLikeList(review);
 	}
+
+	public ArrayList<Review> searchReview(String retitle) {
+		
+		return rdao.selectSearchReview(retitle);
+	}
 	
 
 

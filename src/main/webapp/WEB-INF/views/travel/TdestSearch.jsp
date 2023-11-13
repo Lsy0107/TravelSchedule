@@ -43,14 +43,20 @@
                     background-color: lightgrey;
                     cursor: pointer;
                 }
+                ol>li>a:hover{
+                    color: gray;
+                }
 
                 .active {
-                    background-color: rgb(105, 107, 109);
+                    background-color: rgb(0, 0, 0);                    
+                }
+                .active > a{
+                    color: white;
                 }
 
                 ol>li {
                     padding: 3px;
-                    border: 1px solid blue;
+                    border: 1px solid gray;
                     margin: 3px;
                     text-align: center;
                     min-width: 57px;
@@ -62,6 +68,7 @@
                     max-width: 50px;
                     position: relative;
                     top: 21%;
+                    color: gray;
                 }
 
                 i#leftCur {
@@ -471,6 +478,7 @@
                     </div>
                     <div class="SearchBox">
                         <div class="SearchD">
+                            <form action="javascript:SearchDetail()">
                             <select name="cateVal" id="selectCategory" class="SearchCate" required="required"
                                 onchange="selectCategory(this)">
                                 <option value="">카테고리</option>
@@ -479,8 +487,9 @@
                             </select>
                             <input class="SearchInput" onkeyup="previewInput(this)" type="text"
                                 placeholder="검색어를 입력해주세요.">
-                            <button class="SearchBtn2" onclick="SearchDetail()"><i id=""
+                            <button type="submit"class="SearchBtn2" onclick="SearchDetail()"><i id=""
                                     class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
                         </div>
                         <button id="CloseIcon"><i id="Close" class="fa-solid fa-circle-xmark"
                                 style="color: #000000;"></i></button>
