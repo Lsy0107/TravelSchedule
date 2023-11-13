@@ -148,6 +148,9 @@ public class MemberService {
 
 	public int memStateY(String mid, String mpw) {
 		System.out.println("memStateY - (호출)");
+		if(mid.equals("admin")) {
+			return mdao.updateMstateAD(mid);
+		}
 		if(mpw.equals("kakaoAccount")) {
 			return mdao.updateMstateYK(mid);
 		}else if(mpw.equals("naverAccount")) {

@@ -176,7 +176,7 @@ body, div, p, h4, a, td, span, tr, button{
 				<div
 					class="col col-2 p-3 overflow-auto rounded-start"
 					style="min-height: 500px; border-right: 1px solid #a2a2a28f; background-color: #fff;">
-					<div style="height:505px;">
+					<div style="height:505px; overflow-y:auto;">
 					<h4 style="text-align:center;margin-top:0;">캘린더</h4>
 					<c:forEach items="${cdList }" var="cd">
 						<a style="display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"class="btn btn-primary m-1 w-btn w-btn-gra1 w-btn-gra-anim"
