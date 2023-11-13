@@ -632,5 +632,10 @@ public class ApiService {
 		}
 	}
 
+	public String CountReviewFe(String code) {
+		// TODO Auto-generated method stub
+		return apiDao.CountReFe(code);
+	}
+
 
 }

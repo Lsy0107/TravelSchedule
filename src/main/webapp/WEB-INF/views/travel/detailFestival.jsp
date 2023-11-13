@@ -329,6 +329,12 @@
 				.lknum {
 					display: inline-block;
 				}
+
+				.NoRe {
+					position: relative;
+					left: 28%;
+					font-size: 35px
+				}
 			</style>
 
 
@@ -423,22 +429,27 @@
 						</div>
 						<div class="FestivalComment">
 							<div class="InnerComment">
-								<c:forEach items="${ReList}" var="re">
-									<div>
+								<c:if test="${CR == 0}">
+									<span class="NoRe">아직 해당 축제에 리뷰가 없습니다!</span>
+								</c:if>
+								<c:if test="${CR > 0}">
+									<c:forEach items="${ReList}" var="re">
 										<div>
-											<img class="MemberImg" src="/resources/memberProfile/${re.MPROFILE}"
-												alt="">
-											<span>${re.MID}</span>
-											<span>조회 수 : ${re.REHIT}</span>
+											<div>
+												<img class="MemberImg" src="/resources/memberProfile/${re.MPROFILE}"
+													alt="">
+												<span>${re.MID}</span>
+												<span>조회 수 : ${re.REHIT}</span>
+											</div>
+											<div class="TitleDiv">
+												<span>${re.RETITLE}</span>
+												<a class="d-flex justify-content-end"
+													href="/detailReview?recode=${re.RECODE}">리뷰 자세히보기</a>
+											</div>
+											<hr class="Recommhr">
 										</div>
-										<div class="TitleDiv">
-											<span>${re.RETITLE}</span>
-											<a class="d-flex justify-content-end"
-												href="/detailReview?recode=${re.RECODE}">리뷰 자세히보기</a>
-										</div>
-										<hr class="Recommhr">
-									</div>
-								</c:forEach>
+									</c:forEach>
+								</c:if>
 							</div>
 						</div>
 					</div>
