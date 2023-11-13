@@ -397,15 +397,14 @@ div {
 	<script type="text/javascript">
 	
 	let lalngList = JSON.parse('${lalngList}');
-	console.log(lalngList);
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	
 	var options = {}; //지도를 생성할 때 필요한 기본 옵션
-	if(lalngList.lenght <= 0){
+	if(lalngList.length > 0){
 		options = {
-		center: new kakao.maps.LatLng( lalngList[0].lati, lalngList[0].longti), //지도의 중심좌표.
-		level: 10, //지도의 레벨(확대, 축소 정도)
-		draggable: false
+			center: new kakao.maps.LatLng( lalngList[0].lati, lalngList[0].longti), //지도의 중심좌표.
+			level: 10, //지도의 레벨(확대, 축소 정도)
+			draggable: false
 	};
 		
 	}else{
@@ -420,7 +419,6 @@ div {
 	var positions = [];
 	var bounds = new kakao.maps.LatLngBounds(); 
 	for(let lalng of lalngList){
-		console.log('asd')
 		positions.push({title: lalng.name, latlng: new kakao.maps.LatLng(lalng.lati, lalng.longti)})
 		bounds.extend(new kakao.maps.LatLng(lalng.lati, lalng.longti));
 		let scDiv = document.querySelector('#'+lalng.code +'div');
@@ -434,10 +432,6 @@ div {
 		if(i == 0){
 			continue;
 		}
-		
-		console.log(lalngList[i-1])
-		console.log(lalngList[i]);
-			console.log(lalngList[i-1].scdate.split(' ')[0]== lalngList[i].scdate.split(' ')[0]);
 		if(lalngList[i-1].scdate.split(' ')[0]== lalngList[i].scdate.split(' ')[0]){
 		var linePath = [
 		    new kakao.maps.LatLng(lalngList[i-1].lati, lalngList[i-1].longti),
@@ -455,7 +449,6 @@ div {
 
 		// 지도에 선을 표시합니다 
 		polyline.setMap(map);  
-			console.log(color);
 		}else{
 			colornum = colornum + 1000;
 			color = "#" + colornum.toString(16);
@@ -471,7 +464,7 @@ div {
 	        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 	    });
 	}
-	if(lalngList.lenght>0){
+	if(lalngList.length>0){
 	map.setBounds(bounds);
 		
 	}

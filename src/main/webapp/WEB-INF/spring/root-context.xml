@@ -16,8 +16,8 @@
 			value="jdbc:oracle:thin:@//localhost:1521/xe" />
 			
 			<!-- 192.168.0.95 : TRAVELSCHEDULE : 1111-->
-		<property name="username" value="TS" />
-		<property name="password" value="1111" />
+		<property name="username" value="TVSC" />
+		<property name="password" value="1234" />
 	</bean>
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
