@@ -198,13 +198,13 @@ color:black;}
 			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="/resources/img/seoul-cityscape-at-twilight-in-south-korea.jpg"style="height: 100vh;width: 100vw;" class="d-block w-100" alt="...">
+                <img src="/resources/img/seoul1.jpg"style="height: 100vh;width: 100vw;" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="/resources/img/gyeongbokgung-palace-with-cherry-blossom-in-spring-south-korea.jpg"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
+                <img src="/resources/img/gyeongbokgung.png"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="/resources/img/gyeongbokgung-palace-at-night-in-seoul-korea.jpg"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
+                <img src="/resources/img/seoul3.png"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

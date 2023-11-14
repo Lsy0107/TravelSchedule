@@ -237,7 +237,7 @@
                 function Login_Kakao() {
                     console.log('카카오 로그인 호출');
                     Kakao.Auth.authorize({
-                        redirectUri: 'http://localhost:8081/memberJoinForm'
+                        redirectUri: 'http://	:8081/memberJoinForm'
                     });
                 }
                 let authCode = '${param.code}';

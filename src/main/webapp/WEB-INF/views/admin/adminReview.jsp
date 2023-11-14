@@ -77,7 +77,7 @@
 			                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
 			                                         aria-labelledby="dropdownMenuLink">
 			                                         <div class="dropdown-header">REVIEW STATE</div>
-			                                         <a class="dropdown-item" style="width: 120px;" onclick="reviewDel('${re.mid}', '${re.recode}')">리뷰삭제</a>
+			                                         <a class="dropdown-item" style="width: 120px;" onclick="reviewDel('${re.mid}', '${re.recode}', '${re.cdcode }')">리뷰삭제</a>
 			                                     </div>
                                             </td>
                                         </tr>
@@ -111,12 +111,12 @@
 
 </body>
 <script type="text/javascript">
-	function reviewDel(mid, recode) {
+	function reviewDel(mid, recode, cdcode) {
 		console.log(recode+', '+mid);
 		$.ajax({
 			url:"/reviewDelete",
 			type:"post",
-			data: {'mid' : mid, 'recode' : recode},
+			data: {'mid' : mid, 'recode' : recode, 'cdcode':cdcode},
 			aync:false,
 			success:function(rs){
 				if(rs == "Y"){
