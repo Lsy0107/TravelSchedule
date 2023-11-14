@@ -10,6 +10,7 @@ import com.TravelSchedule.dao.TravelDao;
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 
@@ -171,6 +172,17 @@ public class TravelService {
 	public String CountReview(String tdcode) {
 		// TODO Auto-generated method stub
 		return tdao.CountRe(tdcode);
+	}
+	public Review getReview(Calendar cd) {
+		return tdao.selectReview(cd);
+	}
+	public int delLike(Review re) {
+		// TODO Auto-generated method stub
+		return tdao.deleteLikeList(re);
+	}
+	public int delRe(Review re) {
+		// TODO Auto-generated method stub
+		return tdao.deleteReview(re);
 	}
 
 	

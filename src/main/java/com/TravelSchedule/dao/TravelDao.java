@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import com.TravelSchedule.dto.Calendar;
 import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 
@@ -82,6 +83,12 @@ public interface TravelDao {
 
 	@Select("SELECT COUNT(*) FROM REVIEW WHERE CODELIST LIKE '%'||#{tdcode}||'%'")
 	String CountRe(String tdcode);
+
+	Review selectReview(Calendar cd);
+
+	int deleteLikeList(Review re);
+
+	int deleteReview(Review re);
 
 
 }
