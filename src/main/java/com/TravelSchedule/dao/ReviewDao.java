@@ -83,7 +83,7 @@ public interface ReviewDao {
 	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
 	HashMap<String, String> reList(String recode);
 
-	@Select("select * from (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where recode = #{recode}")
+	@Select("select RECODE,MID,RECOMMENT,RETITLE,REPHOTO,REHIT,RESTATE,CDCODE,CODELIST,TO_CHAR(REDATE,'YYYY/MM/DD HH24:MI') AS REDATE,LKNUM from (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where recode = #{recode}")
 	HashMap<String, String> getreList(String recode);
 
 	@Update("UPDATE REVIEW SET REHIT = REHIT + 1 WHERE RECODE = #{recode}")
