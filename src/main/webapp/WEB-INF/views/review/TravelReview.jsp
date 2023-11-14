@@ -25,16 +25,13 @@
                 margin-top: 125px;
                 width: 30%;
                 height: 580px;
-                overflow: scroll;
-                overflow-x: hidden;
                 z-index: 1;
-                overflow-y: hidden;
                 display: inline-block;
                 margin-left: 600px;
-            }
+            }            
 
             .InnerCal {
-                height: 95%;
+                height: 100%;
                 margin: 15px;
             }
 
@@ -120,6 +117,7 @@
             }
             .DeleteBtn{
             	margin-left: 5px;
+            	margin-right: 10px;
             }
             .hr{
             	border: 1px solid black;
@@ -150,6 +148,26 @@
             .nameDiv{
             	width: 400px;
             }
+            .TextArea{
+            	overflow: scroll;
+                overflow-x: hidden;
+                height: 500px;
+            }
+            .TextArea::-webkit-scrollbar {
+			    width: 10px;
+			  }
+			  .TextArea::-webkit-scrollbar-thumb {
+			    background-color: #2f3542;
+			    border-radius: 10px;
+			    background-clip: padding-box;
+			    border: 2px solid transparent;
+			  }
+			  .TextArea::-webkit-scrollbar-track {
+			    background-color: grey;
+			    border-radius: 10px;
+			    box-shadow: inset 0px 0px 5px white;
+			}
+            
         </style>
     </head>
 
@@ -169,15 +187,17 @@
 		                	<hr class="hr">
 		                	<p class="count">총 ${count }건</p>
 		                	<hr class="hr2">
-		                    <c:forEach items="${review}" var="re" varStatus="Cl">
-		                        <div class="Ctitle" >
-		                            <div class="nameDiv" onclick="location.href='${pageContext.request.contextPath }/detailReview?recode=${re.recode}'"><p class="cdname">${re.retitle}</p></div>
-		                                    <button class="ModifyBtn reviewBtn btn btn-outline-success"
-		                                        onclick="location.href='ReviewFix?cdcode=${re.cdcode}'">수정</button>
-		                                    <button class="DeleteBtn reviewBtn btn btn-outline-danger"
-		                                        onclick="return DeleteReview('${re.cdcode}')">삭제</button>
-		                        </div>
-		                    </c:forEach>
+		                	<div class="TextArea">
+			                    <c:forEach items="${review}" var="re" varStatus="Cl">
+			                        <div class="Ctitle" >
+			                            <div class="nameDiv" onclick="location.href='${pageContext.request.contextPath }/detailReview?recode=${re.recode}'"><p class="cdname">${re.retitle}</p></div>
+			                                    <button class="ModifyBtn reviewBtn btn btn-outline-success"
+			                                        onclick="location.href='ReviewFix?cdcode=${re.cdcode}'">수정</button>
+			                                    <button class="DeleteBtn reviewBtn btn btn-outline-danger"
+			                                        onclick="return DeleteReview('${re.cdcode}')">삭제</button>
+			                        </div>
+			                    </c:forEach>
+		                    </div>
 		                </div>
 		
 		            </div>

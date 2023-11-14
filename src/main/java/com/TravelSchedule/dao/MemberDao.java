@@ -21,7 +21,7 @@ public interface MemberDao {
 
 	int memberUpdate(Member mem);
 
-	int passwordUpdate(@Param("mid")String mid, @Param("mpw")String mpw);
+	int passwordUpdate(Member mem);
 
 	@Select("SELECT * FROM MEMBERS WHERE MID = #{id}")
 	Member selectKakaoMemberInfo(String id);
