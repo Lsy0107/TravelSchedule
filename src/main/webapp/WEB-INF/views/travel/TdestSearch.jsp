@@ -1011,8 +1011,13 @@
                             data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption": seloption },
                             async: false,
                             success(rs) {
-                                alert('행선지 선택 완료');
-                                location.href = "/";
+                                if (rs == 'Y') {
+                                    alert('행선지 선택 완료');
+                                    location.href = "/";
+                                } else {
+                                    alert('이미 선택된 행선지 입니다.');
+                                    location.href = "/TdestSearchPage";
+                                }
                             }
                         })
                     }

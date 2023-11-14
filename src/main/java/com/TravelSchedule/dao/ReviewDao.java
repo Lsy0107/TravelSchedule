@@ -74,6 +74,9 @@ public interface ReviewDao {
 	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND CDCODE = #{cdcode}")
 	int DeleteReview(@Param("cdcode")String cdcode, @Param("mid")String mid);
 
+	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND CDCODE = #{cdcode}")
+	int deleteReview(Review review);
+	
 	@Update("UPDATE CALENDAR SET CDSTATE = 'N' WHERE MID = #{mid} AND CDCODE = #{cdcode}")
 	int UpdateCdState(@Param("cdcode")String cdcode, @Param("mid")String mid);
 
@@ -83,7 +86,7 @@ public interface ReviewDao {
 	@Select("SELECT * FROM REVIEW WHERE RECODE = #{recode}")
 	HashMap<String, String> reList(String recode);
 
-	@Select("select * from (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where recode = #{recode}")
+	@Select("select RECODE,MID,RECOMMENT,RETITLE,REPHOTO,REHIT,RESTATE,CDCODE,CODELIST,TO_CHAR(REDATE,'YYYY/MM/DD HH24:MI') AS REDATE,LKNUM from (select re.*,nvl(lknum, '0') lknum from review re left join (select recode, count(*) as lknum  from likelist group by recode ) lk on re.recode=lk.recode order by lknum desc) where recode = #{recode}")
 	HashMap<String, String> getreList(String recode);
 
 	@Update("UPDATE REVIEW SET REHIT = REHIT + 1 WHERE RECODE = #{recode}")
@@ -108,8 +111,7 @@ public interface ReviewDao {
 	ArrayList<Review> selReviewList(Review review);
 	
 	
-	@Delete("DELETE FROM REVIEW WHERE MID = #{mid} AND RECODE = #{recode}")
-	int deleteReview(Review review);
+	
 	@Delete("DELETE FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
 	int deleteLikeList(Review review);
 	@Select("select * FROM LIKELIST WHERE MID = #{mid} AND RECODE = #{recode}")
