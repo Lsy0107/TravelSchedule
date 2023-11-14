@@ -224,6 +224,15 @@ public class ReviewService {
 		return rdao.selectReview(mid);
 	}
 
+	public ArrayList<Review> getAllReview() {
+
+		return rdao.selectAllReview();
+	}
+
+	public ArrayList<Review> getBestReview() {
+		
+		return rdao.selectBestReview();
+	}
 	public ArrayList<Review> getReviewList(Review review) {
 		
 		return rdao.selReviewList(review);
@@ -242,6 +251,11 @@ public class ReviewService {
 	public Review likeListSel(Review review) {
 		
 		return rdao.selectLikeList(review);
+	}
+
+	public ArrayList<Review> searchReview(String retitle) {
+		
+		return rdao.selectSearchReview(retitle);
 	}
 	
 

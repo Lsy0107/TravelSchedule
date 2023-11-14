@@ -21,7 +21,7 @@ public interface MemberDao {
 
 	int memberUpdate(Member mem);
 
-	int passwordUpdate(@Param("mid")String mid, @Param("mpw")String mpw);
+	int passwordUpdate(Member mem);
 
 	@Select("SELECT * FROM MEMBERS WHERE MID = #{id}")
 	Member selectKakaoMemberInfo(String id);
@@ -45,6 +45,8 @@ public interface MemberDao {
 	int updateMstateYK(String mid);
 	@Update("UPDATE MEMBERS SET MSTATE = 'NA' WHERE mid = #{mid}")
 	int updateMstateNA(String mid);
+	@Update("UPDATE MEMBERS SET MSTATE = 'AD' WHERE mid = #{mid}")
+	int updateMstateAD(String mid);
 	
 
 }

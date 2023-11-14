@@ -283,6 +283,34 @@ public class ReviewController {
 		mav.setViewName("review/DetailReview");
 		return mav;
 	}
+	
+	@RequestMapping(value="/ReviewList")
+	public ModelAndView ReviewList() {
+		System.out.println("리뷰리스트 최신순 이동");
+		ModelAndView mav = new ModelAndView();
+		ArrayList<Review> reviewList = rsvc.getAllReview();
+		
+		String css1 = "font-weight: bold; text-decoration-line: underline;";
+		
+		mav.addObject("css1", css1);
+		
+		mav.addObject("reviewList", reviewList);
+		mav.setViewName("review/ReviewList");
+		return mav;
+	}
+	@RequestMapping(value="/ReviewBest")
+	public ModelAndView ReviewBest() {
+		System.out.println("리뷰리스트 인기순 이동");
+		ModelAndView mav = new ModelAndView();
+		ArrayList<Review> reviewList = rsvc.getBestReview();
+		
+		String css2 = "font-weight: bold; text-decoration-line: underline;";
+		
+		mav.addObject("css2", css2);
+		mav.addObject("reviewList", reviewList);
+		mav.setViewName("review/ReviewList");
+		return mav;
+	}
 	@RequestMapping(value = "/reviewDelete")
 	public @ResponseBody String reviewDelete(Review review) {
 		System.out.println("리뷰삭제");
@@ -309,5 +337,17 @@ public class ReviewController {
 		}
 
 	}
-
+	
+	@RequestMapping(value="/searchReview")
+	public @ResponseBody String searchReview(String retitle) {
+		System.out.println("검색 리뷰");
+		System.out.println(retitle);
+		ArrayList<Review> review = rsvc.searchReview(retitle);
+		System.out.println(review);
+		
+		return new Gson().toJson(review);
+		
+	}
 }
+
+

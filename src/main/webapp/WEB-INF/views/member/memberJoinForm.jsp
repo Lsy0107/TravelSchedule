@@ -277,6 +277,16 @@
                 position: relative;
                 top: 40px;
             }
+            .imageSel{
+            	background-color: whitesmoke;
+            	border: 1px solid black;
+            	padding: 6px;
+            	cursor: pointer;
+            	position: relative;
+			    left: 57px;
+			    bottom: 41px;
+			    display: inline;
+            }
         </style>
 
 
@@ -312,23 +322,21 @@
                                         placeholder="닉네임">
                                 </div>
 
-                                <input type="file" id="profile" name="mprofiledata" value="파일선택">
-
+                                <input type="file" id="profile" name="mprofiledata" value="이미지 선택" accept="image/jpeg, image/png, image/jpg">
+								<label for="profile" class="imageSel">이미지 추가</label>
+								
                                 <div class="button_container">
                                     <button class="btn1" type="submit"><span>회원가입</span></button>
                                 </div>
                             </form>
 
                         </div>
-                        <div class="LoginApiDiv">
+                        <div class="LoginApiDiv" style="text-align: center;">
                             <button onclick="Login_Kakao()" class="KakaoBtn"><img class="kakaoImg"
                                     src="${pageContext.request.contextPath}/resources/img/카카오로그인버튼.png" alt=""></button>
                             <button id="naver_id_login" class="NaverBtn"><img class="naverImg"
                                     src="${pageContext.request.contextPath}/resources/img/네이버로그인버튼.png" alt=""></button>
                         </div>
-                        <p style="position: relative; left: 25%; top: 80px;">
-                            <a href="">회원가입</a> <a href="">아이디 찾기</a> <a href="">비밀번호 찾기</a>
-                        </p>
                     </div>
                 </div>
                 <!-- content 종료 -->
