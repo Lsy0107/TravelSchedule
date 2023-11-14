@@ -129,4 +129,13 @@
 	select * from (select tdname from tdest where tdname like '%'||#{searchInfo}||'%' order by DBMS_RANDOM.RANDOM()) where rownum <= 6
 	]]></if> 
 	</select>
+	<select id="selectReview" resultType="com.TravelSchedule.dto.Review">
+	select * from review where mid = #{mid} and cdcode = #{cdcode}
+	</select>
+	<delete id="deleteLikeList">
+	delete from likelist where recode = #{recode}
+	</delete>
+	<delete id="deleteReview">
+	delete from review where mid = #{mid} and recode = #{recode}
+	</delete>
 </mapper>
