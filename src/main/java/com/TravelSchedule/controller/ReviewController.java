@@ -273,7 +273,7 @@ public class ReviewController {
 			String Like = apisvc.getLikelist(lk, seloption);
 			mav.addObject("like", Like);
 		}
-		System.out.println(ReviewList);
+		System.out.println("출력 "+ReviewList);
 		mav.addObject("Re", ReviewList);
 		mav.addObject("Ph", PhotoList);
 		mav.addObject("TdList", TdList);

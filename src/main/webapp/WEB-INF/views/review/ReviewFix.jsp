@@ -215,7 +215,7 @@
                                                 value="${td.TDCODE}">
                                             <label for="${td.TDCODE}"><img onclick="checkImg('${td.TDCODE}')" name="TF"
                                                     value="${td.TDCODE}" class="${td.TDCODE} img" src="${td.TDPHOTO}"
-                                                    alt=""></label>
+                                                    alt="" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" ></label>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -231,7 +231,7 @@
                                                 value="${fe.FECODE}">
                                             <label for="${fe.FECODE}"><img onclick="checkImgFe('${fe.FECODE}')"
                                                     name="FE" value="${fe.FECODE}" class="${fe.FECODE} img"
-                                                    src="${fe.FEPOSTER}" alt=""></label>
+                                                    src="${fe.FEPOSTER}" alt="" onerror="this.src='${pageContext.request.contextPath}/resources/tdest/3509.jpg'" ></label>
                                         </div>
                                     </div>
                                 </c:forEach>
