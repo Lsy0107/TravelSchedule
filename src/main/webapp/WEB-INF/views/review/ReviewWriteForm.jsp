@@ -188,7 +188,7 @@
                     padding: 83px;
                     display: none;
                 }
-            
+            }
             </style>
         </head>
 
