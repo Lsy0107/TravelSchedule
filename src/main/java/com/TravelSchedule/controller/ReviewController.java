@@ -288,13 +288,18 @@ public class ReviewController {
 	public ModelAndView ReviewList() {
 		System.out.println("리뷰리스트 최신순 이동");
 		ModelAndView mav = new ModelAndView();
-		ArrayList<Review> reviewList = rsvc.getAllReview();
 		
+		ArrayList<Review> reviewList = rsvc.getAllReview();
+		ArrayList<Review> resultReList = new ArrayList<Review>();
+		for(Review re : reviewList) {
+			re.setMnickname(rsvc.getMnickname(re.getMid()));
+			resultReList.add(re);
+		}
 		String css1 = "font-weight: bold; text-decoration-line: underline;";
 		
 		mav.addObject("css1", css1);
 		
-		mav.addObject("reviewList", reviewList);
+		mav.addObject("reviewList", resultReList);
 		mav.setViewName("review/ReviewList");
 		return mav;
 	}
@@ -303,11 +308,16 @@ public class ReviewController {
 		System.out.println("리뷰리스트 인기순 이동");
 		ModelAndView mav = new ModelAndView();
 		ArrayList<Review> reviewList = rsvc.getBestReview();
+		ArrayList<Review> resultReList = new ArrayList<Review>();
+		for(Review re : reviewList) {
+			re.setMnickname(rsvc.getMnickname(re.getMid()));
+			resultReList.add(re);
+		}
 		
 		String css2 = "font-weight: bold; text-decoration-line: underline;";
 		
 		mav.addObject("css2", css2);
-		mav.addObject("reviewList", reviewList);
+		mav.addObject("reviewList", resultReList);
 		mav.setViewName("review/ReviewList");
 		return mav;
 	}

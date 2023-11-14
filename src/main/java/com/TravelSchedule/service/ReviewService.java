@@ -257,6 +257,11 @@ public class ReviewService {
 		
 		return rdao.selectSearchReview(retitle);
 	}
+
+	public String getMnickname(String mid) {
+		// TODO Auto-generated method stub
+		return rdao.selectMnickname(mid);
+	}
 	
 
 

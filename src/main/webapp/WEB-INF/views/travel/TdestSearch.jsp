@@ -954,7 +954,9 @@
                                     alert('행선지 선택 완료');
                                     location.href = "/";
                                 } else {
+                                	console.log('asdasd')
                                     alert('이미 선택된 행선지 입니다.');
+                                    location.href = "/TdestSearchPage";
 
                                 }
                             }

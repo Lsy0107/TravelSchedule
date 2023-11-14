@@ -19,5 +19,6 @@ public class Review {
 	private String relike;
 	private String lknum;
 	
+	private String mnickname;
 	private MultipartFile[] profiledata;
 }

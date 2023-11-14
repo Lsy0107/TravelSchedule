@@ -313,15 +313,21 @@ body, div, p, h4, a, td, span, tr, button{
 						mksc.classList.remove("btn-danger");
 						mksc.classList.remove("btn-success");
 					if(firstdate > nowdate){
-						mksc.addEventListener("click", function(){
-		    			})
+						mksc.setAttribute('onclick',''); // location.href="/ReviewWriteForm?cdcode="+cdcode"
+						/* mksc.addEventListener("click", function(){
+		    			}) */
 						mksc.classList.add("btn-danger");
 						
 					}else{
 						mksc.classList.add("btn-info");
+						
+						mksc.setAttribute('onclick',"location.href='/ReviewWriteForm?cdcode="+cdcode+"'");
+						/*
 						mksc.addEventListener("click", function(){
 		    				location.href="/ReviewWriteForm?cdcode="+cdcode;
 		    			})
+		    			*/
+		    			
 					}
 						mksc.innerText = "리뷰작성하기";
 					break;
@@ -329,9 +335,13 @@ body, div, p, h4, a, td, span, tr, button{
 					mksc.classList.remove("btn-info");
 					mksc.classList.remove("btn-danger");
 					mksc.classList.add("btn-success");
+					
+					mksc.setAttribute('onclick',"location.href='/ReviewFix?cdcode="+cdcode+"'");
+					/*
 					mksc.addEventListener("click", function(){
 	    				location.href="ReviewFix?cdcode="+cdcode;
 	    			})
+	    			*/
     				mksc.innerText = "리뷰수정하기";
 					break;
 				}

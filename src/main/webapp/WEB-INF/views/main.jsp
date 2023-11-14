@@ -198,7 +198,7 @@ color:black;}
 			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="/resources/img/seoul-cityscape-at-twilight-in-south-korea.jpg"style="height: 100vh;width: 100vw;" class="d-block w-100" alt="...">
+                <img src="/resources/img/seoul1.png"style="height: 100vh;width: 100vw;" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
                 <img src="/resources/img/gyeongbokgung-palace-with-cherry-blossom-in-spring-south-korea.jpg"style="height: 100vh;width: 100vw;"  class="d-block w-100" alt="...">
