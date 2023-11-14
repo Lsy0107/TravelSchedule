@@ -605,9 +605,9 @@
                     let currentCate = null;
                     function SearchClick() {
 
-
                         let SelCate = document.querySelector('#SelCate').value;
                         let SelCity = document.querySelector('#SelCity').value;
+
 
                         if (SelCate == '여행지') {
                             $.ajax({
@@ -622,7 +622,7 @@
                                 success: function (e) {
                                     console.log('전송 성공');
                                     console.log(e);
-                                    currentCate = SelCate;
+                                    currentCate = SelCate;                                    
                                     PrintTdest(e);
                                 }
                             });
@@ -943,6 +943,8 @@
                         }
                     }
                     function selectDest(tdcode, cdcode, seloption) {
+                        let Cate = document.querySelector('#SelCate').value;
+                        let City = document.querySelector('#SelCity').value;
                         console.log(tdcode + "  " + cdcode);
                         $.ajax({
                             url: "/registSelectDest",
@@ -952,11 +954,11 @@
                             success(rs) {
                                 if (rs == 'Y') {
                                     alert('행선지 선택 완료');
-                                    location.href = "/";
                                 } else {
                                     alert('이미 선택된 행선지 입니다.');
-                                    location.href = "/TdestSearchPage";
+                                    
                                 }
+                                location.href = "/TdestSearchPage?category="+Cate+"&ctcode="+City;
                             }
                         })
                     }
@@ -968,7 +970,7 @@
                                 url: "/getCdcode",
                                 type: "post",
                                 data: { mid: "${sessionScope.loginId}" },
-                                async: false,
+                                
                                 success(rs) {
                                     let modalBodyTag = document.querySelector("#selectCalendar")
                                     modalBodyTag.innerHTML = "";
@@ -1002,20 +1004,21 @@
                         }
                     }
                     function selectFest(fecode, cdcode, seloption) {
+                        let Cate = document.querySelector('#SelCate').value;
+                        let City = document.querySelector('#SelCity').value;
                         console.log(fecode + "  " + cdcode);
                         $.ajax({
                             url: "/registSelectDest",
                             type: "post",
                             data: { mid: "${sessionScope.loginId}", fecode: fecode, cdcode: cdcode, "seloption": seloption },
-                            async: false,
+                            
                             success(rs) {
                                 if (rs == 'Y') {
                                     alert('행선지 선택 완료');
-                                    location.href = "/";
                                 } else {
                                     alert('이미 선택된 행선지 입니다.');
-                                    location.href = "/TdestSearchPage";
                                 }
+                                location.href = "/TdestSearchPage?category="+Cate+"&ctcode="+City;
                             }
                         })
                     }
@@ -1272,6 +1275,8 @@
                     if (${ category != null }) {
                         document.querySelector("#SelCate").value = '${category}';
                         document.querySelector("#SelCity").value = '${ctcode}';
+                        $("#SelCate").css('color', 'blue');
+                        $("#SelCity").css('color', 'blue');
                         SearchClick();
                     }
                 </script>

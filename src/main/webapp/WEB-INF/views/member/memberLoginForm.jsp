@@ -237,7 +237,7 @@
                 function Login_Kakao() {
                     console.log('카카오 로그인 호출');
                     Kakao.Auth.authorize({
-                        redirectUri: 'http://localhost:8081/memberJoinForm'
+                        redirectUri: 'http://121.65.47.74:5575/memberJoinForm'
                     });
                 }
                 let authCode = '${param.code}';
@@ -252,7 +252,7 @@
                         data: {
                             'grant_type': 'authorization_code',
                             'client_id': 'a3431cbff51101bc0a8832f02f739e85',
-                            'redirect_uri': 'http://localhost:8081/memberJoinForm',
+                            'redirect_uri': 'http://121.65.47.74:5575/memberJoinForm',
                             'code': authCode
                         },
                         success: function (response) {
@@ -317,10 +317,10 @@
 
             <script>
 
-                var naver_id_login = new naver_id_login("LBJBGOQrRWS1gNyVVoZX", "http://localhost:8081/memberJoinForm");
+                var naver_id_login = new naver_id_login("LBJBGOQrRWS1gNyVVoZX", "http://121.65.47.74:5575/memberJoinForm");
                 var state = naver_id_login.getUniqState();
                 naver_id_login.setButton("green", 1, 40);
-                naver_id_login.setDomain("http://localhost:8081/memberJoinForm");
+                naver_id_login.setDomain("http://121.65.47.74:5575/memberJoinForm");
                 naver_id_login.setState(state);
 
                 naver_id_login.init_naver_id_login();
@@ -331,7 +331,7 @@
                 charset="utf-8"></script>
             <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
             <script type="text/javascript">
-                var naver_id_login = new naver_id_login("LBJBGOQrRWS1gNyVVoZX", "http://localhost:8081/memberJoinForm");
+                var naver_id_login = new naver_id_login("LBJBGOQrRWS1gNyVVoZX", "http://121.65.47.74:5575/memberJoinForm");
                 // 접근 토큰 값 출력
 
                 // 네이버 사용자 프로필 조회

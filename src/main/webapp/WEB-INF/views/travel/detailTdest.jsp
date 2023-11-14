@@ -487,7 +487,7 @@
 				AOS.init();
 			</script>
 			<script type="text/javascript"
-				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74571bb2dc8fe8db5069ca3d6dcd15a9"></script>
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=963b2e12b6b2948f660fa6eab737705a"></script>
 			<script type="text/javascript">
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					mapOption = {
