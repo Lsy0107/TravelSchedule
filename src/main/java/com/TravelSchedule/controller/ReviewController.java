@@ -216,7 +216,33 @@ public class ReviewController {
 		int UpdateCdState = rsvc.UpdateCdState(cdcode, mid);
 		return new Gson().toJson(DeleteReview);
 	}
+	@RequestMapping(value = "/reviewDelete")
+	public @ResponseBody String reviewDelete(Review review) {
+		System.out.println("리뷰삭제");
+		System.out.println("삭제할 리뷰 코드, mid : " + review);
+		
+		Review result = rsvc.likeListSel(review);
+		
+		System.out.println(result);
+		if(result != null) {
+			int rs = rsvc.reLikeListDel(review);
+			if(rs < 0) {
+				System.out.println("likelist 삭제 실패");
+				return "N";
+			}
+		}
+		System.out.println("likeList 삭제");
+		int re = rsvc.reviewDel(review);
+		int UpdateCdState = rsvc.UpdateCdState(review.getCdcode(), review.getMid());
+		if(0 < re) {
+			System.out.println("리뷰삭제성공");
+			return "Y";
+		}else {
+			System.out.println("리뷰삭제실패");
+			return "N";
+		}
 
+	}
 	@RequestMapping(value = "detailReview")
 	public ModelAndView detailReview(String recode, HttpSession session) {
 		System.out.println("리뷰 상세보기 페이지 이동");
@@ -273,7 +299,7 @@ public class ReviewController {
 			String Like = apisvc.getLikelist(lk, seloption);
 			mav.addObject("like", Like);
 		}
-		System.out.println(ReviewList);
+		System.out.println("출력 "+ReviewList);
 		mav.addObject("Re", ReviewList);
 		mav.addObject("Ph", PhotoList);
 		mav.addObject("TdList", TdList);
@@ -288,13 +314,18 @@ public class ReviewController {
 	public ModelAndView ReviewList() {
 		System.out.println("리뷰리스트 최신순 이동");
 		ModelAndView mav = new ModelAndView();
-		ArrayList<Review> reviewList = rsvc.getAllReview();
 		
+		ArrayList<Review> reviewList = rsvc.getAllReview();
+		ArrayList<Review> resultReList = new ArrayList<Review>();
+		for(Review re : reviewList) {
+			re.setMnickname(rsvc.getMnickname(re.getMid()));
+			resultReList.add(re);
+		}
 		String css1 = "font-weight: bold; text-decoration-line: underline;";
 		
 		mav.addObject("css1", css1);
 		
-		mav.addObject("reviewList", reviewList);
+		mav.addObject("reviewList", resultReList);
 		mav.setViewName("review/ReviewList");
 		return mav;
 	}
@@ -303,40 +334,20 @@ public class ReviewController {
 		System.out.println("리뷰리스트 인기순 이동");
 		ModelAndView mav = new ModelAndView();
 		ArrayList<Review> reviewList = rsvc.getBestReview();
+		ArrayList<Review> resultReList = new ArrayList<Review>();
+		for(Review re : reviewList) {
+			re.setMnickname(rsvc.getMnickname(re.getMid()));
+			resultReList.add(re);
+		}
 		
 		String css2 = "font-weight: bold; text-decoration-line: underline;";
 		
 		mav.addObject("css2", css2);
-		mav.addObject("reviewList", reviewList);
+		mav.addObject("reviewList", resultReList);
 		mav.setViewName("review/ReviewList");
 		return mav;
 	}
-	@RequestMapping(value = "/reviewDelete")
-	public @ResponseBody String reviewDelete(Review review) {
-		System.out.println("리뷰삭제");
-		System.out.println("삭제할 리뷰 코드, mid : " + review);
-		
-		Review result = rsvc.likeListSel(review);
-		
-		System.out.println(result);
-		if(result != null) {
-			int rs = rsvc.reLikeListDel(review);
-			if(rs < 0) {
-				System.out.println("likelist 삭제 실패");
-				return "N";
-			}
-		}
-		System.out.println("likeList 삭제");
-		int re = rsvc.reviewDel(review);
-		if(0 < re) {
-			System.out.println("리뷰삭제성공");
-			return "Y";
-		}else {
-			System.out.println("리뷰삭제실패");
-			return "N";
-		}
-
-	}
+	
 	
 	@RequestMapping(value="/searchReview")
 	public @ResponseBody String searchReview(String retitle) {

@@ -272,7 +272,7 @@
 				                	<c:forEach items="${reviewList }" var="re">			                	
 				                		<tr id="containDest">
 				                			<th><a href="${pageContext.request.contextPath }/detailReview?recode=${re.recode}"><p class="titleSon">${re.retitle }</p></a></th>
-				                			<th>${re.mid }</th>
+				                			<th>${re.mnickname }</th>
 				                			<th>${re.redate }</th>
 				                			<th>${re.rehit }</th>
 				                			<th>${re.lknum }</th>
