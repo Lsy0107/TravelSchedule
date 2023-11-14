@@ -74,7 +74,7 @@
 			                                         aria-labelledby="dropdownMenuLink">
 			                                         <div class="dropdown-header">MEMBER STATE</div>
 			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNN('${mem.mid}')">회원정지</a>
-			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNY('${mem.mid}')">정지해제</a>
+			                                         <a class="dropdown-item" style="width: 120px;" onclick="mstateNY('${mem.mid}','${mem.mpw }')">정지해제</a>
 			                                     </div>
                                             </td>
                                         </tr>
@@ -91,14 +91,8 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
+            <!-- Footer-->
+       		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
             <!-- End of Footer -->
 
         </div>
@@ -111,26 +105,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 </body>
@@ -152,12 +126,12 @@
 			}
 		})
 	}
-	function mstateNY(mid) {
+	function mstateNY(mid, mpw) {
 		console.log(mid);
 		$.ajax({
 			url:"/mstateNY",
 			type:"post",
-			data: {'mid' : mid},
+			data: {'mid' : mid, 'mpw':mpw},
 			aync:false,
 			success:function(rs){
 				if(rs == "Y"){

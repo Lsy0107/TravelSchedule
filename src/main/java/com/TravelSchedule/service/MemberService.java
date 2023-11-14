@@ -33,7 +33,7 @@ public class MemberService {
 		UUID uuid = UUID.randomUUID();
 		savePath = session.getServletContext().getRealPath("/resources/memberProfile");
 		System.out.println(savePath);
-
+		
 		if (!mprofiledata.isEmpty()) {
 			System.out.println("첨부파일 O");
 			mprofile = uuid + "_" + mprofiledata.getOriginalFilename();
@@ -88,7 +88,7 @@ public class MemberService {
 			String code = uuid.toString();
 			System.out.println("code : " + code);
 			mprofile = code + "_" + mfile.getOriginalFilename();
-
+			session.setAttribute("loginProfile", mprofile);
 			System.out.println("savePath" + savePath);
 			File newFile = new File(savePath, mprofile);
 			try {
@@ -108,10 +108,10 @@ public class MemberService {
 		return result;
 	}
 
-	public int newPassword(String mid, String mpw) {
+	public int newPassword(Member mem) {
 		System.out.println("MemberService - newPassword");
 
-		return mdao.passwordUpdate(mid, mpw);
+		return mdao.passwordUpdate(mem);
 	}
 
 	public Member LoginMemberInfo_kakao(String id) {
@@ -146,9 +146,18 @@ public class MemberService {
 		return mdao.updateMstateNN(mid);
 	}
 
-	public int memStateY(String mid) {
+	public int memStateY(String mid, String mpw) {
 		System.out.println("memStateY - (호출)");
-		return mdao.updateMstateNY(mid);
+		if(mid.equals("admin")) {
+			return mdao.updateMstateAD(mid);
+		}
+		if(mpw.equals("kakaoAccount")) {
+			return mdao.updateMstateYK(mid);
+		}else if(mpw.equals("naverAccount")) {
+			return mdao.updateMstateNA(mid);
+		}else {
+			return mdao.updateMstateNY(mid);			
+		}
 	}
 	
 

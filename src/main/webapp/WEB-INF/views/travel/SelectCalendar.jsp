@@ -67,12 +67,12 @@ td {
 	font-weight: bold;
 }
 
-.Calendar>thead>tr:last-child>td {
+.Calendar>thead>tr:last-child>td>div {
 	font-family: 'Questrial', sans-serif;
 	font-weight: 600;
 }
 
-.Calendar>tbody>tr>td>p {
+.Calendar>tbody>tr>td>div>p {
 	font-family: 'Montserrat', sans-serif;
 	height: 45px;
 	width: 45px;
@@ -176,7 +176,7 @@ body, div, p, h4, a, td, span, tr, button{
 				<div
 					class="col col-2 p-3 overflow-auto rounded-start"
 					style="min-height: 500px; border-right: 1px solid #a2a2a28f; background-color: #fff;">
-					<div style="height:505px;">
+					<div style="height:505px; overflow-y:auto;">
 					<h4 style="text-align:center;margin-top:0;">캘린더</h4>
 					<c:forEach items="${cdList }" var="cd">
 						<a style="display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"class="btn btn-primary m-1 w-btn w-btn-gra1 w-btn-gra-anim"
@@ -396,15 +396,19 @@ body, div, p, h4, a, td, span, tr, button{
                 let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
                 nowColumn.setAttribute("style", "text-align: -webkit-center;");
 
-                let newDIV = document.createElement("p");
-                newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
+                let newDIV = document.createElement("div");
+                let pTag = document.createElement('p');
+                pTag.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
+                newDIV.appendChild(pTag);
                 nowColumn.appendChild(newDIV);
                 if (nowDay.getDay() == 6) {                 // 토요일인 경우
                     nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
                 }
                 if (nowDay < today) {                       // 지난날인 경우
-                    newDIV.className = "pastDay";
+                	pTag.className = "pastDay";
                 }
+                let count = true;
+                let divTag = document.createElement("div");
 				for(let sc of scList){
 					let scdate = "";
 					if(sc.SCDATE != null){
@@ -413,11 +417,39 @@ body, div, p, h4, a, td, span, tr, button{
 					let scmouth = scdate.split('/')[1];
 					let scday = scdate.split('/')[2];
 						if(nowDay.getFullYear() == scyear && nowDay.getMonth()+1 == scmouth && nowDay.getDate() == scday){
-							newDIV.className = "today";
+							pTag.className = "today";
+							
+							if(count){
+							newDIV.className = 'btn-group dropend';
+							pTag.setAttribute('data-bs-toggle','dropdown');
+							pTag.setAttribute('aria-expanded', 'false');
+							divTag.className='dropdown-menu'
+							newDIV.appendChild(divTag);
+							count = false;
+							}
+							console.log(sc.TDNAME);
+							console.log(sc.FENAME);
+							if(sc.TDNAME != null){
+								divTag.innerHTML += sc.SCDATE.split(' ')[1]+" : "+sc.TDNAME+"<br>";								
+							}else{
+								divTag.innerHTML += sc.SCDATE.split(' ')[1]+" : "+sc.FENAME+"<br>";
+							}
+							
 						}
 					}
 						
 				}
+				count =true;
+				/*
+				<div class="btn-group dropend">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropend
+  </button>
+  <ul class="dropdown-menu">
+    <!-- Dropdown menu links -->
+  </ul>
+</div>
+				*/
 				/*
                 else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우 
                 	console.log(today.getFullYear());
