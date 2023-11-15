@@ -317,7 +317,7 @@ color:black;}
 												loading="lazy"></a>
 											<div class="">
 												<p style="margin: 0px; text-align: center;">${newList[0].newtitle }</p>
-												<p style="margin: 0px; text-align: center;">${newList[0].newsdate }</p>
+												<p style="margin: 0px; text-align: center;">중앙일보 : ${newList[0].newsdate }</p>
 											</div>
 										</div>
 									</div>
@@ -332,7 +332,7 @@ color:black;}
 												loading="lazy"></a>
 											<div>
 												<p style="margin: 0px; text-align: center;">${newList[1].newtitle }</p>
-												<p style="margin: 0px; text-align: center;">${newList[1].newsdate }</p>
+												<p style="margin: 0px; text-align: center;">중앙일보 : ${newList[1].newsdate }</p>
 											</div>
 										</div>
 									</div>
@@ -348,7 +348,7 @@ color:black;}
 												loading="lazy"></a>
 											<div>
 												<p style="margin: 0px; text-align: center;">${newList[2].newtitle }</p>
-												<p style="margin: 0px; text-align: center;">${newList[2].newsdate }</p>
+												<p style="margin: 0px; text-align: center;">중앙일보 : ${newList[2].newsdate }</p>
 											</div>
 										</div>
 									</div>
