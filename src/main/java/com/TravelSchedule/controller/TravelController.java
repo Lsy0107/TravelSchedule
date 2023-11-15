@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TravelSchedule.dto.Calendar;
-import com.TravelSchedule.dto.Country;
 import com.TravelSchedule.dto.Festival;
 import com.TravelSchedule.dto.Likelist;
+import com.TravelSchedule.dto.Review;
 import com.TravelSchedule.dto.Schedule;
 import com.TravelSchedule.dto.Tdest;
 import com.TravelSchedule.service.ApiService;
@@ -53,6 +53,11 @@ public class TravelController {
 	@RequestMapping(value="/removeCalendar")
 	public @ResponseBody boolean removeCalendar(Calendar cd) {
 		System.out.println("캘린더 삭제하기");
+		System.out.println(cd);
+		Review re = tsvc.getReview(cd);
+		System.out.println(re);
+		int delLike = tsvc.delLike(re);
+		int delRe = tsvc.delRe(re);
 		ArrayList<Schedule> scList = tsvc.checkSchedule(cd);
 		System.out.println(scList.size());
 		int resc = 1;

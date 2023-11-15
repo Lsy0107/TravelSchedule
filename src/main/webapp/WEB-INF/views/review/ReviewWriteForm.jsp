@@ -218,7 +218,7 @@
                                                     id="${td.TDCODE}" value="${td.TDCODE}">
                                                 <label for="${td.TDCODE}"><img onclick="checkImg('${td.TDCODE}')"
                                                         name="TF" value="${td.TDCODE}" class="${td.TDCODE} img"
-                                                        src="${td.TDPHOTO}" alt=""></label>
+                                                        src="${td.TDPHOTO}" alt="" onerror="this.src='/resources/tdest/3509.jpg'"></label>
                                             </div>
                                         </div>
                                     </c:forEach>
@@ -368,7 +368,7 @@
                                     let imgTag = document.createElement('img');
                                     //imgTag.setAttribute('id',"img");
                                     //$("#img").attr("src", );
-                                    imgTag.setAttribute("src", e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>"
+                                    imgTag.setAttribute("src", e.target.result)  //"<img src=\""+e.target.result+"\"data-file='"+f.name+"'>
                                     imgTag.setAttribute("data-file", f.name);
                                     imgTag.classList.add('img');
                                     imgTag.addEventListener('click', function (e) {

@@ -331,7 +331,7 @@
                 charset="utf-8"></script>
             <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
             <script type="text/javascript">
-                var naver_id_login = new naver_id_login("LBJBGOQrRWS1gNyVVoZX", "http://121.65.47.74:5575/memberJoinForm");
+                var naver_id_login = new naver_id_login("LBJBGOQrRWS1gNyVVoZX", "http://121.65.47.74:5575/memberLoginForm");
                 // 접근 토큰 값 출력
 
                 // 네이버 사용자 프로필 조회
@@ -384,7 +384,7 @@
 
                         success: function (result) {
                             alert('네이버 계정으로 회원가입 되었습니다.');
-                            location.href = "/memberJoinForm"
+                            location.href = "/memberLoginForm"
                         }
                     })
                 }

@@ -145,7 +145,7 @@ public class HomeController {
 		return mav;
 	}
 	@RequestMapping(value="/TdestSearchPage")
-	public ModelAndView TdestSearchPage(String category, String ctcode) throws Exception {
+	public ModelAndView TdestSearchPage(String category, String ctcode, String name) throws Exception {
 		System.out.println("여행지 검색 페이지 이동");
 		ModelAndView mav = new ModelAndView();
 		//ArrayList<Tdest> TdestList = apisvc.getTdestList();
@@ -154,10 +154,12 @@ public class HomeController {
 		
 		System.out.println(category);
 		System.out.println(ctcode);
+		System.out.println(name);
 		
 		mav.addObject("CountryList",CountryList);
 		mav.addObject("category", category);
 		mav.addObject("ctcode", ctcode);
+		mav.addObject("name", name);
 		
 //		mav.addObject("TdestList",TdestList);
 		mav.setViewName("/travel/TdestSearch");

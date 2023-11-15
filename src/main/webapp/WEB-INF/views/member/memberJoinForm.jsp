@@ -513,7 +513,7 @@
                         
                         success : function(result){
                             alert('네이버 계정으로 회원가입 되었습니다.');
-                            location.href = "/memberJoinForm"
+                            location.href = "/memberLoginForm"
                         }
                     })
                 }
